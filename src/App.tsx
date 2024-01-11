@@ -3,9 +3,10 @@ import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import DatacenterLogin from "./pages/DataCenterLogin";
 import RegisterUser from "./pages/RegisterUser";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Error404Page from "./pages/Error404Page.tsx";
 import Protected from "./components/Protected.tsx";
+import Header from "./components/Header.tsx";
 
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(true);
@@ -13,24 +14,35 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
-      errorElement: <Error404Page />,
-    },
-    {
-      path: "/user-login",
-      element: <UserLogin />,
-    },
-    {
-      path: "/datacenter-login",
       element: (
-        <Protected isLoggedIn={isLoggedIn}>
-          <DatacenterLogin />
-        </Protected>
+        <>
+          <Header />
+          <Outlet />
+        </>
       ),
-    },
-    {
-      path: "/register-user",
-      element: <RegisterUser />,
+      errorElement: <Error404Page />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+        {
+          path: "/user-login",
+          element: <UserLogin />,
+        },
+        {
+          path: "/register-user",
+          element: <RegisterUser />,
+        },
+        {
+          path: "/datacenter-login",
+          element: (
+            <Protected isLoggedIn={isLoggedIn}>
+              <DatacenterLogin />
+            </Protected>
+          ),
+        },
+      ],
     },
   ]);
 

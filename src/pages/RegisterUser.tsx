@@ -4,7 +4,6 @@ import Header from "../components/Header";
 function RegisterUser() {
   return (
     <>
-      <Header />
       <div>Register User Page</div>
     </>
   );
