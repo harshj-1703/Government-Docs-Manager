@@ -1,11 +1,13 @@
 import React from "react";
+import Slideshow from "../components/HomeComponents/Slideshow";
 
 function Home() {
   return (
     <>
       <section id="home" className="section">
-        <h2>Home Section</h2>
-        <p>This is the content for the Home section.</p>
+        {/* <h2>Home Section</h2>
+        <p>This is the content for the Home section.</p> */}
+        <Slideshow/>
       </section>
 
       <section id="services" className="section">
