@@ -6,7 +6,7 @@ import RegisterUser from "./pages/RegisterUser";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Error404Page from "./pages/Error404Page.tsx";
 import Protected from "./components/Protected.tsx";
-import Header from "./components/Header.tsx";
+import BottomBar from "./components/BottomBar.tsx";
 
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(true);
@@ -16,7 +16,7 @@ function App() {
       path: "/",
       element: (
         <>
-          <Header />
+          <BottomBar />
           <Outlet />
         </>
       ),

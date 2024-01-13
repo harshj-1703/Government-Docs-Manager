@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import IonIcon from "@reacticons/ionicons";
 
-function Header() {
+function BottomBar() {
   const [activeLink, setActiveLink] = useState("home");
 
   const handleLinkClick = (linkName:any) => {
@@ -105,4 +105,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default BottomBar;
