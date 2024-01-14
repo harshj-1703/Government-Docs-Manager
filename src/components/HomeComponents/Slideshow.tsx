@@ -10,12 +10,16 @@ const Slideshow = () => {
     "https://static.theprint.in/wp-content/uploads/2018/08/Modi-Ujjawala.jpg",
   ];
 
-  const [isLoaded, setIsLoaded] = useState(new Array(imageUrls.length).fill(false));
+  const [isLoaded, setIsLoaded] = useState(
+    new Array(imageUrls.length).fill(false)
+  );
 
   const handleImageLoad = (index: number) => {
     const updatedIsLoaded = [...isLoaded];
     updatedIsLoaded[index] = true;
     setIsLoaded(updatedIsLoaded);
+
+    console.log("Image loaded, state:", updatedIsLoaded);
   };
 
   return (
@@ -34,7 +38,15 @@ const Slideshow = () => {
                   onLoad={() => handleImageLoad(index)}
                 />
               ) : (
-                <div className="skeleton-image"></div>
+                <div>
+                  <div className="skeleton-image"></div>
+                  <img
+                    src={url}
+                    alt={`Image ${index + 1}`}
+                    onLoad={() => handleImageLoad(index)}
+                    style={{ display: "none" }}
+                  />
+                </div>
               )}
             </div>
           ))}
