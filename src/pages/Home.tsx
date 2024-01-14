@@ -5,9 +5,12 @@ function Home() {
   return (
     <>
       <section id="home" className="section">
+        <div id="logo-image">
+          <img src="/images/logo.png" />
+        </div>
         {/* <h2>Home Section</h2>
         <p>This is the content for the Home section.</p> */}
-        <Slideshow/>
+        <Slideshow />
       </section>
 
       <section id="services" className="section">

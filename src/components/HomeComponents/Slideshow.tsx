@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import Slider from "react-slick";
 import wave from "../../assets/wave.svg";
 
 const Slideshow = () => {
+  const [isLoaded] = useState(false);
+
   const settings = {
     dots: true,
     infinite: true,
@@ -10,7 +12,7 @@ const Slideshow = () => {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2500,
   };
 
   return (
@@ -18,16 +20,28 @@ const Slideshow = () => {
       <div className="wave">
         <img src={wave} />
       </div>
-      <div className="slideshow-container">
+      <div className="slideshow-container" style={{backgroundColor:"red"}}>
         <Slider {...settings}>
           <div>
-            <img src="/images/1.jpg" alt="Image 1" />
+            {isLoaded ? (
+              <img src="/images/1.jpg" alt="Image 1" />
+            ) : (
+              <div className="skeleton-image"></div>
+            )}
           </div>
           <div>
-            <img src="/images/24.jpg" alt="Image 2" />
+            {isLoaded ? (
+              <img src="/images/1.jpg" alt="Image 1" />
+            ) : (
+              <div className="skeleton-image"></div>
+            )}
           </div>
           <div>
-            <img src="/images/25.jpg" alt="Image 3" />
+            {isLoaded ? (
+              <img src="/images/1.jpg" alt="Image 1" />
+            ) : (
+              <div className="skeleton-image"></div>
+            )}
           </div>
         </Slider>
       </div>
