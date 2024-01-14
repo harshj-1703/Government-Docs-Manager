@@ -3,14 +3,14 @@ import Slider from "react-slick";
 import wave from "../../assets/wave.svg";
 
 const Slideshow = () => {
-  const [isLoaded, setIsLoaded] = useState([false, false, false]);
-
   const imageUrls = [
     "https://www.india.gov.in/sites/upload_files/npi/files/spotlights/VanDhan.jpg",
     "https://www.mygov.in/sites/all/themes/mygov/images/pmfby/pmfby-banner.jpg",
     "https://www.india.gov.in/sites/upload_files/npi/files/spotlights/ujjwala-yojana-inner.jpg",
     "https://static.theprint.in/wp-content/uploads/2018/08/Modi-Ujjawala.jpg",
   ];
+
+  const [isLoaded, setIsLoaded] = useState(new Array(imageUrls.length).fill(true));
 
   const handleImageLoad = (index: number) => {
     const updatedIsLoaded = [...isLoaded];
