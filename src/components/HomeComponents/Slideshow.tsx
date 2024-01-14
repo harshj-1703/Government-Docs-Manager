@@ -10,7 +10,7 @@ const Slideshow = () => {
     "https://static.theprint.in/wp-content/uploads/2018/08/Modi-Ujjawala.jpg",
   ];
 
-  const [isLoaded, setIsLoaded] = useState(new Array(imageUrls.length).fill(true));
+  const [isLoaded, setIsLoaded] = useState(new Array(imageUrls.length).fill(false));
 
   const handleImageLoad = (index: number) => {
     const updatedIsLoaded = [...isLoaded];
