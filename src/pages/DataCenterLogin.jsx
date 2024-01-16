@@ -1,4 +1,4 @@
-// pages/DatacenterLogin/DatacenterLogin.tsx
+// pages/DatacenterLogin/DatacenterLogin.jsx
 import React from "react";
 import Header from "../components/BottomBar";
 
