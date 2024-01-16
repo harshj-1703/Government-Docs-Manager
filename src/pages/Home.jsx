@@ -1,6 +1,7 @@
 import React from "react";
 import Slideshow from "../components/HomeComponents/Slideshow";
 import Wave from "../components/HomeComponents/Wave";
+import Menu from "../components/HomeComponents/Menu";
 
 function Home() {
   return (
@@ -12,6 +13,7 @@ function Home() {
         {/* <h2>Home Section</h2>
         <p>This is the content for the Home section.</p> */}
         <Wave/>
+        <Menu/>
         <Slideshow />
       </section>
 
