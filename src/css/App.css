@@ -316,7 +316,7 @@ html {
 .home-menu-ul li:hover a {
   color: #fff;
 }
-ul li a span {
+.home-menu ul li a span {
   position: absolute;
   top: 0;
   left: -40px;
@@ -332,6 +332,6 @@ ul li a span {
   font-size: 1.25em;
   opacity: 0.5;
 }
-ul li:hover a span {
+.home-menu ul li:hover a span {
   opacity: 1;
 }
