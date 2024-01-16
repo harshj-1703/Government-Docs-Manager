@@ -5,11 +5,11 @@ import IonIcon from "@reacticons/ionicons";
 function BottomBar() {
   const [activeLink, setActiveLink] = useState("home");
 
-  const handleLinkClick = (linkName:any) => {
+  const handleLinkClick = (linkName) => {
     scrollTo(linkName);
   };
   
-  const scrollTo = (elementId:any) => {
+  const scrollTo = (elementId) => {
     const element = document.getElementById(elementId);
     if (element) {
       element.scrollIntoView({ behavior: "smooth" });
@@ -24,9 +24,9 @@ function BottomBar() {
     const aboutElement = document.getElementById("about");
     const contactElement = document.getElementById("contact");
   
-    const servicesOffset = servicesElement!.offsetTop - 70 || 0;
-    const aboutOffset = aboutElement!.offsetTop - 70 || 0;
-    const contactOffset = contactElement!.offsetTop - 70 || 0;
+    const servicesOffset = servicesElement.offsetTop - 70 || 0;
+    const aboutOffset = aboutElement.offsetTop - 70 || 0;
+    const contactOffset = contactElement.offsetTop - 70 || 0;
   
     if (scrollY >= servicesOffset && scrollY < aboutOffset) {
       setActiveLink("services");
