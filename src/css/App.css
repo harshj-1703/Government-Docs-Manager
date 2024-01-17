@@ -291,7 +291,6 @@ html {
 
 .home-menu-ul li a {
   text-decoration: none;
-  /* text-transform: uppercase; */
   font-family:'Audiowide';
   font-size: 30px;
   letter-spacing: 0.04rem;
@@ -325,7 +324,7 @@ html {
   height: 100%;
   transform-origin: right;
   transform: skewY(45deg);
-  transition: 0.5s;
+  transition: 0.1s;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -334,4 +333,8 @@ html {
 }
 .home-menu ul li:hover a span {
   opacity: 1;
+}
+
+.home-menu ul li a span i{
+  font-size: 35px;
 }
