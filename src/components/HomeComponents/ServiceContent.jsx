@@ -12,6 +12,8 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import LockIcon from "@mui/icons-material/Lock";
 import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import { motion, useAnimation } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const services = [
   {
@@ -65,21 +67,42 @@ const services = [
 ];
 
 function ServiceCard({ title, description, icon }) {
+  const controls = useAnimation();
+  const [ref, inView] = useInView({ triggerOnce: false });
+
+  React.useEffect(() => {
+    if (inView) {
+      controls.start("visible");
+    }
+  }, [controls, inView]);
+
+  const fadeInUpVariant = {
+    hidden: { opacity: 0, y: 70 },
+    visible: { opacity: 1, y: 0 },
+  };
+
   return (
-    <Grid item xs={12} sm={4}>
-      <Card className="card-container">
-        <CardContent>
-          <Grid container spacing={2}>
-            <Grid item className="icon-service">
-              {icon}
+    <Grid item xs={12} sm={4} ref={ref}>
+      <motion.div
+        initial="hidden"
+        animate={controls}
+        variants={fadeInUpVariant}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
+        <Card className="card-container">
+          <CardContent>
+            <Grid container spacing={2}>
+              <Grid item className="icon-service">
+                {icon}
+              </Grid>
             </Grid>
-          </Grid>
-        </CardContent>
-        <CardContent>
-          <div id="main-service-text">{title}</div>
-          <div id="second-service-text">{description}</div>
-        </CardContent>
-      </Card>
+          </CardContent>
+          <CardContent>
+            <div id="main-service-text">{title}</div>
+            <div id="second-service-text">{description}</div>
+          </CardContent>
+        </Card>
+      </motion.div>
     </Grid>
   );
 }
