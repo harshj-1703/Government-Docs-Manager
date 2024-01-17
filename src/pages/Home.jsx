@@ -2,6 +2,7 @@ import React from "react";
 import Slideshow from "../components/HomeComponents/Slideshow";
 import Wave from "../components/HomeComponents/Wave";
 import Menu from "../components/HomeComponents/Menu";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 function Home() {
   return (
@@ -11,7 +12,7 @@ function Home() {
           <img src="/images/logo.png" />
         </div>
         <div id="india-animated-logo">
-          <img src="/images/indian-animated-flag.gif" />
+          <LazyLoadImage src="/images/indian-animated-flag.gif" effect={blur} />
         </div>
         <Wave />
         <Menu />
