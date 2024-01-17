@@ -10,10 +10,11 @@ function Home() {
         <div id="logo-image">
           <img src="/images/logo.png" />
         </div>
-        {/* <h2>Home Section</h2>
-        <p>This is the content for the Home section.</p> */}
-        <Wave/>
-        <Menu/>
+        <div id="india-animated-logo">
+          <img src="/images/indian-animated-flag.gif" />
+        </div>
+        <Wave />
+        <Menu />
         <Slideshow />
       </section>
 

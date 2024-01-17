@@ -7,10 +7,10 @@ const Skeleton = () => <div className="skeleton"></div>;
 
 const Slideshow = () => {
   const imageArray = [
-    "https://www.india.gov.in/sites/upload_files/npi/files/spotlights/VanDhan.jpg",
-    "https://www.mygov.in/sites/all/themes/mygov/images/pmfby/pmfby-banner.jpg",
-    "https://www.india.gov.in/sites/upload_files/npi/files/spotlights/ujjwala-yojana-inner.jpg",
-    "https://static.theprint.in/wp-content/uploads/2018/08/Modi-Ujjawala.jpg",
+    "https://scgj.azadikaamritmahotsav.in/wp-content/uploads/2021/09/Web-Banner-Hindi_1600X500.jpg",
+    "https://t4.ftcdn.net/jpg/04/45/41/71/360_F_445417168_ySehXZbCO65QjGgjSdoYXfJO8ME8tSkk.jpg",
+    "https://img.freepik.com/free-vector/abstract-wavy-indian-flag-banner_1055-7052.jpg",
+    "https://www.shutterstock.com/image-vector/stain-brush-stroke-flag-india-260nw-1922760536.jpg",
   ];
 
   return (
