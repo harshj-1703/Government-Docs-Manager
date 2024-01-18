@@ -25,6 +25,7 @@ body{
     align-items: center;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    z-index: 9;
 }
 .navigation ul {
     display: flex;
@@ -472,4 +473,147 @@ html {
   /* z-index: 1; */
   color: darkblue;
   padding-bottom: 20px;
+}
+
+#about{
+  display: flex;
+  justify-content: center;
+  padding: 80px;
+}
+
+#box-photo-content{
+  width: 300px;
+  /* height: 400px; */
+  background: #1e1e1e;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#box-photo-content::before{
+  content: '';
+  position: absolute;
+  width: 150px;
+  height: 600px;
+  left: 75px;
+  top: -100px;
+  background: linear-gradient(#00e5ff, #b400fb);
+  animation: hjbg 7s linear infinite;
+}
+
+@keyframes hjbg{
+  0%{
+    transform: rotate(0deg);
+  }
+  100%{
+    transform: rotate(360deg);
+  }
+}
+
+#box-photo-content div{
+  z-index: 1;
+  padding-top: 10px;
+  padding-left: 9px;
+  padding-right: 9px;
+}
+
+#hj-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+#about{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#about-heading{
+  /* z-index: 1; */
+  color: cyan;
+  padding-bottom: 80px;
+  font-size: 40px;
+}
+
+#main-about{
+  margin-bottom: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+#about-main-text{
+  margin-left: 100px;
+  text-align: center;
+}
+
+#about-main-text h2{
+  position: relative;
+  font-size: 2.5vw;
+  color: #252839;
+  -webkit-text-stroke: 0.3vw #383d52;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.1em;
+  font-weight: 100;
+}
+
+#about-main-text h2::before{
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  color: #01fe87;
+  -webkit-text-stroke: 0vw #383d52;
+  border-right: 2px solid #01fe87;
+  overflow: hidden;
+  animation: developedBy 4s linear infinite;
+}
+
+@keyframes developedBy{
+  0%,10%,100%
+  {
+    width: 0;
+  }
+  70%,90%
+  {
+    width: 100%;
+  }
+}
+
+#about-main-text h1{
+  margin-top: 35px;
+  position: relative;
+  font-size: 2em;
+  letter-spacing: 5px;
+  color: #0e3742;
+  text-transform: uppercase;
+  width: 100%;
+  text-align: center;
+  -webkit-box-reflect: below 1px linear-gradient(transperent,#0004);
+  line-height: 0.7;
+  outline: none;
+  animation: hj 5s linear infinite;
+}
+
+@keyframes hj{
+  0%,18%,20%,50.1%,60%,65.1%,80%,90.1%,92%{
+    color: #0e3742;
+    text-shadow: none;
+  }
+  18.1%,20.1%,30%,50%,60.1%,65%,80.1%,90%,92.1%,100%{
+    color: #fff;
+    text-shadow: 0 0 10px #03bcf4,
+    0 0 20px #03bcf4,
+    0 0 40px #03bcf4,
+    0 0 80px #03bcf4,
+    0 0 160px #03bcf4;
+  }
 }

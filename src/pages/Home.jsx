@@ -4,6 +4,7 @@ import Wave from "../components/HomeComponents/Wave";
 import Menu from "../components/HomeComponents/Menu";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import ServiceContent from "../components/HomeComponents/ServiceContent";
+import AboutContent from "../components/HomeComponents/AboutContent";
 
 function Home() {
   return (
@@ -26,8 +27,8 @@ function Home() {
       </section>
 
       <section id="about" className="section">
-        <h2>About Section</h2>
-        <p>This is the content for the About section.</p>
+        <div id="about-heading">About Us</div>
+        <AboutContent />
       </section>
 
       <section id="contact" className="section">
