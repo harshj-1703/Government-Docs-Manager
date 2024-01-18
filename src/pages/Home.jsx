@@ -21,7 +21,8 @@ function Home() {
       </section>
 
       <section id="services" className="section">
-        <ServiceContent/>
+        <div id="service-heading">We Provide Below Services</div>
+        <ServiceContent />
       </section>
 
       <section id="about" className="section">
