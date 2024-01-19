@@ -1,9 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 
 const Skeleton = () => <div className="skeleton"></div>;
+
+function RenderSmoothImage({ src }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  return (
+    <div className="smooth-image-wrapper">
+      {!imageLoaded && <Skeleton />}
+      <LazyLoadImage
+        src={src}
+        wrapperClassName="image-wrapper"
+        className="carousel-image"
+        style={{ opacity: imageLoaded ? 1 : 0 }}
+        onLoad={() => setImageLoaded(true)}
+      />
+    </div>
+  );
+}
 
 const Slideshow = () => {
   const imageArray = [
@@ -26,13 +43,7 @@ const Slideshow = () => {
       >
         {imageArray.map((image, index) => (
           <div key={index} className="carousel-item">
-            <LazyLoadImage
-              src={image}
-              alt={`Slide ${index + 1}`}
-              wrapperClassName="image-wrapper"
-              className="carousel-image"
-              placeholder={<Skeleton />}
-            />
+            <RenderSmoothImage src={image} />
           </div>
         ))}
       </Carousel>
