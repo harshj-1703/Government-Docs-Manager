@@ -619,3 +619,137 @@ html {
     0 0 160px #03bcf4;
   }
 }
+
+#contact{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#contact-heading{
+  /* z-index: 1; */
+  color: darkblue;
+  padding-bottom: 10px;
+  font-size: 40px;
+}
+
+#main-contact-div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#map-div{
+  height: fit-content;
+  width: 570px;
+  color: darkblue;
+  margin-right: 20px;
+}
+
+#map-div iframe{
+  height: 370px;
+  width: 550px;
+}
+
+#phone-div {
+  position: relative;
+}
+
+#mobile-photo {
+  height: 530px;
+  width: 300px;
+}
+
+#phone-app-details {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  padding: 20px;
+  color: white;
+}
+
+#phone-app-details img {
+  height: 180px;
+  width: 180px;
+}
+
+#contact-div {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  border: 3px darkblue solid;
+  overflow: hidden;
+  animation: wavy-border-contact 2s infinite;
+}
+
+#contact-div div {
+  /* display: flex; */
+  align-items: center;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#contact-div i {
+  font-size: 25px;
+  margin-right: 10px;
+  color: darkblue;
+}
+
+#contact-div a {
+  color: darkblue;
+  text-decoration: none;
+}
+
+@keyframes wavy-border-contact {
+  0%, 100% {
+    border-radius: 20px;
+    border: 3px darkblue solid;
+  }
+  25%, 75% {
+    border-radius: 20px 40px 20px 40px;
+    border: 3px darkblue solid;
+  }
+  50% {
+    border-radius: 40px 20px 40px 20px;
+    border: 3px darkblue solid;
+  }
+}
+
+#made-in-india{
+  color: darkblue;
+  text-align: center;
+}
+
+.skeleton-map {
+  position: absolute;
+  z-index: 1;
+  border-radius: 20px;
+  height: 370px;
+  width: 550px;
+  background: linear-gradient(45deg, #eee 25%, #dddddddc 50%, #eeeeeee2 75%);
+  background-size: 200% 100%;
+  animation: skeletonAnimation 1.5s infinite linear;
+}
+
+.skeleton-mobile {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  height: 90%;
+  border-radius: 20px;
+  background: linear-gradient(45deg, #eee 25%, #dddddddc 50%, #eeeeeee2 75%);
+  background-size: 200% 100%;
+  animation: skeletonAnimation 1.5s infinite linear;
+}
