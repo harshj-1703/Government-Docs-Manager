@@ -651,7 +651,8 @@ html {
 
 #map-div iframe{
   height: 370px;
-  width: 550px;
+  width: 100%;
+  border-radius: 20px;
 }
 
 #phone-div {
@@ -685,12 +686,13 @@ html {
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 10px;
+  padding: 4px;
   background-color: #f0f0f0;
   border-radius: 20px;
   border: 3px darkblue solid;
   overflow: hidden;
   animation: wavy-border-contact 2s infinite;
+  word-break: break-all;
 }
 
 #contact-div div {
@@ -752,4 +754,135 @@ html {
   background: linear-gradient(45deg, #eee 25%, #dddddddc 50%, #eeeeeee2 75%);
   background-size: 200% 100%;
   animation: skeletonAnimation 1.5s infinite linear;
+}
+
+@media only screen and (max-width: 600px) {
+  section {
+      height: auto;
+      padding: 20px;
+  }
+
+  #service-heading{
+    text-align: center;
+  }
+
+  #about-heading{
+    padding-bottom: 20px;
+  }
+
+  .slideshow-container {
+      height: auto;
+      margin-top: 20px;
+      margin-right: 0;
+  }
+
+  .carousel-item,
+  .image-wrapper,
+  .skeleton {
+      height: 200px;
+  }
+
+  .home-menu {
+      width: 100%;
+      margin: 0;
+      padding: 20px;
+  }
+
+  .home-menu-ul li {
+      width: 100%;
+      margin-bottom: 10px;
+  }
+
+  #box-photo-content::before {
+      width: 35%;
+      left: 45%;
+      top: -100px;
+  }
+
+  #about {
+      padding: 20px;
+  }
+
+  #main-about {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  #about-main-text {
+      margin-left: 0;
+  }
+
+  #about-main-text h2 {
+    margin-top: 25px;
+      font-size: 18px;
+      -webkit-text-stroke: 0.1em #383d52;
+  }
+
+  #about-main-text h1 {
+    letter-spacing: 4px;
+    font-size: 1.3em;
+    margin-top: 30px;
+    line-height: 55px;
+  }
+
+  #contact {
+    padding: 20px;
+  }
+
+  #main-contact-div {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+  }
+
+  #map-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 100%;
+    position: relative;
+    margin-right: 0;
+    margin-top: 5px;
+    margin-bottom: 30px;
+  }
+
+  .skeleton-map {
+    height: 100%;
+    width: 100%;
+  }
+
+  #map-div iframe {
+    height: 100%;
+  }
+
+  #phone-div {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  #phone-app-details {
+      top: 50%;
+  }
+
+  #phone-app-details img {
+      height: 120px;
+      width: 120px;
+  }
+
+  #contact-div {
+    font-size: 28px;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    word-break: break-all;
+    text-wrap: wrap;
+    margin-bottom: 50px;
+  }
+
+  #map-div-text{
+    display: none;
+  }
+
 }

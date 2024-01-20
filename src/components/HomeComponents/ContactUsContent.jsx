@@ -68,7 +68,7 @@ function ContactUsContent() {
                 onLoad={() => setmapLoaded(true)}
                 style={{ opacity: mapLoaded ? 1 : 0, border: "0" }}
               ></iframe>
-              <div style={{ opacity: mapLoaded ? 1 : 0 }}>
+              <div id="map-div-text" style={{ opacity: mapLoaded ? 1 : 0 }}>
                 Our Main Branch Location
               </div>
             </div>
