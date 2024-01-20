@@ -37,6 +37,10 @@ function App() {
         </Protected>
       ),
     },
+    {
+      path: "*",
+      element: <Error404Page />,
+    },
   ]);
 
   return (

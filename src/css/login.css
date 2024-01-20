@@ -1,8 +1,208 @@
-.div-user-login{
-    background-color: white;
+.container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    width: 100wh;
+    background-image: url('/images/ramsetu.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.login-form {
+    max-width: 330px;
+    width: 100%;
+    padding: 20px;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.173);
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+    animation: wavy-border1 2s infinite;
+}
+
+.login-form::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: -20px;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    z-index: -1;
+}
+
+.login-form:hover {
+    transform: scale(1.07);
+    border-color: rgba(255, 255, 255, 0.3);
+    animation: wavy-border 2s infinite;
+}
+
+h2 {
+    color: #fff;
+    text-align: center;
+    margin-bottom: 32px;
+    letter-spacing: 4px;
+    font-weight: 500;
+    font-size: xx-large;
+}
+
+label {
+    margin-top: 21px;
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+input {
+    width: 100%;
+    padding: 11px;
+    border: 2px solid rgba(242, 224, 224, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: cyan;
+    letter-spacing: 2px;
+    font-size: 17px;
+    font-family: 'Trebuchet MS', sans-serif;
+    transition: background 0.3s, border 0.3s;
+    box-sizing: border-box;
+}
+
+input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+input::placeholder {
+    color: #bbb;
+}
+
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password i {
+    font-size: 18px;
+    color: whitesmoke;
+    margin-right: 5px;
+}
+
+.forgot-password {
+    margin-top: 12px;
+    text-align: right;
+    color: #fff;
+}
+
+.error {
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+@keyframes wavy-border1 {
+    0% {
+      border-radius: 20px;
+      border: 2px rgba(0, 0, 0, 0.173) solid;
+    }
+    25% {
+      border-radius: 20px 40px 20px 40px;
+      border: 2px rgba(0, 0, 0, 0.173) solid;
+    }
+    50% {
+      border-radius: 40px 20px 40px 20px;
+      border: 2px rgba(0, 0, 0, 0.173) solid;
+    }
+    75% {
+      border-radius: 20px 40px 20px 40px;
+      border: 2px rgba(0, 0, 0, 0.173) solid;
+    }
+    100% {
+      border-radius: 20px;
+      border: 2px rgba(0, 0, 0, 0.173) solid;
+    }
+  }
+
+  .forgot-password {
+    margin-top: 12px;
+    text-align: right;
+}
+
+.forgot-password-link {
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    transition: color 0.3s;
+    letter-spacing: 1.4px;
+}
+
+.forgot-password-link:hover {
+    color: #bbdefb;
+}
+
+.new-user {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 12px;
+    letter-spacing: 1.1px;
+    color: #fff;
+}
+
+.new-user-text {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.register-link {
+    text-decoration: none;
+    color: cyan;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+.register-link:hover {
+    color: #bbdefb;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    letter-spacing: 4px;
+    margin-top: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2196f3;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: #1565c0;
+}
+
+
+@media screen and (max-width: 600px) {
+    .login-form {
+        max-width: 100%;
+        margin: 20px;
+    }
 }
