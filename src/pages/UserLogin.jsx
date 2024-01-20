@@ -4,7 +4,7 @@ import '../css/login.css';
 function UserLogin() {
   return (
     <>
-      <div>User Login Page</div>
+      <div className="div-user-login">User Login Page</div>
     </>
   );
 }

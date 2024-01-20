@@ -629,8 +629,8 @@ html {
 #contact-heading{
   /* z-index: 1; */
   color: darkblue;
-  padding-bottom: 10px;
-  font-size: 40px;
+  /* padding-bottom: 10px; */
+  font-size: 35px;
 }
 
 #main-contact-div{
@@ -639,7 +639,7 @@ html {
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 #map-div{
@@ -666,7 +666,7 @@ html {
 
 #mobile-photo {
   height: 530px;
-  width: 300px;
+  width: 330px;
 }
 
 #phone-app-details {
@@ -1090,4 +1090,490 @@ html {
   #map-div-text {
     display: none;
   }
+}
+
+#social-media{
+  margin-top: 30px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.tooltip-container {
+  margin-right: 21px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 17px;
+  border-radius: 10px;
+}
+
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  border-radius: 15px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.profile {
+  background: #2a2b2f;
+  border-radius: 10px 15px;
+  padding: 10px;
+  border: 1px solid #52382f;
+}
+
+.tooltip-container:hover .tooltip {
+  top: -120px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.icon {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+.layer {
+  width: 55px;
+  height: 55px;
+  transition: transform 0.3s;
+}
+.icon:hover .layer {
+  transform: rotate(-35deg) skew(20deg);
+}
+.layer span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #fff;
+  border-radius: 15px;
+  transition: all 0.3s;
+}
+
+.layer span,
+.text {
+  color: #e6683c;
+  border-color: #e6683c;
+}
+
+.icon:hover.layer span {
+  box-shadow: -1px 1px 3px #e6683c;
+}
+.icon .text {
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  opacity: 0;
+  font-weight: 500;
+  transform: translateX(-50%);
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+}
+.icon:hover .text {
+  bottom: -35px;
+  opacity: 1;
+}
+
+.icon:hover .layer span:nth-child(1) {
+  opacity: 0.2;
+}
+.icon:hover .layer span:nth-child(2) {
+  opacity: 0.4;
+  transform: translate(5px, -5px);
+}
+.icon:hover .layer span:nth-child(3) {
+  opacity: 0.6;
+  transform: translate(10px, -10px);
+}
+.icon:hover .layer span:nth-child(4) {
+  opacity: 0.8;
+  transform: translate(15px, -15px);
+}
+.icon:hover .layer span:nth-child(5) {
+  opacity: 1;
+  transform: translate(20px, -20px);
+}
+
+.instagramSVG {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: -webkit-linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  background: linear-gradient(
+    45deg,
+    #f09433 0%,
+    #e6683c 25%,
+    #dc2743 50%,
+    #cc2366 75%,
+    #bc1888 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f09433', endColorstr='#bc1888',GradientType=1 );
+}
+.user {
+  display: flex;
+  gap: 10px;
+}
+.img {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 700;
+  border: 1px solid #e6683c;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+.name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #e6683c;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: #fff;
+}
+
+.linkedin-tooltip-container {
+  margin-right: 21px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 17px;
+  border-radius: 10px;
+}
+
+.linkedin-tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  border-radius: 15px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.linkedin-profile {
+  background: #2a2b2f;
+  border-radius: 10px 15px;
+  padding: 10px;
+  border: 1px solid rgba(11, 63, 95, 1);
+}
+
+.linkedin-tooltip-container:hover .linkedin-tooltip {
+  top: -120px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.linkedin-icon {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+
+.linkedin-layer {
+  width: 55px;
+  height: 55px;
+  transition: transform 0.3s;
+}
+
+.linkedin-icon:hover .linkedin-layer {
+  transform: rotate(-35deg) skew(20deg);
+}
+
+.linkedin-layer span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.linkedin-layer span,
+.linkedin-text {
+  color: #1da1f2;
+  border-color: #1da1f2;
+}
+
+.linkedin-icon:hover .linkedin-layer span {
+  box-shadow: -1px 1px 3px #1da1f2;
+}
+
+.linkedin-icon .linkedin-text {
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  opacity: 0;
+  font-weight: 500;
+  transform: translateX(-50%);
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+}
+
+.linkedin-icon:hover .linkedin-text {
+  bottom: -35px;
+  opacity: 1;
+}
+
+.linkedin-icon:hover .linkedin-layer span:nth-child(1) {
+  opacity: 0.2;
+}
+
+.linkedin-icon:hover .linkedin-layer span:nth-child(2) {
+  opacity: 0.4;
+  transform: translate(5px, -5px);
+}
+
+.linkedin-icon:hover .linkedin-layer span:nth-child(3) {
+  opacity: 0.6;
+  transform: translate(10px, -10px);
+}
+
+.linkedin-icon:hover .linkedin-layer span:nth-child(4) {
+  opacity: 0.8;
+  transform: translate(15px, -15px);
+}
+
+.linkedin-icon:hover .linkedin-layer span:nth-child(5) {
+  opacity: 1;
+  transform: translate(20px, -20px);
+}
+
+.linkedin-layer span.fab {
+  font-size: 30px;
+  line-height: 64px;
+  text-align: center;
+  fill: #1da1f2;
+  background: #000;
+}
+
+.linkedin-user {
+  display: flex;
+  gap: 10px;
+}
+
+.linkedin-img {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 700;
+  border: 1px solid #1da1f2;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.linkedin-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1da1f2;
+}
+
+.linkedin-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: #fff;
+}
+
+
+.facebook-tooltip-container {
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 17px;
+  border-radius: 10px;
+}
+
+.facebook-tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  border-radius: 15px;
+  box-shadow: inset 5px 5px 5px rgba(0, 0, 0, 0.2),
+    inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+    5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.facebook-profile {
+  background: #3b5998;
+  border-radius: 10px 15px;
+  padding: 10px;
+  border: 1px solid #29487d;
+}
+
+.facebook-tooltip-container:hover .facebook-tooltip {
+  top: -120px;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.facebook-icon {
+  text-decoration: none;
+  color: #fff;
+  display: block;
+  position: relative;
+}
+
+.facebook-layer {
+  width: 55px;
+  height: 55px;
+  border: 3px solid #1877f2;
+  border-radius: 50%;
+  transition: transform 0.3s, border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 15px rgba(24, 119, 242, 0.7), 0 0 20px rgba(24, 119, 242, 0.5);
+}
+
+.facebook-icon:hover .facebook-layer {
+  transform: rotate(-35deg) skew(20deg);
+  box-shadow: 0 0 30px rgba(24, 119, 242, 1), 0 0 40px rgba(24, 119, 242, 0.7);
+}
+
+.facebook-layer span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  transition: all 0.3s;
+}
+
+.facebook-layer span,
+.facebook-text {
+  color: #1877f2;
+  border-color: #1877f2;
+}
+
+.facebook-icon:hover .facebook-layer span {
+  box-shadow: -1px 1px 3px #1877f2;
+}
+
+.facebook-icon .facebook-text {
+  position: absolute;
+  left: 50%;
+  bottom: -5px;
+  opacity: 0;
+  font-weight: 500;
+  transform: translateX(-50%);
+  transition: bottom 0.3s ease, opacity 0.3s ease;
+}
+
+.facebook-icon:hover .facebook-text {
+  bottom: -35px;
+  opacity: 1;
+}
+
+.facebook-icon:hover .facebook-layer span:nth-child(1) {
+  opacity: 0.2;
+}
+
+.facebook-icon:hover .facebook-layer span:nth-child(2) {
+  opacity: 0.4;
+  transform: translate(5px, -5px);
+}
+
+.facebook-icon:hover .facebook-layer span:nth-child(3) {
+  opacity: 0.6;
+  transform: translate(10px, -10px);
+}
+
+.facebook-icon:hover .facebook-layer span:nth-child(4) {
+  opacity: 0.8;
+  transform: translate(15px, -15px);
+}
+
+.facebook-icon:hover .facebook-layer span:nth-child(5) {
+  opacity: 1;
+  transform: translate(20px, -20px);
+}
+
+.facebookSVG {
+  font-size: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #1877f2;
+  border-radius: 50%;
+  background: linear-gradient(
+    45deg,
+    #1877f2 0%,
+    #3b5998 25%,
+    #1877f2 50%,
+    #3b5998 75%,
+    #1877f2 100%
+  );
+}
+
+.facebook-user {
+  display: flex;
+  gap: 10px;
+}
+
+.facebook-img {
+  width: 50px;
+  height: 50px;
+  font-size: 25px;
+  font-weight: 700;
+  border: 1px solid #1877f2;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+}
+
+.facebook-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1877f2;
+}
+
+.facebook-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  color: #fff;
 }

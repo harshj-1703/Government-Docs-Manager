@@ -3,8 +3,9 @@ import {
   LazyLoadComponent,
   LazyLoadImage,
 } from "react-lazy-load-image-component";
-import { motion, useAnimation } from "framer-motion";
+import { color, motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import SocialMediaContent from "./SocialMediaContent";
 
 const SkeletonMap = () => <div className="skeleton-map"></div>;
 const SkeletonMobile = () => <div className="skeleton-mobile"></div>;
@@ -53,9 +54,10 @@ function ContactUsContent() {
                   width={180}
                   style={{ opacity: imageLoaded ? 1 : 0 }}
                 />
-                <div style={{ opacity: imageLoaded ? 1 : 0 }}>
+                <div style={{ opacity: imageLoaded ? 1 : 0, fontSize: 20 }}>
                   Download Our Mobile App
                 </div>
+                <SocialMediaContent/>
               </div>
             </div>
             <div id="map-div">
