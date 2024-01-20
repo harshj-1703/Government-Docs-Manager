@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/login.css";
 import { Link } from "react-router-dom";
+import ToastMessage from "../components/ToastMessage";
 
 function UserLogin() {
   const [mobile, setMobile] = useState("");
@@ -10,6 +11,17 @@ function UserLogin() {
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const handleMobileChange = (e) => {
+    const value = e.target.value;
+    // Validate if the entered value is a valid mobile number
+    if (!/^\d*$/.test(value) || value.length > 10) {
+      setErrors({ ...errors, mobile: "Invalid mobile number" });
+    } else {
+      setErrors({ ...errors, mobile: "" });
+    }
+    setMobile(value);
   };
 
   const handleSubmit = (e) => {
@@ -23,10 +35,16 @@ function UserLogin() {
     }
 
     if (Object.keys(validationErrors).length === 0) {
-      // Proceed with login logic
-      console.log("Login successful!");
+      ToastMessage({
+        message: "Login successful!",
+        type: "success",
+      });
     } else {
       setErrors(validationErrors);
+      ToastMessage({
+        message: "Login failed. Please check your credentials.",
+        type: "error",
+      });
     }
   };
 
@@ -40,7 +58,8 @@ function UserLogin() {
           id="mobile"
           placeholder="Enter your mobile number"
           value={mobile}
-          onChange={(e) => setMobile(e.target.value)}
+          maxLength={10}
+          onChange={handleMobileChange}
         />
         {errors.mobile && <span className="error">{errors.mobile}</span>}
 
@@ -77,7 +96,7 @@ function UserLogin() {
           <span className="new-user-text">New User?</span>
           <Link className="register-link" to="/register-user">
             Register
-            </Link>
+          </Link>
         </div>
       </form>
     </div>

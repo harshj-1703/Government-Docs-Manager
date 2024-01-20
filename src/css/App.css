@@ -692,7 +692,7 @@ html {
   align-items: center;
   text-align: center;
   padding: 4px;
-  background-color: #f0f0f0;
+  background-color: rgba(204, 255, 255, 0.684);
   border-radius: 20px;
   border: 3px darkblue solid;
   overflow: hidden;

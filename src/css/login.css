@@ -42,7 +42,7 @@
     animation: wavy-border 2s infinite;
 }
 
-h2 {
+.login-form h2 {
     color: #fff;
     text-align: center;
     margin-bottom: 32px;
@@ -66,7 +66,7 @@ input {
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.1);
     color: cyan;
-    letter-spacing: 2px;
+    letter-spacing: 2.5px;
     font-size: 17px;
     font-family: 'Trebuchet MS', sans-serif;
     transition: background 0.3s, border 0.3s;
@@ -110,7 +110,7 @@ input::placeholder {
 }
 
 .error {
-    color: #d32f2f;
+    color: red;
     font-size: 14px;
     margin-top: 4px;
 }

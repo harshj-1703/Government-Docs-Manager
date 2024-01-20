@@ -7,6 +7,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Error404Page from "./pages/Error404Page.jsx";
 import Protected from "./components/Protected.jsx";
 import BottomBar from "./components/BottomBar.jsx";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [isLoggedIn, setisLoggedIn] = useState(true);
@@ -23,7 +24,12 @@ function App() {
     },
     {
       path: "/user-login",
-      element: <UserLogin />,
+      element: (
+        <>
+          <ToastContainer />
+          <UserLogin />
+        </>
+      ),
     },
     {
       path: "/register-user",

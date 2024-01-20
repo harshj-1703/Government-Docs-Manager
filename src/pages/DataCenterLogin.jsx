@@ -1,6 +1,4 @@
-// pages/DatacenterLogin/DatacenterLogin.jsx
 import React from "react";
-import Header from "../components/BottomBar";
 
 function DatacenterLogin() {
   return (
