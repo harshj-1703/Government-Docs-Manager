@@ -17,32 +17,25 @@ function App() {
       element: (
         <>
           <BottomBar />
-          <Outlet />
+          <Home />
         </>
       ),
-      errorElement: <Error404Page />,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/user-login",
-          element: <UserLogin />,
-        },
-        {
-          path: "/register-user",
-          element: <RegisterUser />,
-        },
-        {
-          path: "/datacenter-login",
-          element: (
-            <Protected isLoggedIn={isLoggedIn}>
-              <DatacenterLogin />
-            </Protected>
-          ),
-        },
-      ],
+    },
+    {
+      path: "/user-login",
+      element: <UserLogin />,
+    },
+    {
+      path: "/register-user",
+      element: <RegisterUser />,
+    },
+    {
+      path: "/datacenter-login",
+      element: (
+        <Protected isLoggedIn={isLoggedIn}>
+          <DatacenterLogin />
+        </Protected>
+      ),
     },
   ]);
 
