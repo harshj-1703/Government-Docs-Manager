@@ -1,4 +1,4 @@
-.container {
+.registration-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,8 +9,13 @@
     overflow: hidden;
 }
 
-.login-form {
-    max-width: 330px;
+#back-login{
+    margin-top: 10px;
+    text-align: end;
+}
+
+.registration-form {
+    max-width: 360px;
     width: 100%;
     padding: 20px;
     border: 2px solid transparent;
@@ -23,7 +28,7 @@
     animation: wavy-border1 2s infinite;
 }
 
-.login-form::before {
+.registration-form::before {
     content: "";
     position: absolute;
     top: -20px;
@@ -36,22 +41,22 @@
     z-index: -1;
 }
 
-.login-form:hover {
+.registration-form:hover {
     transform: scale(1.07);
     border-color: rgba(255, 255, 255, 0.3);
     animation: wavy-border 2s infinite;
 }
 
-.login-form h2 {
+.registration-form h2 {
     color: #fff;
     text-align: center;
     margin-bottom: 32px;
     letter-spacing: 4px;
     font-weight: 500;
-    font-size: xx-large;
+    font-size: 27px;
 }
 
-label {
+.registration-label {
     margin-top: 21px;
     display: block;
     margin-bottom: 8px;
@@ -59,7 +64,7 @@ label {
     letter-spacing: 2px;
 }
 
-input {
+.registration-input {
     width: 100%;
     padding: 11px;
     border: 2px solid rgba(242, 224, 224, 0.3);
@@ -73,20 +78,20 @@ input {
     box-sizing: border-box;
 }
 
-input:focus {
+.registration-input:focus {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
-input::placeholder {
+.registration-input::placeholder {
     color: #bbb;
 }
 
-.password-container {
+.registration-password-container {
     position: relative;
 }
 
-.toggle-password {
+.registration-toggle-password {
     position: absolute;
     top: 50%;
     right: 10px;
@@ -97,23 +102,63 @@ input::placeholder {
     align-items: center;
 }
 
-.toggle-password i {
+.registration-toggle-password i {
     font-size: 18px;
     color: whitesmoke;
     margin-right: 5px;
 }
 
-.forgot-password {
+.registration-forgot-password {
     margin-top: 12px;
     text-align: right;
     color: #fff;
 }
 
-.error {
+.registration-error {
     color: red;
     font-size: 14px;
     margin-top: 4px;
 }
+
+.registration-button {
+    width: 100%;
+    padding: 12px;
+    letter-spacing: 4px;
+    margin-top: 16px;
+    border: none;
+    border-radius: 8px;
+    background-color: #2196f3;
+    color: #fff;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.registration-button:hover {
+    background-color: #1565c0;
+}
+
+#otp-input{
+    display: flex;
+    justify-content: center;
+}
+
+#otp-input input {
+    margin: 0 5px;
+    text-align: center;
+    font-size: xx-large;
+  }
+
+#otp-input input::-webkit-outer-spin-button,
+#otp-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+#otp-input input[type=number] {
+    -moz-appearance: textfield;
+  }
 
 @keyframes wavy-border1 {
     0% {
@@ -136,72 +181,10 @@ input::placeholder {
       border-radius: 20px;
       border: 2px rgba(0, 0, 0, 0.173) solid;
     }
-  }
-
-  .forgot-password {
-    margin-top: 12px;
-    text-align: right;
 }
-
-.forgot-password-link {
-    text-decoration: none;
-    color: #fff;
-    font-size: 14px;
-    transition: color 0.3s;
-    letter-spacing: 1.4px;
-}
-
-.forgot-password-link:hover {
-    color: #bbdefb;
-}
-
-.new-user {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-top: 12px;
-    letter-spacing: 1.1px;
-    color: #fff;
-}
-
-.new-user-text {
-    margin-right: 8px;
-    font-size: 14px;
-}
-
-.register-link {
-    text-decoration: none;
-    color: rgb(64, 243, 243);
-    font-size: 14px;
-    transition: color 0.3s;
-}
-
-.register-link:hover {
-    color: #bbdefb;
-}
-
-.login-button {
-    width: 100%;
-    padding: 12px;
-    letter-spacing: 4px;
-    margin-top: 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: #2196f3;
-    color: #fff;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.login-button:hover {
-    background-color: #1565c0;
-}
-
 
 @media screen and (max-width: 600px) {
-    .login-form {
+    .registration-form {
         max-width: 100%;
         margin: 20px;
     }

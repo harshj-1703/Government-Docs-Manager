@@ -33,7 +33,12 @@ function App() {
     },
     {
       path: "/register-user",
-      element: <RegisterUser />,
+      element: (
+        <>
+          <ToastContainer />
+          <RegisterUser />
+        </>
+      ),
     },
     {
       path: "/datacenter-login",
