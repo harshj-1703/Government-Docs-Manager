@@ -643,8 +643,13 @@ html {
 }
 
 #map-div{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   height: fit-content;
-  width: 570px;
+  width: 500px;
   color: darkblue;
   margin-right: 20px;
 }
@@ -738,8 +743,8 @@ html {
   position: absolute;
   z-index: 1;
   border-radius: 20px;
-  height: 370px;
-  width: 550px;
+  height: 100%;
+  width: 100%;
   background: linear-gradient(45deg, #eee 25%, #dddddddc 50%, #eeeeeee2 75%);
   background-size: 200% 100%;
   animation: skeletonAnimation 1.5s infinite linear;
