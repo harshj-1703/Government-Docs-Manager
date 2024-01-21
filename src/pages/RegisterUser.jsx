@@ -35,6 +35,8 @@ function RegisterUser() {
   const [professionError, setProfessionError] = useState("");
   const [photo, setPhoto] = useState(null);
   const [photoError, setPhotoError] = useState("");
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [fileError, setFileError] = useState("");
   const [errors, setErrors] = useState({});
   const [otp, setOtp] = useState("");
 
@@ -346,6 +348,32 @@ function RegisterUser() {
     validatePhoto(selectedPhoto);
   };
 
+  const handleFileChange = (e) => {
+    const allowedFileTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/gif",
+      "application/pdf",
+    ];
+    const maxFileSize = 1000 * 1024;
+    const file = e.target.files[0];
+
+    if (file) {
+      if (allowedFileTypes.includes(file.type)) {
+        if (file.size <= maxFileSize) {
+          setSelectedFile(file);
+          setFileError("");
+        } else {
+          setSelectedFile(null);
+          setFileError("File size exceeds the limit (500 KB).");
+        }
+      } else {
+        setSelectedFile(null);
+        setFileError("Invalid file type. Allowed types: JPG, PNG, GIF, PDF");
+      }
+    }
+  };
+
   return (
     <div className="registration-container">
       <form className="registration-form" onSubmit={(e) => e.preventDefault()}>
@@ -619,6 +647,26 @@ function RegisterUser() {
                 onChange={handlePhotoChange}
               />
               {photoError && <span className="error">{photoError}</span>}
+              {photo && (
+                <div className="avatar-container">
+                  <img
+                    src={URL.createObjectURL(photo)}
+                    alt="Preview"
+                    className="avatar-preview"
+                  />
+                </div>
+              )}
+            </div>
+            {/* File Upload */}
+            <div>
+              <label htmlFor="file">Upload Doc File Proof:</label>
+              <input
+                type="file"
+                id="file"
+                accept=".jpg, .jpeg, .png, .gif, .pdf"
+                onChange={handleFileChange}
+              />
+              {fileError && <span className="error">{fileError}</span>}
             </div>
             {/* submit */}
             <button
