@@ -2,11 +2,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    /* height: 100vh; */
     background-image: url('/images/ramsetu.jpg');
     background-size: cover;
     background-position: center;
-    overflow: hidden;
+    overflow-y: auto;
 }
 
 #back-login{
@@ -18,6 +19,7 @@
     max-width: 360px;
     width: 100%;
     padding: 20px;
+    margin: 20px;
     border: 2px solid transparent;
     border-radius: 15px;
     backdrop-filter: blur(10px);
@@ -42,7 +44,7 @@
 }
 
 .registration-form:hover {
-    transform: scale(1.07);
+    transform: scale(1.04);
     border-color: rgba(255, 255, 255, 0.3);
     animation: wavy-border 2s infinite;
 }

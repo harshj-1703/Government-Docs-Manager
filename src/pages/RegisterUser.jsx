@@ -33,6 +33,8 @@ function RegisterUser() {
   const [cityError, setCityError] = useState("");
   const [profession, setProfession] = useState("");
   const [professionError, setProfessionError] = useState("");
+  const [photo, setPhoto] = useState(null);
+  const [photoError, setPhotoError] = useState("");
   const [errors, setErrors] = useState({});
   const [otp, setOtp] = useState("");
 
@@ -120,8 +122,9 @@ function RegisterUser() {
 
   const handleRegister3 = () => {
     const isProfessionValid = validateProfession(profession);
+    const isPhotoValid = validatePhoto(photo);
 
-    if (isProfessionValid) {
+    if (isProfessionValid && isPhotoValid) {
       // setStep(5);
       ToastMessage({
         message: "Registration successful!",
@@ -314,8 +317,37 @@ function RegisterUser() {
     validateProfession(newValue);
   };
 
+  const validatePhoto = (file) => {
+    const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
+    const maxSizeInBytes = 500 * 1024;
+
+    if (!file) {
+      setPhotoError("Photo is required.");
+      return false;
+    }
+
+    if (!allowedTypes.includes(file.type)) {
+      setPhotoError("Invalid file type. Please upload a JPG, PNG, or GIF.");
+      return false;
+    }
+
+    if (file.size > maxSizeInBytes) {
+      setPhotoError("File size exceeds 500 KB limit.");
+      return false;
+    }
+
+    setPhotoError("");
+    return true;
+  };
+
+  const handlePhotoChange = (e) => {
+    const selectedPhoto = e.target.files[0];
+    setPhoto(selectedPhoto);
+    validatePhoto(selectedPhoto);
+  };
+
   return (
-    <div className="container">
+    <div className="registration-container">
       <form className="registration-form" onSubmit={(e) => e.preventDefault()}>
         {/* Mobile number */}
         {step === 1 && (
@@ -576,6 +608,17 @@ function RegisterUser() {
                   <span className="error">{professionError}</span>
                 )}
               </div>
+            </div>
+            {/* Profile Photo */}
+            <label htmlFor="photo">Upload Profile Photo:</label>
+            <div>
+              <input
+                type="file"
+                id="photo"
+                accept=".jpg, .jpeg, .png, .gif"
+                onChange={handlePhotoChange}
+              />
+              {photoError && <span className="error">{photoError}</span>}
             </div>
             {/* submit */}
             <button
