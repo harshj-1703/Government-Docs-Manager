@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/registration.css";
 import { Link } from "react-router-dom";
 import ToastMessage from "../components/ToastMessage";
 import OTPInput from "react-otp-input";
+import * as data from "../assets/state and cities.json";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 function RegisterUser() {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(5);
   const [mobile, setMobile] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const [fullName, setFullName] = useState("");
@@ -21,8 +23,22 @@ function RegisterUser() {
   const [addressError, setAddressError] = useState("");
   const [pincode, setPincode] = useState("");
   const [pincodeError, setPincodeError] = useState("");
+  const [stateOptions, setStateOptions] = useState([]);
+  const [cityOptions, setCityOptions] = useState([]);
+  const [selectedState, setSelectedState] = useState(null);
+  const [selectedCity, setSelectedCity] = useState(null);
+  const [stateError, setStateError] = useState("");
+  const [cityError, setCityError] = useState("");
   const [errors, setErrors] = useState({});
   const [otp, setOtp] = useState("");
+
+  useEffect(() => {
+    const statesData = Object.keys(data).map((state) => ({
+      value: state,
+      label: state,
+    }));
+    setStateOptions(statesData);
+  }, []);
 
   const validateMobile = (value) => {
     if (/^\d{10}$/.test(value)) {
@@ -85,12 +101,14 @@ function RegisterUser() {
   const handleRegister2 = () => {
     const isAddressValid = validateAddress(address);
     const isPincodeValid = validatePincode(pincode);
-    if (isAddressValid && isPincodeValid) {
-      // setStep(5);
-      ToastMessage({
-        message: "Registration successful!",
-        type: "success",
-      });
+    const isStateValid = validateState(selectedState);
+    const isCityValid = validateCity(selectedCity);
+    if (isAddressValid && isPincodeValid && isStateValid && isCityValid) {
+      setStep(5);
+      // ToastMessage({
+      //   message: "Registration successful!",
+      //   type: "success",
+      // });
     }
   };
 
@@ -173,193 +191,293 @@ function RegisterUser() {
     }
   };
 
+  const validateState = (value) => {
+    if (!value) {
+      setStateError("State is required.");
+      return false;
+    } else {
+      setStateError("");
+      return true;
+    }
+  };
+
+  const validateCity = (value) => {
+    if (!value) {
+      setCityError("City is required.");
+      return false;
+    } else {
+      setCityError("");
+      return true;
+    }
+  };
+
+  const handleStateChange = (e) => {
+    const selectedStateValue = e.target.value;
+    setSelectedState(selectedStateValue);
+
+    if (data[selectedStateValue]) {
+      setCityOptions(
+        data[selectedStateValue].map((city) => ({ value: city, label: city }))
+      );
+      setCityError(null);
+    } else {
+      setCityOptions([]);
+      setCityError("No cities found for the selected state");
+    }
+
+    setSelectedCity(null);
+  };
+
+  const handleCityChange = (e) => {
+    const selectedCityValue = e.target.value;
+    setSelectedCity(selectedCityValue);
+  };
+
   return (
     <div className="container">
       <form className="registration-form" onSubmit={(e) => e.preventDefault()}>
+        {/* Mobile number */}
         {step === 1 && (
-          <>
-            <h2>Enter Your Mobile Number</h2>
-            <div>
-              <input
-                type="tel"
-                placeholder="Enter your mobile number"
-                value={mobile}
-                onChange={(e) => {
-                  setMobile(e.target.value);
-                  validateMobile(e.target.value);
-                }}
-                maxLength={10}
-              />
-              {errors.mobile && <span className="error">{errors.mobile}</span>}
-            </div>
-            <div id="recaptcha-container"></div>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleSendVerificationCode();
-              }}
-              className="registration-button"
-            >
-              Send Code
-            </button>
-          </>
-        )}
-        {step === 2 && (
-          <>
-            <h2>Enter the verification code</h2>
-            <div id="otp-input">
-              <OTPInput
-                value={otp}
-                onChange={(code) => {
-                  setOtp(code);
-                }}
-                numInputs={6}
-                inputType={"number"}
-                isInputNum={true}
-                skipDefaultStyles={true}
-                // renderSeparator={<span>-</span>}
-                renderInput={(props) => <input {...props} />}
-              />
-            </div>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleVerifyCode();
-              }}
-              className="registration-button"
-            >
-              Verify Code
-            </button>
-          </>
-        )}
-
-        {step === 3 && (
-          <>
-            <h2>Registration</h2>
-            {/* Full Name */}
-            <label htmlFor="full name">Full Name:</label>
-            <div>
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={fullName}
-                onChange={(e) => {
-                  setFullName(e.target.value);
-                  validateFullName(e.target.value);
-                }}
-              />
-              {fullNameError && <span className="error">{fullNameError}</span>}
-            </div>
-            {/* Email */}
-            <label htmlFor="email">Email:</label>
-            <div>
-              <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  validateEmail(e.target.value);
-                }}
-              />
-              {emailError && <span className="error">{emailError}</span>}
-            </div>
-            {/* Passwords */}
-            <label htmlFor="password">Password:</label>
-            <div className="password-container">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Password"
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                  validatePassword(e.target.value);
-                }}
-              />
-              <span className="toggle-password" onClick={handleTogglePassword}>
-                {showPassword ? (
-                  <i className="material-icons">visibility_off</i>
-                ) : (
-                  <i className="material-icons">visibility</i>
+          <LazyLoadComponent>
+              <h2>Enter Your Mobile Number</h2>
+              <div>
+                <input
+                  type="tel"
+                  placeholder="Enter your mobile number"
+                  value={mobile}
+                  onChange={(e) => {
+                    setMobile(e.target.value);
+                    validateMobile(e.target.value);
+                  }}
+                  maxLength={10}
+                />
+                {errors.mobile && (
+                  <span className="error">{errors.mobile}</span>
                 )}
-              </span>
-            </div>
-            {passwordError && <span className="error">{passwordError}</span>}
-            <label htmlFor="confirm-password">Confirm Password:</label>
-            <div>
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                value={confirmPassword}
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                  validateConfirmPassword(e.target.value);
+              </div>
+              <div id="recaptcha-container"></div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSendVerificationCode();
                 }}
-              />
-              {confirmPasswordError && (
-                <span className="error">{confirmPasswordError}</span>
-              )}
-            </div>
-            {/* submit */}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleRegister1();
-              }}
-              className="registration-button"
-            >
-              Submit Details
-            </button>
-          </>
+                className="registration-button"
+              >
+                Send Code
+              </button>
+          </LazyLoadComponent>
+        )}
+        {/* OTP */}
+        {step === 2 && (
+          <LazyLoadComponent>
+              <h2>Enter the verification code</h2>
+              <div id="otp-input">
+                <OTPInput
+                  value={otp}
+                  onChange={(code) => {
+                    setOtp(code);
+                  }}
+                  numInputs={6}
+                  inputType={"number"}
+                  isInputNum={true}
+                  skipDefaultStyles={true}
+                  // renderSeparator={<span>-</span>}
+                  renderInput={(props) => <input {...props} />}
+                />
+              </div>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleVerifyCode();
+                }}
+                className="registration-button"
+              >
+                Verify Code
+              </button>
+          </LazyLoadComponent>
+        )}
+        {/* Register Details */}
+        {step === 3 && (
+          <LazyLoadComponent>
+              <h2>Registration</h2>
+              {/* Full Name */}
+              <label htmlFor="full name">Full Name:</label>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={fullName}
+                  onChange={(e) => {
+                    setFullName(e.target.value);
+                    validateFullName(e.target.value);
+                  }}
+                />
+                {fullNameError && (
+                  <span className="error">{fullNameError}</span>
+                )}
+              </div>
+              {/* Email */}
+              <label htmlFor="email">Email:</label>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    validateEmail(e.target.value);
+                  }}
+                />
+                {emailError && <span className="error">{emailError}</span>}
+              </div>
+              {/* Passwords */}
+              <label htmlFor="password">Password:</label>
+              <div className="password-container">
+                <input
+                  type={showPassword ? "text" : "password"}
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    validatePassword(e.target.value);
+                  }}
+                />
+                <span
+                  className="toggle-password"
+                  onClick={handleTogglePassword}
+                >
+                  {showPassword ? (
+                    <i className="material-icons">visibility_off</i>
+                  ) : (
+                    <i className="material-icons">visibility</i>
+                  )}
+                </span>
+              </div>
+              {passwordError && <span className="error">{passwordError}</span>}
+              <label htmlFor="confirm-password">Confirm Password:</label>
+              <div>
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  value={confirmPassword}
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                    validateConfirmPassword(e.target.value);
+                  }}
+                />
+                {confirmPasswordError && (
+                  <span className="error">{confirmPasswordError}</span>
+                )}
+              </div>
+              {/* submit */}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleRegister1();
+                }}
+                className="registration-button"
+              >
+                Submit Details
+              </button>
+          </LazyLoadComponent>
+        )}
+        {/* Address */}
+        {step === 4 && (
+          <LazyLoadComponent>
+              <h2>Address Details</h2>
+              {/* Address */}
+              <div>
+                <label htmlFor="address">Address:</label>
+                <textarea
+                  type="text"
+                  placeholder="Address"
+                  value={address}
+                  rows={3}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                    validateAddress(e.target.value);
+                  }}
+                />
+                {addressError && <span className="error">{addressError}</span>}
+              </div>
+              {/* Pincode */}
+              <label htmlFor="pincode">PinCode:</label>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Pin Code"
+                  maxLength={6}
+                  value={pincode}
+                  onChange={(e) => {
+                    setPincode(e.target.value);
+                    validatePincode(e.target.value);
+                  }}
+                />
+                {pincodeError && <span className="error">{pincodeError}</span>}
+              </div>
+              {/* State & City */}
+              <div>
+                <label htmlFor="state">State:</label>
+                <div>
+                  <select
+                    value={selectedState || ""}
+                    onChange={handleStateChange}
+                  >
+                    <option value="" disabled>
+                      Select State
+                    </option>
+                    {stateOptions.map((state) => (
+                      <option key={state.value} value={state.value}>
+                        {state.label}
+                      </option>
+                    ))}
+                  </select>
+                  {stateError && <span className="error">{stateError}</span>}
+                </div>
+
+                <label htmlFor="city">City:</label>
+                <div>
+                  <select
+                    value={selectedCity || ""}
+                    onChange={handleCityChange}
+                  >
+                    <option value="" style={{ color: "#bbb" }} disabled>
+                      Select City
+                    </option>
+                    {cityOptions
+                      .filter(
+                        (city, index, self) =>
+                          index ===
+                          self.findIndex((c) => c.value === city.value)
+                      )
+                      .map((city) => (
+                        <option key={city.value} value={city.value}>
+                          {city.label}
+                        </option>
+                      ))}
+                  </select>
+                  {cityError && <span className="error">{cityError}</span>}
+                </div>
+              </div>
+              {/* submit */}
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleRegister2();
+                }}
+                className="registration-button"
+              >
+                Add Address
+              </button>
+          </LazyLoadComponent>
+        )}
+        {/* Photos And Doc */}
+        {step === 5 && (
+          <LazyLoadComponent>
+
+          </LazyLoadComponent>
         )}
 
-        {step === 4 && (
-          <>
-            <h2>Address Details</h2>
-            {/* Address */}
-            <div>
-              <label htmlFor="address">Address:</label>
-              <textarea
-                type="text"
-                placeholder="Address"
-                value={address}
-                rows={3}
-                onChange={(e) => {
-                  setAddress(e.target.value);
-                  validateAddress(e.target.value);
-                }}
-              />
-              {addressError && <span className="error">{addressError}</span>}
-            </div>
-            {/* Pincode */}
-            <label htmlFor="pincode">PinCode:</label>
-            <div>
-              <input
-                type="text"
-                placeholder="Pin Code"
-                maxLength={6}
-                value={pincode}
-                onChange={(e) => {
-                  setPincode(e.target.value);
-                  validatePincode(e.target.value);
-                }}
-              />
-              {pincodeError && <span className="error">{pincodeError}</span>}
-            </div>
-            {/* State & City */}
-            
-            {/* submit */}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleRegister2();
-              }}
-              className="registration-button"
-            >
-              Add Address
-            </button>
-          </>
-        )}
         {step <= 3 && (
           <div id="back-login">
             <Link to="/user-login" className="register-link">

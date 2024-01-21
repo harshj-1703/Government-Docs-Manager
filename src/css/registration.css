@@ -177,13 +177,40 @@
     -moz-appearance: textfield;
   }
 
-  .register-back {
+.register-back {
     background: none;
     border: none;
     color: cyan;
     cursor: pointer;
     padding: 0;
+}
+
+select {
+    width: 100%;
+    padding: 11px;
+    border: 2px solid rgba(242, 224, 224, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: cyan;
+    letter-spacing: 2.5px;
+    font-size: 17px;
+    font-family: 'Trebuchet MS', sans-serif;
+    transition: background 0.3s, border 0.3s;
+    box-sizing: border-box;
   }
+  
+select option {
+    color: darkblue;
+}
+
+select:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+select::placeholder {
+    color: #bbb;
+}
 
 @keyframes wavy-border1 {
     0% {
