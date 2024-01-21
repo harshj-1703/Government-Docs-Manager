@@ -5,7 +5,7 @@ import ToastMessage from "../components/ToastMessage";
 import OTPInput from "react-otp-input";
 
 function RegisterUser() {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(4);
   const [mobile, setMobile] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const [fullName, setFullName] = useState("");
@@ -17,6 +17,10 @@ function RegisterUser() {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [address, setAddress] = useState("");
+  const [addressError, setAddressError] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [pincodeError, setPincodeError] = useState("");
   const [errors, setErrors] = useState({});
   const [otp, setOtp] = useState("");
 
@@ -58,7 +62,7 @@ function RegisterUser() {
     });
   };
 
-  const handleRegister = () => {
+  const handleRegister1 = () => {
     const isFullNameValid = validateFullName(fullName);
     const isEmailValid = validateEmail(email);
     const isPasswordValid = validatePassword(password);
@@ -70,6 +74,19 @@ function RegisterUser() {
       isPasswordValid &&
       isConfirmPasswordValid
     ) {
+      setStep(4);
+      // ToastMessage({
+      //   message: "Registration successful!",
+      //   type: "success",
+      // });
+    }
+  };
+
+  const handleRegister2 = () => {
+    const isAddressValid = validateAddress(address);
+    const isPincodeValid = validatePincode(pincode);
+    if (isAddressValid && isPincodeValid) {
+      // setStep(5);
       ToastMessage({
         message: "Registration successful!",
         type: "success",
@@ -129,6 +146,31 @@ function RegisterUser() {
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
+  };
+
+  const validateAddress = (value) => {
+    if (value.trim() === "") {
+      setAddressError("Address is required.");
+      return false;
+    } else {
+      setAddressError("");
+      return true;
+    }
+  };
+
+  const validatePincode = (value) => {
+    const pincodeRegex = /^\d{6}$/;
+
+    if (value.trim() === "") {
+      setPincodeError("Pin code is required.");
+      return false;
+    } else if (!pincodeRegex.test(value)) {
+      setPincodeError("Invalid pin code. It should be exactly 6 digits.");
+      return false;
+    } else {
+      setPincodeError("");
+      return true;
+    }
   };
 
   return (
@@ -262,19 +304,80 @@ function RegisterUser() {
             <button
               onClick={(e) => {
                 e.preventDefault();
-                handleRegister();
+                handleRegister1();
               }}
               className="registration-button"
             >
-              Register
+              Submit Details
             </button>
           </>
         )}
-        <div id="back-login">
-          <Link to="/user-login" className="register-link">
-            Back to Login
-          </Link>
-        </div>
+
+        {step === 4 && (
+          <>
+            <h2>Address Details</h2>
+            {/* Address */}
+            <div>
+              <label htmlFor="address">Address:</label>
+              <textarea
+                type="text"
+                placeholder="Address"
+                value={address}
+                rows={3}
+                onChange={(e) => {
+                  setAddress(e.target.value);
+                  validateAddress(e.target.value);
+                }}
+              />
+              {addressError && <span className="error">{addressError}</span>}
+            </div>
+            {/* Pincode */}
+            <label htmlFor="pincode">PinCode:</label>
+            <div>
+              <input
+                type="text"
+                placeholder="Pin Code"
+                maxLength={6}
+                value={pincode}
+                onChange={(e) => {
+                  setPincode(e.target.value);
+                  validatePincode(e.target.value);
+                }}
+              />
+              {pincodeError && <span className="error">{pincodeError}</span>}
+            </div>
+            {/* State & City */}
+            
+            {/* submit */}
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handleRegister2();
+              }}
+              className="registration-button"
+            >
+              Add Address
+            </button>
+          </>
+        )}
+        {step <= 3 && (
+          <div id="back-login">
+            <Link to="/user-login" className="register-link">
+              Back to Login
+            </Link>
+          </div>
+        )}
+        {step > 3 && (
+          <div id="back-login">
+            <button
+              id="back-login"
+              onClick={() => setStep(step - 1)}
+              className="register-back"
+            >
+              Back
+            </button>
+          </div>
+        )}
       </form>
     </div>
   );

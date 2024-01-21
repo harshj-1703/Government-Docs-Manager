@@ -87,6 +87,29 @@
     color: #bbb;
 }
 
+.registration-form textarea {
+    width: 100%;
+    padding: 11px;
+    border: 2px solid rgba(242, 224, 224, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: cyan;
+    letter-spacing: 2.5px;
+    font-size: 17px;
+    font-family: 'Trebuchet MS', sans-serif;
+    transition: background 0.3s, border 0.3s;
+    box-sizing: border-box;
+}
+
+.registration-form textarea:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.registration-form textarea::placeholder {
+    color: #bbb;
+}
+
 .registration-password-container {
     position: relative;
 }
@@ -106,12 +129,6 @@
     font-size: 18px;
     color: whitesmoke;
     margin-right: 5px;
-}
-
-.registration-forgot-password {
-    margin-top: 12px;
-    text-align: right;
-    color: #fff;
 }
 
 .registration-error {
@@ -158,6 +175,14 @@
 
 #otp-input input[type=number] {
     -moz-appearance: textfield;
+  }
+
+  .register-back {
+    background: none;
+    border: none;
+    color: cyan;
+    cursor: pointer;
+    padding: 0;
   }
 
 @keyframes wavy-border1 {
