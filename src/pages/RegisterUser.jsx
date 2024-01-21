@@ -7,7 +7,7 @@ import * as data from "../assets/state and cities.json";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 function RegisterUser() {
-  const [step, setStep] = useState(3);
+  const [step, setStep] = useState(5);
   const [mobile, setMobile] = useState("");
   const [verificationCode, setVerificationCode] = useState("");
   const [fullName, setFullName] = useState("");
@@ -31,6 +31,8 @@ function RegisterUser() {
   const [selectedCity, setSelectedCity] = useState(null);
   const [stateError, setStateError] = useState("");
   const [cityError, setCityError] = useState("");
+  const [profession, setProfession] = useState("");
+  const [professionError, setProfessionError] = useState("");
   const [errors, setErrors] = useState({});
   const [otp, setOtp] = useState("");
 
@@ -116,9 +118,24 @@ function RegisterUser() {
     }
   };
 
+  const handleRegister3 = () => {
+    const isProfessionValid = validateProfession(profession);
+
+    if (isProfessionValid) {
+      // setStep(5);
+      ToastMessage({
+        message: "Registration successful!",
+        type: "success",
+      });
+    }
+  };
+
   const validateFullName = (value) => {
     if (value.trim() === "") {
       setFullNameError("Full Name is required.");
+      return false;
+    } else if (value.length > 35) {
+      setFullNameError("Full Name Length Must Less Then 35 letters");
       return false;
     } else if (/^[a-zA-Z\s]*$/.test(value)) {
       setFullNameError("");
@@ -137,6 +154,9 @@ function RegisterUser() {
     if (value.trim() === "") {
       setEmailError("Email is required.");
       return false;
+    } else if (value.length > 35) {
+      setEmailError("Email Length Must Less Then 35 letters");
+      return false;
     } else if (!emailRegex.test(value)) {
       setEmailError("Invalid email address.");
       return false;
@@ -149,6 +169,9 @@ function RegisterUser() {
   const validatePassword = (value) => {
     if (value.length < 8) {
       setPasswordError("Password must be at least 8 characters long.");
+      return false;
+    } else if (value.length > 35) {
+      setPasswordError("Password Length Must Less Then 35 letters");
       return false;
     } else {
       setPasswordError("");
@@ -205,6 +228,9 @@ function RegisterUser() {
   const validateAddress = (value) => {
     if (value.trim() === "") {
       setAddressError("Address is required.");
+      return false;
+    } else if (value.length > 50) {
+      setAddressError("Address Length Must Less Then 50 letters");
       return false;
     } else {
       setAddressError("");
@@ -267,6 +293,25 @@ function RegisterUser() {
   const handleCityChange = (e) => {
     const selectedCityValue = e.target.value;
     setSelectedCity(selectedCityValue);
+  };
+
+  const validateProfession = (value) => {
+    if (value.trim() === "") {
+      setProfessionError("Profession is required.");
+      return false;
+    } else if (value.length > 25) {
+      setProfessionError("Profession Length Must Less Then 25 letters");
+      return false;
+    } else {
+      setProfessionError("");
+      return true;
+    }
+  };
+
+  const handleProfessionChange = (e) => {
+    const newValue = e.target.value;
+    setProfession(newValue);
+    validateProfession(newValue);
   };
 
   return (
@@ -516,12 +561,27 @@ function RegisterUser() {
         {step === 5 && (
           <LazyLoadComponent>
             <h2>Other Details</h2>
-
+            {/* Profession */}
+            <div>
+              <label htmlFor="profession">Profession:</label>
+              <div>
+                <input
+                  type="text"
+                  id="profession"
+                  placeholder="Enter your profession"
+                  value={profession}
+                  onChange={handleProfessionChange}
+                />
+                {professionError && (
+                  <span className="error">{professionError}</span>
+                )}
+              </div>
+            </div>
             {/* submit */}
             <button
               onClick={(e) => {
                 e.preventDefault();
-                handleRegister2();
+                handleRegister3();
               }}
               className="registration-button"
             >
