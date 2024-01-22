@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import ToastMessage from "../ToastMessage";
+import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
+import { auth } from "../../firebase";
 
 function MobileNumberComponent({
   mobile,
@@ -10,6 +12,13 @@ function MobileNumberComponent({
   setStep,
   setVerificationCode,
 }) {
+  const generateRecaptcha = () => {
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
+      size: "invisible",
+      callback: (response) => {},
+    });
+  };
+
   const validateMobile = (value) => {
     if (/^\d{10}$/.test(value)) {
       setErrors({ ...errors, mobile: "" });
@@ -25,20 +34,32 @@ function MobileNumberComponent({
 
   const handleSendVerificationCode = () => {
     if (validateMobile(mobile)) {
-      setVerificationCode("123456");
-      setStep(2);
-      setErrors({});
-      ToastMessage({
-        message: "Verification code sent successfully!",
-        type: "success",
-      });
-      // Uncomment the line below if you want to display an error message
-      // ToastMessage({
-      //   message: "Unable to send OTP!",
-      //   type: "error",
-      // });
+      generateRecaptcha();
+      let appVerifier = window.recaptchaVerifier;
+      let phoneNumber = "+91" + mobile;
+      console.log(phoneNumber);
+
+      signInWithPhoneNumber(auth, phoneNumber, appVerifier)
+        .then((result) => {
+          // console.log(result);
+          setVerificationCode(result);
+          setStep(2);
+          setErrors({});
+          ToastMessage({
+            message: "Verification code sent successfully!",
+            type: "success",
+          });
+        })
+        .catch((err) => {
+          ToastMessage({
+            message: "Unable to send OTP!",
+            type: "error",
+          });
+          alert(err.message);
+        });
     }
   };
+
   return (
     <>
       <LazyLoadComponent>
@@ -56,7 +77,6 @@ function MobileNumberComponent({
           />
           {errors.mobile && <span className="error">{errors.mobile}</span>}
         </div>
-        <div id="recaptcha-container"></div>
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -66,6 +86,7 @@ function MobileNumberComponent({
         >
           Send Code
         </button>
+        <div id="recaptcha" style={{display:"none"}}></div>
       </LazyLoadComponent>
     </>
   );

@@ -5,18 +5,18 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
   const handleVerifyCode = () => {
-    if (otp === verificationCode) {
-      setStep(3);
-      ToastMessage({
-        message: "Verification successful!",
-        type: "success",
-      });
-    } else {
-      ToastMessage({
-        message: "OTP not valid!",
-        type: "error",
-      });
-    }
+    verificationCode.confirm(otp).then((result) => {
+        setStep(3);
+        ToastMessage({
+          message: "Verification successful!",
+          type: "success",
+        });
+    }).catch((error) => {
+        ToastMessage({
+          message: "OTP not valid!",
+          type: "error",
+        });
+    });
   };
   return (
     <>
