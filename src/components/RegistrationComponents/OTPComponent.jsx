@@ -6,6 +6,7 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
   const [seconds, setSeconds] = useState(150);
   const [timer, setTimer] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setTimer(
@@ -26,6 +27,7 @@ function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
   }, [seconds, timer, setStep]);
 
   const handleVerifyCode = () => {
+    setLoading(true);
     clearInterval(timer);
     verificationCode
       .confirm(otp)
@@ -37,11 +39,14 @@ function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
         });
       })
       .catch((error) => {
+        // console.error("OTP verification error:", error);
         ToastMessage({
           message: "OTP not valid!",
           type: "error",
         });
-      });
+      }).finally(() => {
+        setLoading(false);
+      });;
   };
   return (
     <>
@@ -71,6 +76,7 @@ function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
         >
           Verify Code
         </button>
+        {loading && <div className="loading-spinner">xyz</div>}
       </LazyLoadComponent>
     </>
   );

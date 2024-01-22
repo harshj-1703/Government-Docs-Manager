@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import ToastMessage from "../ToastMessage";
 import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
@@ -12,6 +12,8 @@ function MobileNumberComponent({
   setStep,
   setVerificationCode,
 }) {
+  const [loading, setLoading] = useState(false);
+
   const generateRecaptcha = () => {
     window.recaptchaVerifier = new RecaptchaVerifier(auth, "recaptcha", {
       size: "invisible",
@@ -34,6 +36,7 @@ function MobileNumberComponent({
 
   const handleSendVerificationCode = () => {
     if (validateMobile(mobile)) {
+      setLoading(true);
       generateRecaptcha();
       let appVerifier = window.recaptchaVerifier;
       let phoneNumber = "+91" + mobile;
@@ -51,11 +54,15 @@ function MobileNumberComponent({
           });
         })
         .catch((err) => {
+          // console.error("OTP sending error:", error);
           ToastMessage({
             message: "Unable to send OTP!",
             type: "error",
           });
           alert(err.message);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
   };
@@ -86,7 +93,8 @@ function MobileNumberComponent({
         >
           Send Code
         </button>
-        <div id="recaptcha" style={{display:"none"}}></div>
+        {loading && <div className="loading-spinner">xyz</div>}
+        <div id="recaptcha" style={{ display: "none" }}></div>
       </LazyLoadComponent>
     </>
   );
