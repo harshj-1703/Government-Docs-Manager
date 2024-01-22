@@ -235,7 +235,14 @@ select::placeholder {
 .avatar-container:hover .avatar-preview {
     transform: scale(1.1);
 }
-  
+ 
+.time-out{
+    text-align: center;
+    width: 100%;
+    color: white;
+    font-size: 17px;
+    margin-bottom: 10px;
+}
     
 @keyframes wavy-border1 {
     0% {
