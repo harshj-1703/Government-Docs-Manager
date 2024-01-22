@@ -1,14 +1,16 @@
-import React,{useState,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import ToastMessage from "../ToastMessage";
 import OTPInput from "react-otp-input";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
-  const [seconds, setSeconds] = useState(60);
+  const [seconds, setSeconds] = useState(150);
   const [timer, setTimer] = useState(null);
 
   useEffect(() => {
-    setTimer(setInterval(() => setSeconds((prevSeconds) => prevSeconds - 1), 1000));
+    setTimer(
+      setInterval(() => setSeconds((prevSeconds) => prevSeconds - 1), 1000)
+    );
     return () => clearInterval(timer);
   }, []);
 
@@ -24,19 +26,22 @@ function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
   }, [seconds, timer, setStep]);
 
   const handleVerifyCode = () => {
-    verificationCode.confirm(otp).then((result) => {
-      clearInterval(timer);
+    clearInterval(timer);
+    verificationCode
+      .confirm(otp)
+      .then((result) => {
         setStep(3);
         ToastMessage({
           message: "Verification successful!",
           type: "success",
         });
-    }).catch((error) => {
+      })
+      .catch((error) => {
         ToastMessage({
           message: "OTP not valid!",
           type: "error",
         });
-    });
+      });
   };
   return (
     <>
