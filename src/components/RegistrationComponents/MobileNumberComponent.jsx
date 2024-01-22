@@ -37,7 +37,7 @@ function MobileNumberComponent({
       generateRecaptcha();
       let appVerifier = window.recaptchaVerifier;
       let phoneNumber = "+91" + mobile;
-      console.log(phoneNumber);
+      // console.log(phoneNumber);
 
       signInWithPhoneNumber(auth, phoneNumber, appVerifier)
         .then((result) => {
