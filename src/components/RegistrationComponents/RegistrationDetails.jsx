@@ -1,8 +1,19 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
-function RegistrationDetails ({setStep,fullName,setFullName,email,setEmail,password,setPassword,confirmPassword,setConfirmPassword,dob,setDob}) {
-
+function RegistrationDetails({
+  setStep,
+  fullName,
+  setFullName,
+  email,
+  setEmail,
+  password,
+  setPassword,
+  confirmPassword,
+  setConfirmPassword,
+  dob,
+  setDob,
+}) {
   const [fullNameError, setFullNameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
@@ -10,27 +21,27 @@ function RegistrationDetails ({setStep,fullName,setFullName,email,setEmail,passw
   const [showPassword, setShowPassword] = useState(false);
   const [dobError, setDobError] = useState("");
 
-    const handleRegister1 = () => {
-        const isFullNameValid = validateFullName(fullName);
-        const isEmailValid = validateEmail(email);
-        const isPasswordValid = validatePassword(password);
-        const isConfirmPasswordValid = validateConfirmPassword(confirmPassword);
-        const isDobValid = validateDob(dob);
-    
-        if (
-          isFullNameValid &&
-          isEmailValid &&
-          isPasswordValid &&
-          isConfirmPasswordValid &&
-          isDobValid
-        ) {
-          setStep(4);
-          // ToastMessage({
-          //   message: "Registration successful!",
-          //   type: "success",
-          // });
-        }
-      };
+  const handleRegister1 = () => {
+    const isFullNameValid = validateFullName(fullName);
+    const isEmailValid = validateEmail(email);
+    const isPasswordValid = validatePassword(password);
+    const isConfirmPasswordValid = validateConfirmPassword(confirmPassword);
+    const isDobValid = validateDob(dob);
+
+    if (
+      isFullNameValid &&
+      isEmailValid &&
+      isPasswordValid &&
+      isConfirmPasswordValid &&
+      isDobValid
+    ) {
+      setStep(4);
+      // ToastMessage({
+      //   message: "Registration successful!",
+      //   type: "success",
+      // });
+    }
+  };
 
   const validateFullName = (value) => {
     if (value.trim() === "") {
@@ -127,103 +138,95 @@ function RegistrationDetails ({setStep,fullName,setFullName,email,setEmail,passw
     validateDob(newValue);
   };
 
-    return (
-        <>
-        <LazyLoadComponent>
-            <h2>Registration</h2>
-            {/* Full Name */}
-            <label htmlFor="full name">Full Name:</label>
-            <div>
-              <input
-                type="text"
-                placeholder="Full Name"
-                value={fullName}
-                onChange={(e) => {
-                  setFullName(e.target.value);
-                  validateFullName(e.target.value);
-                }}
-              />
-              {fullNameError && <span className="error">{fullNameError}</span>}
-            </div>
-            {/* DOB */}
-            <label htmlFor="dob">Date of Birth:</label>
-            <div>
-              <input
-                type="date"
-                id="dob"
-                value={dob}
-                onChange={handleDobChange}
-              />
-              {dobError && <span className="error">{dobError}</span>}
-            </div>
-            {/* Email */}
-            <label htmlFor="email">Email:</label>
-            <div>
-              <input
-                type="text"
-                placeholder="Email"
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  validateEmail(e.target.value);
-                }}
-              />
-              {emailError && <span className="error">{emailError}</span>}
-            </div>
-            {/* Passwords */}
-            <label htmlFor="password">Password:</label>
-            <div id="passwords-div">
-              <div className="password-container">
-                <input
-                  type={showPassword ? "text" : "password"}
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => {
-                    setPassword(e.target.value);
-                    validatePassword(e.target.value);
-                  }}
-                />
-                <span
-                  className="toggle-password"
-                  onClick={handleTogglePassword}
-                >
-                  {showPassword ? (
-                    <i className="material-icons">visibility_off</i>
-                  ) : (
-                    <i className="material-icons">visibility</i>
-                  )}
-                </span>
-              </div>
-              {passwordError && <span className="error">{passwordError}</span>}
-              <label htmlFor="confirm-password">Confirm Password:</label>
-              <div>
-                <input
-                  type="password"
-                  placeholder="Confirm Password"
-                  value={confirmPassword}
-                  onChange={(e) => {
-                    setConfirmPassword(e.target.value);
-                    validateConfirmPassword(e.target.value);
-                  }}
-                />
-                {confirmPasswordError && (
-                  <span className="error">{confirmPasswordError}</span>
-                )}
-              </div>
-            </div>
-            {/* submit */}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleRegister1();
+  return (
+    <>
+      <LazyLoadComponent>
+        <h2>Registration</h2>
+        {/* Full Name */}
+        <label htmlFor="full name">Full Name:</label>
+        <div>
+          <input
+            type="text"
+            placeholder="Full Name"
+            value={fullName}
+            onChange={(e) => {
+              setFullName(e.target.value);
+              validateFullName(e.target.value);
+            }}
+          />
+          {fullNameError && <span className="error">{fullNameError}</span>}
+        </div>
+        {/* DOB */}
+        <label htmlFor="dob">Date of Birth:</label>
+        <div>
+          <input type="date" id="dob" value={dob} onChange={handleDobChange} />
+          {dobError && <span className="error">{dobError}</span>}
+        </div>
+        {/* Email */}
+        <label htmlFor="email">Email:</label>
+        <div>
+          <input
+            type="text"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+              validateEmail(e.target.value);
+            }}
+          />
+          {emailError && <span className="error">{emailError}</span>}
+        </div>
+        {/* Passwords */}
+        <label htmlFor="password">Password:</label>
+        <div id="passwords-div">
+          <div className="password-container">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Password"
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+                validatePassword(e.target.value);
               }}
-              className="registration-button"
-            >
-              Submit Details
-            </button>
-          </LazyLoadComponent>
-        </>
-    )
+            />
+            <span className="toggle-password" onClick={handleTogglePassword}>
+              {showPassword ? (
+                <i className="material-icons">visibility_off</i>
+              ) : (
+                <i className="material-icons">visibility</i>
+              )}
+            </span>
+          </div>
+          {passwordError && <span className="error">{passwordError}</span>}
+          <label htmlFor="confirm-password">Confirm Password:</label>
+          <div>
+            <input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+                validateConfirmPassword(e.target.value);
+              }}
+            />
+            {confirmPasswordError && (
+              <span className="error">{confirmPasswordError}</span>
+            )}
+          </div>
+        </div>
+        {/* submit */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            handleRegister1();
+          }}
+          className="registration-button"
+        >
+          Submit Details
+        </button>
+      </LazyLoadComponent>
+    </>
+  );
 }
 
-export default RegistrationDetails; 
+export default RegistrationDetails;

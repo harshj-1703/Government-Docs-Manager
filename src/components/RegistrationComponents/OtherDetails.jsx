@@ -1,12 +1,18 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import ToastMessage from "../ToastMessage";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
-function OtherDetails ({profession,setProfession,photo,setPhoto,selectedFile,setSelectedFile}) {
+function OtherDetails({
+  profession,
+  setProfession,
+  photo,
+  setPhoto,
+  selectedFile,
+  setSelectedFile,
+}) {
   const [professionError, setProfessionError] = useState("");
   const [photoError, setPhotoError] = useState("");
   const [fileError, setFileError] = useState("");
-
 
   const handleRegister3 = () => {
     const isProfessionValid = validateProfession(profession);
@@ -70,7 +76,7 @@ function OtherDetails ({profession,setProfession,photo,setPhoto,selectedFile,set
     validatePhoto(selectedPhoto);
   };
 
-  const validateFile = (file) =>{
+  const validateFile = (file) => {
     const allowedFileTypes = [
       "image/jpeg",
       "image/png",
@@ -95,12 +101,11 @@ function OtherDetails ({profession,setProfession,photo,setPhoto,selectedFile,set
         setFileError("Invalid file type. Allowed types: JPG, PNG, GIF, PDF");
         return false;
       }
-    }
-    else{
+    } else {
       setFileError("File proof is required!");
-        return false;
+      return false;
     }
-  }
+  };
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -108,70 +113,70 @@ function OtherDetails ({profession,setProfession,photo,setPhoto,selectedFile,set
     validateFile(selectedFile);
   };
 
-    return (
-        <>
-            <LazyLoadComponent>
-            <h2>Other Details</h2>
-            {/* Profession */}
-            <div>
-              <label htmlFor="profession">Profession:</label>
-              <div>
-                <input
-                  type="text"
-                  id="profession"
-                  placeholder="Enter your profession"
-                  value={profession}
-                  onChange={handleProfessionChange}
-                />
-                {professionError && (
-                  <span className="error">{professionError}</span>
-                )}
-              </div>
-            </div>
-            {/* Profile Photo */}
-            <label htmlFor="photo">Upload Profile Photo:</label>
-            <div>
-              <input
-                type="file"
-                id="photo"
-                accept=".jpg, .jpeg, .png, .gif"
-                onChange={handlePhotoChange}
+  return (
+    <>
+      <LazyLoadComponent>
+        <h2>Other Details</h2>
+        {/* Profession */}
+        <div>
+          <label htmlFor="profession">Profession:</label>
+          <div>
+            <input
+              type="text"
+              id="profession"
+              placeholder="Enter your profession"
+              value={profession}
+              onChange={handleProfessionChange}
+            />
+            {professionError && (
+              <span className="error">{professionError}</span>
+            )}
+          </div>
+        </div>
+        {/* Profile Photo */}
+        <label htmlFor="photo">Upload Profile Photo:</label>
+        <div>
+          <input
+            type="file"
+            id="photo"
+            accept=".jpg, .jpeg, .png, .gif"
+            onChange={handlePhotoChange}
+          />
+          {photoError && <span className="error">{photoError}</span>}
+          {photo && (
+            <div className="avatar-container">
+              <img
+                src={URL.createObjectURL(photo)}
+                alt="Preview"
+                className="avatar-preview"
               />
-              {photoError && <span className="error">{photoError}</span>}
-              {photo && (
-                <div className="avatar-container">
-                  <img
-                    src={URL.createObjectURL(photo)}
-                    alt="Preview"
-                    className="avatar-preview"
-                  />
-                </div>
-              )}
             </div>
-            {/* File Upload */}
-            <div>
-              <label htmlFor="file">Upload Doc File Proof:</label>
-              <input
-                type="file"
-                id="file"
-                accept=".jpg, .jpeg, .png, .gif, .pdf"
-                onChange={handleFileChange}
-              />
-              {fileError && <span className="error">{fileError}</span>}
-            </div>
-            {/* submit */}
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                handleRegister3();
-              }}
-              className="registration-button"
-            >
-              Register
-            </button>
-          </LazyLoadComponent>
-        </>
-    )
+          )}
+        </div>
+        {/* File Upload */}
+        <div>
+          <label htmlFor="file">Upload Doc File Proof:</label>
+          <input
+            type="file"
+            id="file"
+            accept=".jpg, .jpeg, .png, .gif, .pdf"
+            onChange={handleFileChange}
+          />
+          {fileError && <span className="error">{fileError}</span>}
+        </div>
+        {/* submit */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            handleRegister3();
+          }}
+          className="registration-button"
+        >
+          Register
+        </button>
+      </LazyLoadComponent>
+    </>
+  );
 }
 
 export default OtherDetails;
