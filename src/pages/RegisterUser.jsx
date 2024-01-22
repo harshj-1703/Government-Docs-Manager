@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import "../css/registration.css";
 import { Link } from "react-router-dom";
 import MobileNumberComponent from "../components/RegistrationComponents/MobileNumberComponent";
@@ -31,23 +31,64 @@ function RegisterUser() {
       <form className="registration-form" onSubmit={(e) => e.preventDefault()}>
         {/* Mobile number */}
         {step === 1 && (
-          <MobileNumberComponent setVerificationCode={setVerificationCode} setStep={setStep} mobile={mobile} setMobile={setMobile} errors={errors} setErrors={setErrors}/>
+          <MobileNumberComponent
+            setVerificationCode={setVerificationCode}
+            setStep={setStep}
+            mobile={mobile}
+            setMobile={setMobile}
+            errors={errors}
+            setErrors={setErrors}
+          />
         )}
         {/* OTP */}
         {step === 2 && (
-          <OTPComponent otp={otp} setOtp={setOtp} setStep={setStep} verificationCode={verificationCode} />
+          <OTPComponent
+            otp={otp}
+            setOtp={setOtp}
+            setStep={setStep}
+            verificationCode={verificationCode}
+          />
         )}
         {/* Register Details */}
         {step === 3 && (
-          <RegistrationDetails setStep={setStep} fullName={fullName} setFullName={setFullName} email={email} setEmail={setEmail} password={password} setPassword={setPassword} confirmPassword={confirmPassword} setConfirmPassword={setConfirmPassword} dob={dob} setDob={setDob}/>
+          <RegistrationDetails
+            setStep={setStep}
+            fullName={fullName}
+            setFullName={setFullName}
+            email={email}
+            setEmail={setEmail}
+            password={password}
+            setPassword={setPassword}
+            confirmPassword={confirmPassword}
+            setConfirmPassword={setConfirmPassword}
+            dob={dob}
+            setDob={setDob}
+          />
         )}
         {/* Address */}
         {step === 4 && (
-          <AddressDetails setStep={setStep} address={address} setAddress={setAddress} pincode={pincode} setPincode={setPincode} selectedState={selectedState} setSelectedState={setSelectedState} selectedCity={selectedCity} setSelectedCity={setSelectedCity} />
+          <AddressDetails
+            setStep={setStep}
+            address={address}
+            setAddress={setAddress}
+            pincode={pincode}
+            setPincode={setPincode}
+            selectedState={selectedState}
+            setSelectedState={setSelectedState}
+            selectedCity={selectedCity}
+            setSelectedCity={setSelectedCity}
+          />
         )}
         {/* Photos And Doc */}
         {step === 5 && (
-          <OtherDetails profession={profession} setProfession={setProfession} photo={photo} setPhoto={setPhoto} selectedFile={selectedFile} setSelectedFile={setSelectedFile}/>
+          <OtherDetails
+            profession={profession}
+            setProfession={setProfession}
+            photo={photo}
+            setPhoto={setPhoto}
+            selectedFile={selectedFile}
+            setSelectedFile={setSelectedFile}
+          />
         )}
 
         {step <= 3 && (
@@ -68,7 +109,14 @@ function RegisterUser() {
             </button>
           </div>
         )}
-        
+        {(step == 1) &&
+        (
+          <div className="new-user">
+            <Link to="/" className="register-link" style={{ color: "white" }}>
+              Home
+            </Link>
+          </div>
+        )}
       </form>
     </div>
   );

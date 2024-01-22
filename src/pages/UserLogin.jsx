@@ -98,6 +98,11 @@ function UserLogin() {
             Register
           </Link>
         </div>
+        <div className="new-user">
+          <Link to="/" className="register-link" style={{color:"white"}}>
+              Home
+          </Link>
+        </div>
       </form>
     </div>
   );
