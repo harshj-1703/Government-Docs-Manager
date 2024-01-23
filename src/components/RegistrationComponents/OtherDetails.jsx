@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import ToastMessage from "../ToastMessage";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
+import { Navigate, useNavigate } from "react-router-dom";
+import CircularLoading from "../CircularLoading";
 
 function OtherDetails({
   profession,
@@ -9,22 +11,28 @@ function OtherDetails({
   setPhoto,
   selectedFile,
   setSelectedFile,
+  addUser
 }) {
   const [professionError, setProfessionError] = useState("");
   const [photoError, setPhotoError] = useState("");
   const [fileError, setFileError] = useState("");
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
-  const handleRegister3 = () => {
+  const handleRegister3 = async () => {
     const isProfessionValid = validateProfession(profession);
     const isPhotoValid = validatePhoto(photo);
     const isFileValid = validateFile(selectedFile);
 
     if (isProfessionValid && isPhotoValid && isFileValid) {
-      // setStep(5);
+      setLoading(true);
+      await addUser();
       ToastMessage({
         message: "Registration successful!",
         type: "success",
       });
+      setLoading(false);
+      navigate("/user-login");
     }
   };
 
@@ -171,9 +179,11 @@ function OtherDetails({
             handleRegister3();
           }}
           className="registration-button"
+          disabled={loading}
         >
           Register
         </button>
+        {loading && <CircularLoading/>}
       </LazyLoadComponent>
     </>
   );

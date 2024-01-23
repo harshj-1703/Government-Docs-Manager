@@ -6,6 +6,11 @@ import OTPComponent from "../components/RegistrationComponents/OTPComponent";
 import RegistrationDetails from "../components/RegistrationComponents/RegistrationDetails";
 import AddressDetails from "../components/RegistrationComponents/AddressDetails";
 import OtherDetails from "../components/RegistrationComponents/OtherDetails";
+import userService from "../services/user.services";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../firebase";
+import { v4 } from "uuid";
+import CryptoJS from "crypto-js";
 
 function RegisterUser() {
   const [step, setStep] = useState(1);
@@ -25,6 +30,51 @@ function RegisterUser() {
   const [photo, setPhoto] = useState(null);
   const [selectedFile, setSelectedFile] = useState(null);
   const [errors, setErrors] = useState({});
+
+  const addUser = async () => {
+    //hash password
+    const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+    //image
+    const imageRef = ref(storage, `ProfilePhotos/${photo.name + v4()}`);
+    const snapshot = await uploadBytes(imageRef, photo);
+    const urlImage = await getDownloadURL(snapshot.ref);
+
+    //file
+    const fileRef = ref(
+      storage,
+      `UserProfileProofs/${selectedFile.name + v4()}`
+    );
+    const snapshotFile = await uploadBytes(fileRef, selectedFile);
+    const urlFile = await getDownloadURL(snapshotFile.ref);
+
+    const timestampOptions = {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      timeZoneName: "short",
+      timeZone: "Asia/Kolkata",
+    };
+
+    const newUser = {
+      fullName: fullName,
+      email: email,
+      mobile: mobile,
+      password: hashedPassword,
+      dob: dob,
+      address: address,
+      pincode: pincode,
+      selectedState: selectedState,
+      selectedCity: selectedCity,
+      profession: profession,
+      profilePhotoUrl: urlImage,
+      profileProof: urlFile,
+      timestamp: new Date().toLocaleString("en-US", timestampOptions),
+    };
+    await userService.addUser(newUser);
+  };
 
   return (
     <div className="registration-container">
@@ -88,6 +138,7 @@ function RegisterUser() {
             setPhoto={setPhoto}
             selectedFile={selectedFile}
             setSelectedFile={setSelectedFile}
+            addUser={addUser}
           />
         )}
 
@@ -109,8 +160,7 @@ function RegisterUser() {
             </button>
           </div>
         )}
-        {(step == 1) &&
-        (
+        {step == 1 && (
           <div className="new-user">
             <Link to="/" className="register-link" style={{ color: "white" }}>
               Home
