@@ -3,6 +3,7 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 import ToastMessage from "../ToastMessage";
 import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 import { auth } from "../../firebase";
+import CircularLoading from "../CircularLoading";
 
 function MobileNumberComponent({
   mobile,
@@ -90,10 +91,11 @@ function MobileNumberComponent({
             handleSendVerificationCode();
           }}
           className="registration-button"
+          disabled={loading}
         >
           Send Code
         </button>
-        {loading && <div className="loading-spinner">xyz</div>}
+        {loading && <CircularLoading/>}
         <div id="recaptcha" style={{ display: "none" }}></div>
       </LazyLoadComponent>
     </>

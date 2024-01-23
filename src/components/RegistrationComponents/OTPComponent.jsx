@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ToastMessage from "../ToastMessage";
 import OTPInput from "react-otp-input";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
+import CircularLoading from "../CircularLoading";
 
 function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
   const [seconds, setSeconds] = useState(150);
@@ -76,7 +77,7 @@ function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
         >
           Verify Code
         </button>
-        {loading && <div className="loading-spinner">xyz</div>}
+        {loading && <CircularLoading/>}
       </LazyLoadComponent>
     </>
   );
