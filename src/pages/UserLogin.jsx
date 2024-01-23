@@ -2,12 +2,16 @@ import React, { useState } from "react";
 import "../css/login.css";
 import { Link } from "react-router-dom";
 import ToastMessage from "../components/ToastMessage";
+import userService from "../services/user.services";
+import CircularLoading from "../components/CircularLoading";
+import CryptoJS from "crypto-js";
 
 function UserLogin() {
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -24,7 +28,8 @@ function UserLogin() {
     setMobile(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const validationErrors = {};
     if (!/^\d{10}$/.test(mobile)) {
@@ -35,17 +40,33 @@ function UserLogin() {
     }
 
     if (Object.keys(validationErrors).length === 0) {
-      ToastMessage({
-        message: "Login successful!",
-        type: "success",
-      });
+      const available = await userService.getUserFromMobile(mobile);
+      if (!available) {
+        ToastMessage({
+          message: "User Not Registered",
+          type: "error",
+        });
+      } else {
+        const hashedPassword = CryptoJS.SHA256(password).toString(
+          CryptoJS.enc.Hex
+        );
+        if (hashedPassword === available.password) {
+          ToastMessage({
+            message: "Login Succesful",
+            type: "success",
+          });
+        }
+        else{
+          ToastMessage({
+            message: "Wrong Password",
+            type: "error",
+          });
+        }
+      }
     } else {
       setErrors(validationErrors);
-      ToastMessage({
-        message: "Login failed. Please check your credentials.",
-        type: "error",
-      });
     }
+    setLoading(false);
   };
 
   return (
@@ -99,11 +120,12 @@ function UserLogin() {
           </Link>
         </div>
         <div className="new-user">
-          <Link to="/" className="register-link" style={{color:"white"}}>
-              Home
+          <Link to="/" className="register-link" style={{ color: "white" }}>
+            Home
           </Link>
         </div>
       </form>
+      {loading && <CircularLoading />}
     </div>
   );
 }
