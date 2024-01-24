@@ -6,21 +6,20 @@ const userAuthContext = createContext();
 
 export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
-      setUser(currentuser);
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      setIsLoading(false);
     });
-
-    
-
     return () => {
       unsubscribe();
     };
   }, []);
 
   return (
-    <userAuthContext.Provider value={{ user }}>
+    <userAuthContext.Provider value={{ user, isLoading }}>
       {children}
     </userAuthContext.Provider>
   );
