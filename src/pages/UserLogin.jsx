@@ -4,7 +4,9 @@ import { Link } from "react-router-dom";
 import ToastMessage from "../components/ToastMessage";
 import userService from "../services/user.services";
 import CircularLoading from "../components/CircularLoading";
-import CryptoJS from "crypto-js";
+import { auth } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+// import CryptoJS from "crypto-js";
 
 function UserLogin() {
   const [mobile, setMobile] = useState("");
@@ -28,6 +30,10 @@ function UserLogin() {
     setMobile(value);
   };
 
+  // const saveUserToLocalStorage = (user) => {
+  //   localStorage.setItem('currentUser',user);
+  // };
+
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -47,21 +53,25 @@ function UserLogin() {
           type: "error",
         });
       } else {
-        const hashedPassword = CryptoJS.SHA256(password).toString(
-          CryptoJS.enc.Hex
-        );
-        if (hashedPassword === available.password) {
-          ToastMessage({
-            message: "Login Succesful",
-            type: "success",
+        await signInWithEmailAndPassword(auth, mobile + '@hj.com', password)
+          .then((userCredential) => {
+            // const user = userCredential.user;
+            // console.log(user);
+            ToastMessage({
+              message: "Login Succesful",
+              type: "success",
+            });
+            // saveUserToLocalStorage(user);
+          })
+          .catch((error) => {
+            // const errorCode = error.code;
+            // const errorMessage = error.message;
+            // console.log(errorCode,errorMessage);
+            ToastMessage({
+              message: "Wrong Password",
+              type: "error",
+            });
           });
-        }
-        else{
-          ToastMessage({
-            message: "Wrong Password",
-            type: "error",
-          });
-        }
       }
     } else {
       setErrors(validationErrors);

@@ -11,7 +11,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, storage } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { v4 } from "uuid";
-import CryptoJS from "crypto-js";
+// import CryptoJS from "crypto-js";
 
 function RegisterUser() {
   const [step, setStep] = useState(1);
@@ -34,7 +34,7 @@ function RegisterUser() {
 
   const addUser = async () => {
     //hash password
-    const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+    // const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
     //image
     const imageRef = ref(storage, `ProfilePhotos/${photo.name + v4()}`);
     const snapshot = await uploadBytes(imageRef, photo);
@@ -63,7 +63,6 @@ function RegisterUser() {
       fullName: fullName,
       email: email,
       mobile: mobile,
-      password: hashedPassword,
       dob: dob,
       address: address,
       pincode: pincode,
@@ -72,17 +71,21 @@ function RegisterUser() {
       profession: profession,
       profilePhotoUrl: urlImage,
       profileProof: urlFile,
-      timestamp: new Date().toLocaleString("en-US", timestampOptions),
+      createdAt: new Date().toLocaleString("en-US", timestampOptions),
+      updatedAt: new Date().toLocaleString("en-US", timestampOptions)
     };
     await userService.addUser(newUser);
 
-    createUserWithEmailAndPassword(auth, mobile + "@hj.com", password)
+    await createUserWithEmailAndPassword(auth, mobile + "@hj.com", password)
       .then((userCredential) => {
-        const user = userCredential.user;
+        // const user = userCredential.user;
+        // console.log(user);
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        console.log(errorCode);
+        console.log(errorMessage);
       });
   };
 

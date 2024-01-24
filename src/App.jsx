@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import DatacenterLogin from "./pages/DataCenterLogin";
 import RegisterUser from "./pages/RegisterUser";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error404Page from "./pages/Error404Page.jsx";
-import Protected from "./components/Protected.jsx";
+import ProtectedUser from "./components/ProtectedUser.jsx";
 import BottomBar from "./components/BottomBar.jsx";
 import { ToastContainer } from "react-toastify";
 
 function App() {
-  const [isLoggedIn, setisLoggedIn] = useState(true);
-
   const router = createBrowserRouter([
     {
       path: "/",
@@ -43,9 +41,9 @@ function App() {
     {
       path: "/datacenter-login",
       element: (
-        <Protected isLoggedIn={isLoggedIn}>
+        <ProtectedUser>
           <DatacenterLogin />
-        </Protected>
+        </ProtectedUser>
       ),
     },
     {
