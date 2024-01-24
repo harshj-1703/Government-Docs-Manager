@@ -4,6 +4,7 @@ import ToastMessage from "../ToastMessage";
 import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 import { auth } from "../../firebase";
 import CircularLoading from "../CircularLoading";
+import userService from "../../services/user.services";
 
 function MobileNumberComponent({
   mobile,
@@ -22,7 +23,16 @@ function MobileNumberComponent({
     });
   };
 
-  const validateMobile = (value) => {
+  const mobileAvailableOrNot = async (mobile) => {
+    const available = await userService.getUserFromMobile(mobile);
+    if (available) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const validateMobile = async (value) => {
     if (/^\d{10}$/.test(value)) {
       setErrors({ ...errors, mobile: "" });
       return true;
@@ -35,9 +45,18 @@ function MobileNumberComponent({
     }
   };
 
-  const handleSendVerificationCode = () => {
-    if (validateMobile(mobile)) {
-      setLoading(true);
+  const handleSendVerificationCode = async () => {
+    setLoading(true);
+    const available = await mobileAvailableOrNot(mobile);
+    if(available){
+      setErrors({
+        ...errors,
+        mobile: "Mobile Number already used!",
+      });
+      setLoading(false);
+      return;
+    }
+    if (!available && validateMobile(mobile)) {
       generateRecaptcha();
       let appVerifier = window.recaptchaVerifier;
       let phoneNumber = "+91" + mobile;
@@ -95,7 +114,7 @@ function MobileNumberComponent({
         >
           Send Code
         </button>
-        {loading && <CircularLoading/>}
+        {loading && <CircularLoading />}
         <div id="recaptcha" style={{ display: "none" }}></div>
       </LazyLoadComponent>
     </>

@@ -8,7 +8,8 @@ import AddressDetails from "../components/RegistrationComponents/AddressDetails"
 import OtherDetails from "../components/RegistrationComponents/OtherDetails";
 import userService from "../services/user.services";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { storage } from "../firebase";
+import { auth, storage } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { v4 } from "uuid";
 import CryptoJS from "crypto-js";
 
@@ -74,6 +75,15 @@ function RegisterUser() {
       timestamp: new Date().toLocaleString("en-US", timestampOptions),
     };
     await userService.addUser(newUser);
+
+    createUserWithEmailAndPassword(auth, mobile + "@hj.com", password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
   };
 
   return (
