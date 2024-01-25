@@ -57,7 +57,7 @@ function NewPasswordUpdate({
         const userData = await userService.getUserFromMobile(mobile);
         const decryptedBytes = CryptoJS.AES.decrypt(
           userData.password,
-          "harshjolapara@8128203856"
+          process.env.ENCRYPT_HJ_KEY
         );
         const oldPassword = decryptedBytes.toString(CryptoJS.enc.Utf8);
         // console.log(mobile,password);
@@ -71,7 +71,7 @@ function NewPasswordUpdate({
               });
             const newPassword = CryptoJS.AES.encrypt(
               password,
-              "harshjolapara@8128203856"
+              process.env.ENCRYPT_HJ_KEY
             ).toString();
             userService.updateUser(userData.id, { password: newPassword });
           })

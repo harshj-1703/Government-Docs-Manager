@@ -34,7 +34,7 @@ function RegisterUser() {
 
   const addUser = async () => {
     //hash password
-    const hashPassword = CryptoJS.AES.encrypt(password, "harshjolapara@8128203856").toString();
+    const hashPassword = CryptoJS.AES.encrypt(password, process.env.ENCRYPT_HJ_KEY).toString();
 
     //image
     const imageRef = ref(storage, `ProfilePhotos/${photo.name + v4()}`);
