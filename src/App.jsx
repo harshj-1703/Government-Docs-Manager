@@ -10,6 +10,7 @@ import BottomBar from "./components/BottomBar.jsx";
 import { ToastContainer } from "react-toastify";
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase.js";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
 
 function SignOut() {
   function logout() {
@@ -39,6 +40,15 @@ function App() {
       ),
     },
     {
+      path: "/forgot-password",
+      element: (
+        <>
+          <ToastContainer />
+          <ForgotPassword />
+        </>
+      ),
+    },
+    {
       path: "/register-user",
       element: (
         <>
@@ -56,7 +66,7 @@ function App() {
       ),
     },
     {
-      path: "logout",
+      path: "/logout",
       element: <SignOut />,
     },
     {

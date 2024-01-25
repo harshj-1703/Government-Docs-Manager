@@ -31,6 +31,7 @@ const userService = {
         return {
           id: userDoc.id,
           password: userDoc.data().password,
+          user: userDoc.data(),
         };
       } else {
         return null;

@@ -30,10 +30,6 @@ function UserLogin() {
     setMobile(value);
   };
 
-  // const saveUserToLocalStorage = (user) => {
-  //   localStorage.setItem('currentUser',user);
-  // };
-
   const handleSubmit = async (e) => {
     setLoading(true);
     e.preventDefault();
@@ -61,7 +57,6 @@ function UserLogin() {
               message: "Login Succesful",
               type: "success",
             });
-            // saveUserToLocalStorage(user);
           })
           .catch((error) => {
             // const errorCode = error.code;

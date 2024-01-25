@@ -11,7 +11,6 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { auth, storage } from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { v4 } from "uuid";
-// import CryptoJS from "crypto-js";
 
 function RegisterUser() {
   const [step, setStep] = useState(1);
@@ -34,7 +33,7 @@ function RegisterUser() {
 
   const addUser = async () => {
     //hash password
-    // const hashedPassword = CryptoJS.SHA256(password).toString(CryptoJS.enc.Hex);
+
     //image
     const imageRef = ref(storage, `ProfilePhotos/${photo.name + v4()}`);
     const snapshot = await uploadBytes(imageRef, photo);
@@ -71,8 +70,9 @@ function RegisterUser() {
       profession: profession,
       profilePhotoUrl: urlImage,
       profileProof: urlFile,
+      password: password,
       createdAt: new Date().toLocaleString("en-US", timestampOptions),
-      updatedAt: new Date().toLocaleString("en-US", timestampOptions)
+      updatedAt: new Date().toLocaleString("en-US", timestampOptions),
     };
     await userService.addUser(newUser);
 

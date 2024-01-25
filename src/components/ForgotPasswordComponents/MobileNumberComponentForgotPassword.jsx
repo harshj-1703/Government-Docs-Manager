@@ -6,7 +6,7 @@ import { auth } from "../../firebase";
 import CircularLoading from "../CircularLoading";
 import userService from "../../services/user.services";
 
-function MobileNumberComponent({
+function MobileNumberComponentForgotPassword({
   mobile,
   setMobile,
   errors,
@@ -47,20 +47,20 @@ function MobileNumberComponent({
 
   const handleSendVerificationCode = async () => {
     const checkMobile = await validateMobile(mobile);
-    if(!checkMobile){
+    if (!checkMobile) {
       return;
     }
     setLoading(true);
     const available = await mobileAvailableOrNot(mobile);
-    if(available){
+    if (!available) {
       setErrors({
         ...errors,
-        mobile: "Mobile Number already used!",
+        mobile: "Mobile Number Not Available!",
       });
       setLoading(false);
       return;
     }
-    if (!available && validateMobile(mobile)) {
+    if (available && validateMobile(mobile)) {
       generateRecaptcha();
       let appVerifier = window.recaptchaVerifier;
       let phoneNumber = "+91" + mobile;
@@ -94,7 +94,7 @@ function MobileNumberComponent({
   return (
     <>
       <LazyLoadComponent>
-        <h2>Register Your Mobile Number</h2>
+        <h2>Forgot Password</h2>
         <div>
           <input
             type="tel"
@@ -125,4 +125,4 @@ function MobileNumberComponent({
   );
 }
 
-export default MobileNumberComponent;
+export default MobileNumberComponentForgotPassword;

@@ -4,7 +4,7 @@ import OTPInput from "react-otp-input";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import CircularLoading from "../CircularLoading";
 
-function OTPComponentForgotPassword({ otp, setOtp, verificationCode, setStep }) {
+function OTPComponent({ otp, setOtp, verificationCode, setStep }) {
   const [seconds, setSeconds] = useState(150);
   const [timer, setTimer] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -83,4 +83,4 @@ function OTPComponentForgotPassword({ otp, setOtp, verificationCode, setStep }) 
   );
 }
 
-export default OTPComponentForgotPassword;
+export default OTPComponent;
