@@ -5,6 +5,7 @@ import CircularLoading from "../CircularLoading";
 import { signInWithEmailAndPassword, updatePassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import userService from "../../services/user.services";
+import CryptoJS from "crypto-js";
 
 function NewPasswordUpdate({
   password,
@@ -51,13 +52,16 @@ function NewPasswordUpdate({
 
     if (isPasswordValid && isConfirmPasswordValid) {
       setLoading(true);
-      let oldPassword = "";
       let user = "";
       try {
         const userData = await userService.getUserFromMobile(mobile);
-        oldPassword = userData.password;
+        const decryptedBytes = CryptoJS.AES.decrypt(
+          userData.password,
+          "harshjolapara@8128203856"
+        );
+        const oldPassword = decryptedBytes.toString(CryptoJS.enc.Utf8);
         // console.log(mobile,password);
-        await signInWithEmailAndPassword(auth, mobile+"@hj.com", oldPassword)
+        await signInWithEmailAndPassword(auth, mobile + "@hj.com", oldPassword)
           .then((userCredential) => {
             user = userCredential.user;
             updatePassword(user, password)
@@ -65,7 +69,11 @@ function NewPasswordUpdate({
               .catch((error) => {
                 console.log(error);
               });
-            userService.updateUser(userData.id, {password} );
+            const newPassword = CryptoJS.AES.encrypt(
+              password,
+              "harshjolapara@8128203856"
+            ).toString();
+            userService.updateUser(userData.id, { password: newPassword });
           })
           .catch((error) => {
             const errorCode = error.code;
