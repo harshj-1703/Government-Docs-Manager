@@ -7,7 +7,7 @@ function Menu() {
     <div className="home-menu">
       <ul className="home-menu-ul">
         <li style={{ "--i": 6, "--clr1": "#1877f2" }}>
-          <Link to="/">
+          <Link to="/user-dashboard">
             <span>
               <i className="material-icons">home</i>
             </span>
@@ -15,7 +15,7 @@ function Menu() {
           </Link>
         </li>
         <li style={{ "--i": 5, "--clr1": "#25d366" }}>
-          <Link to="user-login">
+          <Link to="/user-login">
             <span>
               <i className="material-icons">person</i>
             </span>
@@ -31,7 +31,7 @@ function Menu() {
           </Link>
         </li>
         <li style={{ "--i": 3, "--clr1": "#ff0000" }}>
-          <Link to="datacenter-login">
+          <Link to="/datacenter-login">
             <span>
               <i className="material-icons">business_center</i>
             </span>

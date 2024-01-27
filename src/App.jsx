@@ -3,7 +3,11 @@ import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import DatacenterLogin from "./pages/DataCenterLogin";
 import RegisterUser from "./pages/RegisterUser";
-import { createBrowserRouter, Navigate, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import Error404Page from "./pages/Error404Page.jsx";
 import ProtectedUser from "./components/ProtectedUser.jsx";
 import BottomBar from "./components/BottomBar.jsx";
@@ -11,6 +15,7 @@ import { ToastContainer } from "react-toastify";
 import { signOut } from "firebase/auth";
 import { auth } from "./firebase.js";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
+import UserDashboard from "./pages/UserDashboard.jsx";
 
 function SignOut() {
   function logout() {
@@ -30,6 +35,7 @@ function App() {
         </>
       ),
     },
+    //user-login
     {
       path: "/user-login",
       element: (
@@ -39,6 +45,7 @@ function App() {
         </>
       ),
     },
+    //forgot password
     {
       path: "/forgot-password",
       element: (
@@ -48,6 +55,7 @@ function App() {
         </>
       ),
     },
+    //register user
     {
       path: "/register-user",
       element: (
@@ -57,18 +65,26 @@ function App() {
         </>
       ),
     },
+    //user-dashboard
+    {
+      path: "/user-dashboard",
+      element: (
+        <>
+          <ProtectedUser>
+            <UserDashboard />
+          </ProtectedUser>
+        </>
+      ),
+    },
     {
       path: "/datacenter-login",
-      element: (
-        <ProtectedUser>
-          <DatacenterLogin />
-        </ProtectedUser>
-      ),
+      element: <DatacenterLogin />,
     },
     {
       path: "/logout",
       element: <SignOut />,
     },
+    //error 404
     {
       path: "*",
       element: <Error404Page />,
