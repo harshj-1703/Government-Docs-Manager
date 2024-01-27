@@ -6,9 +6,9 @@ import UserNavbarMenu from "../components/UserDashboard/UserNavbarMenu";
 function UserDashboard() {
   return (
     <div className="user-dashboard">
+      <UserNavbarMenu />
       <UserNavbar />
       <div>UserDashboard</div>
-      <UserNavbarMenu />
     </div>
   );
 }
