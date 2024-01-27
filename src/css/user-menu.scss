@@ -1,0 +1,139 @@
+.user-menu{
+  height: 85%;
+  width: 100%;
+  z-index: 50;
+  position: absolute;
+  display: flex;
+  align-items:center;
+  justify-content:center;
+}
+  @keyframes appear {
+    0% {
+      top: 0;
+      transform-origin: 5rem 0;
+    }
+    100% {
+      top: -14rem;
+      transform-origin: 5rem 14rem;
+    }
+  }
+  @keyframes menu-rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(359deg);
+    }
+  } 
+  @keyframes scaling {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .orbital-menu{
+      position: relative;
+     $ref: &;
+    &__list{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      animation: menu-rotation linear 60s infinite;
+      &:hover{
+        animation-play-state: paused;      
+        #{$ref}__link{
+          > * {
+        animation-play-state: paused;  
+          }
+        }
+      }
+    }
+    &__item{
+      position: absolute;
+      animation: appear 2s forwards;
+      left: -5rem;
+      top: 0;
+      transform-origin: 5rem 0;
+      @for $c from 2 to 9 {
+        &:nth-child(#{$c}){
+          animation-delay: ($c - 1) * 0.1s;
+          transform:rotate(($c - 1)* 45deg);
+          #{$ref}__link{
+              transform:rotate(($c - 1)* 45deg * -1);
+            &:before{
+              background:hsl(($c - 1)* 45deg 100% 65%);
+              animation-delay:($c - 1)*0.33s;
+            }
+          }
+        }
+      }
+    }
+    &__link{
+      position: relative;
+      display:block;
+      height: 6rem;
+      width: 6rem;
+      &:before{
+        content:'';
+        position: absolute;
+        inset: 0;
+        background:hsl(0 100% 65%);
+        border-radius: 50%;
+        animation: scaling linear 3s infinite;
+      }    
+      > *{
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items:center;
+        justify-content:center;
+        animation: menu-rotation linear 60s infinite;
+        animation-direction: reverse;
+        transition: 250ms ease all;
+      }
+      &-text{
+        opacity: 0;
+        text-align: center;
+        color: #fff;
+      }
+      &-icon{
+        color: rgba(#000, 0.8);
+      }
+      &:hover{
+        &:before{
+          animation-play-state: paused;        
+          filter: brightness(0.7);
+        }
+        #{$ref}__link-text{
+          opacity: 1;
+        }
+        #{$ref}__link-icon{
+          opacity: 0;
+        }
+      }
+    }
+    &__center-pic{
+      position: relative;
+      width: 10rem;
+      height: 10rem;
+      overflow: hidden;
+      border-radius: 4rem;
+      > img{
+        position: absolute;
+        inset: 0;
+        max-width: 100%;
+        transition: 500ms ease all;
+      }
+      &:hover{
+        > img:last-child{
+          transform: scale(1.2);
+        }
+      }
+    }
+  }

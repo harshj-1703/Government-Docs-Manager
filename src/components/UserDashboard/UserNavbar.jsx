@@ -1,11 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../../css/usernavbar.css";
 import "../../css/boxicons.min.css";
 import "./UserNavbar";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 
+const Skeleton = () => <div className="skeleton"></div>;
+
 function UserNavbar() {
+  const [imageLoaded, setImageLoaded] = useState(false);
   useEffect(() => {
     const body = document.querySelector("body");
     const nav = document.querySelector("nav");
@@ -107,12 +110,18 @@ function UserNavbar() {
               <i className="material-icons">search</i>
             </div>
           </div> */}
-          <LazyLoadComponent>
-            <img
-              src={localStorage.getItem("profileImage")}
-              className="profile-image"
-            ></img>
-          </LazyLoadComponent>
+          <div className="profile-image">
+            <LazyLoadComponent>
+              {!imageLoaded && <Skeleton />}
+              <img
+              className="profile-image-photo"
+                src={localStorage.getItem("profileImage")}
+                style={{ opacity: imageLoaded ? 1 : 0 }}
+                onLoad={() => setImageLoaded(true)}
+                alt=""
+              />
+            </LazyLoadComponent>
+          </div>
         </div>
       </div>
     </nav>
