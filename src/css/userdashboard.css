@@ -1,0 +1,8 @@
+.user-dashboard{
+    background-color: rgb(183, 221, 255);
+    height:100vh;
+}
+
+body.dark .user-dashboard{
+    background-color: rgb(1, 1, 32);
+}
