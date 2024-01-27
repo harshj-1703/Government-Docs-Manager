@@ -12,19 +12,19 @@
 }
 
 .loader {
-  width: 70px;
-  height: 70px;
+  width: 85px;
+  height: 85px;
   margin: auto;
   position: relative;
 }
 
 .loader:before {
   content: '';
-  width: 70px;
+  width: 85px;
   height: 5px;
   background: #7077fc50;
   position: absolute;
-  top: 85px;
+  top: 100px;
   left: 0;
   border-radius: 50%;
   animation: shadow324 0.5s linear infinite;

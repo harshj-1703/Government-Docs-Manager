@@ -70,6 +70,7 @@ function App() {
       path: "/user-dashboard",
       element: (
         <>
+          <ToastContainer />
           <ProtectedUser>
             <UserDashboard />
           </ProtectedUser>

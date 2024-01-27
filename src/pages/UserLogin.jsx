@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../css/login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ToastMessage from "../components/ToastMessage";
 import userService from "../services/user.services";
 import CircularLoading from "../components/CircularLoading";
@@ -14,6 +14,7 @@ function UserLogin() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -57,6 +58,7 @@ function UserLogin() {
               message: "Login Succesful",
               type: "success",
             });
+            navigate("/user-dashboard");
           })
           .catch((error) => {
             // const errorCode = error.code;

@@ -6,6 +6,7 @@ import { signInWithEmailAndPassword, updatePassword } from "firebase/auth";
 import { auth } from "../../firebase";
 import userService from "../../services/user.services";
 import CryptoJS from "crypto-js";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function NewPasswordUpdate({
   password,
@@ -18,6 +19,7 @@ function NewPasswordUpdate({
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
@@ -84,6 +86,7 @@ function NewPasswordUpdate({
           message: "Password Updated Succesfully",
           type: "success",
         });
+        navigate("/user-login");
       } catch (error) {
         console.error("Error updating password:", error.message);
         throw error;
