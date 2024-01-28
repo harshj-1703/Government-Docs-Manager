@@ -34,19 +34,21 @@ function UserNavbarMenu() {
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="map" className="material-icons"></i>
+                  <i data-feather="map" className="material-icons">
+                    manage_accounts
+                  </i>
                 </span>
                 <span className="orbital-menu__link-text">
-                  Travel & Requisitions
+                  Edit Profile
                 </span>
               </a>
             </li>
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="alert-circle" className="material-icons"></i>
+                  <i data-feather="alert-circle" className="material-icons">key</i>
                 </span>
-                <span className="orbital-menu__link-text">Disciplinary</span>
+                <span className="orbital-menu__link-text">Change Password</span>
               </a>
             </li>
             <li className="orbital-menu__item">
