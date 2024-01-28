@@ -254,3 +254,7 @@ body.dark .search-field i{
         margin-top: 20px;
     }
 }
+
+.profile-image:hover {
+    cursor: pointer !important;
+}
