@@ -1,8 +1,32 @@
 .user-dashboard{
     background-color: rgb(183, 221, 255);
-    height:100vh;
+    min-height: 100vh;
+    height:fit-content;
+}
+
+.user-dashboard-main-content-blur{
+  /* background-color: aqua; */
+  filter: blur(38px);
 }
 
 body.dark .user-dashboard{
     background-color: rgb(1, 1, 32);
 }
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .grid-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+
+  .grid-item img {
+    max-width: 100%;
+    height: auto;
+  }
