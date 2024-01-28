@@ -136,3 +136,27 @@
       }
     }
   }
+
+  @media screen and (max-width: 800px) {
+    .user-menu{
+      width: 30%;
+    }
+    .orbital-menu__center-pic{
+      width: 7rem;
+      height: 7rem;
+    }
+    .orbital-menu__link{
+      height: 4rem;
+      width: 4rem;
+    }
+    @keyframes appear {
+      0% {
+        top: 0;
+        transform-origin: 5rem 0;
+      }
+      100% {
+        top: -9rem;
+        transform-origin: 5rem 9rem;
+      }
+    }
+}

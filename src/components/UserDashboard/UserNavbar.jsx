@@ -7,7 +7,7 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 const Skeleton = () => <div className="skeleton"></div>;
 
-function UserNavbar() {
+function UserNavbar({ isMenuShow, setIsMenuShow }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   useEffect(() => {
     const body = document.querySelector("body");
@@ -110,11 +110,16 @@ function UserNavbar() {
               <i className="material-icons">search</i>
             </div>
           </div> */}
-          <div className="profile-image">
+          <div
+            className="profile-image"
+            onClick={() => {
+              isMenuShow ? setIsMenuShow(false) : setIsMenuShow(true);
+            }}
+          >
             <LazyLoadComponent>
               {!imageLoaded && <Skeleton />}
               <img
-              className="profile-image-photo"
+                className="profile-image-photo"
                 src={localStorage.getItem("profileImage")}
                 style={{ opacity: imageLoaded ? 1 : 0 }}
                 onLoad={() => setImageLoaded(true)}
