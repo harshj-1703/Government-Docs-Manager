@@ -6,6 +6,9 @@
   align-items:center;
   justify-content:center;
 }
+.orbital-menu__list{
+  list-style-type: none;
+}
   @keyframes appear {
     0% {
       top: 0;

@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import "../../css/user-menu.scss";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
+import { Link, useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const Skeleton = () => <div className="skeleton"></div>;
 
 function UserNavbarMenu() {
+  const navigate = useNavigate();
   const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <div className="user-menu">
@@ -12,19 +16,25 @@ function UserNavbarMenu() {
         <div className="orbital-menu">
           <ul className="orbital-menu__list">
             <li className="orbital-menu__item">
-              <a href="" className="orbital-menu__link">
+              <Link
+                className="orbital-menu__link"
+                onClick={() => {
+                  signOut(auth);
+                  navigate("/");
+                }}
+              >
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="log-out"></i>
+                  <i data-feather="log-out" className="material-icons">
+                    logout
+                  </i>
                 </span>
-                <span className="orbital-menu__link-text">
-                  Exit & Off-branding
-                </span>
-              </a>
+                <span className="orbital-menu__link-text">LogOut</span>
+              </Link>
             </li>
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="map"></i>
+                  <i data-feather="map" className="material-icons"></i>
                 </span>
                 <span className="orbital-menu__link-text">
                   Travel & Requisitions
@@ -34,7 +44,7 @@ function UserNavbarMenu() {
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="alert-circle"></i>
+                  <i data-feather="alert-circle" className="material-icons"></i>
                 </span>
                 <span className="orbital-menu__link-text">Disciplinary</span>
               </a>
@@ -42,7 +52,7 @@ function UserNavbarMenu() {
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="activity"></i>
+                  <i data-feather="activity" className="material-icons"></i>
                 </span>
                 <span className="orbital-menu__link-text">
                   Analytics & Reporting
@@ -52,7 +62,7 @@ function UserNavbarMenu() {
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="calendar"></i>
+                  <i data-feather="calendar" className="material-icons"></i>
                 </span>
                 <span className="orbital-menu__link-text">
                   Time & Attendance
@@ -62,7 +72,7 @@ function UserNavbarMenu() {
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="user-plus"></i>
+                  <i data-feather="user-plus" className="material-icons"></i>
                 </span>
                 <span className="orbital-menu__link-text">Onboarding</span>
               </a>
@@ -70,7 +80,7 @@ function UserNavbarMenu() {
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="archive"></i>
+                  <i data-feather="archive" className="material-icons"></i>
                 </span>
                 <span className="orbital-menu__link-text">
                   HR Information System
@@ -80,7 +90,7 @@ function UserNavbarMenu() {
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="sun"></i>
+                  <i data-feather="sun" className="material-icons"></i>
                 </span>
                 <span className="orbital-menu__link-text">
                   Leaves & Holidays
