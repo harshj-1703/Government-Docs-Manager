@@ -24,7 +24,7 @@ body.dark .user-dashboard{
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  margin: 0 45px;
+  padding: 0 45px;
   margin-top: 25px;
   padding-bottom: 40px;
 }
@@ -223,4 +223,8 @@ body.dark .card__title{
 .smooth-image-wrapper-grid{
   height: 100%;
   width: 200%;
+}
+
+.pagination-blur{
+  filter: blur(38px);
 }

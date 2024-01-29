@@ -73,7 +73,7 @@ function UserDashboard() {
         )}
       </div>
       {!isLoading && (
-        <div className="pagination">
+        <div className={!isMenuShow ? "pagination" : "pagination-blur"}>
           <button onClick={() => paginate(1)} disabled={currentPage === 1}>
             {"<<"}
           </button>
