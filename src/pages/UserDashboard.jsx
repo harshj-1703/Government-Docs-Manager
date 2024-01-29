@@ -1,25 +1,64 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  Suspense,
+} from "react";
 import UserNavbar from "../components/UserDashboard/UserNavbar";
 import "../css/userdashboard.css";
-import UserNavbarMenu from "../components/UserDashboard/UserNavbarMenu";
+import { LazyLoadImage } from "react-lazy-load-image-component";
+
+const Skeleton = () => <div className="skeleton"></div>;
 
 function UserDashboard() {
   const [isMenuShow, setIsMenuShow] = useState(false);
   const [gridData, setGridData] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+
+  const observer = useRef();
+
+  const lastItemRef = useCallback(
+    (node) => {
+      if (loading) return;
+
+      if (observer.current) observer.current.disconnect();
+
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          setPage((prevPage) => prevPage + 1);
+        }
+      });
+
+      if (node) observer.current.observe(node);
+    },
+    [loading]
+  );
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/photos")
-      .then((response) => response.json())
-      .then((data) => setGridData(data.slice(0, 16)))
-      .catch((error) => console.error("Error fetching data:", error));
-  }, []);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `https://api.slingacademy.com/v1/sample-data/photos?offset=${
+            page * 10
+          }&limit=10`
+        );
+        const data = await response.json();
+        setGridData((prevData) => [...prevData, ...data.photos]);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, [page]);
 
   return (
     <div className="user-dashboard">
-      {isMenuShow && <UserNavbarMenu />}
       <UserNavbar isMenuShow={isMenuShow} setIsMenuShow={setIsMenuShow} />
-
-      {/* User Dashboard */}
       <div
         className={
           isMenuShow
@@ -28,11 +67,18 @@ function UserDashboard() {
         }
       >
         <div className="grid-container">
-          {gridData.map((item) => (
-            <div key={item.id} className="grid-item">
-              <img src={item.thumbnailUrl} alt={item.title} />
-              <p>{item.title}</p>
-            </div>
+          {gridData.map((item, index) => (
+            <Suspense key={item.id} fallback={<Skeleton />}>
+              <div className="card">
+                <div ref={index === gridData.length - 1 ? lastItemRef : null}>
+                  <LazyLoadImage src={item.url} alt={item.title} />
+                  <div className="card__content">
+                    <p className="card__title">{item.title}</p>
+                    <p className="card__description">{item.description}</p>
+                  </div>
+                </div>
+              </div>
+            </Suspense>
           ))}
         </div>
       </div>

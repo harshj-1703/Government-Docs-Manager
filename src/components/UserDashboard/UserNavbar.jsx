@@ -4,6 +4,7 @@ import "../../css/usernavbar.css";
 import "../../css/boxicons.min.css";
 import "./UserNavbar";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
+import UserNavbarMenu from "./UserNavbarMenu";
 
 const Skeleton = () => <div className="skeleton"></div>;
 
@@ -64,43 +65,44 @@ function UserNavbar({ isMenuShow, setIsMenuShow }) {
     };
   }, []);
   return (
-    <nav>
-      <div className="nav-bar">
-        <i className="material-icons sidebarOpen">menu</i>
-        <span className="logo navLogo">
-          <Link to="/">
-            <img src="/images/logo.png" height={30} width={30} />
-            &nbsp;Gov Docs
-          </Link>
-        </span>
-        <div className="menu">
-          <div className="logo-toggle">
-            <span className="logo">
-              <Link to="/">Gov Docs</Link>
-            </span>
-            <i className="material-icons siderbarClose">cancel</i>
+    <>
+      <nav>
+        <div className="nav-bar">
+          <i className="material-icons sidebarOpen">menu</i>
+          <span className="logo navLogo">
+            <Link to="/">
+              <img src="/images/logo.png" height={30} width={30} />
+              &nbsp;Gov Docs
+            </Link>
+          </span>
+          <div className="menu">
+            <div className="logo-toggle">
+              <span className="logo">
+                <Link to="/">Gov Docs</Link>
+              </span>
+              <i className="material-icons siderbarClose">cancel</i>
+            </div>
+            <ul className="nav-links">
+              <li>
+                <Link to="/">Home</Link>
+              </li>
+              <li>
+                <Link to="/">About</Link>
+              </li>
+              <li>
+                <Link to="/">Portfolio</Link>
+              </li>
+              <li>
+                <Link to="/">Contact</Link>
+              </li>
+            </ul>
           </div>
-          <ul className="nav-links">
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/">About</Link>
-            </li>
-            <li>
-              <Link to="/">Portfolio</Link>
-            </li>
-            <li>
-              <Link to="/">Contact</Link>
-            </li>
-          </ul>
-        </div>
-        <div className="darkLight-searchBox">
-          <div className="dark-light">
-            <i className="material-icons moon">dark_mode</i>
-            <i className="material-icons sun">light_mode</i>
-          </div>
-          {/* <div className="searchBox">
+          <div className="darkLight-searchBox">
+            <div className="dark-light">
+              <i className="material-icons moon">dark_mode</i>
+              <i className="material-icons sun">light_mode</i>
+            </div>
+            {/* <div className="searchBox">
             <div className="searchToggle">
             <i className="material-icons cancel">cancel</i>
             <i className="material-icons search">search</i>
@@ -110,26 +112,28 @@ function UserNavbar({ isMenuShow, setIsMenuShow }) {
               <i className="material-icons">search</i>
             </div>
           </div> */}
-          <div
-            className="profile-image"
-            onClick={() => {
-              isMenuShow ? setIsMenuShow(false) : setIsMenuShow(true);
-            }}
-          >
-            <LazyLoadComponent>
-              {!imageLoaded && <Skeleton />}
-              <img
-                className="profile-image-photo"
-                src={localStorage.getItem("profileImage")}
-                style={{ opacity: imageLoaded ? 1 : 0 }}
-                onLoad={() => setImageLoaded(true)}
-                alt=""
-              />
-            </LazyLoadComponent>
+            <div
+              className="profile-image"
+              onClick={() => {
+                isMenuShow ? setIsMenuShow(false) : setIsMenuShow(true);
+              }}
+            >
+              <LazyLoadComponent>
+                {!imageLoaded && <Skeleton />}
+                <img
+                  className="profile-image-photo"
+                  src={localStorage.getItem("profileImage")}
+                  style={{ opacity: imageLoaded ? 1 : 0 }}
+                  onLoad={() => setImageLoaded(true)}
+                  alt=""
+                />
+              </LazyLoadComponent>
+            </div>
           </div>
         </div>
-      </div>
-    </nav>
+        {isMenuShow && <UserNavbarMenu />}
+      </nav>
+    </>
   );
 }
 
