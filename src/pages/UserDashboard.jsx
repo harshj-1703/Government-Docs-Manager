@@ -10,7 +10,7 @@ function RenderSmoothImage({ src }) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   return (
-    <div className="smooth-image-wrapper">
+    <div className="smooth-image-wrapper-grid">
       {!imageLoaded && <Skeleton />}
       <LazyLoadImage
         src={src}
