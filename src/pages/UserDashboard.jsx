@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import UserNavbar from "../components/UserDashboard/UserNavbar";
 import "../css/userdashboard.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
@@ -23,47 +23,23 @@ function RenderSmoothImage({ src }) {
 function UserDashboard() {
   const [isMenuShow, setIsMenuShow] = useState(false);
   const [gridData, setGridData] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [page, setPage] = useState(1);
-
-  const observer = useRef();
-
-  const lastItemRef = useCallback(
-    (node) => {
-      if (loading) return;
-
-      if (observer.current) observer.current.disconnect();
-
-      observer.current = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          setPage((prevPage) => prevPage + 1);
-        }
-      });
-
-      if (node) observer.current.observe(node);
-    },
-    [loading]
-  );
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 12;
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `https://api.slingacademy.com/v1/sample-data/photos?offset=${
-            page * 10
-          }&limit=10`
-        );
-        const data = await response.json();
-        setGridData((prevData) => [...prevData, ...data.photos]);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    fetch("https://jsonplaceholder.typicode.com/photos")
+      .then((response) => response.json())
+      .then((data) => setGridData(data))
+      .catch((error) => console.error("Error fetching data:", error));
+  }, []);
 
-    fetchData();
-  }, [page]);
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = gridData.slice(indexOfFirstCard, indexOfLastCard);
+
+  const totalPages = Math.ceil(gridData.length / cardsPerPage);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div className="user-dashboard">
@@ -76,21 +52,51 @@ function UserDashboard() {
         }
       >
         <div className="grid-container">
-          {gridData.map((item, index) => (
-            <div
-              key={item.id}
-              className="card"
-              ref={index === gridData.length - 1 ? lastItemRef : null}
-            >
+          {currentCards.map((item) => (
+            <div key={item.id} className="card">
               <RenderSmoothImage src={item.url} />
               <div className="card__content">
                 <p className="card__title">{item.title}</p>
-                <p className="card__description">{item.description}</p>
+                <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eligendi consequatur officiis libero repellat eveniet ipsum earum. Dignissimos reiciendis expedita iusto, tempore eveniet nam porro, eum fugit quam, placeat sapiente?</p>
               </div>
             </div>
           ))}
         </div>
       </div>
+        <div className="pagination">
+          <button onClick={() => paginate(1)} disabled={currentPage === 1}>
+            {"<<"}
+          </button>
+          <button
+            onClick={() => paginate(currentPage - 1)}
+            disabled={currentPage === 1}
+          >
+            {"<"}
+          </button>
+          {[currentPage, currentPage + 1]
+            .filter((page) => page <= totalPages)
+            .map((page) => (
+              <button
+                key={page}
+                onClick={() => paginate(page)}
+                className={currentPage === page ? "active" : ""}
+              >
+                {page}
+              </button>
+            ))}
+          <button
+            onClick={() => paginate(currentPage + 1)}
+            disabled={currentPage === totalPages}
+          >
+            {">"}
+          </button>
+          <button
+            onClick={() => paginate(totalPages)}
+            disabled={currentPage === totalPages}
+          >
+            {">>"}
+          </button>
+        </div>
     </div>
   );
 }
