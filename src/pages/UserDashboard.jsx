@@ -1,15 +1,24 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  Suspense,
-} from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import UserNavbar from "../components/UserDashboard/UserNavbar";
 import "../css/userdashboard.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const Skeleton = () => <div className="skeleton"></div>;
+
+function RenderSmoothImage({ src }) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  return (
+    <div className="smooth-image-wrapper">
+      {!imageLoaded && <Skeleton />}
+      <LazyLoadImage
+        src={src}
+        style={{ opacity: imageLoaded ? 1 : 0 }}
+        onLoad={() => setImageLoaded(true)}
+      />
+    </div>
+  );
+}
 
 function UserDashboard() {
   const [isMenuShow, setIsMenuShow] = useState(false);
@@ -68,17 +77,17 @@ function UserDashboard() {
       >
         <div className="grid-container">
           {gridData.map((item, index) => (
-            <Suspense key={item.id} fallback={<Skeleton />}>
-              <div className="card">
-                <div ref={index === gridData.length - 1 ? lastItemRef : null}>
-                  <LazyLoadImage src={item.url} alt={item.title} />
-                  <div className="card__content">
-                    <p className="card__title">{item.title}</p>
-                    <p className="card__description">{item.description}</p>
-                  </div>
-                </div>
+            <div
+              key={item.id}
+              className="card"
+              ref={index === gridData.length - 1 ? lastItemRef : null}
+            >
+              <RenderSmoothImage src={item.url} />
+              <div className="card__content">
+                <p className="card__title">{item.title}</p>
+                <p className="card__description">{item.description}</p>
               </div>
-            </Suspense>
+            </div>
           ))}
         </div>
       </div>
