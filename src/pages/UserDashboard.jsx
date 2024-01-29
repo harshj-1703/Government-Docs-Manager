@@ -15,7 +15,7 @@ function RenderSmoothImage({ src }) {
       <LazyLoadImage
         src={src}
         style={{ opacity: imageLoaded ? 1 : 0 }}
-        onLoad={() => setImageLoaded(false)}
+        onLoad={() => setImageLoaded(true)}
       />
     </div>
   );
