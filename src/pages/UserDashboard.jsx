@@ -3,7 +3,7 @@ import UserNavbar from "../components/UserDashboard/UserNavbar";
 import "../css/userdashboard.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-const Skeleton = () => <div className="skeleton"></div>;
+const Skeleton = () => <div className="skeleton-grid"></div>;
 
 function RenderSmoothImage({ src }) {
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -57,46 +57,51 @@ function UserDashboard() {
               <RenderSmoothImage src={item.url} />
               <div className="card__content">
                 <p className="card__title">{item.title}</p>
-                <p className="card__description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum eligendi consequatur officiis libero repellat eveniet ipsum earum. Dignissimos reiciendis expedita iusto, tempore eveniet nam porro, eum fugit quam, placeat sapiente?</p>
+                <p className="card__description">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+                  eligendi consequatur officiis libero repellat eveniet ipsum
+                  earum. Dignissimos reiciendis expedita iusto, tempore eveniet
+                  nam porro, eum fugit quam, placeat sapiente?
+                </p>
               </div>
             </div>
           ))}
         </div>
       </div>
-        <div className="pagination">
-          <button onClick={() => paginate(1)} disabled={currentPage === 1}>
-            {"<<"}
-          </button>
-          <button
-            onClick={() => paginate(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            {"<"}
-          </button>
-          {[currentPage, currentPage + 1]
-            .filter((page) => page <= totalPages)
-            .map((page) => (
-              <button
-                key={page}
-                onClick={() => paginate(page)}
-                className={currentPage === page ? "active" : ""}
-              >
-                {page}
-              </button>
-            ))}
-          <button
-            onClick={() => paginate(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            {">"}
-          </button>
-          <button
-            onClick={() => paginate(totalPages)}
-            disabled={currentPage === totalPages}
-          >
-            {">>"}
-          </button>
-        </div>
+      <div className="pagination">
+        <button onClick={() => paginate(1)} disabled={currentPage === 1}>
+          {"<<"}
+        </button>
+        <button
+          onClick={() => paginate(currentPage - 1)}
+          disabled={currentPage === 1}
+        >
+          {"<"}
+        </button>
+        {[currentPage, currentPage + 1]
+          .filter((page) => page <= totalPages)
+          .map((page) => (
+            <button
+              key={page}
+              onClick={() => paginate(page)}
+              className={currentPage === page ? "active" : ""}
+            >
+              {page}
+            </button>
+          ))}
+        <button
+          onClick={() => paginate(currentPage + 1)}
+          disabled={currentPage === totalPages}
+        >
+          {">"}
+        </button>
+        <button
+          onClick={() => paginate(totalPages)}
+          disabled={currentPage === totalPages}
+        >
+          {">>"}
+        </button>
+      </div>
     </div>
   );
 }
