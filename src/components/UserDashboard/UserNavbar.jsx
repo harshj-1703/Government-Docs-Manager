@@ -84,7 +84,7 @@ function UserNavbar({ isMenuShow, setIsMenuShow }) {
             </div>
             <ul className="nav-links">
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/user-dashboard">Home</Link>
               </li>
               <li>
                 <Link to="/">About</Link>

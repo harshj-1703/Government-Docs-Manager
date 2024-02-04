@@ -73,7 +73,6 @@ function App() {
           element: (
             <UserDashboard
               isMenuShow={isMenuShow}
-              setIsMenuShow={setIsMenuShow}
             />
           ),
         },

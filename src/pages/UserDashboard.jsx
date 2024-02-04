@@ -22,7 +22,7 @@ function RenderSmoothImage({ src }) {
   );
 }
 
-function UserDashboard({isMenuShow,setIsMenuShow}) {
+function UserDashboard({isMenuShow}) {
   const [gridData, setGridData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
