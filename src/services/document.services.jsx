@@ -1,9 +1,77 @@
-import React from 'react'
+import { db } from "../firebase";
 
-function documentService() {
-  return (
-    <div>document.services</div>
-  )
-}
+import {
+  addDoc,
+  collection,
+  getDocs,
+  getDoc,
+  deleteDoc,
+  updateDoc,
+  orderBy,
+  limit,
+  where,
+  startAfter,
+  doc,
+  query,
+} from "firebase/firestore";
 
-export default documentService
+const docCollectionRef = collection(db, "Documents");
+
+const documentService = {
+  getAllDocuments: async (page = 1, itemsPerPage = 12) => {
+    try {
+      const queryRef = query(
+        docCollectionRef,
+        orderBy("updatedAt", "desc"),
+        limit(itemsPerPage)
+      );
+
+      const startAfterDoc =
+        page > 1 ? await getDoc(queryRef.doc(page * itemsPerPage)) : null;
+
+      const querySnapshot = await getDocs(
+        startAfterDoc ? startAfter(queryRef, startAfterDoc) : queryRef
+      );
+
+      const documents = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+
+      return documents;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getDocumentFromId: async (id) => {
+    try {
+      const q = query(
+        docCollectionRef,
+        where(firebase.firestore.FieldPath.documentId(), "==", id)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.docs.length > 0) {
+        const userDoc = querySnapshot.docs[0];
+        return {
+          id: userDoc.id,
+          password: userDoc.data().password,
+          user: userDoc.data(),
+        };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+  addDocument: (newUser) => {
+    return addDoc(docCollectionRef, newUser);
+  },
+  updateDocument: (id, newUser) => {
+    const userDocRef = doc(docCollectionRef, id);
+    return updateDoc(userDocRef, newUser);
+  },
+};
+
+export default documentService;

@@ -3,6 +3,7 @@ import UserNavbar from "../components/UserDashboard/UserNavbar";
 import "../css/userdashboard.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import CircularLoading from "../components/CircularLoading";
+import documentService from "../services/document.services";
 
 const Skeleton = () => <div className="skeleton-grid"></div>;
 
@@ -29,13 +30,19 @@ function UserDashboard() {
   const cardsPerPage = 12;
 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/photos")
-      .then((response) => response.json())
-      .then((data) => {
+    const fetchData = async () => {
+      try {
+        const data = await documentService.getAllDocuments(
+          currentPage,
+          cardsPerPage
+        );
         setGridData(data);
         setIsLoading(false);
-      })
-      .catch((error) => console.error("Error fetching data:", error));
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
   }, []);
 
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -57,21 +64,24 @@ function UserDashboard() {
         }
       >
         {isLoading ? (
-          <div><CircularLoading/></div>
+          <div>
+            <CircularLoading />
+          </div>
         ) : (
           <div className="grid-container">
             {currentCards.map((item) => (
               <div key={item.id} className="card">
-                <RenderSmoothImage src={item.url} />
+                <RenderSmoothImage src={item.data.banner} />
                 <div className="card__content">
-                  <p className="card__title">{item.title}</p>
-                  <p className="card__description">{item.description}</p>
+                  <p className="card__title">{item.data.title}</p>
+                  <p className="card__description">{item.data.description}</p>
                 </div>
               </div>
             ))}
           </div>
         )}
       </div>
+      {/* Pagination */}
       {!isLoading && (
         <div className={!isMenuShow ? "pagination" : "pagination-blur"}>
           <button onClick={() => paginate(1)} disabled={currentPage === 1}>
