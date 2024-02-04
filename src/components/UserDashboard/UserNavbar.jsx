@@ -90,9 +90,6 @@ function UserNavbar({ isMenuShow, setIsMenuShow }) {
                 <Link to="/">About</Link>
               </li>
               <li>
-                <Link to="/">Portfolio</Link>
-              </li>
-              <li>
                 <Link to="/">Contact</Link>
               </li>
             </ul>

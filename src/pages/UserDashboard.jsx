@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import UserNavbar from "../components/UserDashboard/UserNavbar";
 import "../css/userdashboard.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import CircularLoading from "../components/CircularLoading";
 import documentService from "../services/document.services";
+import { Link } from "react-router-dom";
 
 const Skeleton = () => <div className="skeleton-grid"></div>;
 
@@ -22,8 +22,7 @@ function RenderSmoothImage({ src }) {
   );
 }
 
-function UserDashboard() {
-  const [isMenuShow, setIsMenuShow] = useState(false);
+function UserDashboard({isMenuShow,setIsMenuShow}) {
   const [gridData, setGridData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -55,7 +54,6 @@ function UserDashboard() {
 
   return (
     <div className="user-dashboard">
-      <UserNavbar isMenuShow={isMenuShow} setIsMenuShow={setIsMenuShow} />
       <div
         className={
           isMenuShow
@@ -71,11 +69,13 @@ function UserDashboard() {
           <div className="grid-container">
             {currentCards.map((item) => (
               <div key={item.id} className="card">
-                <RenderSmoothImage src={item.data.banner} />
-                <div className="card__content">
-                  <p className="card__title">{item.data.title}</p>
-                  <p className="card__description">{item.data.description}</p>
-                </div>
+                <Link to={`/user-dashboard/docdetails/${item.id}`}>
+                  <RenderSmoothImage src={item.data.banner} />
+                  <div className="card__content">
+                    <p className="card__title">{item.data.title}</p>
+                    <p className="card__description">{item.data.description}</p>
+                  </div>
+                </Link>
               </div>
             ))}
           </div>

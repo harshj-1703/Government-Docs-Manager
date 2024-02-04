@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import DatacenterLogin from "./pages/DataCenterLogin";
 import RegisterUser from "./pages/RegisterUser";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Error404Page from "./pages/Error404Page.jsx";
 import ProtectedUser from "./components/ProtectedUser.jsx";
 import BottomBar from "./components/BottomBar.jsx";
 import { ToastContainer } from "react-toastify";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import UserDashboard from "./pages/UserDashboard.jsx";
+import DocumentPage from "./components/DocumentsComponents/DocumentPage.jsx";
+import UserNavbar from "./components/UserDashboard/UserNavbar.jsx";
 
 function App() {
+  const [isMenuShow, setIsMenuShow] = useState(false);
   const router = createBrowserRouter([
     {
       path: "/",
@@ -59,10 +62,26 @@ function App() {
         <>
           <ToastContainer />
           <ProtectedUser>
-            <UserDashboard />
+            <UserNavbar isMenuShow={isMenuShow} setIsMenuShow={setIsMenuShow} />
+            <Outlet />
           </ProtectedUser>
         </>
       ),
+      children: [
+        {
+          path: "/user-dashboard",
+          element: (
+            <UserDashboard
+              isMenuShow={isMenuShow}
+              setIsMenuShow={setIsMenuShow}
+            />
+          ),
+        },
+        {
+          path: "docdetails/:id",
+          element: <DocumentPage />,
+        },
+      ],
     },
     {
       path: "/datacenter-login",

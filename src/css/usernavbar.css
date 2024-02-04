@@ -125,74 +125,8 @@ nav .nav-bar .logo a{
     opacity: 0;
     pointer-events: none;
 }
-.searchToggle i.cancel{
-    opacity: 0;
-    pointer-events: none;
-}
-.searchToggle.active i.cancel{
-    opacity: 1;
-    pointer-events: auto;
-}
-.searchToggle.active i.search{
-    opacity: 0;
-    pointer-events: none;
-}
-.searchBox{
-    position: relative;
-}
-.searchBox .search-field{
-    position: absolute;
-    bottom: -85px;
-    right: 5px;
-    height: 50px;
-    width: 300px;
-    display: flex;
-    align-items: center;
-    background-color: var(--nav-color);
-    padding: 3px;
-    border-radius: 6px;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-}
-.searchToggle.active ~ .search-field{
-    bottom: -74px;
-    opacity: 1;
-    pointer-events: auto;
-}
-.search-field::before{
-    content: '';
-    position: absolute;
-    right: 14px;
-    top: -4px;
-    height: 12px;
-    width: 12px;
-    background-color: var(--nav-color);
-    transform: rotate(-45deg);
-    z-index: -1;
-}
-.search-field input{
-    height: 100%;
-    width: 100%;
-    padding: 0 45px 0 15px;
-    outline: none;
-    border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 400;
-    color: var(--search-text);
-    background-color: var(--search-bar);
-}
 body.dark .search-field input{
     color: var(--text-color);
-}
-.search-field i{
-    position: absolute;
-    color: var(--nav-color);
-    right: 15px;
-    font-size: 22px;
-    cursor: pointer;
 }
 body.dark .search-field i{
     color: var(--text-color);

@@ -5,7 +5,6 @@ import {
   collection,
   getDocs,
   getDoc,
-  deleteDoc,
   updateDoc,
   orderBy,
   limit,
