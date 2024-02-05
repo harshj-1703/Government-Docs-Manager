@@ -24,7 +24,7 @@ nav{
     height: 70px;
     width: 100%;
     background-color: var(--nav-color);
-    z-index: 100;
+    z-index: 1000;
 }
 body.dark nav{
     /* border: 1px solid #393838; */
