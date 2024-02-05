@@ -57,10 +57,6 @@ body.dark .user-dashboard{
   color: grey;
 }
 
-body.dark .search-doc::placeholder {
-  color: #00ff2a;
-}
-
 .search-doc:valid {
   border-color: darkblue;
   color: darkblue;
