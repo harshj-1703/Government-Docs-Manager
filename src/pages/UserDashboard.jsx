@@ -33,8 +33,7 @@ function UserDashboard({ isMenuShow }) {
       try {
         const data = await documentService.getAllDocuments(
           currentPage,
-          cardsPerPage,
-          // searchTerm
+          cardsPerPage
         );
         setGridData(data);
         setIsLoading(false);
@@ -44,10 +43,6 @@ function UserDashboard({ isMenuShow }) {
     };
     fetchData();
   }, []);
-
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -80,7 +75,6 @@ function UserDashboard({ isMenuShow }) {
                   className="search-doc"
                   placeholder="Search Document"
                   required=" "
-                  
                 />
               </div>
             </div>
