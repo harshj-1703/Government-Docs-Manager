@@ -17,11 +17,15 @@ import {
 const docCollectionRef = collection(db, "Documents");
 
 const documentService = {
-  getAllDocuments: async (page = 1, itemsPerPage = 12) => {
+  getAllDocuments: async (page = 1, itemsPerPage = 12, searchQuery = "") => {
     try {
+      const collectionRef = docCollectionRef;
       const queryRef = query(
-        docCollectionRef,
+        collectionRef,
+        orderBy("title", "asc"),
         orderBy("updatedAt", "desc"),
+        where("title", ">=", searchQuery),
+        where("title", "<=", searchQuery + "\uf8ff"),
         limit(itemsPerPage)
       );
 

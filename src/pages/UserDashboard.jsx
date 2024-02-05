@@ -27,14 +27,25 @@ function UserDashboard({ isMenuShow }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const cardsPerPage = 12;
+  const [searchQuery, setSearchQuery] = useState("");
+  const [noDataFound, setNoDataFound] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setIsLoading(true);
         const data = await documentService.getAllDocuments(
           currentPage,
-          cardsPerPage
+          cardsPerPage,
+          searchQuery
         );
+
+        if (data.length === 0) {
+          setNoDataFound(true);
+        } else {
+          setNoDataFound(false);
+        }
+
         setGridData(data);
         setIsLoading(false);
       } catch (error) {
@@ -42,7 +53,7 @@ function UserDashboard({ isMenuShow }) {
       }
     };
     fetchData();
-  }, []);
+  }, [currentPage, searchQuery]);
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -51,6 +62,10 @@ function UserDashboard({ isMenuShow }) {
   const totalPages = Math.ceil(gridData.length / cardsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
 
   return (
     <div className="user-dashboard">
@@ -61,43 +76,51 @@ function UserDashboard({ isMenuShow }) {
             : "user-dashboard-main-content"
         }
       >
-        {isLoading ? (
-          <div>
-            <CircularLoading />
-          </div>
-        ) : (
-          <div className="search-and-grid-main-div">
-            <div className="search-div">
-              <div className="inputs">
-                <input
-                  type="text"
-                  name="search-doc"
-                  className="search-doc"
-                  placeholder="Search Document"
-                  required=" "
-                />
-              </div>
+        <div className="search-and-grid-main-div">
+          <div className="search-div">
+            <div className="inputs">
+              <input
+                type="text"
+                name="search-doc"
+                className="search-doc"
+                placeholder="Search Document"
+                required=" "
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
             </div>
-            <div className="grid-container">
-              {currentCards.map((item) => (
-                <div key={item.id} className="card">
-                  <Link to={`/user-dashboard/docdetails/${item.id}`}>
-                    <RenderSmoothImage src={item.data.banner} />
-                    <div className="card__content">
-                      <p className="card__title">{item.data.title}</p>
-                      <p className="card__description">
-                        {item.data.description}
-                      </p>
-                    </div>
-                  </Link>
+          </div>
+          <div className="grid-container">
+            {!isLoading ? (
+              currentCards.length > 0 ? (
+                currentCards.map((item) => (
+                  <div key={item.id} className="card">
+                    <Link to={`/user-dashboard/docdetails/${item.id}`}>
+                      <RenderSmoothImage src={item.data.banner} />
+                      <div className="card__content">
+                        <p className="card__title">{item.data.title}</p>
+                        <p className="card__description">
+                          {item.data.description}
+                        </p>
+                      </div>
+                    </Link>
+                  </div>
+                ))
+              ) : (
+                <div id="error-page-div">
+                  <h1>No Data Found</h1>
                 </div>
-              ))}
-            </div>
+              )
+            ) : (
+              <div>
+                <CircularLoading />
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
       {/* Pagination */}
-      {!isLoading && (
+      {!isLoading && currentCards.length > 0 && (
         <div className={!isMenuShow ? "pagination" : "pagination-blur"}>
           <button onClick={() => paginate(1)} disabled={currentPage === 1}>
             {"<<"}
