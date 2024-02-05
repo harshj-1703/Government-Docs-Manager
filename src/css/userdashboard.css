@@ -54,7 +54,7 @@ body.dark .user-dashboard{
 }
 
 .search-doc::placeholder {
-  color: darkblue;
+  color: grey;
 }
 
 body.dark .search-doc::placeholder {
@@ -193,7 +193,6 @@ body.dark .card__title{
   height: 200px;
   background-color: #f2f2f2;
   border-radius: 10px;
-  display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;

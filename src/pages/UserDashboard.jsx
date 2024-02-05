@@ -33,7 +33,8 @@ function UserDashboard({ isMenuShow }) {
       try {
         const data = await documentService.getAllDocuments(
           currentPage,
-          cardsPerPage
+          cardsPerPage,
+          // searchTerm
         );
         setGridData(data);
         setIsLoading(false);
@@ -43,6 +44,10 @@ function UserDashboard({ isMenuShow }) {
     };
     fetchData();
   }, []);
+
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
@@ -68,13 +73,14 @@ function UserDashboard({ isMenuShow }) {
         ) : (
           <div className="search-and-grid-main-div">
             <div className="search-div">
-              <div class="inputs">
+              <div className="inputs">
                 <input
                   type="text"
                   name="search-doc"
-                  class="search-doc"
+                  className="search-doc"
                   placeholder="Search Document"
                   required=" "
+                  
                 />
               </div>
             </div>
