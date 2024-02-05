@@ -22,7 +22,7 @@ function RenderSmoothImage({ src }) {
   );
 }
 
-function UserDashboard({isMenuShow}) {
+function UserDashboard({ isMenuShow }) {
   const [gridData, setGridData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
@@ -66,18 +66,33 @@ function UserDashboard({isMenuShow}) {
             <CircularLoading />
           </div>
         ) : (
-          <div className="grid-container">
-            {currentCards.map((item) => (
-              <div key={item.id} className="card">
-                <Link to={`/user-dashboard/docdetails/${item.id}`}>
-                  <RenderSmoothImage src={item.data.banner} />
-                  <div className="card__content">
-                    <p className="card__title">{item.data.title}</p>
-                    <p className="card__description">{item.data.description}</p>
-                  </div>
-                </Link>
+          <div className="search-and-grid-main-div">
+            <div className="search-div">
+              <div class="inputs">
+                <input
+                  type="text"
+                  name="search-doc"
+                  class="search-doc"
+                  placeholder="Search Document"
+                  required=" "
+                />
               </div>
-            ))}
+            </div>
+            <div className="grid-container">
+              {currentCards.map((item) => (
+                <div key={item.id} className="card">
+                  <Link to={`/user-dashboard/docdetails/${item.id}`}>
+                    <RenderSmoothImage src={item.data.banner} />
+                    <div className="card__content">
+                      <p className="card__title">{item.data.title}</p>
+                      <p className="card__description">
+                        {item.data.description}
+                      </p>
+                    </div>
+                  </Link>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>

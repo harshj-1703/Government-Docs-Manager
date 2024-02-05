@@ -1,6 +1,6 @@
 .user-dashboard{
   background-color: rgb(183, 221, 255);
-  min-height: 100vh;
+  min-height: calc(100vh - 70px);
   height: fit-content;
 }
 
@@ -25,9 +25,68 @@ body.dark .user-dashboard{
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   padding: 0 45px;
-  padding-top: 25px;
-  /* margin-top: 25px; */
+  margin-top: 25px;
   padding-bottom: 40px;
+}
+
+.search-and-grid-main-div{
+  padding-top: 25px;
+}
+
+.search-div{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search-doc {
+  /* max-width: 500px; */
+  height: 45px;
+  width: 300px;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.search-doc::placeholder {
+  color: darkblue;
+}
+
+body.dark .search-doc::placeholder {
+  color: #00ff2a;
+}
+
+.search-doc:valid {
+  border-color: darkblue;
+  color: darkblue;
+  box-shadow: 2px 2px 8px 1px darkblue;
+}
+
+.search-doc:invalid {
+  border-color: #ff0000;
+  color: #ff0000;
+  box-shadow: 2px 2px 8px 1px #ff0000;
+}
+
+body.dark .search-doc:valid {
+  border-color: #00ff2a;
+  color: #00ff2a;
+  box-shadow: 2px 2px 8px 1px #00ff2a;
+}
+
+body.dark .search-doc:invalid {
+  border-color: #ff0000;
+  color: #ff0000;
+  box-shadow: 2px 2px 8px 1px #ff0000;
+}
+
+.search-doc {
+  color: black;
 }
 
 @media screen and (max-width: 1100px) {
