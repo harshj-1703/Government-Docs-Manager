@@ -39,6 +39,31 @@ body.dark .document-detail-main-div{
     border-radius: 10px;
 }
 
+.document-page-example-image{
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    padding: 25px 350px;
+    height: 400px;
+}
+
+.document-page-example-image .smooth-image-wrapper-grid {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+  }
+  
+.document-page-example-image .smooth-image-wrapper-grid img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+.document-page-example-image .skeleton{
+    position: relative;
+    border-radius: 10px;
+}
+
 .document-page-title{
     color: darkblue;
     font-family: 'Times New Roman', Times, serif;
@@ -89,9 +114,7 @@ body.dark .document-page-description{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 20px;
+    padding: 20px;
     width: 100%;
     font-size: 20px;
 }
@@ -125,5 +148,14 @@ body.dark .line{
     .document-page-banner-image{
         height: 250px;
         padding: 25px;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .document-page-example-image{
+        height: 300px;
+        padding-left: 30px;
+        padding-right: 30px;
+        padding-top: 20px;
     }
 }

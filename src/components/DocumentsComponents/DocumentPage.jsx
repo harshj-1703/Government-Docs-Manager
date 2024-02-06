@@ -70,6 +70,10 @@ function DocumentPage({ isMenuShow }) {
                 {data.state == "india" ? "Whole India" : data.state}
               </div>
             </div>
+            <hr className="line" />
+            <div className="document-page-example-image">
+              <RenderSmoothImage src={data.photoExample} />
+            </div>
           </div>
         </div>
       ) : (
