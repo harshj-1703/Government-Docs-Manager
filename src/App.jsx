@@ -70,15 +70,11 @@ function App() {
       children: [
         {
           path: "/user-dashboard",
-          element: (
-            <UserDashboard
-              isMenuShow={isMenuShow}
-            />
-          ),
+          element: <UserDashboard isMenuShow={isMenuShow} />,
         },
         {
-          path: "docdetails/:id",
-          element: <DocumentPage />,
+          path: "docdetails/",
+          element: <DocumentPage isMenuShow={isMenuShow} />,
         },
       ],
     },

@@ -34,7 +34,7 @@ function UserDashboard({ isMenuShow }) {
     const fetchData = async () => {
       try {
         setIsLoading(true);
-        const data = await documentService.getAllDocuments(
+        const data = await documentService.getAllUploadeByUserDocuments(
           currentPage,
           cardsPerPage,
           searchQuery
@@ -95,7 +95,7 @@ function UserDashboard({ isMenuShow }) {
               currentCards.length > 0 ? (
                 currentCards.map((item) => (
                   <div key={item.id} className="card">
-                    <Link to={`/user-dashboard/docdetails/${item.id}`}>
+                    <Link to={`/user-dashboard/docdetails/`} state={item.id}>
                       <RenderSmoothImage src={item.data.banner} />
                       <div className="card__content">
                         <p className="card__title">{item.data.title}</p>

@@ -1,0 +1,14 @@
+.document-detail-main-div{
+    background-color: rgb(183, 221, 255);
+    min-height: calc(100vh - 70px);
+    height: fit-content;
+}
+
+.document-detail-div-blur{
+    filter: blur(38px);
+}
+
+body.dark .document-detail-main-div{
+    background-color: rgb(1, 1, 32);
+    color: white;
+  }

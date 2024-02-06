@@ -12,20 +12,26 @@ import {
   startAfter,
   doc,
   query,
+  documentId,
 } from "firebase/firestore";
 
 const docCollectionRef = collection(db, "Documents");
 
 const documentService = {
-  getAllDocuments: async (page = 1, itemsPerPage = 12, searchQuery = "") => {
+  getAllUploadeByUserDocuments: async (
+    page = 1,
+    itemsPerPage = 12,
+    searchQuery = ""
+  ) => {
     try {
       const collectionRef = docCollectionRef;
       const queryRef = query(
         collectionRef,
         orderBy("title", "asc"),
         orderBy("updatedAt", "desc"),
-        where("title", ">=", searchQuery),
-        where("title", "<=", searchQuery + "\uf8ff"),
+        where("title", ">=", searchQuery.toUpperCase()),
+        where("title", "<=", searchQuery.toUpperCase() + "\uf8ff"),
+        where("uploadedBy", "==", "Users"),
         limit(itemsPerPage)
       );
 
@@ -47,33 +53,21 @@ const documentService = {
     }
   },
   getDocumentFromId: async (id) => {
+    const docRef = doc(db, "Documents", id);
     try {
-      const q = query(
-        docCollectionRef,
-        where(firebase.firestore.FieldPath.documentId(), "==", id)
-      );
-      const querySnapshot = await getDocs(q);
-
-      if (querySnapshot.docs.length > 0) {
-        const userDoc = querySnapshot.docs[0];
-        return {
-          id: userDoc.id,
-          password: userDoc.data().password,
-          user: userDoc.data(),
-        };
-      } else {
-        return null;
-      }
+      const doc = await getDoc(docRef);
+      // console.log(doc.data());
+      return doc.data();
     } catch (error) {
       throw error;
     }
   },
-  addDocument: (newUser) => {
-    return addDoc(docCollectionRef, newUser);
+  addDocument: (newDoc) => {
+    return addDoc(docCollectionRef, newDoc);
   },
-  updateDocument: (id, newUser) => {
-    const userDocRef = doc(docCollectionRef, id);
-    return updateDoc(userDocRef, newUser);
+  updateDocument: (id, newDoc) => {
+    const docRef = doc(docCollectionRef, id);
+    return updateDoc(docRef, newDoc);
   },
 };
 

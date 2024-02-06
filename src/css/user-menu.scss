@@ -125,12 +125,14 @@
       position: relative;
       width: 10rem;
       height: 10rem;
+      object-fit: cover;
       overflow: hidden;
-      border-radius: 4rem;
+      border-radius: 50%;
       > img{
         position: absolute;
         inset: 0;
-        max-width: 100%;
+        height: 100%;
+        width: 100%;
         transition: 500ms ease all;
       }
       &:hover{
@@ -143,7 +145,7 @@
 
   @media screen and (max-width: 800px) {
     .user-menu{
-      width: 30%;
+      width: 100%;
     }
     .orbital-menu__center-pic{
       width: 7rem;
