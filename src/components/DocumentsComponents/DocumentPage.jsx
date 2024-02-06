@@ -74,6 +74,11 @@ function DocumentPage({ isMenuShow }) {
             <div className="document-page-example-image">
               <RenderSmoothImage src={data.photoExample} />
             </div>
+            <hr className="line" />
+            <div className="document-page-fields">
+              <div className="title">Apply For Document</div>
+              <div className="fields">{data.fields.toString()}</div>
+            </div>
           </div>
         </div>
       ) : (

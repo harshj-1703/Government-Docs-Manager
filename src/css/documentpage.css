@@ -135,6 +135,25 @@ body.dark .document-page-state{
     color: green;
 }
 
+.document-page-fields{
+    color: darkblue;
+    text-align: center;
+}
+
+body.dark .document-page-fields{
+    color: white;
+}
+
+.document-page-fields .title{
+    font-size: 35px;
+    padding: 20px;
+}
+
+.document-page-fields .fields{
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+
 .line{
     margin-left: 50px;
     margin-right: 50px;
