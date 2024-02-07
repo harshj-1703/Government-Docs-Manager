@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import ToastMessage from "../ToastMessage";
 import CircularLoading from "../CircularLoading";
 import "../../css/change-password.css";
+import { updatePassword } from "firebase/auth";
+import userService from "../../services/user.services";
+import CryptoJS from "crypto-js";
+import { auth } from "../../firebase";
 
 function ChangePassword() {
   const [password, setPassword] = useState("");
@@ -38,18 +42,47 @@ function ChangePassword() {
     }
   };
 
-  const changePasswordSubmitted = (e) => {
-    e.preventDefault();
+  const changePasswordSubmitted = async () => {
     const isPasswordValid = validatePassword(password);
     const isConfirmPasswordValid = validateConfirmPassword(confirmPassword);
-    if(isPasswordValid && isConfirmPasswordValid){
-        setLoading(true);
+    if (isPasswordValid && isConfirmPasswordValid) {
+      setLoading(true);
+      try {
+        const user = auth.currentUser;
+        const mobile = localStorage.getItem("mobile");
+        const userData = await userService.getUserFromMobile(mobile);
+        await updatePassword(user, password)
+          .then(() => {
+            const newPassword = CryptoJS.AES.encrypt(
+              password,
+              process.env.ENCRYPT_HJ_KEY
+            ).toString();
+            userService
+              .updateUser(userData.id, { password: newPassword })
+              .then(() => {
+                ToastMessage({
+                  message: "Password Updated Succesfully",
+                  type: "success",
+                });
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+        setConfirmPassword("");
+        setPassword("");
+      } catch (error) {
+        console.error("Error updating password:", error.message);
+        throw error;
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
   return (
     <div className="change-password-user">
-      <form className="registration-form" onSubmit={changePasswordSubmitted}>
+      <form className="registration-form">
         <h2>Set New Password</h2>
         {/* Passwords */}
         <label htmlFor="password">Password:</label>
@@ -92,7 +125,7 @@ function ChangePassword() {
         {/* submit */}
         <button
           onClick={(e) => {
-            handleSetPassword();
+            changePasswordSubmitted();
             e.preventDefault();
           }}
           className="registration-button"
