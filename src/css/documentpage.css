@@ -169,15 +169,18 @@ body.dark .line{
     }
 }
 
+@media screen and (min-width: 801px) and (max-width: 1100px) {
+    .document-page-banner-image{
+        height: 250px;
+        padding: 25px 75px;
+    }
+}
+
 @media screen and (max-width: 1100px) {
     .document-page-example-image{
         height: 300px;
         padding-left: 30px;
         padding-right: 30px;
         padding-top: 20px;
-    }
-    .document-page-banner-image{
-        height: 250px;
-        padding: 25px 75px;
     }
 }

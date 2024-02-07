@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import documentService from "../../services/document.services";
 import CircularLoading from "../CircularLoading";
 import RenderSmoothImage from "./RenderSmoothImage";
+import DocumentFields from "./DocumentFields";
 
 const Skeleton = () => <div className="skeleton"></div>;
 
@@ -60,9 +61,8 @@ function DocumentPage({ isMenuShow }) {
               <RenderSmoothImage src={data.photoExample} Skeleton={Skeleton} />
             </div>
             <hr className="line" />
-            <div className="document-page-fields">
-              <div className="title">Apply For Document</div>
-              <div className="fields"></div>
+            <div className="field-component">
+              <DocumentFields fields={data.fields} />
             </div>
           </div>
         </div>
