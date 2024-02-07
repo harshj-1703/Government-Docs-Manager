@@ -13,13 +13,12 @@ body.dark .document-detail-main-div{
     color: white;
   }
 
-.document-page-banner-image{
+  .document-page-banner-image{
     position: relative;
     overflow: hidden;
     width: 100%;
-    padding: 0 185px;
-    padding-top: 25px;
-    height: 300px;
+    padding: 25px 180px;
+    height: 400px;
 }
 
 .document-page-banner-image .smooth-image-wrapper-grid {
@@ -170,11 +169,15 @@ body.dark .line{
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1100px) {
     .document-page-example-image{
         height: 300px;
         padding-left: 30px;
         padding-right: 30px;
         padding-top: 20px;
+    }
+    .document-page-banner-image{
+        height: 250px;
+        padding: 25px 75px;
     }
 }

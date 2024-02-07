@@ -1,26 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "../css/userdashboard.css";
-import { LazyLoadImage } from "react-lazy-load-image-component";
 import CircularLoading from "../components/CircularLoading";
 import documentService from "../services/document.services";
 import { Link } from "react-router-dom";
+import RenderSmoothImage from "../components/DocumentsComponents/RenderSmoothImage";
 
 const Skeleton = () => <div className="skeleton-grid"></div>;
-
-function RenderSmoothImage({ src }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  return (
-    <div className="smooth-image-wrapper-grid">
-      {!imageLoaded && <Skeleton />}
-      <LazyLoadImage
-        src={src}
-        style={{ opacity: imageLoaded ? 1 : 0 }}
-        onLoad={() => setImageLoaded(true)}
-      />
-    </div>
-  );
-}
 
 function UserDashboard({ isMenuShow }) {
   const [gridData, setGridData] = useState([]);
@@ -52,7 +37,20 @@ function UserDashboard({ isMenuShow }) {
         console.error("Error fetching data:", error);
       }
     };
-    fetchData();
+
+    let timeForSearch;
+
+    if (currentPage !== 1 || searchQuery !== "") {
+      timeForSearch = setTimeout(() => {
+        fetchData();
+      }, 300);
+    } else {
+      fetchData();
+    }
+
+    return () => {
+      clearTimeout(timeForSearch);
+    };
   }, [currentPage, searchQuery]);
 
   const indexOfLastCard = currentPage * cardsPerPage;
@@ -96,7 +94,10 @@ function UserDashboard({ isMenuShow }) {
                 currentCards.map((item) => (
                   <div key={item.id} className="card">
                     <Link to={`/user-dashboard/docdetails/`} state={item.id}>
-                      <RenderSmoothImage src={item.data.banner} />
+                      <RenderSmoothImage
+                        src={item.data.banner}
+                        Skeleton={Skeleton}
+                      />
                       <div className="card__content">
                         <p className="card__title">{item.data.title}</p>
                         <p className="card__description">
@@ -112,9 +113,7 @@ function UserDashboard({ isMenuShow }) {
                 </div>
               )
             ) : (
-              <div>
-                <CircularLoading />
-              </div>
+              <CircularLoading />
             )}
           </div>
         </div>

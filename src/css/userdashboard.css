@@ -29,6 +29,10 @@ body.dark .user-dashboard{
   padding-bottom: 40px;
 }
 
+.grid-container .overlay{
+  backdrop-filter: none;
+}
+
 .search-and-grid-main-div{
   padding-top: 25px;
 }

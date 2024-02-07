@@ -3,24 +3,9 @@ import "../../css/documentpage.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import documentService from "../../services/document.services";
 import CircularLoading from "../CircularLoading";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import RenderSmoothImage from "./RenderSmoothImage";
 
 const Skeleton = () => <div className="skeleton"></div>;
-
-function RenderSmoothImage({ src }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
-  return (
-    <div className="smooth-image-wrapper-grid">
-      {!imageLoaded && <Skeleton />}
-      <LazyLoadImage
-        src={src}
-        style={{ opacity: imageLoaded ? 1 : 0 }}
-        onLoad={() => setImageLoaded(true)}
-      />
-    </div>
-  );
-}
 
 function DocumentPage({ isMenuShow }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -57,7 +42,7 @@ function DocumentPage({ isMenuShow }) {
             }
           >
             <div className="document-page-banner-image">
-              <RenderSmoothImage src={data.banner} />
+              <RenderSmoothImage src={data.banner} Skeleton={Skeleton} />
             </div>
             <div className="document-page-title">{data.title}</div>
             <div className="document-page-ministry">{data.ministry}</div>
@@ -72,12 +57,12 @@ function DocumentPage({ isMenuShow }) {
             </div>
             <hr className="line" />
             <div className="document-page-example-image">
-              <RenderSmoothImage src={data.photoExample} />
+              <RenderSmoothImage src={data.photoExample} Skeleton={Skeleton} />
             </div>
             <hr className="line" />
             <div className="document-page-fields">
               <div className="title">Apply For Document</div>
-              <div className="fields">{data.fields.toString()}</div>
+              <div className="fields"></div>
             </div>
           </div>
         </div>
