@@ -4,6 +4,7 @@ import CircularLoading from "../components/CircularLoading";
 import documentService from "../services/document.services";
 import { Link } from "react-router-dom";
 import RenderSmoothImage from "../components/DocumentsComponents/RenderSmoothImage";
+import Pagination from "../components/DocumentsComponents/Pagination";
 
 const Skeleton = () => <div className="skeleton-grid"></div>;
 
@@ -58,8 +59,6 @@ function UserDashboard({ isMenuShow }) {
   const currentCards = gridData.slice(indexOfFirstCard, indexOfLastCard);
 
   const totalPages = Math.ceil(gridData.length / cardsPerPage);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
@@ -119,42 +118,14 @@ function UserDashboard({ isMenuShow }) {
         </div>
       </div>
       {/* Pagination */}
-      {!isLoading && currentCards.length > 0 && (
-        <div className={!isMenuShow ? "pagination" : "pagination-blur"}>
-          <button onClick={() => paginate(1)} disabled={currentPage === 1}>
-            {"<<"}
-          </button>
-          <button
-            onClick={() => paginate(currentPage - 1)}
-            disabled={currentPage === 1}
-          >
-            {"<"}
-          </button>
-          {[currentPage, currentPage + 1]
-            .filter((page) => page <= totalPages)
-            .map((page) => (
-              <button
-                key={page}
-                onClick={() => paginate(page)}
-                className={currentPage === page ? "active" : ""}
-              >
-                {page}
-              </button>
-            ))}
-          <button
-            onClick={() => paginate(currentPage + 1)}
-            disabled={currentPage === totalPages}
-          >
-            {">"}
-          </button>
-          <button
-            onClick={() => paginate(totalPages)}
-            disabled={currentPage === totalPages}
-          >
-            {">>"}
-          </button>
-        </div>
-      )}
+      <Pagination
+        isLoading={isLoading}
+        currentCards={currentCards}
+        isMenuShow={isMenuShow}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalPages={totalPages}
+      />
     </div>
   );
 }
