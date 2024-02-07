@@ -6,6 +6,12 @@
 .document-page-fields{
     width: 35%;
 }
+.fields .error-message{
+    color: red;
+    font-size: 12px;
+    font-family:Arial, Helvetica, sans-serif;
+    letter-spacing: 1px;
+}
 .each-field-input-label{
     padding: 5px;
 }
