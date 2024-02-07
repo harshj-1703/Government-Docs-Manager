@@ -7,7 +7,7 @@ import { auth } from "../../firebase";
 
 const Skeleton = () => <div className="skeleton"></div>;
 
-function UserNavbarMenu() {
+function UserNavbarMenu({ setIsMenuShow }) {
   const navigate = useNavigate();
   const [imageLoaded, setImageLoaded] = useState(false);
   return (
@@ -38,18 +38,24 @@ function UserNavbarMenu() {
                     manage_accounts
                   </i>
                 </span>
-                <span className="orbital-menu__link-text">
-                  Edit Profile
-                </span>
+                <span className="orbital-menu__link-text">Edit Profile</span>
               </a>
             </li>
             <li className="orbital-menu__item">
-              <a href="" className="orbital-menu__link">
+              <Link
+                className="orbital-menu__link"
+                to="./change-password"
+                onClick={() => {
+                  setIsMenuShow((prev) => !prev);
+                }}
+              >
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="alert-circle" className="material-icons">key</i>
+                  <i data-feather="alert-circle" className="material-icons">
+                    key
+                  </i>
                 </span>
                 <span className="orbital-menu__link-text">Change Password</span>
-              </a>
+              </Link>
             </li>
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">

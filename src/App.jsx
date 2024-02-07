@@ -12,6 +12,7 @@ import ForgotPassword from "./pages/ForgotPassword.jsx";
 import UserDashboard from "./pages/UserDashboard.jsx";
 import DocumentPage from "./components/DocumentsComponents/DocumentPage.jsx";
 import UserNavbar from "./components/UserDashboard/UserNavbar.jsx";
+import ChangePassword from "./components/UserDashboard/ChangePassword.jsx";
 
 function App() {
   const [isMenuShow, setIsMenuShow] = useState(false);
@@ -75,6 +76,10 @@ function App() {
         {
           path: "docdetails/",
           element: <DocumentPage isMenuShow={isMenuShow} />,
+        },
+        {
+          path: "change-password/",
+          element: <ChangePassword isMenuShow={isMenuShow} />,
         },
       ],
     },

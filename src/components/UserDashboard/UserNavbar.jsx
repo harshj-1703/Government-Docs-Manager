@@ -128,7 +128,7 @@ function UserNavbar({ isMenuShow, setIsMenuShow }) {
             </div>
           </div>
         </div>
-        {isMenuShow && <UserNavbarMenu />}
+        {isMenuShow && <UserNavbarMenu setIsMenuShow={setIsMenuShow} />}
       </nav>
     </>
   );
