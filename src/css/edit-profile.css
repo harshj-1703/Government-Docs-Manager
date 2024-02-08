@@ -50,3 +50,49 @@ body.dark .edit-profile-blur{
 body.dark .edit-profile h2{
     color: white;
 }
+
+.edit-profile .fields{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group-photo{
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .edit-button{
+    margin:0 50px;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+  @media screen and (min-width: 768px) {
+    .edit-profile-form {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 767px) {
+    .edit-profile-form {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .edit-profile-form {
+      display: block;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+  }
+  

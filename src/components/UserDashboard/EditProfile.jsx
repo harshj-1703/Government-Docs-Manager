@@ -294,143 +294,160 @@ function EditProfile({ isMenuShow }) {
   return (
     <div className={!isMenuShow ? "edit-profile" : "edit-profile-blur"}>
       <div className="fields">
-        <form
-          className="edit-profile-form"
-          onSubmit={(e) => e.preventDefault()}
-        >
-          <h2>Edit Profile</h2>
-          {/* Full Name */}
-          <label htmlFor="full name">Full Name:</label>
-          <div>
-            <input
-              type="text"
-              placeholder="Full Name"
-              value={fullName}
-              onChange={(e) => {
-                setFullName(e.target.value);
-                validateFullName(e.target.value);
-              }}
-            />
-            {fullNameError && <span className="error">{fullNameError}</span>}
-          </div>
-          {/* DOB */}
-          <label htmlFor="dob">Date of Birth:</label>
-          <div>
-            <input
-              type="date"
-              id="dob"
-              value={dob}
-              onChange={handleDobChange}
-            />
-            {dobError && <span className="error">{dobError}</span>}
-          </div>
-          {/* Email */}
-          <label htmlFor="email">Email:</label>
-          <div>
-            <input
-              type="text"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                validateEmail(e.target.value);
-              }}
-            />
-            {emailError && <span className="error">{emailError}</span>}
-          </div>
-          {/* Address */}
-          <div>
-            <label htmlFor="address">Address:</label>
-            <textarea
-              type="text"
-              placeholder="Address"
-              value={address}
-              rows={3}
-              onChange={(e) => {
-                setAddress(e.target.value);
-                validateAddress(e.target.value);
-              }}
-            />
-            {addressError && <span className="error">{addressError}</span>}
-          </div>
-          {/* Pincode */}
-          <label htmlFor="pincode">PinCode:</label>
-          <div>
-            <input
-              type="text"
-              placeholder="Pin Code"
-              maxLength={6}
-              value={pincode}
-              onChange={(e) => {
-                setPincode(e.target.value);
-                validatePincode(e.target.value);
-              }}
-            />
-            {pincodeError && <span className="error">{pincodeError}</span>}
-          </div>
-          {/* State & City */}
-          <div>
-            <label htmlFor="state">State:</label>
-            <div>
-              <select value={selectedState || ""} onChange={handleStateChange}>
-                <option value="" disabled>
-                  Select State
-                </option>
-                {stateOptions.map((state) => (
-                  <option key={state.value} value={state.value}>
-                    {state.label}
-                  </option>
-                ))}
-              </select>
-              {stateError && <span className="error">{stateError}</span>}
+        <h2>Edit Profile</h2>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <div className="edit-profile-form">
+            {/* Full Name */}
+            <div className="form-group">
+              <label htmlFor="full name">Full Name:</label>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Full Name"
+                  value={fullName}
+                  onChange={(e) => {
+                    setFullName(e.target.value);
+                    validateFullName(e.target.value);
+                  }}
+                />
+                {fullNameError && (
+                  <span className="error">{fullNameError}</span>
+                )}
+              </div>
             </div>
-
-            <label htmlFor="city">City:</label>
-            <div>
-              <select value={selectedCity || ""} onChange={handleCityChange}>
-                <option value="" style={{ color: "#bbb" }} disabled>
-                  Select City
-                </option>
-                {cityOptions
-                  .filter(
-                    (city, index, self) =>
-                      index === self.findIndex((c) => c.value === city.value)
-                  )
-                  .map((city) => (
-                    <option key={city.value} value={city.value}>
-                      {city.label}
+            {/* DOB */}
+            <div className="form-group">
+              <label htmlFor="dob">Date of Birth:</label>
+              <div>
+                <input
+                  type="date"
+                  id="dob"
+                  value={dob}
+                  onChange={handleDobChange}
+                />
+                {dobError && <span className="error">{dobError}</span>}
+              </div>
+            </div>
+            {/* Email */}
+            <div className="form-group">
+              <label htmlFor="email">Email:</label>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Email"
+                  value={email}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    validateEmail(e.target.value);
+                  }}
+                />
+                {emailError && <span className="error">{emailError}</span>}
+              </div>
+            </div>
+            {/* Address */}
+            <div className="form-group">
+              <div>
+                <label htmlFor="address">Address:</label>
+                <textarea
+                  type="text"
+                  placeholder="Address"
+                  value={address}
+                  rows={3}
+                  onChange={(e) => {
+                    setAddress(e.target.value);
+                    validateAddress(e.target.value);
+                  }}
+                />
+              </div>
+              {addressError && <span className="error">{addressError}</span>}
+            </div>
+            {/* Pincode */}
+            <div className="form-group">
+              <label htmlFor="pincode">PinCode:</label>
+              <div>
+                <input
+                  type="text"
+                  placeholder="Pin Code"
+                  maxLength={6}
+                  value={pincode}
+                  onChange={(e) => {
+                    setPincode(e.target.value);
+                    validatePincode(e.target.value);
+                  }}
+                />
+                {pincodeError && <span className="error">{pincodeError}</span>}
+              </div>
+            </div>
+            {/* State & City */}
+            <div className="form-group">
+              <label htmlFor="state">State:</label>
+              <div>
+                <select
+                  value={selectedState || ""}
+                  onChange={handleStateChange}
+                >
+                  <option value="" disabled>
+                    Select State
+                  </option>
+                  {stateOptions.map((state) => (
+                    <option key={state.value} value={state.value}>
+                      {state.label}
                     </option>
                   ))}
-              </select>
-              {cityError && <span className="error">{cityError}</span>}
+                </select>
+                {stateError && <span className="error">{stateError}</span>}
+              </div>
             </div>
-          </div>
-          {/* Profession */}
-          <div>
-            <label htmlFor="profession">Profession:</label>
-            <div>
-              <input
-                type="text"
-                id="profession"
-                placeholder="Enter your profession"
-                value={profession}
-                onChange={handleProfessionChange}
-              />
-              {professionError && (
-                <span className="error">{professionError}</span>
-              )}
+            <div className="form-group">
+              <label htmlFor="city">City:</label>
+              <div>
+                <select value={selectedCity || ""} onChange={handleCityChange}>
+                  <option value="" style={{ color: "#bbb" }} disabled>
+                    Select City
+                  </option>
+                  {cityOptions
+                    .filter(
+                      (city, index, self) =>
+                        index === self.findIndex((c) => c.value === city.value)
+                    )
+                    .map((city) => (
+                      <option key={city.value} value={city.value}>
+                        {city.label}
+                      </option>
+                    ))}
+                </select>
+                {cityError && <span className="error">{cityError}</span>}
+              </div>
             </div>
-          </div>
-          {/* Profile Photo */}
-          <label htmlFor="photo">Upload Profile Photo:</label>
-          <div>
-            <input
-              type="file"
-              id="photo"
-              accept=".jpg, .jpeg, .png, .gif"
-              onChange={handlePhotoChange}
-            />
-            {photoError && <span className="error">{photoError}</span>}
+            {/* Profession */}
+            <div className="form-group">
+              <label htmlFor="profession">Profession:</label>
+              <div>
+                <input
+                  type="text"
+                  id="profession"
+                  placeholder="Enter your profession"
+                  value={profession}
+                  onChange={handleProfessionChange}
+                />
+                {professionError && (
+                  <span className="error">{professionError}</span>
+                )}
+              </div>
+            </div>
+            {/* Profile Photo */}
+            <div className="form-group">
+              <label htmlFor="photo">Upload Profile Photo:</label>
+              <div>
+                <input
+                  type="file"
+                  id="photo"
+                  accept=".jpg, .jpeg, .png, .gif"
+                  onChange={handlePhotoChange}
+                />
+                {photoError && <span className="error">{photoError}</span>}
+              </div>
+            </div>
             {photo && (
               <div className="avatar-container">
                 <img
@@ -440,29 +457,30 @@ function EditProfile({ isMenuShow }) {
                 />
               </div>
             )}
+            {/* File Upload */}
+            <div className="form-group-last">
+              <label htmlFor="file">Upload Doc File Proof:</label>
+              <input
+                type="file"
+                id="file"
+                accept=".jpg, .jpeg, .png, .gif, .pdf"
+                onChange={handleFileChange}
+              />
+              {fileError && <span className="error">{fileError}</span>}
+            </div>
+            {/* submit */}
           </div>
-          {/* File Upload */}
-          <div>
-            <label htmlFor="file">Upload Doc File Proof:</label>
-            <input
-              type="file"
-              id="file"
-              accept=".jpg, .jpeg, .png, .gif, .pdf"
-              onChange={handleFileChange}
-            />
-            {fileError && <span className="error">{fileError}</span>}
+          <div className="edit-button">
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                handleEditProfileSubmit();
+              }}
+              className="registration-button"
+            >
+              Edit Profile
+            </button>
           </div>
-          {/* submit */}
-          <button
-            onClick={(e) => {
-              e.preventDefault();
-              handleEditProfileSubmit();
-            }}
-            className="registration-button"
-            style={{ marginTop: "40px" }}
-          >
-            Edit Profile
-          </button>
         </form>
         {isLoading && <CircularLoading />}
       </div>
