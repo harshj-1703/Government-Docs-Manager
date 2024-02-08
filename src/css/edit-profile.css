@@ -1,0 +1,30 @@
+.edit-profile{
+    background-color: rgb(183, 221, 255);
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    height: calc(100vh - 70px);
+}
+
+.edit-profile-blur{
+    background-color: rgba(211, 242, 255, 0.767);
+    filter: blur(38px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 70px);
+}
+
+body.dark .edit-profile{
+    background-color: rgb(1, 1, 32);
+    color: white;
+}
+
+body.dark .edit-profile-blur{
+    background-color: rgb(1, 1, 32);
+}
+
+.edit-profile .fields{
+    margin: 30px;
+    
+}

@@ -34,19 +34,25 @@ function UserNavbarMenu({ setIsMenuShow }) {
               </Link>
             </li>
             <li className="orbital-menu__item">
-              <a href="" className="orbital-menu__link">
+            <Link
+                className="orbital-menu__link"
+                to="edit-profile"
+                onClick={() => {
+                  setIsMenuShow((prev) => !prev);
+                }}
+              >
                 <span className="orbital-menu__link-icon">
                   <i data-feather="map" className="material-icons">
                     manage_accounts
                   </i>
                 </span>
                 <span className="orbital-menu__link-text">Edit Profile</span>
-              </a>
+              </Link>
             </li>
             <li className="orbital-menu__item">
               <Link
                 className="orbital-menu__link"
-                to="./change-password"
+                to="change-password"
                 onClick={() => {
                   setIsMenuShow((prev) => !prev);
                 }}

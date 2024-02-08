@@ -13,6 +13,7 @@ import UserDashboard from "./pages/UserDashboard.jsx";
 import DocumentPage from "./components/DocumentsComponents/DocumentPage.jsx";
 import UserNavbar from "./components/UserDashboard/UserNavbar.jsx";
 import ChangePassword from "./components/UserDashboard/ChangePassword.jsx";
+import EditProfile from "./components/UserDashboard/EditProfile.jsx";
 
 function App() {
   const [isMenuShow, setIsMenuShow] = useState(false);
@@ -80,6 +81,10 @@ function App() {
         {
           path: "change-password",
           element: <ChangePassword isMenuShow={isMenuShow} />,
+        },
+        {
+          path: "edit-profile",
+          element: <EditProfile isMenuShow={isMenuShow} />,
         },
       ],
     },
