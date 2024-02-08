@@ -26,7 +26,7 @@ body.dark .edit-profile-blur{
 
 .edit-profile-form{
     width: 100%;
-    padding:0 30px;
+    padding:0 20px;
     padding-bottom: 30px;
 }
 
@@ -36,9 +36,13 @@ body.dark .edit-profile-blur{
     /* justify-content: center;
     align-items: center; */
     /* overflow-y: auto; */
-    border: 2px solid darkblue;
-    border-radius: 20px;
     width: 100%;
+    border-radius: 15px;
+    animation: wavy-border 2s infinite;
+}
+
+body.dark .edit-profile .fields{
+    
 }
 
 .edit-profile h2{
