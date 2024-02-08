@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 import "../../css/usernavbar.css";
 import "../../css/boxicons.min.css";
 import "./UserNavbar";
@@ -84,13 +84,19 @@ function UserNavbar({ isMenuShow, setIsMenuShow }) {
             </div>
             <ul className="nav-links">
               <li>
-                <Link to="/user-dashboard">Home</Link>
+                <NavLink to="/user-dashboard" end>
+                  Home
+                </NavLink>
               </li>
               <li>
-                <Link to="/">About</Link>
+                <NavLink to="/" end>
+                  About
+                </NavLink>
               </li>
               <li>
-                <Link to="/">Contact</Link>
+                <NavLink to="/" end>
+                  Contact
+                </NavLink>
               </li>
             </ul>
           </div>

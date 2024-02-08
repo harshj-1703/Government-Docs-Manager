@@ -28,7 +28,7 @@ function App() {
     },
     //user-login
     {
-      path: "/user-login",
+      path: "user-login",
       element: (
         <>
           <ToastContainer />
@@ -38,7 +38,7 @@ function App() {
     },
     //forgot password
     {
-      path: "/forgot-password",
+      path: "forgot-password",
       element: (
         <>
           <ToastContainer />
@@ -48,7 +48,7 @@ function App() {
     },
     //register user
     {
-      path: "/register-user",
+      path: "register-user",
       element: (
         <>
           <ToastContainer />
@@ -58,7 +58,7 @@ function App() {
     },
     //user-dashboard
     {
-      path: "/user-dashboard",
+      path: "user-dashboard",
       element: (
         <>
           <ToastContainer />
@@ -70,21 +70,21 @@ function App() {
       ),
       children: [
         {
-          path: "/user-dashboard",
+          index: true,
           element: <UserDashboard isMenuShow={isMenuShow} />,
         },
         {
-          path: "docdetails/",
+          path: "docdetails",
           element: <DocumentPage isMenuShow={isMenuShow} />,
         },
         {
-          path: "change-password/",
+          path: "change-password",
           element: <ChangePassword isMenuShow={isMenuShow} />,
         },
       ],
     },
     {
-      path: "/datacenter-login",
+      path: "datacenter-login",
       element: <DatacenterLogin />,
     },
     //error 404

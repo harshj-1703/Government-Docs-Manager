@@ -20,6 +20,8 @@ function UserNavbarMenu({ setIsMenuShow }) {
                 className="orbital-menu__link"
                 onClick={() => {
                   signOut(auth);
+                  localStorage.clear();
+                  setIsMenuShow(false);
                   navigate("/");
                 }}
               >

@@ -92,6 +92,9 @@ nav .nav-bar .logo a{
 .nav-links li:hover a::before{
     opacity: 1;
 }
+.nav-links li a.active{
+    color: yellow;
+}
 .nav-bar .darkLight-searchBox{
     display: flex;
     align-items: center;
