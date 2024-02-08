@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import "../../css/documentfields.css";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
+import CircularLoading from "../CircularLoading";
 
 function DocumentFields({ fields }) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
+  const [isloading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, type, files, value } = e.target;
@@ -56,6 +58,7 @@ function DocumentFields({ fields }) {
     });
     setErrors(errorsObj);
     if (Object.keys(errorsObj).length === 0) {
+      setIsLoading(true);
       console.log("Form submitted successfully:", formData);
     }
   };
@@ -102,6 +105,7 @@ function DocumentFields({ fields }) {
           </button>
         </form>
       </LazyLoadComponent>
+      {isloading && <CircularLoading />}
     </div>
   );
 }
