@@ -11,7 +11,7 @@ function OtherDetails({
   setPhoto,
   selectedFile,
   setSelectedFile,
-  addUser
+  addUser,
 }) {
   const [professionError, setProfessionError] = useState("");
   const [photoError, setPhotoError] = useState("");
@@ -25,14 +25,17 @@ function OtherDetails({
     const isFileValid = validateFile(selectedFile);
 
     if (isProfessionValid && isPhotoValid && isFileValid) {
-      setLoading(true);
-      await addUser();
-      ToastMessage({
-        message: "Registration successful!",
-        type: "success",
-      });
-      setLoading(false);
-      navigate("/user-login");
+      const confirmation = window.confirm("Are you sure you want to proceed?");
+      if (confirmation) {
+        setLoading(true);
+        await addUser();
+        ToastMessage({
+          message: "Registration successful!",
+          type: "success",
+        });
+        setLoading(false);
+        navigate("/user-login");
+      }
     }
   };
 
@@ -183,7 +186,7 @@ function OtherDetails({
         >
           Register
         </button>
-        {loading && <CircularLoading/>}
+        {loading && <CircularLoading />}
       </LazyLoadComponent>
     </>
   );

@@ -24,10 +24,10 @@ function RenderSmoothImage({ src }) {
 
 const Slideshow = () => {
   const imageArray = [
-    "https://scgj.azadikaamritmahotsav.in/wp-content/uploads/2021/09/Web-Banner-Hindi_1600X500.jpg",
     "https://t4.ftcdn.net/jpg/04/45/41/71/360_F_445417168_ySehXZbCO65QjGgjSdoYXfJO8ME8tSkk.jpg",
     "https://img.freepik.com/free-vector/abstract-wavy-indian-flag-banner_1055-7052.jpg",
     "https://www.shutterstock.com/image-vector/stain-brush-stroke-flag-india-260nw-1922760536.jpg",
+    "https://scgj.azadikaamritmahotsav.in/wp-content/uploads/2021/09/Web-Banner-Hindi_1600X500.jpg",
   ];
 
   return (

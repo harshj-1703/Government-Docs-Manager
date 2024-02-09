@@ -4,6 +4,9 @@ import * as data from "../../assets/state and cities.json";
 import CircularLoading from "../CircularLoading";
 import ToastMessage from "../ToastMessage";
 import userService from "../../services/user.services";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase";
+import { v4 } from "uuid";
 
 function EditProfile({ isMenuShow }) {
   const [fullName, setFullName] = useState("");
@@ -324,12 +327,69 @@ function EditProfile({ isMenuShow }) {
       isPhotoValid &&
       isFileValid
     ) {
-      // setIsLoading(true);
-      ToastMessage({
-        message: "Profile Edited successfully!",
-        type: "success",
-      });
+      const confirmation = window.confirm("Are you sure you want to proceed?");
+      if (confirmation) {
+        setIsLoading(true);
+        const mobile = localStorage.getItem("mobile");
+        updateDetails(mobile);
+      }
     }
+  };
+
+  const updateDetails = async (mobile) => {
+    const user = await userService.getUserFromMobile(mobile);
+
+    const timestampOptions = {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      second: "numeric",
+      timeZoneName: "short",
+      timeZone: "Asia/Kolkata",
+    };
+
+    const userData = {
+      fullName: fullName,
+      email: email,
+      dob: dob,
+      address: address,
+      pincode: pincode,
+      selectedState: selectedState,
+      selectedCity: selectedCity,
+      profession: profession,
+      // profilePhotoUrl: urlImage,
+      // profileProof: urlFile,
+      updatedAt: new Date().toLocaleString("en-US", timestampOptions),
+    };
+
+    if (defaultImage != photo) {
+      //image
+      const imageRef = ref(storage, `ProfilePhotos/${photo.name + v4()}`);
+      const snapshot = await uploadBytes(imageRef, photo);
+      const urlImage = await getDownloadURL(snapshot.ref);
+      userData.profilePhotoUrl = urlImage;
+      localStorage.setItem("profileImage", urlImage);
+    }
+    if (defaultFile != selectedFile) {
+      //file
+      const fileRef = ref(
+        storage,
+        `UserProfileProofs/${selectedFile.name + v4()}`
+      );
+      const snapshotFile = await uploadBytes(fileRef, selectedFile);
+      const urlFile = await getDownloadURL(snapshotFile.ref);
+      userData.profileProof = urlFile;
+    }
+
+    await userService.updateUser(user.id, userData);
+    localStorage.setItem("fullname", fullName);
+    ToastMessage({
+      message: "Profile Edited successfully!",
+      type: "success",
+    });
+    setIsLoading(false);
   };
 
   return (
@@ -490,13 +550,15 @@ function EditProfile({ isMenuShow }) {
               </div>
             </div>
             <div className="avatar-container">
-              <img
-                src={
-                  photo === defaultImage ? photo : URL.createObjectURL(photo)
-                }
-                alt="Preview"
-                className="avatar-preview"
-              />
+              {photo && (
+                <img
+                  src={
+                    photo !== defaultImage ? URL.createObjectURL(photo) : photo
+                  }
+                  alt="Preview"
+                  className="avatar-preview"
+                />
+              )}
             </div>
             {/* File Upload */}
             <div className="form-group-last">
