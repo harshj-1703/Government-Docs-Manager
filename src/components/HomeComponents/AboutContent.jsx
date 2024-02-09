@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   LazyLoadComponent,
   LazyLoadImage,
@@ -9,6 +9,7 @@ import { useInView } from "react-intersection-observer";
 function AboutContent() {
   const controls = useAnimation();
   const [ref, inView] = useInView({ triggerOnce: false });
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   React.useEffect(() => {
     if (inView) {
@@ -36,7 +37,8 @@ function AboutContent() {
                 <LazyLoadImage
                   id="hj-image"
                   src="/images/bhai.jpeg"
-                  effect="blur"
+                  style={{ opacity: imageLoaded ? 1 : 0 }}
+                  onLoad={() => setImageLoaded(true)}
                 />
               </div>
             </div>

@@ -3,6 +3,7 @@ import "../../css/edit-profile.css";
 import * as data from "../../assets/state and cities.json";
 import CircularLoading from "../CircularLoading";
 import ToastMessage from "../ToastMessage";
+import userService from "../../services/user.services";
 
 function EditProfile({ isMenuShow }) {
   const [fullName, setFullName] = useState("");
@@ -28,7 +29,40 @@ function EditProfile({ isMenuShow }) {
   const [photoError, setPhotoError] = useState("");
   const [fileError, setFileError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [defaultImage, setDefaultImage] = useState(null);
+  const [defaultFile, setDefaultFile] = useState(null);
 
+  useEffect(() => {
+    setIsLoading(true);
+    const mobile = localStorage.getItem("mobile");
+    getUserData(mobile);
+    setIsLoading(false);
+  }, []);
+
+  const getUserData = async (mobile) => {
+    const userData = await userService.getUserFromMobile(mobile);
+    // console.log(userData.user);
+    setFullName(userData.user.fullName);
+    setDob(userData.user.dob);
+    setEmail(userData.user.email);
+    setAddress(userData.user.address);
+    setPincode(userData.user.pincode);
+    setSelectedState(userData.user.selectedState);
+    setCityOptions(
+      data[userData.user.selectedState].map((city) => ({
+        value: city,
+        label: city,
+      }))
+    );
+    setSelectedCity(userData.user.selectedCity);
+    setProfession(userData.user.profession);
+    setDefaultImage(userData.user.profilePhotoUrl);
+    setDefaultFile(userData.user.profileProof);
+    setPhoto(userData.user.profilePhotoUrl);
+    setSelectedFile(userData.user.profileProof);
+  };
+
+  //state and cities data fetch
   useEffect(() => {
     const statesData = Object.keys(data).map((state) => ({
       value: state,
@@ -195,6 +229,10 @@ function EditProfile({ isMenuShow }) {
   };
 
   const validatePhoto = (file) => {
+    if (file === defaultImage) {
+      return true;
+    }
+
     const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
     const maxSizeInBytes = 500 * 1024;
 
@@ -219,11 +257,14 @@ function EditProfile({ isMenuShow }) {
 
   const handlePhotoChange = (e) => {
     const selectedPhoto = e.target.files[0];
-    setPhoto(selectedPhoto);
     validatePhoto(selectedPhoto);
+    setPhoto(selectedPhoto);
   };
 
   const validateFile = (file) => {
+    if (file === defaultFile) {
+      return true;
+    }
     const allowedFileTypes = [
       "image/jpeg",
       "image/png",
@@ -448,15 +489,15 @@ function EditProfile({ isMenuShow }) {
                 {photoError && <span className="error">{photoError}</span>}
               </div>
             </div>
-            {photo && (
-              <div className="avatar-container">
-                <img
-                  src={URL.createObjectURL(photo)}
-                  alt="Preview"
-                  className="avatar-preview"
-                />
-              </div>
-            )}
+            <div className="avatar-container">
+              <img
+                src={
+                  photo === defaultImage ? photo : URL.createObjectURL(photo)
+                }
+                alt="Preview"
+                className="avatar-preview"
+              />
+            </div>
             {/* File Upload */}
             <div className="form-group-last">
               <label htmlFor="file">Upload Doc File Proof:</label>
@@ -468,6 +509,12 @@ function EditProfile({ isMenuShow }) {
               />
               {fileError && <span className="error">{fileError}</span>}
             </div>
+            <a href={defaultFile} target="_blank" className="old-doc-link">
+              Old Document&nbsp;
+              <i className="material-icons" style={{ fontSize: "20px" }}>
+                switch_access_shortcut
+              </i>
+            </a>
             {/* submit */}
           </div>
           <div className="edit-button">

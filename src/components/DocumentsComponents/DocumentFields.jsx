@@ -49,8 +49,12 @@ function DocumentFields({ fields }) {
     e.preventDefault();
     let errorsObj = {};
     Object.entries(fields).forEach(([name, inputType]) => {
+      // console.log(inputType);
       const file = formData[name];
       if (inputType === "file" && file && errors[name]) {
+        errorsObj[name] = errors[name];
+      }
+      if (inputType === "image" && file && errors[name]) {
         errorsObj[name] = errors[name];
       } else if (!file) {
         errorsObj[name] = `${name} is required`;
@@ -58,7 +62,7 @@ function DocumentFields({ fields }) {
     });
     setErrors(errorsObj);
     if (Object.keys(errorsObj).length === 0) {
-      setIsLoading(true);
+      // setIsLoading(true);
       console.log("Form submitted successfully:", formData);
     }
   };
