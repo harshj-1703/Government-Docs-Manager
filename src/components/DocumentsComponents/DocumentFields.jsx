@@ -6,7 +6,7 @@ import CircularLoading from "../CircularLoading";
 function DocumentFields({ fields }) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
-  const [isloading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     const { name, type, files, value } = e.target;
@@ -30,6 +30,12 @@ function DocumentFields({ fields }) {
           } else if (file.size > 1024 * 1024) {
             error = "PDF size exceeds 1MB limit";
           }
+        } else if (inputType === "video") {
+          if (!["video/mp4", "video/mkv"].includes(file.type)) {
+            error = "Only .mp4 and .mkv file types are allowed for video";
+          } else if (file.size > 5 * 1024 * 1024) {
+            error = "Video size exceeds 5MB limit";
+          }
         }
       }
     }
@@ -49,12 +55,14 @@ function DocumentFields({ fields }) {
     e.preventDefault();
     let errorsObj = {};
     Object.entries(fields).forEach(([name, inputType]) => {
-      // console.log(inputType);
       const file = formData[name];
-      if (inputType === "file" && file && errors[name]) {
-        errorsObj[name] = errors[name];
-      }
-      if (inputType === "image" && file && errors[name]) {
+      if (
+        (inputType === "file" ||
+          inputType === "image" ||
+          inputType === "video") &&
+        file &&
+        errors[name]
+      ) {
         errorsObj[name] = errors[name];
       } else if (!file) {
         errorsObj[name] = `${name} is required`;
@@ -62,7 +70,7 @@ function DocumentFields({ fields }) {
     });
     setErrors(errorsObj);
     if (Object.keys(errorsObj).length === 0) {
-      // setIsLoading(true);
+      setIsLoading(true);
       console.log("Form submitted successfully:", formData);
     }
   };
@@ -83,13 +91,21 @@ function DocumentFields({ fields }) {
               {errors[label] && (
                 <div className="error-message">{errors[label]}</div>
               )}
-              {inputType === "file" || inputType === "image" ? (
+              {inputType === "file" ||
+              inputType === "image" ||
+              inputType === "video" ? (
                 <>
                   <input
                     type="file"
                     name={label}
                     onChange={handleChange}
-                    accept={inputType === "image" ? ".jpg,.jpeg,.png" : ".pdf"}
+                    accept={
+                      inputType === "image"
+                        ? ".jpg,.jpeg,.png"
+                        : inputType === "video"
+                        ? ".mp4,.mkv"
+                        : ".pdf"
+                    }
                     className={errors[label] ? "error" : ""}
                   />
                 </>
@@ -109,7 +125,7 @@ function DocumentFields({ fields }) {
           </button>
         </form>
       </LazyLoadComponent>
-      {isloading && <CircularLoading />}
+      {isLoading && <CircularLoading />}
     </div>
   );
 }
