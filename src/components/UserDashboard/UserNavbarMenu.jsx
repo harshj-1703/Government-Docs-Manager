@@ -65,7 +65,7 @@ function UserNavbarMenu({ setIsMenuShow }) {
                 <span className="orbital-menu__link-text">Change Password</span>
               </Link>
             </li>
-            <li className="orbital-menu__item">
+            {/* <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">
                   <i data-feather="activity" className="material-icons"></i>
@@ -112,7 +112,7 @@ function UserNavbarMenu({ setIsMenuShow }) {
                   Leaves & Holidays
                 </span>
               </a>
-            </li>
+            </li> */}
           </ul>
           <div className="orbital-menu__center-pic">
             {!imageLoaded && <Skeleton />}
