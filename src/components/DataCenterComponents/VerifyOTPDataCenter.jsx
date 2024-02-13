@@ -3,7 +3,7 @@ import OTPInput from "react-otp-input";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import ToastMessage from "../ToastMessage";
 
-function VerifyOTPDataCenter({ otp, setOtp, verificationCode,setStep }) {
+function VerifyOTPDataCenter({ otp, setOtp, verificationCode, setStep }) {
   const [seconds, setSeconds] = useState(150);
   const [timer, setTimer] = useState(null);
   const [loading, setLoading] = useState(false);

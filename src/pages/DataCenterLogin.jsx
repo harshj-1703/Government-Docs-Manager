@@ -24,6 +24,10 @@ function DatacenterLogin() {
     }
     if (Object.keys(validationErrors).length === 0) {
       setStep(() => step + 1);
+      ToastMessage({
+        message: "OTP Sended.",
+        type: "success",
+      });
     } else {
       setErrors(validationErrors);
     }

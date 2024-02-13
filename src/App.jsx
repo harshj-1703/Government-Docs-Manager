@@ -90,7 +90,12 @@ function App() {
     },
     {
       path: "datacenter-login",
-      element: <DatacenterLogin />,
+      element: (
+        <>
+          <ToastContainer />
+          <DatacenterLogin />
+        </>
+      ),
     },
     //error 404
     {
