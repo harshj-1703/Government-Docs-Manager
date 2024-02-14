@@ -5,6 +5,7 @@ import { signInWithPhoneNumber, RecaptchaVerifier } from "firebase/auth";
 import { auth } from "../../firebase";
 import CircularLoading from "../CircularLoading";
 import userService from "../../services/user.services";
+import dataCenterServices from "../../services/data-center.services";
 
 function MobileNumberComponent({
   mobile,
@@ -28,7 +29,14 @@ function MobileNumberComponent({
     if (available) {
       return true;
     } else {
-      return false;
+      const available2 = await dataCenterServices.getDataCenterFromMobile(
+        mobile
+      );
+      if (available2) {
+        return true;
+      } else {
+        return false;
+      }
     }
   };
 
@@ -47,12 +55,12 @@ function MobileNumberComponent({
 
   const handleSendVerificationCode = async () => {
     const checkMobile = await validateMobile(mobile);
-    if(!checkMobile){
+    if (!checkMobile) {
       return;
     }
     setLoading(true);
     const available = await mobileAvailableOrNot(mobile);
-    if(available){
+    if (available) {
       setErrors({
         ...errors,
         mobile: "Mobile Number already used!",

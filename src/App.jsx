@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Home from "./pages/Home";
 import UserLogin from "./pages/UserLogin";
 import DatacenterLogin from "./pages/DataCenterLogin";
+import DataCenterDashboard from "./pages/DataCenterDashboard.jsx";
 import RegisterUser from "./pages/RegisterUser";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Error404Page from "./pages/Error404Page.jsx";
@@ -14,6 +15,7 @@ import DocumentPage from "./components/DocumentsComponents/DocumentPage.jsx";
 import UserNavbar from "./components/UserDashboard/UserNavbar.jsx";
 import ChangePassword from "./components/UserDashboard/ChangePassword.jsx";
 import EditProfile from "./components/UserDashboard/EditProfile.jsx";
+import ProtectedDataCenter from "./components/ProtectedDataCenter.jsx";
 
 function App() {
   const [isMenuShow, setIsMenuShow] = useState(false);
@@ -94,6 +96,17 @@ function App() {
         <>
           <ToastContainer />
           <DatacenterLogin />
+        </>
+      ),
+    },
+    {
+      path: "datacenter-dashboard",
+      element: (
+        <>
+          <ToastContainer />
+          <ProtectedDataCenter>
+            <DataCenterDashboard />
+          </ProtectedDataCenter>
         </>
       ),
     },

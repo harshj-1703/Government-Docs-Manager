@@ -3,10 +3,10 @@ import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import dataCenterServices from "../services/data-center.services";
 
-const userAuthContext = createContext();
+const dataCenterAuthContext = createContext();
 
-export function UserAuthContextProvider({ children }) {
-  const [user, setUser] = useState({});
+export function DataCenterAuthContextProvider({ children }) {
+  const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const mobileAvailableOrNot = async (mobile) => {
@@ -23,13 +23,9 @@ export function UserAuthContextProvider({ children }) {
       if (currentUser) {
         if (currentUser.phoneNumber) {
           if (mobileAvailableOrNot(currentUser.phoneNumber.slice(3))) {
-            setUser(null);
+            setUser(currentUser);
           }
-        } else {
-          setUser(currentUser);
         }
-      } else {
-        setUser(currentUser);
       }
       setIsLoading(false);
     });
@@ -39,12 +35,12 @@ export function UserAuthContextProvider({ children }) {
   }, []);
 
   return (
-    <userAuthContext.Provider value={{ user, isLoading }}>
+    <dataCenterAuthContext.Provider value={{ user, isLoading }}>
       {children}
-    </userAuthContext.Provider>
+    </dataCenterAuthContext.Provider>
   );
 }
 
-export function useUserAuth() {
-  return useContext(userAuthContext);
+export function useDataCenterAuth() {
+  return useContext(dataCenterAuthContext);
 }

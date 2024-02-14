@@ -2,11 +2,14 @@ import React, { useState, useEffect } from "react";
 import OTPInput from "react-otp-input";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import ToastMessage from "../ToastMessage";
+import CircularLoading from "../CircularLoading";
+import { useNavigate } from "react-router-dom";
 
 function VerifyOTPDataCenter({ otp, setOtp, verificationCode, setStep }) {
   const [seconds, setSeconds] = useState(150);
   const [timer, setTimer] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setTimer(
@@ -26,7 +29,28 @@ function VerifyOTPDataCenter({ otp, setOtp, verificationCode, setStep }) {
     }
   }, [seconds, timer]);
 
-  const handleVerifyOTP = () => {};
+  const handleVerifyOTP = () => {
+    setLoading(true);
+    clearInterval(timer);
+    verificationCode
+      .confirm(otp)
+      .then((result) => {
+        ToastMessage({
+          message: "Verification successful!",
+          type: "success",
+        });
+        navigate("/datacenter-dashboard");
+      })
+      .catch((error) => {
+        ToastMessage({
+          message: "OTP not valid!",
+          type: "error",
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
 
   return (
     <form className="login-form">
