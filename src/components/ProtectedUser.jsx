@@ -9,6 +9,11 @@ function ProtectedUser({ children }) {
   }
 
   if (user) {
+    if (user.role == "datacenter") {
+      return <Navigate to="/datacenter-dashboard" replace />;
+    }
+  }
+  if (user) {
     return children;
   }
 

@@ -9,7 +9,7 @@ export function UserAuthContextProvider({ children }) {
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
 
-  const mobileAvailableOrNot = async (mobile) => {
+  const mobileAvailableOrNotDataCenter = async (mobile) => {
     const available = await dataCenterServices.getDataCenterFromMobile(mobile);
     if (available) {
       return true;
@@ -22,15 +22,14 @@ export function UserAuthContextProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         if (currentUser.phoneNumber) {
-          if (mobileAvailableOrNot(currentUser.phoneNumber.slice(3))) {
-            setUser(null);
+          if (
+            mobileAvailableOrNotDataCenter(currentUser.phoneNumber.slice(3))
+          ) {
+            currentUser.role = "datacenter";
           }
-        } else {
-          setUser(currentUser);
         }
-      } else {
-        setUser(currentUser);
       }
+      setUser(currentUser);
       setIsLoading(false);
     });
     return () => {
