@@ -73,6 +73,10 @@ input {
     box-sizing: border-box;
 }
 
+#otp-input input{
+    padding: 2px;
+}
+
 input:focus {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.8);
