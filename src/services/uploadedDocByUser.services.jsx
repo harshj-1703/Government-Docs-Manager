@@ -53,6 +53,33 @@ const uploadedByUsersDocumentService = {
       throw error;
     }
   },
+  getAllUploadeByUserDocumentsFromUserId: async (userId, page = 1, itemsPerPage = 15) => {
+    try {
+      const collectionRef = docCollectionRef;
+      const queryRef = query(
+        collectionRef,
+        orderBy("updatedAt", "desc"),
+        where("userId", "==", userId),
+        limit(itemsPerPage)
+      );
+
+      const startAfterDoc =
+        page > 1 ? await getDoc(queryRef.doc(page * itemsPerPage)) : null;
+
+      const querySnapshot = await getDocs(
+        startAfterDoc ? startAfter(queryRef, startAfterDoc) : queryRef
+      );
+
+      const documents = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+
+      return documents;
+    } catch (error) {
+      throw error;
+    }
+  },
   getDocumentFromIdAndUserId: async (docId, userId) => {
     try {
       const q = query(
