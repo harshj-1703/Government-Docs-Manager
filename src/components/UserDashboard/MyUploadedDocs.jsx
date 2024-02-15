@@ -28,15 +28,30 @@ function MyUploadedDocs({ isMenuShow }) {
   };
 
   const fetchData = async () => {
-    const mobile = localStorage.getItem("mobile");
-    const user = await userService.getUserFromMobile(mobile);
-    const uploadedDocuments =
-      await uploadedByUsersDocumentService.getAllUploadeByUserDocumentsFromUserId(
-        user.id
-      );
-    const documents = await getDocuments(uploadedDocuments);
-    console.log(documents);
-    setIsLoading(false);
+    try {
+      const mobile = localStorage.getItem("mobile");
+      const user = await userService.getUserFromMobile(mobile);
+      const uploadedDocuments =
+        await uploadedByUsersDocumentService.getAllUploadeByUserDocumentsFromUserId(
+          user.id
+        );
+      const documents = await getDocuments(uploadedDocuments);
+      // for (let x of documents) {
+      //   console.log(
+      //     x.docData["banner"] +
+      //       "=>" +
+      //       x.docData["title"] +
+      //       "=>" +
+      //       x.docData["ministry"] +
+      //       "=>" +
+      //       x["id"]
+      //   );
+      // }
+      setData(documents);
+      setIsLoading(false);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
