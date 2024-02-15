@@ -65,6 +65,22 @@ function UserNavbarMenu({ setIsMenuShow }) {
                 <span className="orbital-menu__link-text">Change Password</span>
               </Link>
             </li>
+            <li className="orbital-menu__item">
+              <Link
+                className="orbital-menu__link"
+                to="myuploadeddocs"
+                onClick={() => {
+                  setIsMenuShow((prev) => !prev);
+                }}
+              >
+                <span className="orbital-menu__link-icon">
+                  <i data-feather="alert-circle" className="material-icons">
+                    menu
+                  </i>
+                </span>
+                <span className="orbital-menu__link-text">My Uploaded Docs</span>
+              </Link>
+            </li>
             {/* <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">

@@ -16,6 +16,7 @@ import UserNavbar from "./components/UserDashboard/UserNavbar.jsx";
 import ChangePassword from "./components/UserDashboard/ChangePassword.jsx";
 import EditProfile from "./components/UserDashboard/EditProfile.jsx";
 import ProtectedDataCenter from "./components/ProtectedDataCenter.jsx";
+import MyUploadedDocs from "./components/UserDashboard/MyUploadedDocs.jsx";
 
 function App() {
   const [isMenuShow, setIsMenuShow] = useState(false);
@@ -88,8 +89,13 @@ function App() {
           path: "edit-profile",
           element: <EditProfile isMenuShow={isMenuShow} />,
         },
+        {
+          path: "myuploadeddocs",
+          element: <MyUploadedDocs isMenuShow={isMenuShow} />,
+        },
       ],
     },
+    //data-center
     {
       path: "datacenter-login",
       element: (
