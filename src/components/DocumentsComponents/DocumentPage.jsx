@@ -5,14 +5,30 @@ import documentService from "../../services/document.services";
 import CircularLoading from "../CircularLoading";
 import RenderSmoothImage from "./RenderSmoothImage";
 import DocumentFields from "./DocumentFields";
+import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
+import userService from "../../services/user.services";
 
 const Skeleton = () => <div className="skeleton"></div>;
 
 function DocumentPage({ isMenuShow }) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
+  const [showFields, setShowFields] = useState(true);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const getDocumentSubmittedOrNot = async (docId) => {
+    const mobile = localStorage.getItem("mobile");
+    const user = await userService.getUserFromMobile(mobile);
+    const available =
+      await uploadedByUsersDocumentService.getDocumentFromIdAndUserId(
+        docId,
+        user.id
+      );
+    if (available) {
+      setShowFields(false);
+    }
+  };
 
   useEffect(() => {
     const id = location.state;
@@ -30,6 +46,7 @@ function DocumentPage({ isMenuShow }) {
         }
       };
       fetchData();
+      getDocumentSubmittedOrNot(id);
     }
   }, []);
 
@@ -62,7 +79,13 @@ function DocumentPage({ isMenuShow }) {
             </div>
             <hr className="line" />
             <div className="field-component">
-              <DocumentFields fields={data.fields} docId={location.state} />
+              {showFields ? (
+                <DocumentFields fields={data.fields} docId={location.state} />
+              ) : (
+                <h2 style={{ margin: "25px" }}>
+                  You Have Already Applied For This Document
+                </h2>
+              )}
             </div>
           </div>
         </div>

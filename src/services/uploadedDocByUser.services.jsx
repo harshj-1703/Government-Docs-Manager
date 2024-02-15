@@ -11,6 +11,7 @@ import {
   startAfter,
   doc,
   query,
+  where,
 } from "firebase/firestore";
 
 const docCollectionRef = collection(db, "UploadedDocsByUsers");
@@ -48,6 +49,23 @@ const uploadedByUsersDocumentService = {
       const doc = await getDoc(docRef);
       // console.log(doc.data());
       return doc.data();
+    } catch (error) {
+      throw error;
+    }
+  },
+  getDocumentFromIdAndUserId: async (docId, userId) => {
+    try {
+      const q = query(
+        docCollectionRef,
+        where("docId", "==", docId),
+        where("userId", "==", userId)
+      );
+      const querySnapshot = await getDocs(q);
+      if (querySnapshot.docs.length > 0) {
+        return true;
+      } else {
+        return false;
+      }
     } catch (error) {
       throw error;
     }

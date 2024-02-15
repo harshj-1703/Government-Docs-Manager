@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../../css/documentfields.css";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import CircularLoading from "../CircularLoading";
