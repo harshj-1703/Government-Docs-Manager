@@ -1,0 +1,64 @@
+import { db } from "../firebase";
+
+import {
+  addDoc,
+  collection,
+  getDocs,
+  getDoc,
+  updateDoc,
+  orderBy,
+  limit,
+  startAfter,
+  doc,
+  query,
+} from "firebase/firestore";
+
+const docCollectionRef = collection(db, "UploadedDocsByUsers");
+
+const uploadedByUsersDocumentService = {
+  getAllUploadeByUserDocuments: async (page = 1, itemsPerPage = 15) => {
+    try {
+      const collectionRef = docCollectionRef;
+      const queryRef = query(
+        collectionRef,
+        orderBy("updatedAt", "desc"),
+        limit(itemsPerPage)
+      );
+
+      const startAfterDoc =
+        page > 1 ? await getDoc(queryRef.doc(page * itemsPerPage)) : null;
+
+      const querySnapshot = await getDocs(
+        startAfterDoc ? startAfter(queryRef, startAfterDoc) : queryRef
+      );
+
+      const documents = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+
+      return documents;
+    } catch (error) {
+      throw error;
+    }
+  },
+  getDocumentFromId: async (id) => {
+    const docRef = doc(db, "UploadedDocsByUsers", id);
+    try {
+      const doc = await getDoc(docRef);
+      // console.log(doc.data());
+      return doc.data();
+    } catch (error) {
+      throw error;
+    }
+  },
+  addUploadedByUsersDocument: (newDoc) => {
+    return addDoc(docCollectionRef, newDoc);
+  },
+  updateUploadedByUsersDocument: (id, newDoc) => {
+    const docRef = doc(docCollectionRef, id);
+    return updateDoc(docRef, newDoc);
+  },
+};
+
+export default uploadedByUsersDocumentService;

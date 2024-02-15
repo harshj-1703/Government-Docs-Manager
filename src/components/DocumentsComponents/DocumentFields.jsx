@@ -2,11 +2,30 @@ import React, { useState } from "react";
 import "../../css/documentfields.css";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import CircularLoading from "../CircularLoading";
+import { v4 } from "uuid";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { storage } from "../../firebase";
+import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
+import userService from "../../services/user.services";
+import ToastMessage from "../ToastMessage";
+import { useNavigate } from "react-router-dom";
 
-function DocumentFields({ fields }) {
+const timestampOptions = {
+  month: "long",
+  day: "numeric",
+  year: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  second: "numeric",
+  timeZoneName: "short",
+  timeZone: "Asia/Kolkata",
+};
+
+function DocumentFields({ fields, docId }) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, type, files, value } = e.target;
@@ -51,7 +70,7 @@ function DocumentFields({ fields }) {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     let errorsObj = {};
     Object.entries(fields).forEach(([name, inputType]) => {
@@ -71,7 +90,36 @@ function DocumentFields({ fields }) {
     setErrors(errorsObj);
     if (Object.keys(errorsObj).length === 0) {
       setIsLoading(true);
-      console.log("Form submitted successfully:", formData);
+      for (const x in formData) {
+        if (formData[x] instanceof File) {
+          const fileRef = ref(
+            storage,
+            `UserUploadedDocs/${formData[x].name + v4()}`
+          );
+          const snapshotFile = await uploadBytes(fileRef, formData[x]);
+          const urlFile = await getDownloadURL(snapshotFile.ref);
+          formData[x] = urlFile;
+        }
+      }
+      formData["docId"] = docId;
+      const mobile = localStorage.getItem("mobile");
+      const user = await userService.getUserFromMobile(mobile);
+      formData["userId"] = user.id;
+      formData["createdAt"] = new Date().toLocaleString(
+        "en-US",
+        timestampOptions
+      );
+      formData["updatedAt"] = new Date().toLocaleString(
+        "en-US",
+        timestampOptions
+      );
+      await uploadedByUsersDocumentService.addUploadedByUsersDocument(formData);
+      ToastMessage({
+        message: "Document Uploaded Successfully!",
+        type: "success",
+      });
+      navigate("/user-dashboard");
+      setIsLoading(false);
     }
   };
 

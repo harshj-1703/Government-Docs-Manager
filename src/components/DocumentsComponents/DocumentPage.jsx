@@ -62,7 +62,7 @@ function DocumentPage({ isMenuShow }) {
             </div>
             <hr className="line" />
             <div className="field-component">
-              <DocumentFields fields={data.fields} />
+              <DocumentFields fields={data.fields} docId={location.state} />
             </div>
           </div>
         </div>
