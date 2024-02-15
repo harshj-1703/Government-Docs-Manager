@@ -9,6 +9,7 @@ import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.ser
 import userService from "../../services/user.services";
 import ToastMessage from "../ToastMessage";
 import { useNavigate } from "react-router-dom";
+import dataCenterServices from "../../services/data-center.services";
 
 const timestampOptions = {
   month: "long",
@@ -21,7 +22,7 @@ const timestampOptions = {
   timeZone: "Asia/Kolkata",
 };
 
-function DocumentFields({ fields, docId }) {
+function DocumentFields({ fields, docId, verificationType }) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -90,36 +91,49 @@ function DocumentFields({ fields, docId }) {
     setErrors(errorsObj);
     if (Object.keys(errorsObj).length === 0) {
       setIsLoading(true);
-      for (const x in formData) {
-        if (formData[x] instanceof File) {
-          const fileRef = ref(
-            storage,
-            `UserUploadedDocs/${formData[x].name + v4()}`
-          );
-          const snapshotFile = await uploadBytes(fileRef, formData[x]);
-          const urlFile = await getDownloadURL(snapshotFile.ref);
-          formData[x] = urlFile;
+      try {
+        for (const x in formData) {
+          if (formData[x] instanceof File) {
+            const fileRef = ref(
+              storage,
+              `UserUploadedDocs/${formData[x].name + v4()}`
+            );
+            const snapshotFile = await uploadBytes(fileRef, formData[x]);
+            const urlFile = await getDownloadURL(snapshotFile.ref);
+            formData[x] = urlFile;
+          }
         }
+        formData["docId"] = docId;
+        const mobile = localStorage.getItem("mobile");
+        const user = await userService.getUserFromMobile(mobile);
+        formData["userId"] = user.id;
+        formData["verifyRatio"] = 0;
+        if (verificationType === "random") {
+          formData["randomDataCenterId"] =
+            await dataCenterServices.getRandomDataCenterId();
+        }
+        formData["status"] = "Pending";
+        formData["createdAt"] = new Date().toLocaleString(
+          "en-US",
+          timestampOptions
+        );
+        formData["updatedAt"] = new Date().toLocaleString(
+          "en-US",
+          timestampOptions
+        );
+        await uploadedByUsersDocumentService.addUploadedByUsersDocument(
+          formData
+        );
+        ToastMessage({
+          message: "Document Uploaded Successfully!",
+          type: "success",
+        });
+        navigate("/user-dashboard");
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setIsLoading(false);
       }
-      formData["docId"] = docId;
-      const mobile = localStorage.getItem("mobile");
-      const user = await userService.getUserFromMobile(mobile);
-      formData["userId"] = user.id;
-      formData["createdAt"] = new Date().toLocaleString(
-        "en-US",
-        timestampOptions
-      );
-      formData["updatedAt"] = new Date().toLocaleString(
-        "en-US",
-        timestampOptions
-      );
-      await uploadedByUsersDocumentService.addUploadedByUsersDocument(formData);
-      ToastMessage({
-        message: "Document Uploaded Successfully!",
-        type: "success",
-      });
-      navigate("/user-dashboard");
-      setIsLoading(false);
     }
   };
 

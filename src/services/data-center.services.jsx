@@ -29,7 +29,6 @@ const dataCenterServices = {
         const userDoc = querySnapshot.docs[0];
         return {
           id: userDoc.id,
-          password: userDoc.data().password,
           user: userDoc.data(),
         };
       } else {
@@ -39,15 +38,27 @@ const dataCenterServices = {
       throw error;
     }
   },
-  addDataCenter: (newUser) => {
-    return addDoc(datacenterCollectionRef, newUser);
+  getRandomDataCenterId: async () => {
+    try {
+      const querySnapshot = await getDocs(datacenterCollectionRef);
+      const documentIds = querySnapshot.docs.map((doc) => doc.id);
+      const randomIndex = Math.floor(Math.random() * documentIds.length);
+      const randomDocumentId = documentIds[randomIndex];
+      return randomDocumentId;
+    } catch (error) {
+      console.error("Error getting random document ID:", error);
+      throw error;
+    }
+  },
+  addDataCenter: (newDs) => {
+    return addDoc(datacenterCollectionRef, newDs);
   },
   //   deleteUser: (id) => {
   //     return deleteDoc(doc(bookCollectionRef, id));
   //   },
-  updateDataCenter: (id, newUser) => {
+  updateDataCenter: (id, newDs) => {
     const userDocRef = doc(datacenterCollectionRef, id);
-    return updateDoc(userDocRef, newUser);
+    return updateDoc(userDocRef, newDs);
   },
 };
 

@@ -80,9 +80,13 @@ function DocumentPage({ isMenuShow }) {
             <hr className="line" />
             <div className="field-component">
               {showFields ? (
-                <DocumentFields fields={data.fields} docId={location.state} />
+                <DocumentFields
+                  fields={data.fields}
+                  docId={location.state}
+                  verificationType={data.verification}
+                />
               ) : (
-                <h2 style={{ margin: "25px" }}>
+                <h2 className="applied-or-not">
                   You Have Already Applied For This Document
                 </h2>
               )}

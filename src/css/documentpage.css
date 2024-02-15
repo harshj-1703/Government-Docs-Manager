@@ -74,6 +74,11 @@ body.dark .document-detail-main-div{
     text-align: center;
 }
 
+.applied-or-not{
+    margin: 25px;
+    color: red;
+}
+
 body.dark .document-page-title{
     color: white;
 }
