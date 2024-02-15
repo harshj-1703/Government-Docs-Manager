@@ -10,9 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.3",
     "@mui/icons-material": "^5.14.5",
-    "@mui/material": "^5.15.5",
+    "@mui/x-data-grid": "^6.19.4",
     "@reacticons/ionicons": "^7.1.0",
     "crypto-js": "^4.2.0",
     "firebase": "^10.7.2",

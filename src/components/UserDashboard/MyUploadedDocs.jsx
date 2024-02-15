@@ -3,6 +3,7 @@ import userService from "../../services/user.services";
 import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
 import documentService from "../../services/document.services";
 import CircularLoading from "../CircularLoading";
+import MyUploadedDocsDataTable from "./MyUploadedDocsDataTable";
 
 function MyUploadedDocs({ isMenuShow }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +18,7 @@ function MyUploadedDocs({ isMenuShow }) {
         );
         const id = document.id;
         if (docData) {
-          returnDocuments.push({ docData, id });
+          returnDocuments.push({ ...docData, id });
         }
       }
       return returnDocuments;
@@ -66,7 +67,11 @@ function MyUploadedDocs({ isMenuShow }) {
         }
       >
         {isLoading && <CircularLoading />}
-        {!isLoading && <p>Loaded</p>}
+        {!isLoading && (
+          <div>
+            <MyUploadedDocsDataTable documents={data} />
+          </div>
+        )}
       </div>
     </div>
   );
