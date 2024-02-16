@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
 const MyUploadedDocsDataTable = ({ documents }) => {
@@ -7,8 +7,8 @@ const MyUploadedDocsDataTable = ({ documents }) => {
   const columns = [
     {
       field: "banner",
-      headerName: "Banner",
-      flex: 1,
+      headerName: "",
+      flex: 0.4,
       renderCell: (params) => (
         <img
           src={params.value}

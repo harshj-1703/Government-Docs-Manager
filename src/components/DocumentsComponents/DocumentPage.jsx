@@ -6,7 +6,6 @@ import CircularLoading from "../CircularLoading";
 import RenderSmoothImage from "./RenderSmoothImage";
 import DocumentFields from "./DocumentFields";
 import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
-import userService from "../../services/user.services";
 
 const Skeleton = () => <div className="skeleton"></div>;
 
@@ -84,6 +83,9 @@ function DocumentPage({ isMenuShow }) {
                 <DocumentFields
                   fields={data.fields}
                   docId={location.state}
+                  title={data.title}
+                  banner={data.banner}
+                  ministry={data.ministry}
                   verificationType={data.verification}
                 />
               ) : (

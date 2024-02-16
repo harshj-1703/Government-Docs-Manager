@@ -58,8 +58,7 @@ const uploadedByUsersDocumentService = {
       const collectionRef = docCollectionRef;
       const queryRef = query(
         collectionRef,
-        where("userMobile", "==", userMobile),
-        orderBy("updatedAt", "desc")
+        where("userMobile", "==", userMobile)
       );
       const querySnapshot = await getDocs(queryRef);
 

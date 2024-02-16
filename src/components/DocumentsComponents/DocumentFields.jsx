@@ -21,7 +21,14 @@ const timestampOptions = {
   timeZone: "Asia/Kolkata",
 };
 
-function DocumentFields({ fields, docId, verificationType }) {
+function DocumentFields({
+  fields,
+  docId,
+  verificationType,
+  title,
+  banner,
+  ministry,
+}) {
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
@@ -103,6 +110,9 @@ function DocumentFields({ fields, docId, verificationType }) {
           }
         }
         formData["docId"] = docId;
+        formData["title"] = title;
+        formData["banner"] = banner;
+        formData["ministry"] = ministry;
         const mobile = localStorage.getItem("mobile");
         formData["userMobile"] = mobile;
         formData["verifyRatio"] = 0;
