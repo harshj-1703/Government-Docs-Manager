@@ -89,10 +89,10 @@ function App() {
           path: "edit-profile",
           element: <EditProfile isMenuShow={isMenuShow} />,
         },
-        {
-          path: "myuploadeddocs",
-          element: <MyUploadedDocs isMenuShow={isMenuShow} />,
-        },
+        // {
+        //   path: "myuploadeddocs",
+        //   element: <MyUploadedDocs isMenuShow={isMenuShow} />,
+        // },
       ],
     },
     //data-center

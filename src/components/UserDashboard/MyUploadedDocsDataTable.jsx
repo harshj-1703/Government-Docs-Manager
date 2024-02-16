@@ -29,10 +29,13 @@ const MyUploadedDocsDataTable = ({ documents }) => {
       <DataGrid
         rows={documents}
         columns={columns}
-        pageSize={pageSize}
-        rowsPerPageOptions={[5, 10, 20]}
+        initialState={{
+          pagination: {
+            paginationModel: { pageSize: pageSize, page: 0 },
+          },
+        }}
+        pageSizeOptions={[5, 10, 25]}
         onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        pagination
         checkboxSelection={false}
         rowSelection={false}
       />

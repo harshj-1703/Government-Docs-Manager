@@ -4,6 +4,7 @@ import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.ser
 import documentService from "../../services/document.services";
 import CircularLoading from "../CircularLoading";
 import MyUploadedDocsDataTable from "./MyUploadedDocsDataTable";
+import { LazyLoadComponent } from "react-lazy-load-image-component";
 
 function MyUploadedDocs({ isMenuShow }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,17 +38,6 @@ function MyUploadedDocs({ isMenuShow }) {
           user.id
         );
       const documents = await getDocuments(uploadedDocuments);
-      // for (let x of documents) {
-      //   console.log(
-      //     x.docData["banner"] +
-      //       "=>" +
-      //       x.docData["title"] +
-      //       "=>" +
-      //       x.docData["ministry"] +
-      //       "=>" +
-      //       x["id"]
-      //   );
-      // }
       setData(documents);
       setIsLoading(false);
     } catch (e) {
@@ -57,7 +47,7 @@ function MyUploadedDocs({ isMenuShow }) {
 
   useEffect(() => {
     fetchData();
-  }, [data]);
+  }, []);
 
   return (
     <div className="document-detail-main-div">
@@ -69,7 +59,9 @@ function MyUploadedDocs({ isMenuShow }) {
         {isLoading && <CircularLoading />}
         {!isLoading && (
           <div>
-            <MyUploadedDocsDataTable documents={data} />
+            <LazyLoadComponent>
+              <MyUploadedDocsDataTable documents={data} />
+            </LazyLoadComponent>
           </div>
         )}
       </div>

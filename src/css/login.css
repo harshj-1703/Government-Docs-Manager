@@ -51,7 +51,7 @@
     font-size: xx-large;
 }
 
-label {
+.login-form label {
     margin-top: 21px;
     display: block;
     margin-bottom: 8px;
@@ -59,7 +59,7 @@ label {
     letter-spacing: 2px;
 }
 
-input {
+.login-form input {
     width: 100%;
     padding: 11px;
     border: 2px solid rgba(242, 224, 224, 0.3);
@@ -77,12 +77,43 @@ input {
     padding: 2px;
 }
 
-input:focus {
+.login-form input:focus {
     background: rgba(255, 255, 255, 0.2);
     border: 2px solid rgba(255, 255, 255, 0.8);
 }
 
-input::placeholder {
+.login-form input::placeholder {
+    color: #bbb;
+}
+
+.document-page-fields label {
+    margin-top: 21px;
+    display: block;
+    margin-bottom: 8px;
+    color: #fff;
+    letter-spacing: 2px;
+}
+
+.document-page-fields input {
+    width: 100%;
+    padding: 11px;
+    border: 2px solid rgba(242, 224, 224, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: cyan;
+    letter-spacing: 2.5px;
+    font-size: 17px;
+    font-family: 'Trebuchet MS', sans-serif;
+    transition: background 0.3s, border 0.3s;
+    box-sizing: border-box;
+}
+
+.document-page-fields input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.8);
+}
+
+.document-page-fields input::placeholder {
     color: #bbb;
 }
 

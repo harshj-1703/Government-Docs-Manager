@@ -53,22 +53,15 @@ const uploadedByUsersDocumentService = {
       throw error;
     }
   },
-  getAllUploadeByUserDocumentsFromUserId: async (userId, page = 1, itemsPerPage = 15) => {
+  getAllUploadeByUserDocumentsFromUserId: async (userId) => {
     try {
       const collectionRef = docCollectionRef;
       const queryRef = query(
         collectionRef,
-        orderBy("updatedAt", "desc"),
         where("userId", "==", userId),
-        limit(itemsPerPage)
+        orderBy("updatedAt", "desc")
       );
-
-      const startAfterDoc =
-        page > 1 ? await getDoc(queryRef.doc(page * itemsPerPage)) : null;
-
-      const querySnapshot = await getDocs(
-        startAfterDoc ? startAfter(queryRef, startAfterDoc) : queryRef
-      );
+      const querySnapshot = await getDocs(queryRef);
 
       const documents = querySnapshot.docs.map((doc) => ({
         id: doc.id,
