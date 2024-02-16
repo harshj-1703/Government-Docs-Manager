@@ -13,20 +13,21 @@ const Skeleton = () => <div className="skeleton"></div>;
 function DocumentPage({ isMenuShow }) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState(null);
-  const [showFields, setShowFields] = useState(true);
+  const [showFields, setShowFields] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
   const getDocumentSubmittedOrNot = async (docId) => {
     const mobile = localStorage.getItem("mobile");
-    const user = await userService.getUserFromMobile(mobile);
     const available =
-      await uploadedByUsersDocumentService.getDocumentFromIdAndUserId(
+      await uploadedByUsersDocumentService.getDocumentFromIdAndUserMobile(
         docId,
-        user.id
+        mobile
       );
     if (available) {
       setShowFields(false);
+    } else {
+      setShowFields(true);
     }
   };
 
@@ -45,8 +46,8 @@ function DocumentPage({ isMenuShow }) {
           console.error("Error fetching data:", error);
         }
       };
-      fetchData();
       getDocumentSubmittedOrNot(id);
+      fetchData();
     }
   }, []);
 

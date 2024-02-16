@@ -6,7 +6,6 @@ import { v4 } from "uuid";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { storage } from "../../firebase";
 import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
-import userService from "../../services/user.services";
 import ToastMessage from "../ToastMessage";
 import { useNavigate } from "react-router-dom";
 import dataCenterServices from "../../services/data-center.services";
@@ -105,8 +104,7 @@ function DocumentFields({ fields, docId, verificationType }) {
         }
         formData["docId"] = docId;
         const mobile = localStorage.getItem("mobile");
-        const user = await userService.getUserFromMobile(mobile);
-        formData["userId"] = user.id;
+        formData["userMobile"] = mobile;
         formData["verifyRatio"] = 0;
         if (verificationType === "random") {
           formData["randomDataCenterId"] =

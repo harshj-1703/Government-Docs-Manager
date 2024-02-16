@@ -53,12 +53,12 @@ const uploadedByUsersDocumentService = {
       throw error;
     }
   },
-  getAllUploadeByUserDocumentsFromUserId: async (userId) => {
+  getAllUploadeByUserDocumentsFromUserMobile: async (userMobile) => {
     try {
       const collectionRef = docCollectionRef;
       const queryRef = query(
         collectionRef,
-        where("userId", "==", userId),
+        where("userMobile", "==", userMobile),
         orderBy("updatedAt", "desc")
       );
       const querySnapshot = await getDocs(queryRef);
@@ -73,12 +73,12 @@ const uploadedByUsersDocumentService = {
       throw error;
     }
   },
-  getDocumentFromIdAndUserId: async (docId, userId) => {
+  getDocumentFromIdAndUserMobile: async (docId, userMobile) => {
     try {
       const q = query(
         docCollectionRef,
         where("docId", "==", docId),
-        where("userId", "==", userId)
+        where("userMobile", "==", userMobile)
       );
       const querySnapshot = await getDocs(q);
       if (querySnapshot.docs.length > 0) {

@@ -32,10 +32,9 @@ function MyUploadedDocs({ isMenuShow }) {
   const fetchData = async () => {
     try {
       const mobile = localStorage.getItem("mobile");
-      const user = await userService.getUserFromMobile(mobile);
       const uploadedDocuments =
         await uploadedByUsersDocumentService.getAllUploadeByUserDocumentsFromUserId(
-          user.id
+          mobile
         );
       const documents = await getDocuments(uploadedDocuments);
       setData(documents);
