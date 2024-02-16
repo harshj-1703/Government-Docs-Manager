@@ -9,6 +9,9 @@ const MyUploadedDocsDataTable = ({ documents }) => {
       field: "banner",
       headerName: "Banner",
       flex: 0.3,
+      align: "center",
+      headerAlign: "center",
+      headerClassName: "custom-header-datatable",
       renderCell: (params) => (
         <img
           src={params.value}
@@ -19,8 +22,22 @@ const MyUploadedDocsDataTable = ({ documents }) => {
         />
       ),
     },
-    { field: "title", headerName: "Title", flex: 1 },
-    { field: "ministry", headerName: "Ministry", flex: 1 },
+    {
+      field: "title",
+      headerName: "Title",
+      flex: 0.5,
+      align: "center",
+      headerAlign: "center",
+      headerClassName: "custom-header-datatable",
+    },
+    {
+      field: "ministry",
+      headerName: "Ministry",
+      flex: 0.5,
+      align: "center",
+      headerAlign: "center",
+      headerClassName: "custom-header-datatable",
+    },
     // { field: "id", headerName: "ID", flex: 1 },
   ];
 

@@ -44,3 +44,14 @@ body.dark .myuploaded-docs-datatable-table svg,body.dark .myuploaded-docs-datata
       border-radius: 20px;
     }
   }
+
+.custom-header-datatable{
+  font-weight: bolder;
+  font-size: 21px;
+  text-transform: uppercase;
+  color: darkblue;
+}
+
+body.dark .myuploaded-docs-datatable-table .custom-header-datatable div{
+  color: yellow;
+}
