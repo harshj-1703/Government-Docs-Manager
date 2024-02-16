@@ -1,0 +1,46 @@
+.myuploads-user-datatable-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 70px);
+    height: auto;
+    padding: 50px;
+    color: darkblue;
+}
+
+body.dark .myuploads-user-datatable-main{
+    color: white;
+}
+
+.myuploaded-docs-datatable-table{
+    border: 2px darkblue solid;
+    transition: transform 0.3s, border-color 0.3s;
+    animation: wavy-border-data-table 2s infinite;
+}
+
+body.dark .myuploaded-docs-datatable-table{
+    border: 2px white solid;
+    color: white;
+}
+
+body.dark .myuploaded-docs-datatable-table svg,body.dark .myuploaded-docs-datatable-table div{
+    color: white;
+}
+
+@keyframes wavy-border-data-table {
+    0% {
+      border-radius: 20px;
+    }
+    25% {
+      border-radius: 20px 40px 20px 40px;
+    }
+    50% {
+      border-radius: 40px 20px 40px 20px;
+    }
+    75% {
+      border-radius: 20px 40px 20px 40px;
+    }
+    100% {
+      border-radius: 20px;
+    }
+  }

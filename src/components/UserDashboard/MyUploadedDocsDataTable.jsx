@@ -7,14 +7,14 @@ const MyUploadedDocsDataTable = ({ documents }) => {
   const columns = [
     {
       field: "banner",
-      headerName: "",
-      flex: 0.4,
+      headerName: "Banner",
+      flex: 0.3,
       renderCell: (params) => (
         <img
           src={params.value}
           alt=""
           height={50}
-          width={150}
+          width={120}
           style={{ borderRadius: "10%" }}
         />
       ),
@@ -25,21 +25,20 @@ const MyUploadedDocsDataTable = ({ documents }) => {
   ];
 
   return (
-    <div>
-      <DataGrid
-        rows={documents}
-        columns={columns}
-        initialState={{
-          pagination: {
-            paginationModel: { pageSize: pageSize, page: 0 },
-          },
-        }}
-        pageSizeOptions={[5, 10, 25]}
-        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
-        checkboxSelection={false}
-        rowSelection={false}
-      />
-    </div>
+    <DataGrid
+      rows={documents}
+      columns={columns}
+      initialState={{
+        pagination: {
+          paginationModel: { pageSize: pageSize, page: 0 },
+        },
+      }}
+      pageSizeOptions={[5, 10, 25]}
+      onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+      checkboxSelection={false}
+      rowSelection={false}
+      className="myuploaded-docs-datatable-table"
+    />
   );
 };
 

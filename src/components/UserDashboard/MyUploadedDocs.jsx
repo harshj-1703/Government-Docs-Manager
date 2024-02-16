@@ -3,6 +3,7 @@ import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.ser
 import CircularLoading from "../CircularLoading";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import MyUploadedDocsDataTable from "./MyUploadedDocsDataTable";
+import "../../css/myuploadeddocs.css";
 
 function MyUploadedDocs({ isMenuShow }) {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,14 +16,58 @@ function MyUploadedDocs({ isMenuShow }) {
         await uploadedByUsersDocumentService.getAllUploadeByUserDocumentsFromUserMobile(
           mobile
         );
-      const documents = uploadedDocuments.map((doc, id) => {
-        return {
-          id: doc.id,
-          banner: doc.data.banner,
-          title: doc.data.title,
-          ministry: doc.data.ministry,
-        };
-      });
+      // const documents = uploadedDocuments.map((doc, id) => {
+      //   return {
+      //     id: doc.id,
+      //     banner: doc.data.banner,
+      //     title: doc.data.title,
+      //     ministry: doc.data.ministry,
+      //   };
+      // });
+      const documents = [
+        {
+          banner:
+            "https://www.gstsuvidhacenters.com/WebsiteAssets/images/AyushmanBharat/Banner1.jpg",
+          id: "1",
+          ministry: "Ministry Health and Family Welfare",
+          title: "AAYUSHMAN BHARAT YOJNA",
+        },
+        {
+          banner:
+            "https://www.gstsuvidhacenters.com/WebsiteAssets/images/AyushmanBharat/Banner1.jpg",
+          id: "12345678",
+          ministry: "Ministry o Health and Family Welfare",
+          title: "AAYUSHMAN BHARAT YOJNA",
+        },
+        {
+          banner:
+            "https://www.gstsuvidhacenters.com/WebsiteAssets/images/AyushmanBharat/Banner1.jpg",
+          id: "1234567",
+          ministry: "Ministry of and Family Welfare",
+          title: "AAYUSHMAN BHARAT YOJNA",
+        },
+        {
+          banner:
+            "https://www.gstsuvidhacenters.com/WebsiteAssets/images/AyushmanBharat/Banner1.jpg",
+          id: "123456",
+          ministry: "Ministry of Health Family Welfare",
+          title: "AAYUSHMAN BHARAT YOJNA",
+        },
+        {
+          banner:
+            "https://www.gstsuvidhacenters.com/WebsiteAssets/images/AyushmanBharat/Banner1.jpg",
+          id: "12345",
+          ministry: "Ministry of Health and Welfare",
+          title: "AAYUSHMAN BHARAT YOJNA",
+        },
+        {
+          banner:
+            "https://www.gstsuvidhacenters.com/WebsiteAssets/images/AyushmanBharat/Banner1.jpg",
+          id: "1234",
+          ministry: "Ministry of Health and Family",
+          title: "AAYUSHMAN BHARAT YOJNA",
+        },
+      ];
       setData(documents);
       setIsLoading(false);
     } catch (e) {
@@ -43,9 +88,15 @@ function MyUploadedDocs({ isMenuShow }) {
       >
         {isLoading && <CircularLoading />}
         {!isLoading && (
-          <LazyLoadComponent>
-            <MyUploadedDocsDataTable documents={data} />
-          </LazyLoadComponent>
+          <div className="myuploads-user-datatable-main">
+            {data.length !== 0 ? (
+              <LazyLoadComponent>
+                <MyUploadedDocsDataTable documents={data} />
+              </LazyLoadComponent>
+            ) : (
+              <h1>No Uploaded Documents</h1>
+            )}
+          </div>
         )}
       </div>
     </div>
