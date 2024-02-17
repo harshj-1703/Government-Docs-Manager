@@ -22,6 +22,14 @@
     text-align: center;
 }
 
+.field-component-blur {
+    filter: blur(38px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .document-page-fields {
     width: 35%;
     position: relative;

@@ -20,7 +20,7 @@ const timestampOptions = {
   timeZone: "Asia/Kolkata",
 };
 
-function UploadedByUserDocUpdate() {
+function UploadedByUserDocUpdate({ isMenuShow }) {
   const location = useLocation();
   const [fields, setFields] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -161,7 +161,7 @@ function UploadedByUserDocUpdate() {
 
   return (
     <>
-      <div className="field-component">
+      <div className={!isMenuShow ? "field-component" : "field-component-blur"}>
         <div className="document-page-fields">
           {!isLoading && (
             <LazyLoadComponent>

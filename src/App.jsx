@@ -137,7 +137,7 @@ function App() {
             },
             {
               path: "uploadedByUserDocUpdate",
-              element: <UploadedByUserDocUpdate />,
+              element: <UploadedByUserDocUpdate isMenuShow={isMenuShow} />,
             },
           ],
         },
