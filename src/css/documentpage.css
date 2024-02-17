@@ -167,6 +167,10 @@ body.dark .line{
     color: gray;
 }
 
+.applied-or-not{
+    text-align: center;
+}
+
 @media screen and (max-width: 800px) {
     .document-page-banner-image{
         height: 250px;

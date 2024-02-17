@@ -13,14 +13,12 @@ body.dark .myuploads-user-datatable-main{
 }
 
 .myuploaded-docs-datatable-table{
-    border: 2px darkblue solid;
-    transition: transform 0.3s, border-color 0.3s;
     animation: wavy-border-data-table 2s infinite;
 }
 
 body.dark .myuploaded-docs-datatable-table{
     border: 2px white solid;
-    color: white;
+    animation: wavy-border-data-table-white 2s infinite;
 }
 
 body.dark .myuploaded-docs-datatable-table svg,body.dark .myuploaded-docs-datatable-table div{
@@ -30,18 +28,46 @@ body.dark .myuploaded-docs-datatable-table svg,body.dark .myuploaded-docs-datata
 @keyframes wavy-border-data-table {
     0% {
       border-radius: 20px;
+      border: 2px solid darkblue;
     }
     25% {
       border-radius: 20px 40px 20px 40px;
+      border: 2px solid darkblue;
     }
     50% {
       border-radius: 40px 20px 40px 20px;
+      border: 2px solid darkblue;
     }
     75% {
       border-radius: 20px 40px 20px 40px;
+      border: 2px solid darkblue;
     }
     100% {
       border-radius: 20px;
+      border: 2px solid darkblue;
+    }
+  }
+
+  @keyframes wavy-border-data-table-white {
+    0% {
+      border-radius: 20px;
+      border: 2px solid white;
+    }
+    25% {
+      border-radius: 20px 40px 20px 40px;
+      border: 2px solid white;
+    }
+    50% {
+      border-radius: 40px 20px 40px 20px;
+      border: 2px solid white;
+    }
+    75% {
+      border-radius: 20px 40px 20px 40px;
+      border: 2px solid white;
+    }
+    100% {
+      border-radius: 20px;
+      border: 2px solid white;
     }
   }
 

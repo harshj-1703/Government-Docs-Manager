@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 
 const MyUploadedDocsDataTable = ({ documents }) => {
@@ -17,7 +17,7 @@ const MyUploadedDocsDataTable = ({ documents }) => {
           src={params.value}
           alt=""
           height={50}
-          width={120}
+          width={100}
           style={{ borderRadius: "10%" }}
         />
       ),
