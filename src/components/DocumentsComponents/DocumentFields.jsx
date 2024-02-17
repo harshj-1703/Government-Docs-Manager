@@ -116,11 +116,12 @@ function DocumentFields({
         const mobile = localStorage.getItem("mobile");
         formData["userMobile"] = mobile;
         formData["verifyRatio"] = 0;
+        formData["status"] = 1;
         if (verificationType === "random") {
           formData["randomDataCenterId"] =
             await dataCenterServices.getRandomDataCenterId();
         }
-        formData["status"] = "Pending";
+        formData["approveStatus"] = "Pending";
         formData["createdAt"] = new Date().toLocaleString(
           "en-US",
           timestampOptions

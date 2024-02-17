@@ -1,11 +1,19 @@
 .myuploads-user-datatable-main{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 70px);
     height: auto;
-    padding: 50px;
     color: darkblue;
+}
+
+.myuploads-user-datatable-main h1{
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 3px;
 }
 
 body.dark .myuploads-user-datatable-main{
@@ -13,7 +21,8 @@ body.dark .myuploads-user-datatable-main{
 }
 
 .myuploaded-docs-datatable-table{
-    animation: wavy-border-data-table 2s infinite;
+  width: 80%;
+  animation: wavy-border-data-table 2s infinite;
 }
 
 body.dark .myuploaded-docs-datatable-table{
@@ -80,4 +89,26 @@ body.dark .myuploaded-docs-datatable-table svg,body.dark .myuploaded-docs-datata
 
 body.dark .myuploaded-docs-datatable-table .custom-header-datatable div{
   color: yellow;
+}
+
+.delete-button,
+.update-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  margin-right: 5px;
+}
+
+.delete-button {
+  color: white;
+  background-color: red;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.update-button {
+  color: white;
+  background-color: orange;
+  padding: 5px 10px;
+  border-radius: 5px;
 }

@@ -23,6 +23,7 @@ const uploadedByUsersDocumentService = {
       const queryRef = query(
         collectionRef,
         orderBy("updatedAt", "desc"),
+        where("status", "==", 1),
         limit(itemsPerPage)
       );
 
@@ -58,7 +59,8 @@ const uploadedByUsersDocumentService = {
       const collectionRef = docCollectionRef;
       const queryRef = query(
         collectionRef,
-        where("userMobile", "==", userMobile)
+        where("userMobile", "==", userMobile),
+        where("status", "==", 1)
       );
       const querySnapshot = await getDocs(queryRef);
 
@@ -77,7 +79,8 @@ const uploadedByUsersDocumentService = {
       const q = query(
         docCollectionRef,
         where("docId", "==", docId),
-        where("userMobile", "==", userMobile)
+        where("userMobile", "==", userMobile),
+        where("status", "==", 1)
       );
       const querySnapshot = await getDocs(q);
       if (querySnapshot.docs.length > 0) {
