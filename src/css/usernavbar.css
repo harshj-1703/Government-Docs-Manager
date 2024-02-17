@@ -11,7 +11,7 @@ body{
     background-color: var(--body-color);
 }
 body.dark{
-    --body-color: #18191A;
+    --body-color: rgb(1, 1, 32);;
     --nav-color: black;
     /* --side-nav: #242526; */
     --text-color: #CCC;

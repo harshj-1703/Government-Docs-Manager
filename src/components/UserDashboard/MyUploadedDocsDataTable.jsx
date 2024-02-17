@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import CircularLoading from "../CircularLoading";
 import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
+import { Link, useNavigate } from "react-router-dom";
 
 const MyUploadedDocsDataTable = ({ documents }) => {
   const [pageSize, setPageSize] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const deleteUploadedByUserDoc = async (e) => {
     const confirmation = window.confirm(
@@ -14,16 +16,20 @@ const MyUploadedDocsDataTable = ({ documents }) => {
     if (confirmation) {
       setIsLoading(true);
       const docDelete = { status: 0 };
-      try {
-        await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
-          e.target.value,
-          docDelete
-        );
-      } catch (e) {
-        console.log(e);
-      }
+      // try {
+      //   await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
+      //     e.target.value,
+      //     docDelete
+      //   );
+      // } catch (e) {
+      //   console.log(e);
+      // }
       setIsLoading(false);
     }
+  };
+
+  const uploadedByUserDocUpdate = async (e) => {
+    navigate("uploadedByUserDocUpdate");
   };
 
   const columns = [
@@ -76,7 +82,9 @@ const MyUploadedDocsDataTable = ({ documents }) => {
           >
             Delete
           </button>
-          <button className="update-button">Update</button>
+          <button className="update-button" onClick={uploadedByUserDocUpdate}>
+            Update
+          </button>
         </div>
       ),
     },

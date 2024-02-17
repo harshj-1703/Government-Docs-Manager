@@ -32,6 +32,9 @@ const EditProfile = lazy(() =>
 const MyUploadedDocs = lazy(() =>
   import("./components/UserDashboard/MyUploadedDocs.jsx")
 );
+const UploadedByUserDocUpdate = lazy(() =>
+  import("./components/UserDashboard/UploadedByUserDocUpdate.jsx")
+);
 
 //Css files load
 import "./css/App.css";
@@ -126,7 +129,17 @@ function App() {
         },
         {
           path: "myuploadeddocs",
-          element: <MyUploadedDocs isMenuShow={isMenuShow} />,
+          element: <Outlet />,
+          children: [
+            {
+              index: true,
+              element: <MyUploadedDocs isMenuShow={isMenuShow} />,
+            },
+            {
+              path: "uploadedByUserDocUpdate",
+              element: <UploadedByUserDocUpdate />,
+            },
+          ],
         },
       ],
     },
