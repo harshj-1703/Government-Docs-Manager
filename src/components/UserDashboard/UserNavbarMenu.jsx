@@ -34,7 +34,7 @@ function UserNavbarMenu({ setIsMenuShow }) {
               </Link>
             </li>
             <li className="orbital-menu__item">
-            <Link
+              <Link
                 className="orbital-menu__link"
                 to="edit-profile"
                 onClick={() => {
@@ -78,7 +78,9 @@ function UserNavbarMenu({ setIsMenuShow }) {
                     menu
                   </i>
                 </span>
-                <span className="orbital-menu__link-text">My Uploaded Docs</span>
+                <span className="orbital-menu__link-text">
+                  Edit Uploaded Docs
+                </span>
               </Link>
             </li>
             {/* <li className="orbital-menu__item">

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link,NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "../../css/usernavbar.css";
 import "../../css/boxicons.min.css";
 import "./UserNavbar";
@@ -90,14 +90,14 @@ function UserNavbar({ isMenuShow, setIsMenuShow }) {
               </li>
               <li>
                 <NavLink to="/" end>
-                  About
+                  Document_Status
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink to="/" end>
                   Contact
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
           </div>
           <div className="darkLight-searchBox">
