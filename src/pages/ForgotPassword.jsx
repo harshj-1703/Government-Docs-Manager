@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import MobileNumberComponentForgotPassword from "../components/ForgotPasswordComponents/MobileNumberComponentForgotPassword";
 import OTPComponentForgotPassword from "../components/ForgotPasswordComponents/OTPComponent";
-import CircularLoading from "../components/CircularLoading";
 import { Link } from "react-router-dom";
 import NewPasswordUpdate from "../components/ForgotPasswordComponents/NewPasswordUpdate";
 

@@ -4,6 +4,7 @@ import CircularLoading from "../CircularLoading";
 import { LazyLoadComponent } from "react-lazy-load-image-component";
 import MyUploadedDocsDataTable from "./MyUploadedDocsDataTable";
 import "../../css/myuploadeddocs.css";
+import "../../css/documentpage.css";
 
 function MyUploadedDocs({ isMenuShow }) {
   const [isLoading, setIsLoading] = useState(true);

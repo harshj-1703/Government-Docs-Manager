@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import "./css/App.css";
 import { UserAuthContextProvider } from "./context/UserAuthContext.jsx";
 import { DataCenterAuthContextProvider } from "./context/DataCenterAuthContext.jsx";
 

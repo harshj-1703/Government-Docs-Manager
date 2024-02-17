@@ -3,7 +3,6 @@ import Slideshow from "../components/HomeComponents/Slideshow";
 import Wave from "../components/HomeComponents/Wave";
 import Menu from "../components/HomeComponents/Menu";
 import {
-  LazyLoadComponent,
   LazyLoadImage,
 } from "react-lazy-load-image-component";
 import ServiceContent from "../components/HomeComponents/ServiceContent";

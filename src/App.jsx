@@ -1,23 +1,45 @@
-import React, { useState } from "react";
-import Home from "./pages/Home";
-import UserLogin from "./pages/UserLogin";
-import DatacenterLogin from "./pages/DataCenterLogin";
-import DataCenterDashboard from "./pages/DataCenterDashboard.jsx";
-import RegisterUser from "./pages/RegisterUser";
+import React, { useState, Suspense, lazy } from "react";
 import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import BottomBar from "./components/BottomBar.jsx";
 import Error404Page from "./pages/Error404Page.jsx";
 import ProtectedUser from "./components/ProtectedUser.jsx";
-import BottomBar from "./components/BottomBar.jsx";
-import { ToastContainer } from "react-toastify";
-import ForgotPassword from "./pages/ForgotPassword.jsx";
-import UserDashboard from "./pages/UserDashboard.jsx";
-import DocumentPage from "./components/DocumentsComponents/DocumentPage.jsx";
-import UserNavbar from "./components/UserDashboard/UserNavbar.jsx";
-import ChangePassword from "./components/UserDashboard/ChangePassword.jsx";
-import EditProfile from "./components/UserDashboard/EditProfile.jsx";
 import ProtectedDataCenter from "./components/ProtectedDataCenter.jsx";
-import MyUploadedDocs from "./components/UserDashboard/MyUploadedDocs.jsx";
+import CircularLoading from "./components/CircularLoading.jsx";
 
+//Lazy loading files
+const Home = lazy(() => import("./pages/Home"));
+const UserLogin = lazy(() => import("./pages/UserLogin"));
+const DatacenterLogin = lazy(() => import("./pages/DataCenterLogin"));
+const DataCenterDashboard = lazy(() =>
+  import("./pages/DataCenterDashboard.jsx")
+);
+const RegisterUser = lazy(() => import("./pages/RegisterUser"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
+const UserDashboard = lazy(() => import("./pages/UserDashboard.jsx"));
+const DocumentPage = lazy(() =>
+  import("./components/DocumentsComponents/DocumentPage.jsx")
+);
+const UserNavbar = lazy(() =>
+  import("./components/UserDashboard/UserNavbar.jsx")
+);
+const ChangePassword = lazy(() =>
+  import("./components/UserDashboard/ChangePassword.jsx")
+);
+const EditProfile = lazy(() =>
+  import("./components/UserDashboard/EditProfile.jsx")
+);
+const MyUploadedDocs = lazy(() =>
+  import("./components/UserDashboard/MyUploadedDocs.jsx")
+);
+
+//Css files load
+import "./css/App.css";
+import "./css/login.css";
+import "./css/registration.css";
+import "./css/userdashboard.css";
+
+//---------------------------------- Main Function APP ----------------------------------
 function App() {
   const [isMenuShow, setIsMenuShow] = useState(false);
   const router = createBrowserRouter([
@@ -25,8 +47,10 @@ function App() {
       path: "/",
       element: (
         <>
-          <BottomBar />
-          <Home />
+          <Suspense fallback={<CircularLoading />}>
+            <BottomBar />
+            <Home />
+          </Suspense>
         </>
       ),
     },
@@ -35,8 +59,10 @@ function App() {
       path: "user-login",
       element: (
         <>
-          <ToastContainer />
-          <UserLogin />
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <UserLogin />
+          </Suspense>
         </>
       ),
     },
@@ -45,8 +71,10 @@ function App() {
       path: "forgot-password",
       element: (
         <>
-          <ToastContainer />
-          <ForgotPassword />
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <ForgotPassword />
+          </Suspense>
         </>
       ),
     },
@@ -55,8 +83,10 @@ function App() {
       path: "register-user",
       element: (
         <>
-          <ToastContainer />
-          <RegisterUser />
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <RegisterUser />
+          </Suspense>
         </>
       ),
     },
@@ -65,11 +95,16 @@ function App() {
       path: "user-dashboard",
       element: (
         <>
-          <ToastContainer />
-          <ProtectedUser>
-            <UserNavbar isMenuShow={isMenuShow} setIsMenuShow={setIsMenuShow} />
-            <Outlet />
-          </ProtectedUser>
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <ProtectedUser>
+              <UserNavbar
+                isMenuShow={isMenuShow}
+                setIsMenuShow={setIsMenuShow}
+              />
+              <Outlet />
+            </ProtectedUser>
+          </Suspense>
         </>
       ),
       children: [
@@ -95,24 +130,29 @@ function App() {
         },
       ],
     },
-    //data-center
+    //data-center-login
     {
       path: "datacenter-login",
       element: (
         <>
-          <ToastContainer />
-          <DatacenterLogin />
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <DatacenterLogin />
+          </Suspense>
         </>
       ),
     },
+    //data-center
     {
       path: "datacenter-dashboard",
       element: (
         <>
-          <ToastContainer />
-          <ProtectedDataCenter>
-            <DataCenterDashboard />
-          </ProtectedDataCenter>
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <ProtectedDataCenter>
+              <DataCenterDashboard />
+            </ProtectedDataCenter>
+          </Suspense>
         </>
       ),
     },

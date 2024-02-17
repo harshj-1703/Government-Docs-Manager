@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../css/registration.css";
 import { Link } from "react-router-dom";
 import MobileNumberComponent from "../components/RegistrationComponents/MobileNumberComponent";
 import OTPComponent from "../components/RegistrationComponents/OTPComponent";
