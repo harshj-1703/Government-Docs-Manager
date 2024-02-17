@@ -24,6 +24,7 @@ function UploadedByUserDocUpdate() {
   const location = useLocation();
   const [fields, setFields] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isSubmitLoading, setIsSubmitLoading] = useState(false);
   const [docsData, setDocsData] = useState(null);
   const [formData, setFormData] = useState({});
   const [errors, setErrors] = useState({});
@@ -96,7 +97,7 @@ function UploadedByUserDocUpdate() {
         "Are you sure want to edit this document, Not selected field will be as old?"
       );
       if (ask) {
-        setIsLoading(true);
+        setIsSubmitLoading(true);
         try {
           for (const x in formData) {
             if (
@@ -129,7 +130,7 @@ function UploadedByUserDocUpdate() {
         } catch (e) {
           console.log(e);
         } finally {
-          setIsLoading(false);
+          setIsSubmitLoading(false);
         }
       }
     }
@@ -159,86 +160,89 @@ function UploadedByUserDocUpdate() {
   }, []);
 
   return (
-    <div className="field-component">
-      <div className="document-page-fields">
-        {!isLoading && (
-          <LazyLoadComponent>
-            <div className="user-update-doc-title">Update Document</div>
-            <hr />
-            <form className="fields" onSubmit={handleSubmit}>
-              {Object.entries(fields).map(([label, inputType]) => (
-                <div key={label} className="each-field-input-label">
-                  <label>
-                    {" "}
-                    {label +
-                      "(" +
-                      (inputType === "file" ? "PDF" : inputType) +
-                      ")"}
-                  </label>{" "}
-                  {errors[label] && (
-                    <div className="error-message">{errors[label]}</div>
-                  )}
-                  {inputType === "file" ||
-                  inputType === "image" ||
-                  inputType === "video" ? (
-                    <>
+    <>
+      <div className="field-component">
+        <div className="document-page-fields">
+          {!isLoading && (
+            <LazyLoadComponent>
+              <div className="user-update-doc-title">Update Document</div>
+              <hr />
+              <form className="fields" onSubmit={handleSubmit}>
+                {Object.entries(fields).map(([label, inputType]) => (
+                  <div key={label} className="each-field-input-label">
+                    <label>
+                      {" "}
+                      {label +
+                        "(" +
+                        (inputType === "file" ? "PDF" : inputType) +
+                        ")"}
+                    </label>{" "}
+                    {errors[label] && (
+                      <div className="error-message">{errors[label]}</div>
+                    )}
+                    {inputType === "file" ||
+                    inputType === "image" ||
+                    inputType === "video" ? (
+                      <>
+                        <input
+                          type="file"
+                          name={label}
+                          onChange={handleChange}
+                          accept={
+                            inputType === "image"
+                              ? ".jpg,.jpeg,.png"
+                              : inputType === "video"
+                              ? ".mp4,.mkv"
+                              : ".pdf"
+                          }
+                          className={errors[label] ? "error" : ""}
+                        />
+                        <a
+                          href={docsData[label]}
+                          target="_blank"
+                          className="old-doc-link"
+                        >
+                          Old Document&nbsp;
+                          <i
+                            className="material-icons"
+                            style={{ fontSize: "20px" }}
+                          >
+                            switch_access_shortcut
+                          </i>
+                        </a>
+                      </>
+                    ) : (
                       <input
-                        type="file"
+                        type={inputType}
                         name={label}
                         onChange={handleChange}
-                        accept={
-                          inputType === "image"
-                            ? ".jpg,.jpeg,.png"
-                            : inputType === "video"
-                            ? ".mp4,.mkv"
-                            : ".pdf"
+                        value={
+                          formData[label] !== undefined
+                            ? formData[label]
+                            : docsData[label] !== undefined
+                            ? docsData[label]
+                            : ""
                         }
                         className={errors[label] ? "error" : ""}
                       />
-                      <a
-                        href={docsData[label]}
-                        target="_blank"
-                        className="old-doc-link"
-                      >
-                        Old Document&nbsp;
-                        <i
-                          className="material-icons"
-                          style={{ fontSize: "20px" }}
-                        >
-                          switch_access_shortcut
-                        </i>
-                      </a>
-                    </>
-                  ) : (
-                    <input
-                      type={inputType}
-                      name={label}
-                      onChange={handleChange}
-                      value={
-                        formData[label] !== undefined
-                          ? formData[label]
-                          : docsData[label] !== undefined
-                          ? docsData[label]
-                          : ""
-                      }
-                      className={errors[label] ? "error" : ""}
-                    />
-                  )}
-                </div>
-              ))}
-              <button
-                type="submit"
-                className="login-button"
-                style={{ marginBottom: "20px" }}
-              >
-                Update Documents
-              </button>
-            </form>
-          </LazyLoadComponent>
-        )}
+                    )}
+                  </div>
+                ))}
+                <button
+                  type="submit"
+                  className="login-button"
+                  style={{ marginBottom: "20px" }}
+                >
+                  Update Documents
+                </button>
+              </form>
+            </LazyLoadComponent>
+          )}
+        </div>
+        {isLoading && <CircularLoading />}
+        {isSubmitLoading && <CircularLoading />}
       </div>
-      {isLoading && <CircularLoading />}
-    </div>
+    </>
   );
 }
 
