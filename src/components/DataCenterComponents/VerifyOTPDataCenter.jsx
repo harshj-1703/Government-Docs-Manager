@@ -39,6 +39,7 @@ function VerifyOTPDataCenter({ otp, setOtp, verificationCode, setStep }) {
           message: "Verification successful!",
           type: "success",
         });
+        localStorage.setItem("isLoggedIn", 1);
         navigate("/datacenter-dashboard");
       })
       .catch((error) => {

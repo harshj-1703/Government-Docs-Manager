@@ -49,18 +49,22 @@ function UserLogin() {
           type: "error",
         });
       } else {
-        await signInWithEmailAndPassword(auth, mobile + '@hj.com', password)
+        await signInWithEmailAndPassword(auth, mobile + "@hj.com", password)
           .then((userCredential) => {
             const user = userCredential.user;
             // console.log(user.metadata.lastSignInTime);
-            localStorage.setItem("lastlogin",user.metadata.lastSignInTime);
+            localStorage.setItem("lastlogin", user.metadata.lastSignInTime);
             ToastMessage({
               message: "Login Succesful",
               type: "success",
             });
-            localStorage.setItem("profileImage",available.user.profilePhotoUrl);
-            localStorage.setItem("fullName",available.user.fullName);
-            localStorage.setItem("mobile",available.user.mobile);
+            localStorage.setItem(
+              "profileImage",
+              available.user.profilePhotoUrl
+            );
+            localStorage.setItem("fullName", available.user.fullName);
+            localStorage.setItem("mobile", available.user.mobile);
+            localStorage.setItem("isLoggedIn", 1);
             navigate("/user-dashboard");
           })
           .catch((error) => {

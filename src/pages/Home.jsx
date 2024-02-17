@@ -2,9 +2,7 @@ import React from "react";
 import Slideshow from "../components/HomeComponents/Slideshow";
 import Wave from "../components/HomeComponents/Wave";
 import Menu from "../components/HomeComponents/Menu";
-import {
-  LazyLoadImage,
-} from "react-lazy-load-image-component";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 import ServiceContent from "../components/HomeComponents/ServiceContent";
 import AboutContent from "../components/HomeComponents/AboutContent";
 import ContactUsContent from "../components/HomeComponents/ContactUsContent";
@@ -36,7 +34,7 @@ function Home() {
 
       <section id="contact" className="section">
         <div id="contact-heading">Contact Us</div>
-          <ContactUsContent />
+        <ContactUsContent />
       </section>
     </>
   );

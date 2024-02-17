@@ -1,19 +1,21 @@
-import IonIcon from "@reacticons/ionicons";
 import React from "react";
 import { Link } from "react-router-dom";
 
 function Menu() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
   return (
     <div className="home-menu">
       <ul className="home-menu-ul">
-        <li style={{ "--i": 6, "--clr1": "#1877f2" }}>
-          <Link to="/user-dashboard">
-            <span>
-              <i className="material-icons">home</i>
-            </span>
-            Home
-          </Link>
-        </li>
+        {isLoggedIn && (
+          <li style={{ "--i": 6, "--clr1": "#1877f2" }}>
+            <Link to="/user-dashboard">
+              <span>
+                <i className="material-icons">home</i>
+              </span>
+              Home
+            </Link>
+          </li>
+        )}
         <li style={{ "--i": 5, "--clr1": "#25d366" }}>
           <Link to="/user-login">
             <span>
