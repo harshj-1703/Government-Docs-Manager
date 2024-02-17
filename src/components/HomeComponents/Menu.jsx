@@ -16,6 +16,7 @@ function Menu() {
             </Link>
           </li>
         )}
+        {/* {!isLoggedIn && ( */}
         <li style={{ "--i": 5, "--clr1": "#25d366" }}>
           <Link to="/user-login">
             <span>
@@ -24,6 +25,7 @@ function Menu() {
             User Login
           </Link>
         </li>
+        {/* )} */}
         <li style={{ "--i": 4, "--clr1": "#1da1f2" }}>
           <Link to="/register-user">
             <span>

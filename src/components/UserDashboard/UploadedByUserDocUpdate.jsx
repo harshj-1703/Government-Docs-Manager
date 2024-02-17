@@ -92,40 +92,45 @@ function UploadedByUserDocUpdate() {
     });
     setErrors(errorsObj);
     if (Object.keys(errorsObj).length === 0) {
-      setIsLoading(true);
-      try {
-        for (const x in formData) {
-          if (
-            formData[x] instanceof File &&
-            formData[x] !== null &&
-            formData[x] !== ""
-          ) {
-            const fileRef = ref(
-              storage,
-              `UserUploadedDocs/${formData[x].name + v4()}`
-            );
-            const snapshotFile = await uploadBytes(fileRef, formData[x]);
-            const urlFile = await getDownloadURL(snapshotFile.ref);
-            formData[x] = urlFile;
+      const ask = window.confirm(
+        "Are you sure want to edit this document, Not selected field will be as old?"
+      );
+      if (ask) {
+        setIsLoading(true);
+        try {
+          for (const x in formData) {
+            if (
+              formData[x] instanceof File &&
+              formData[x] !== null &&
+              formData[x] !== ""
+            ) {
+              const fileRef = ref(
+                storage,
+                `UserUploadedDocs/${formData[x].name + v4()}`
+              );
+              const snapshotFile = await uploadBytes(fileRef, formData[x]);
+              const urlFile = await getDownloadURL(snapshotFile.ref);
+              formData[x] = urlFile;
+            }
           }
+          formData["updatedAt"] = new Date().toLocaleString(
+            "en-US",
+            timestampOptions
+          );
+          await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
+            id,
+            formData
+          );
+          ToastMessage({
+            message: "Document Updated Successfully!",
+            type: "success",
+          });
+          navigate("/user-dashboard");
+        } catch (e) {
+          console.log(e);
+        } finally {
+          setIsLoading(false);
         }
-        formData["updatedAt"] = new Date().toLocaleString(
-          "en-US",
-          timestampOptions
-        );
-        await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
-          id,
-          formData
-        );
-        ToastMessage({
-          message: "Document Updated Successfully!",
-          type: "success",
-        });
-        navigate("/user-dashboard");
-      } catch (e) {
-        console.log(e);
-      } finally {
-        setIsLoading(false);
       }
     }
   };
@@ -137,6 +142,11 @@ function UploadedByUserDocUpdate() {
         await uploadedByUsersDocumentService.getDocumentFromId(id);
       setFields(userUploadedDocData.fields);
       setDocsData(userUploadedDocData);
+      const initialFormData = {};
+      Object.entries(userUploadedDocData).forEach(([label, value]) => {
+        initialFormData[label] = value;
+      });
+      setFormData(initialFormData);
     } catch (e) {
       console.log(e);
     } finally {
@@ -164,7 +174,6 @@ function UploadedByUserDocUpdate() {
                       "(" +
                       (inputType === "file" ? "PDF" : inputType) +
                       ")"}
-                    *
                   </label>{" "}
                   {errors[label] && (
                     <div className="error-message">{errors[label]}</div>
@@ -205,7 +214,13 @@ function UploadedByUserDocUpdate() {
                       type={inputType}
                       name={label}
                       onChange={handleChange}
-                      value={docsData[label] || ""}
+                      value={
+                        formData[label] !== undefined
+                          ? formData[label]
+                          : docsData[label] !== undefined
+                          ? docsData[label]
+                          : ""
+                      }
                       className={errors[label] ? "error" : ""}
                     />
                   )}
