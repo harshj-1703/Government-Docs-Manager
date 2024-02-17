@@ -19,6 +19,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
 }
 
 .document-page-fields {
@@ -63,6 +64,18 @@ body.dark .document-page-fields input {
     .document-page-fields {
         width: 80%;
     }
+}
+
+.user-update-doc-title{
+    margin: 10px;
+    margin-top: 20px;
+    font-size: 40px;
+    text-align: center;
+    color: darkblue;
+}
+
+body.dark .user-update-doc-title{
+    color: white;
 }
 
 .document-page-fields .each-field-input-label{

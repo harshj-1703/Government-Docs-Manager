@@ -109,6 +109,7 @@ function DocumentFields({
             formData[x] = urlFile;
           }
         }
+        formData["fields"] = fields;
         formData["docId"] = docId;
         formData["title"] = title;
         formData["banner"] = banner;
