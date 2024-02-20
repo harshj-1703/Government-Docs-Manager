@@ -63,14 +63,14 @@ const MyUploadedDocsDataTable = ({ documents }) => {
       headerAlign: "left",
       headerClassName: "custom-header-datatable",
     },
-    {
-      field: "ministry",
-      headerName: "Ministry",
-      flex: 0.4,
-      align: "left",
-      headerAlign: "left",
-      headerClassName: "custom-header-datatable",
-    },
+    // {
+    //   field: "ministry",
+    //   headerName: "Ministry",
+    //   flex: 0.4,
+    //   align: "left",
+    //   headerAlign: "left",
+    //   headerClassName: "custom-header-datatable",
+    // },
     {
       field: "id",
       headerName: "Action",
@@ -96,7 +96,7 @@ const MyUploadedDocsDataTable = ({ documents }) => {
   ];
 
   const getRowHeight = () => {
-    return 80;
+    return 100;
   };
 
   return (
@@ -116,7 +116,7 @@ const MyUploadedDocsDataTable = ({ documents }) => {
           checkboxSelection={false}
           rowSelection={false}
           getRowHeight={getRowHeight}
-          style={{ border: "none" }}
+          style={{ border: "none", width: "100%", height: "100%" }}
         />
       )}
     </div>
