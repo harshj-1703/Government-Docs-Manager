@@ -41,6 +41,7 @@ import "./css/App.css";
 import "./css/login.css";
 import "./css/registration.css";
 import "./css/userdashboard.css";
+import DocumentStatus from "./components/UserDashboard/UserDocumentStatus.jsx";
 
 //---------------------------------- Main Function APP ----------------------------------
 function App() {
@@ -126,6 +127,10 @@ function App() {
         {
           path: "edit-profile",
           element: <EditProfile isMenuShow={isMenuShow} />,
+        },
+        {
+          path: "user-document-status",
+          element: <DocumentStatus isMenuShow={isMenuShow} />,
         },
         {
           path: "myuploadeddocs",

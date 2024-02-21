@@ -89,7 +89,7 @@ function UserNavbar({ isMenuShow, setIsMenuShow }) {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/" end>
+                <NavLink to="user-document-status" end>
                   Document_Status
                 </NavLink>
               </li>
