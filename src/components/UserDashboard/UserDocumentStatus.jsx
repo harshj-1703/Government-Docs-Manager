@@ -175,7 +175,7 @@ function UserDocumentStatus({ isMenuShow }) {
           {!isLoading &&
             (documents.length !== 0 ? (
               <>
-                <h1>My Documents Status</h1>
+                <h1 style={{ marginBottom: "5px" }}>My Documents Status</h1>
                 <hr />
                 <DataGrid
                   rows={documents}
