@@ -4,8 +4,15 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 import ToastMessage from "../ToastMessage";
 import CircularLoading from "../CircularLoading";
 import { useNavigate } from "react-router-dom";
+import dataCenterServices from "../../services/data-center.services";
 
-function VerifyOTPDataCenter({ otp, setOtp, verificationCode, setStep }) {
+function VerifyOTPDataCenter({
+  mobile,
+  otp,
+  setOtp,
+  verificationCode,
+  setStep,
+}) {
   const [seconds, setSeconds] = useState(150);
   const [timer, setTimer] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -39,8 +46,21 @@ function VerifyOTPDataCenter({ otp, setOtp, verificationCode, setStep }) {
           message: "Verification successful!",
           type: "success",
         });
-        localStorage.setItem("isLoggedIn", 1);
-        navigate("/datacenter-dashboard");
+        dataCenterServices
+          .getDataCenterFromMobile(mobile)
+          .then((result) => {
+            localStorage.setItem("isLoggedIn", 1);
+            localStorage.setItem("mobile", mobile);
+            localStorage.setItem("imageurl", result.user.imageurl);
+            localStorage.setItem("city", result.user.city);
+            localStorage.setItem("state", result.user.state);
+            localStorage.setItem("person1", result.user.p1);
+            localStorage.setItem("person2", result.user.p2);
+            navigate("/datacenter-dashboard");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
       .catch((error) => {
         ToastMessage({

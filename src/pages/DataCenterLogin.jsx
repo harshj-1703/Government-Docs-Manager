@@ -134,6 +134,7 @@ function DatacenterLogin() {
         )}
         {step === 1 && (
           <VerifyOTPDataCenter
+            mobile={mobile}
             otp={otp}
             setOtp={setOtp}
             verificationCode={verificationCode}
