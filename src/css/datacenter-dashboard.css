@@ -1,6 +1,6 @@
 .datacenter-dashboard-main{
     width: 100%;
-    height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px);
     padding: 15px;
 }
 
@@ -13,6 +13,7 @@
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
+    margin-bottom: 10px;
    }
 
 .datacenter-profile-card .datacenter-dashboard-profile-image{
@@ -516,6 +517,7 @@ body.dark .datacenter-profile-card{
       justify-content: center;
       align-items: center;
       height: fit-content;
+      border-radius: 70px 0 40px 50px;
     }
     .datacenter-profile-card .datacenter-dashboard-profile-image{
       width: 100%;
@@ -527,8 +529,21 @@ body.dark .datacenter-profile-card{
     }
     .datacenter-data-persons{
       margin: 0;
+      margin-top: 15px;
       position: relative;
       overflow: hidden;
+    }
+    .datacenter-data-persons div{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 23px;
+    }
+    .datacenter-data-persons span{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 5px;
     }
     .temp-data .card-moon{
       margin-top: 15px;
