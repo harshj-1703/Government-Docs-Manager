@@ -7,10 +7,10 @@
 .datacenter-profile-card {
     width: 100%;
     height: 190px;
-    background: #4070F4;
+    background: #5582ff;
     border-radius: 150px 0 40px 50px;
     display: flex;
-    justify-content: right;
+    justify-content: space-between;
     align-items: center;
     flex-direction: row;
    }
@@ -215,12 +215,26 @@ body.dark .datacenter-profile-card{
     margin-right: 5px;
     height: 170px;
     min-width: fit-content !important;
-    width: fit-content !important;
+    width: 300px !important;
     position: relative;
     padding: 25px;
     background: radial-gradient(178.94% 106.41% at 26.42% 106.41%, #b1ffff 0%, rgba(255, 255, 255, 0) 71.88%) #FFFFFF;
     box-shadow: 0px 155px 62px rgba(0, 0, 0, 0.01), 0px 87px 52px rgba(0, 0, 0, 0.05), 0px 39px 39px rgba(0, 0, 0, 0.09), 0px 10px 21px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
     /* border-radius: 23px; */
+    border-radius: 40px 0 0 10px;
+    transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
+    cursor: pointer;
+  }
+
+  .temp-data .card-moon {
+    margin-right: 5px;
+    height: 170px;
+    min-width: fit-content !important;
+    width: 300px !important;
+    position: relative;
+    padding: 25px;
+    background: radial-gradient(178.94% 106.41% at 26.42% 106.41%, #7260fb 0%, rgba(255, 255, 255, 0) 71.88%) #3421fd;
+    box-shadow: 0px 155px 62px rgba(0, 0, 0, 0.01), 0px 87px 52px rgba(0, 0, 0, 0.05), 0px 39px 39px rgba(0, 0, 0, 0.09), 0px 10px 21px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
     border-radius: 40px 0 0 10px;
     transition: all 0.8s cubic-bezier(0.15, 0.83, 0.66, 1);
     cursor: pointer;
@@ -249,7 +263,7 @@ body.dark .datacenter-profile-card{
   
   .temp-data .front {
     padding-top: 45px;
-    margin-left: 25px;
+    margin-left: 18px;
     display: inline;
     position: absolute;
     z-index: 11;
@@ -312,6 +326,19 @@ body.dark .datacenter-profile-card{
     display: inline;
     position: absolute;
   }
+
+  .temp-data .moon {
+    width: 120px;
+    height: 120px;
+    display: inline;
+    position: absolute;
+    top: 45%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    box-shadow: -20px 20px 0 5px white; 
+    border-radius: 50%;
+    margin-left: 15px;
+  }
   
   .temp-data .sunshine {
     animation: sunshines 2s infinite;
@@ -365,13 +392,36 @@ body.dark .datacenter-profile-card{
     line-height: 135%;
     color: darkblue;
   }
+
+  .temp-data .card-header-moon {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .temp-data .card-header-moon span:first-child {
+    font-family: 'Courier New', Courier, monospace;
+    word-break: break-all;
+    font-weight: 900;
+    font-size: 15px;
+    letter-spacing: 0.4px;
+    color: white;
+  }
+  
+  .temp-data .card-header-moon span:last-child {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 135%;
+    color: whitesmoke;
+  }
   
   .temp-data .temp {
     position: absolute;
-    left: 25px;
+    left: 18px;
     bottom: 8px;
     font-weight: 700;
-    font-size: 64px;
+    font-size: 45px;
     line-height: 77px;
     /* color: rgba(87, 77, 51, 1); */
     color: darkblue;
@@ -396,3 +446,97 @@ body.dark .datacenter-profile-card{
     line-height: 134.49%;
     color: rgba(87, 77, 51, 0.66);
   }
+
+  .datacenter-data-persons{
+    color: darkblue;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: center;
+    margin-left: 270px;
+  }
+
+  body.dark .datacenter-data-persons{
+    color: white;
+  }
+
+  .datacenter-data-persons div{
+    font-family: inherit;
+    width: 100%;
+    font-size: 35px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
+  .datacenter-data-combine-column{
+    display: flex;
+  }
+
+  @media only screen and (min-width:840px) and (max-width: 1124px) {
+    .datacenter-profile-card{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+    }
+    .datacenter-profile-card .datacenter-dashboard-profile-image{
+      width: 100%;
+      border-radius: 0 0 40px 40px;
+      margin: 12px 0 8px 0;
+    }
+    .datacenter-profile-card .datacenter-dashboard-profile-image img{
+      width: 100%;
+    }
+    .datacenter-data-persons{
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .temp-data .card-moon{
+      margin-top: 15px;
+    }
+    .datacenter-data-combine-column{
+      position: relative;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+   }
+
+   @media only screen and (max-width: 840px) {
+    .clock{
+      position: relative;
+      top: 0;
+      margin: auto;
+      margin-bottom: 10px;
+    }
+    .datacenter-profile-card{
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: fit-content;
+    }
+    .datacenter-profile-card .datacenter-dashboard-profile-image{
+      width: 100%;
+      border-radius: 0 0 40px 40px;
+      margin: 12px 0 8px 0;
+    }
+    .datacenter-profile-card .datacenter-dashboard-profile-image img{
+      width: 100%;
+    }
+    .datacenter-data-persons{
+      margin: 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .temp-data .card-moon{
+      margin-top: 15px;
+    }
+    .datacenter-data-combine-column{
+      position: relative;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+   }
