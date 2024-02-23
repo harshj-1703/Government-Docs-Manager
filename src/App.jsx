@@ -6,9 +6,9 @@ import Error404Page from "./pages/Error404Page.jsx";
 import ProtectedUser from "./components/ProtectedUser.jsx";
 import ProtectedDataCenter from "./components/ProtectedDataCenter.jsx";
 import CircularLoading from "./components/CircularLoading.jsx";
+import Home from "./pages/Home";
 
 //Lazy loading files
-const Home = lazy(() => import("./pages/Home"));
 const UserLogin = lazy(() => import("./pages/UserLogin"));
 const DatacenterLogin = lazy(() => import("./pages/DataCenterLogin"));
 const DataCenterDashboard = lazy(() =>

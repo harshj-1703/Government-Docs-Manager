@@ -438,11 +438,12 @@ html {
   /* padding: 4px; */
   border-radius: 20px;
   border: 2px red solid;
-  animation: wavy-border-service 2s infinite;
+  /* animation: wavy-border-service 2s infinite; */
+  border-color: darkblue;
   font-family:'Audiowide';
 }
 
-@keyframes wavy-border-service {
+/* @keyframes wavy-border-service {
   0% {
     border-radius: 20px;
     border: 3px darkblue solid;
@@ -463,7 +464,7 @@ html {
     border-radius: 20px;
     border: 3px darkblue solid;
   }
-}
+} */
 
 #services{
   display: flex;
@@ -569,6 +570,20 @@ html {
 #about-main-text h2::before{
   content: attr(data-text);
   position: absolute;
+  /* top: 0;
+  left: 0;
+  width: 0; */
+  height: 100%;
+  color: #01fe87;
+  -webkit-text-stroke: 0vw #383d52;
+  /* border-right: 2px solid #01fe87; */
+  /* overflow: hidden; */
+  /* animation: developedBy 4s linear infinite; */
+}
+
+/* #about-main-text h2::before{
+  content: attr(data-text);
+  position: absolute;
   top: 0;
   left: 0;
   width: 0;
@@ -578,7 +593,7 @@ html {
   border-right: 2px solid #01fe87;
   overflow: hidden;
   animation: developedBy 4s linear infinite;
-}
+} */
 
 @keyframes developedBy{
   0%,10%,100%
@@ -697,7 +712,7 @@ html {
   border-radius: 20px;
   border: 3px darkblue solid;
   overflow: hidden;
-  animation: wavy-border-contact 2s infinite;
+  /* animation: wavy-border-contact 2s infinite; */
   word-break: break-all;
 }
 
@@ -826,6 +841,10 @@ html {
       margin-bottom: 10px;
   }
 
+  #box-photo-content{
+    display: none;
+  }
+
   #box-photo-content::before {
       width: 35%;
       left: 45%;
@@ -893,6 +912,7 @@ html {
   #phone-div {
       flex-direction: column;
       align-items: center;
+      display: none;
   }
 
   #phone-app-details {
