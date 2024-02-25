@@ -37,7 +37,7 @@ function DataCenterDashboard() {
         day: "numeric",
       })
     );
-    // getTempratureData();
+    getTempratureData();
   }, []);
 
   const getTempratureData = async () => {

@@ -47,6 +47,15 @@ const DocumentStatus = lazy(() =>
 const DataCenterNavbar = lazy(() =>
   import("./components/DataCenterComponents/DataCenterNavbar.jsx")
 );
+const VerifyUserDocuments = lazy(() =>
+  import("./components/DataCenterComponents/VerifyUserDocuments.jsx")
+);
+const UserDocumentsStatus = lazy(() =>
+  import("./components/DataCenterComponents/UserDocumentsStatus.jsx")
+);
+const DataCenterDetails = lazy(() =>
+  import("./components/DataCenterComponents/DataCenterDetails.jsx")
+);
 
 //---------------------------------- Main Function APP ----------------------------------
 function App() {
@@ -183,6 +192,18 @@ function App() {
         {
           index: true,
           element: <DataCenterDashboard />,
+        },
+        {
+          path: "verify-user-uploaded-docs",
+          element: <VerifyUserDocuments />,
+        },
+        {
+          path: "check-user-documents-status",
+          element: <UserDocumentsStatus />,
+        },
+        {
+          path: "datacenter-details",
+          element: <DataCenterDetails />,
         },
       ],
     },

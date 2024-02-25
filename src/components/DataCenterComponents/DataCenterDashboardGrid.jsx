@@ -1,7 +1,9 @@
 import React from "react";
 import "../../css/datacenter-dashboard-grid.css";
+import { useNavigate } from "react-router-dom";
 
 function DataCenterDashboardGrid() {
+  const navigate = useNavigate();
   const cards = [
     {
       heading: "Verify Users Documents",
@@ -11,11 +13,12 @@ function DataCenterDashboardGrid() {
     {
       heading: "Users Documents Status",
       content: "Check status of user documents",
+      link: "check-user-documents-status",
     },
     {
-      heading: "Person Details",
-      content: "Datacenter's head persons details",
-      link: "datacenter-persons",
+      heading: "DataCenter Details",
+      content: "Datacenter's all details",
+      link: "datacenter-details",
     },
   ];
 
@@ -25,7 +28,13 @@ function DataCenterDashboardGrid() {
       <div className="all-cards">
         {cards.map((card, idx) => {
           return (
-            <div className="card-container" key={idx}>
+            <div
+              className="card-container"
+              key={idx}
+              onClick={() => {
+                navigate(card.link);
+              }}
+            >
               <div className="card">
                 <div className="front-content">
                   <p>{card.heading}</p>
