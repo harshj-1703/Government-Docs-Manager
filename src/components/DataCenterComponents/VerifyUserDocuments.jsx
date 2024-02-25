@@ -6,6 +6,7 @@ import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.ser
 function VerifyUserDocuments() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [page, setPage] = useState(1);
 
   const getData = async () => {
     const mobile = localStorage.getItem("mobile");
@@ -14,13 +15,15 @@ function VerifyUserDocuments() {
     );
     const docData =
       await uploadedByUsersDocumentService.getAllUploadeByUserDocumentsWithRandomDCorVotebased(
-        dataCenterId.id
+        dataCenterId.id,
+        page
       );
     console.log(docData);
+    setData();
   };
 
   useEffect(() => {
-    getData();
+    // getData();
   }, []);
 
   return (

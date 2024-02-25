@@ -21,7 +21,7 @@ const uploadedByUsersDocumentService = {
   getAllUploadeByUserDocumentsWithRandomDCorVotebased: async (
     dataCenterId,
     page = 1,
-    itemsPerPage = 10
+    itemsPerPage = 2
   ) => {
     try {
       const collectionRef = docCollectionRef;
@@ -34,11 +34,15 @@ const uploadedByUsersDocumentService = {
         limit(itemsPerPage)
       );
 
-      const startAfterDoc =
-        page > 1 ? await getDoc(queryRef.doc(page * itemsPerPage)) : null;
+      let startAfterDoc = null;
+      if (page > 1) {
+        const snapshot = await getDocs(queryRef);
+        const lastVisible = snapshot.docs[snapshot.docs.length - 1];
+        startAfterDoc = lastVisible.data().createdAt;
+      }
 
       const querySnapshot = await getDocs(
-        startAfterDoc ? startAfter(queryRef, startAfterDoc) : queryRef
+        startAfterDoc ? query(queryRef, startAfter(startAfterDoc)) : queryRef
       );
 
       const documents = querySnapshot.docs.map((doc) => ({

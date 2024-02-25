@@ -32,15 +32,10 @@ const documentService = {
         where("title", ">=", searchQuery.toUpperCase()),
         where("title", "<=", searchQuery.toUpperCase() + "\uf8ff"),
         where("uploadedBy", "==", "Users"),
-        limit(itemsPerPage)
+        startAfter(page * itemsPerPage)
       );
 
-      const startAfterDoc =
-        page > 1 ? await getDoc(queryRef.doc(page * itemsPerPage)) : null;
-
-      const querySnapshot = await getDocs(
-        startAfterDoc ? startAfter(queryRef, startAfterDoc) : queryRef
-      );
+      const querySnapshot = await getDocs(queryRef);
 
       const documents = querySnapshot.docs.map((doc) => ({
         id: doc.id,
