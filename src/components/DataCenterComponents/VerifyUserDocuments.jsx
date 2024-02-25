@@ -20,10 +20,11 @@ function VerifyUserDocuments() {
       );
     console.log(docData);
     setData();
+    setIsLoading(false);
   };
 
   useEffect(() => {
-    // getData();
+    getData();
   }, []);
 
   return (

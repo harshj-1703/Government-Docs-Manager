@@ -32,6 +32,7 @@ const documentService = {
         where("title", ">=", searchQuery.toUpperCase()),
         where("title", "<=", searchQuery.toUpperCase() + "\uf8ff"),
         where("uploadedBy", "==", "Users"),
+        where("status", "==", 1),
         startAfter(page * itemsPerPage)
       );
 
