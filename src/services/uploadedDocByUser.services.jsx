@@ -12,18 +12,25 @@ import {
   doc,
   query,
   where,
+  or,
 } from "firebase/firestore";
 
 const docCollectionRef = collection(db, "UploadedDocsByUsers");
 
 const uploadedByUsersDocumentService = {
-  getAllUploadeByUserDocuments: async (page = 1, itemsPerPage = 15) => {
+  getAllUploadeByUserDocumentsWithRandomDCorVotebased: async (
+    dataCenterId,
+    page = 1,
+    itemsPerPage = 10
+  ) => {
     try {
       const collectionRef = docCollectionRef;
       const queryRef = query(
         collectionRef,
-        orderBy("updatedAt", "desc"),
+        orderBy("createdAt", "desc"),
         where("status", "==", 1),
+        where("approveStatus", "==", "Pending"),
+        where("randomDataCenterId", "in", [dataCenterId, 0]),
         limit(itemsPerPage)
       );
 

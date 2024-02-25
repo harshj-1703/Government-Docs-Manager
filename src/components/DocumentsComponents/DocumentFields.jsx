@@ -121,6 +121,8 @@ function DocumentFields({
         if (verificationType === "random") {
           formData["randomDataCenterId"] =
             await dataCenterServices.getRandomDataCenterId();
+        } else {
+          formData["randomDataCenterId"] = 0;
         }
         formData["approveStatus"] = "Pending";
         formData["userMobile"] = localStorage.getItem("mobile");
