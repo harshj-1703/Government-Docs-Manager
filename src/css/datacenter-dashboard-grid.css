@@ -81,11 +81,11 @@ body.dark .datacenter-dashboard-grid h1{
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* gap: 10px; */
+    gap: 10px;
     background: linear-gradient(-45deg, #4070F4 0%, rgb(24, 24, 156) 100% );
     color: #e8e8e8;
     padding: 40px;
-    line-height: 1.5;
+    /* line-height: 1.5; */
     overflow: hidden;
     border-radius: 5px;
     pointer-events: none;
@@ -99,7 +99,7 @@ body.dark .datacenter-dashboard-grid h1{
   
   .datacenter-dashboard-grid .card .content .heading {
     font-family: monospace;
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 700;
   }
   
