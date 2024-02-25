@@ -56,6 +56,8 @@ function VerifyOTPDataCenter({
             localStorage.setItem("state", result.user.state);
             localStorage.setItem("person1", result.user.p1);
             localStorage.setItem("person2", result.user.p2);
+            localStorage.setItem("p1Photo", result.user.p1Photo);
+            localStorage.setItem("p2Photo", result.user.p2Photo);
             navigate("/datacenter-dashboard");
           })
           .catch((e) => {
