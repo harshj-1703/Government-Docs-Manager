@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "../css/datacenter-dashboard.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import DataCenterDashboardGrid from "../components/DataCenterComponents/DataCenterDashboardGrid";
 
 const Skeleton = () => <div className="skeleton"></div>;
 
-//TODO - song,temprature of city
+//TODO - song
 function DataCenterDashboard() {
   const [formattedDate, setFormattedDate] = useState("");
   const [capitalizedCity, setCapitalizedCity] = useState("");
@@ -36,7 +37,7 @@ function DataCenterDashboard() {
         day: "numeric",
       })
     );
-    getTempratureData();
+    // getTempratureData();
   }, []);
 
   const getTempratureData = async () => {
@@ -172,6 +173,7 @@ function DataCenterDashboard() {
           </div>
         </div>
       </div>
+      <DataCenterDashboardGrid />
     </div>
   );
 }
