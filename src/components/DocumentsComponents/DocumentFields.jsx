@@ -123,6 +123,9 @@ function DocumentFields({
             await dataCenterServices.getRandomDataCenterId();
         }
         formData["approveStatus"] = "Pending";
+        formData["userMobile"] = localStorage.getItem("mobile");
+        formData["userProfileImage"] = localStorage.getItem("profileImage");
+        formData["userFullName"] = localStorage.getItem("fullName");
         formData["createdAt"] = new Date().toLocaleString(
           "en-US",
           timestampOptions
