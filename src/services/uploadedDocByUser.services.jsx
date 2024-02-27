@@ -49,7 +49,18 @@ const uploadedByUsersDocumentService = {
         data: doc.data(),
       }));
 
-      return documents;
+      const queryRefCount = query(
+        collectionRef,
+        orderBy("createdAt", "desc"),
+        where("status", "==", 1),
+        where("approveStatus", "==", "Pending"),
+        where("randomDataCenterId", "in", [dataCenterId, 0])
+      );
+      const totalDocsQuerySnapshot = await getDocs(queryRefCount);
+      const totalDocsCount = totalDocsQuerySnapshot.size;
+      // const totalPages = Math.ceil(totalDocsCount / itemsPerPage);
+
+      return { documents, totalItems: totalDocsCount };
     } catch (error) {
       throw error;
     }

@@ -1,0 +1,71 @@
+/* VerifyUserDocDataTable.css */
+
+.verify-user-table-container {
+    border-radius: 8px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  
+  .verify-user-table {
+    width: 100%;
+  }
+  
+  .verify-user-table-head {
+    background-color: #4070f4;
+    font-weight: bold;
+    font-size: 25px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    color: #fff;
+  }
+  
+  .verify-user-table-cell {
+    font-weight: normal;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    padding: 12px 0; /* Add padding to the cell */
+  }
+  
+  .verify-user-table-row:hover {
+    background-color: rgba(64, 112, 244, 0.1);
+  }
+  
+  .verify-user-banner-cell {
+    width: 120px;
+    padding-left: 16px; /* Add space to the left of the banner column */
+}
+
+.verify-user-banner-avatar {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+  }
+  
+  .verify-user-user-cell {
+    text-align: center; /* Center content horizontally */
+    vertical-align: middle; /* Center content vertically */
+  }
+  
+  .verify-user-user-avatar {
+    display: block; /* Display avatar as a block element */
+    margin: 0 auto 8px; /* Center avatar horizontally and add space below */
+  }
+  
+  .verify-user-user-name {
+    font-weight: normal;
+    text-align: center; /* Center username horizontally */
+  }
+  
+  .verify-user-check-cell button {
+    border: 1px solid #1976d2;
+    color: #1976d2;
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 14px;
+  }
+  
+  .verify-user-check-cell button:hover {
+    background-color: #1976d2;
+    color: #fff;
+  }
