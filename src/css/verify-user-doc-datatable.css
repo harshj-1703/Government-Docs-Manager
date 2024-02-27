@@ -13,11 +13,6 @@
   
   .verify-user-table-head {
     background-color: #4070f4;
-    font-weight: bold;
-    font-size: 25px;
-    font-family: 'Roboto', sans-serif;
-    text-align: center;
-    color: #fff;
   }
   
   .verify-user-table-cell {
