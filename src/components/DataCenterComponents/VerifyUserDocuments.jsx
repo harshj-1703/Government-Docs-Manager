@@ -18,18 +18,30 @@ function VerifyUserDocuments() {
         dataCenterId.id,
         page
       );
-    console.log(docData);
-    setData();
+    // console.log(docData);
+    const data = docData.map((data) => {
+      return {
+        id: data.id,
+        banner: data.data.banner,
+        title: data.data.title,
+        ministry: data.data.ministry,
+        userFullName: data.data.userFullName,
+        mobile: data.data.userMobile,
+        userProfileImage: data.data.userProfileImage,
+        verifyRatio: data.data.verifyRatio,
+        createdAt: data.data.createdAt,
+      };
+    });
+    setData(data);
+    console.log(data);
     setIsLoading(false);
   };
 
   useEffect(() => {
-    getData();
+    // getData();
   }, []);
 
-  return (
-    <>{isLoading ? <CircularLoading /> : <div>VerifyUserDocuments</div>}</>
-  );
+  return <>{isLoading ? <CircularLoading /> : <div></div>}</>;
 }
 
 export default VerifyUserDocuments;

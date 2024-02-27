@@ -12,7 +12,6 @@ import {
   doc,
   query,
   where,
-  or,
 } from "firebase/firestore";
 
 const docCollectionRef = collection(db, "UploadedDocsByUsers");

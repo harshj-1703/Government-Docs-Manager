@@ -16,9 +16,16 @@ function DataCenterDashboardGrid() {
       link: "check-user-documents-status",
     },
     {
-      heading: "User Approved Documents",
-      content: "Watch and print recipt of users verified documents",
+      heading: "Approved Documents",
+      content:
+        "Watch and print recipt of users verified documents from datacenter",
       link: "datacenter-user-approved-documents",
+    },
+    {
+      heading: "Rejected Documents",
+      content:
+        "Watch and print recipt of users rejected documents from datacenter",
+      link: "datacenter-user-rejected-documents",
     },
     {
       heading: "DataCenter Details",

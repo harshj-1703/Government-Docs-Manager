@@ -119,7 +119,7 @@ body.dark .datacenter-dashboard-grid h1{
     .datacenter-dashboard-grid .all-cards {
     display: flex;
       flex-wrap: wrap;
-      justify-content: space-between;
+      justify-content: center;
       /* gap: 20px; */
     }
   
