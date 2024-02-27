@@ -16,6 +16,11 @@ function DataCenterDashboardGrid() {
       link: "check-user-documents-status",
     },
     {
+      heading: "User Approved Documents",
+      content: "Watch and print recipt of users verified documents",
+      link: "datacenter-user-approved-documents",
+    },
+    {
       heading: "DataCenter Details",
       content: "Datacenter's all details",
       link: "datacenter-details",

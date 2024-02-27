@@ -35,6 +35,9 @@ const MyUploadedDocs = lazy(() =>
 const UploadedByUserDocUpdate = lazy(() =>
   import("./components/UserDashboard/UploadedByUserDocUpdate.jsx")
 );
+const UsersApprovedDocuments = lazy(() =>
+  import("./components/DataCenterComponents/UsersApprovedDocuments.jsx")
+);
 
 //Css files load
 import "./css/App.css";
@@ -200,6 +203,10 @@ function App() {
         {
           path: "check-user-documents-status",
           element: <UserDocumentsStatus />,
+        },
+        {
+          path: "datacenter-user-approved-documents",
+          element: <UsersApprovedDocuments />,
         },
         {
           path: "datacenter-details",
