@@ -59,12 +59,16 @@ function VerifyUserDocuments() {
         <div style={{ padding: "20px 40px 40px 40px" }}>
           <div className="head-div-dc-verify-users">
             <h1>Verify User Documents</h1>
-            <div></div>
-            <input
-              placeholder="Search With Mobile"
-              className="data-center-search-input"
-              type="number"
-            />
+            <div className="hr-div"></div>
+            <div className="search-with-button-dc-verify-users">
+              <input
+                placeholder="Search With Mobile Number"
+                className="data-center-search-input"
+                type="number"
+                // value={search}
+              />
+              <button className="search-button">Search</button>
+            </div>
           </div>
           <VerifyUserDocDataTable
             data={data}
