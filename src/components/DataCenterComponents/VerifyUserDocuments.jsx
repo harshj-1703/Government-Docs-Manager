@@ -9,7 +9,7 @@ function VerifyUserDocuments() {
   const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
-  const rowsPerPage = 2;
+  const [rowsPerPage, setRowPerPage] = useState(5);
 
   useEffect(() => {
     setIsLoading(true);
@@ -43,7 +43,7 @@ function VerifyUserDocuments() {
     };
 
     fetchData();
-  }, [page]);
+  }, [page, rowsPerPage]);
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
@@ -61,6 +61,7 @@ function VerifyUserDocuments() {
             page={page}
             onPageChange={handlePageChange}
             rowsPerPage={rowsPerPage}
+            setRowPerPage={setRowPerPage}
             setPage={setPage}
           />
         </div>

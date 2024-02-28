@@ -18,6 +18,7 @@ const VerifyUserDocDataTable = ({
   page,
   onPageChange,
   rowsPerPage,
+  setRowPerPage,
   setPage,
 }) => {
   const handleChangePage = (event, newPage) => {
@@ -115,6 +116,8 @@ const VerifyUserDocDataTable = ({
       <TablePagination
         component="div"
         className="verify-user-table-bottom"
+        rowsPerPageOptions={[2, 5, 10, 25]}
+        onRowsPerPageChange={(e) => setRowPerPage(e.target.value)}
         count={totalItems}
         rowsPerPage={rowsPerPage}
         page={page}
