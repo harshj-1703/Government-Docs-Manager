@@ -10,6 +10,7 @@ function VerifyUserDocuments() {
   const [page, setPage] = useState(0);
   const [totalItems, setTotalItems] = useState(0);
   const [rowsPerPage, setRowPerPage] = useState(5);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     setIsLoading(true);
@@ -22,7 +23,8 @@ function VerifyUserDocuments() {
         await uploadedByUsersDocumentService.getAllUploadeByUserDocumentsWithRandomDCorVotebased(
           dataCenterId.id,
           page + 1,
-          rowsPerPage
+          rowsPerPage,
+          search
         );
 
       const formattedData = documents.map((data) => ({
@@ -54,7 +56,16 @@ function VerifyUserDocuments() {
       {isLoading ? (
         <CircularLoading />
       ) : (
-        <div style={{ padding: "50px" }}>
+        <div style={{ padding: "20px 40px 40px 40px" }}>
+          <div className="head-div-dc-verify-users">
+            <h1>Verify User Documents</h1>
+            <div></div>
+            <input
+              placeholder="Search With Mobile"
+              className="data-center-search-input"
+              type="number"
+            />
+          </div>
           <VerifyUserDocDataTable
             data={data}
             totalItems={totalItems}

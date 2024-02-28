@@ -54,7 +54,7 @@ const VerifyUserDocDataTable = ({
             </TableCell>
             <TableCell
               className="verify-user-table-cell verify-user-user-cell"
-              sx={headerStyle}
+              sx={{ textAlign: "center", ...headerStyle }}
             >
               User
             </TableCell>
