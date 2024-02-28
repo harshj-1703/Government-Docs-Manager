@@ -25,23 +25,42 @@ const VerifyUserDocDataTable = ({
     onPageChange(event, newPage);
   };
 
+  const headerStyle = {
+    color: "white",
+    fontSize: "20px",
+    fontFamily: "monospace",
+  };
+
   return (
     <TableContainer className="verify-user-table-container">
       <Table className="verify-user-table">
         <TableHead className="verify-user-table-head">
           <TableRow>
-            <TableCell className="verify-user-table-cell verify-user-banner-cell">
+            <TableCell
+              className="verify-user-table-cell verify-user-banner-cell"
+              sx={headerStyle}
+            >
               Banner
             </TableCell>
-            <TableCell className="verify-user-table-cell">Title</TableCell>
-            <TableCell className="verify-user-table-cell">
+            <TableCell className="verify-user-table-cell" sx={headerStyle}>
+              Title
+            </TableCell>
+            <TableCell className="verify-user-table-cell" sx={headerStyle}>
               Uploaded Document At
             </TableCell>
-            <TableCell className="verify-user-table-cell">Mobile</TableCell>
-            <TableCell className="verify-user-table-cell verify-user-user-cell">
+            <TableCell className="verify-user-table-cell" sx={headerStyle}>
+              Mobile
+            </TableCell>
+            <TableCell
+              className="verify-user-table-cell verify-user-user-cell"
+              sx={headerStyle}
+            >
               User
             </TableCell>
-            <TableCell className="verify-user-table-cell verify-user-check-cell">
+            <TableCell
+              className="verify-user-table-cell verify-user-check-cell"
+              sx={headerStyle}
+            >
               Check Document
             </TableCell>
           </TableRow>
@@ -54,6 +73,11 @@ const VerifyUserDocDataTable = ({
                   className="verify-user-banner-avatar"
                   src={item.banner}
                   alt="Banner"
+                  sx={{
+                    width: "100%",
+                    height: "50px",
+                    borderRadius: "5px",
+                  }}
                 />
               </TableCell>
               <TableCell className="verify-user-table-cell">
@@ -65,7 +89,13 @@ const VerifyUserDocDataTable = ({
               <TableCell className="verify-user-table-cell">
                 {item.mobile}
               </TableCell>
-              <TableCell className="verify-user-table-cell verify-user-user-cell">
+              <TableCell
+                className="verify-user-table-cell verify-user-user-cell"
+                sx={{
+                  textAlign: "center",
+                  verticalAlign: "middle",
+                }}
+              >
                 <Avatar
                   className="verify-user-user-avatar"
                   src={item.userProfileImage}
@@ -84,6 +114,7 @@ const VerifyUserDocDataTable = ({
       </Table>
       <TablePagination
         component="div"
+        className="verify-user-table-bottom"
         count={totalItems}
         rowsPerPage={rowsPerPage}
         page={page}

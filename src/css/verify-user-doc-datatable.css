@@ -6,6 +6,10 @@
     overflow: hidden;
     margin-bottom: 16px;
   }
+
+  body.dark .verify-user-table-container{
+    background-color: #161449;
+  }
   
   .verify-user-table {
     width: 100%;
@@ -14,12 +18,19 @@
   .verify-user-table-head {
     background-color: #4070f4;
   }
+
+  body.dark .verify-user-table-head {
+    background-color: black;
+  }
   
   .verify-user-table-cell {
     font-weight: normal;
-    font-family: 'Roboto', sans-serif;
     text-align: center;
-    padding: 12px 0; /* Add padding to the cell */
+    padding: 12px 0;
+  }
+
+  body.dark .verify-user-table-cell{
+    color: white;
   }
   
   .verify-user-table-row:hover {
@@ -28,7 +39,7 @@
   
   .verify-user-banner-cell {
     width: 120px;
-    padding-left: 16px; /* Add space to the left of the banner column */
+    padding-left: 16px;
 }
 
 .verify-user-banner-avatar {
@@ -38,18 +49,19 @@
   }
   
   .verify-user-user-cell {
-    text-align: center; /* Center content horizontally */
-    vertical-align: middle; /* Center content vertically */
+    text-align: center;
+    vertical-align: middle;
   }
   
   .verify-user-user-avatar {
-    display: block; /* Display avatar as a block element */
-    margin: 0 auto 8px; /* Center avatar horizontally and add space below */
+    display: block;
+    margin: 0 auto 8px;
   }
   
   .verify-user-user-name {
+    font-family: monospace;
     font-weight: normal;
-    text-align: center; /* Center username horizontally */
+    text-align: center;
   }
   
   .verify-user-check-cell button {
@@ -63,4 +75,8 @@
   .verify-user-check-cell button:hover {
     background-color: #1976d2;
     color: #fff;
+  }
+
+  body.dark .verify-user-table-bottom{
+    color: white;
   }
