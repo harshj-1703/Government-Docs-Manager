@@ -67,50 +67,66 @@ const VerifyUserDocDataTable = ({
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((item) => (
-            <TableRow key={item.id} className="verify-user-table-row">
-              <TableCell className="verify-user-table-cell verify-user-banner-cell">
-                <Avatar
-                  className="verify-user-banner-avatar"
-                  src={item.banner}
-                  alt="Banner"
-                  sx={{
-                    width: "100%",
-                    height: "50px",
-                    borderRadius: "5px",
-                  }}
-                />
-              </TableCell>
-              <TableCell className="verify-user-table-cell">
-                {item.title}
-              </TableCell>
-              <TableCell className="verify-user-table-cell">
-                {item.createdAt}
-              </TableCell>
-              <TableCell className="verify-user-table-cell">
-                {item.mobile}
-              </TableCell>
+          {data.length === 0 ? (
+            <TableRow>
               <TableCell
-                className="verify-user-table-cell verify-user-user-cell"
+                colSpan={6}
+                align="center"
+                className="no-data-dc-verify-user-header"
                 sx={{
-                  textAlign: "center",
-                  verticalAlign: "middle",
+                  fontSize: "20px",
+                  color: "darkblue",
                 }}
               >
-                <Avatar
-                  className="verify-user-user-avatar"
-                  src={item.userProfileImage}
-                  alt="User Avatar"
-                />
-                <span className="verify-user-user-name">
-                  {item.userFullName}
-                </span>
-              </TableCell>
-              <TableCell className="verify-user-table-cell verify-user-check-cell">
-                <Button variant="outlined">Check Document</Button>
+                No data available
               </TableCell>
             </TableRow>
-          ))}
+          ) : (
+            data.map((item) => (
+              <TableRow key={item.id} className="verify-user-table-row">
+                <TableCell className="verify-user-table-cell verify-user-banner-cell">
+                  <Avatar
+                    className="verify-user-banner-avatar"
+                    src={item.banner}
+                    alt="Banner"
+                    sx={{
+                      width: "100%",
+                      height: "50px",
+                      borderRadius: "5px",
+                    }}
+                  />
+                </TableCell>
+                <TableCell className="verify-user-table-cell">
+                  {item.title}
+                </TableCell>
+                <TableCell className="verify-user-table-cell">
+                  {item.createdAt}
+                </TableCell>
+                <TableCell className="verify-user-table-cell">
+                  {item.mobile}
+                </TableCell>
+                <TableCell
+                  className="verify-user-table-cell verify-user-user-cell"
+                  sx={{
+                    textAlign: "center",
+                    verticalAlign: "middle",
+                  }}
+                >
+                  <Avatar
+                    className="verify-user-user-avatar"
+                    src={item.userProfileImage}
+                    alt="User Avatar"
+                  />
+                  <span className="verify-user-user-name">
+                    {item.userFullName}
+                  </span>
+                </TableCell>
+                <TableCell className="verify-user-table-cell verify-user-check-cell">
+                  <Button variant="outlined">Check Document</Button>
+                </TableCell>
+              </TableRow>
+            ))
+          )}
         </TableBody>
       </Table>
       <TablePagination

@@ -29,8 +29,10 @@ const uploadedByUsersDocumentService = {
       const collectionRef = docCollectionRef;
       const queryRef = query(
         collectionRef,
+        orderBy("userMobile", "desc"),
         orderBy("createdAt", "desc"),
-        // where("userMobile", "==", searchQuery),
+        where("userMobile", ">=", searchQuery.toUpperCase()),
+        where("userMobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
         where("status", "==", 1),
         where("approveStatus", "==", "Pending"),
         where("randomDataCenterId", "in", [dataCenterId, 0]),
@@ -55,7 +57,10 @@ const uploadedByUsersDocumentService = {
 
       const queryRefCount = query(
         collectionRef,
+        orderBy("userMobile", "desc"),
         orderBy("createdAt", "desc"),
+        where("userMobile", ">=", searchQuery.toUpperCase()),
+        where("userMobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
         where("status", "==", 1),
         where("approveStatus", "==", "Pending"),
         where("randomDataCenterId", "in", [dataCenterId, 0])

@@ -45,7 +45,7 @@ function VerifyUserDocuments() {
     };
 
     fetchData();
-  }, [page, rowsPerPage]);
+  }, [page, rowsPerPage, search]);
 
   const handlePageChange = (event, newPage) => {
     setPage(newPage);
@@ -64,10 +64,20 @@ function VerifyUserDocuments() {
               <input
                 placeholder="Search With Mobile Number"
                 className="data-center-search-input"
+                id="data-center-search-input"
                 type="number"
-                // value={search}
               />
-              <button className="search-button">Search</button>
+              <button
+                className="search-button"
+                onClick={() => {
+                  const search = document.getElementById(
+                    "data-center-search-input"
+                  ).value;
+                  setSearch(search);
+                }}
+              >
+                Search
+              </button>
             </div>
           </div>
           <VerifyUserDocDataTable
