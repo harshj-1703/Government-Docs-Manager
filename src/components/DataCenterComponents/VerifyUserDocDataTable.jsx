@@ -1,145 +1,119 @@
 import React from "react";
-import {
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-  TablePagination,
-  Avatar,
-  Button,
-} from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
+import { Avatar, Button } from "@mui/material";
 import "../../css/verify-user-doc-datatable.css";
 
 const VerifyUserDocDataTable = ({
   data,
   totalItems,
   page,
-  onPageChange,
   rowsPerPage,
   setRowPerPage,
   setPage,
 }) => {
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-    onPageChange(event, newPage);
-  };
+  const renderUserCell = (params) => (
+    <div className="verify-user-table-cell verify-user-user-cell">
+      <Avatar
+        src={params.row.userProfileImage}
+        alt="User Avatar"
+        className="verify-user-user-avatar"
+      />
+      <span className="verify-user-user-name">{params.row.userFullName}</span>
+    </div>
+  );
 
-  const headerStyle = {
-    color: "white",
-    fontSize: "20px",
-    fontFamily: "monospace",
-  };
+  const columns = [
+    {
+      field: "banner",
+      headerName: "Banner",
+      flex: 0.2,
+      headerClassName: "verify-user-table-head",
+      renderCell: (params) => (
+        <div className="verify-user-table-cell verify-user-banner-cell">
+          <Avatar
+            className="verify-user-banner-avatar"
+            src={params.value}
+            alt="Banner"
+            sx={{
+              width: "100%",
+              height: "75px",
+              borderRadius: "5px",
+            }}
+          />
+        </div>
+      ),
+    },
+    {
+      field: "title",
+      headerName: "Title",
+      flex: 0.2,
+      headerClassName: "verify-user-table-head",
+      renderCell: (params) => (
+        <div className="verify-user-table-cell">{params.value}</div>
+      ),
+    },
+    {
+      field: "createdAt",
+      headerName: "Uploaded Document At",
+      flex: 0.25,
+      headerClassName: "verify-user-table-head",
+      renderCell: (params) => (
+        <div className="verify-user-table-cell-timestamp">
+          {params.value.slice(0, -9)}
+        </div>
+      ),
+    },
+    {
+      field: "mobile",
+      headerName: "Mobile",
+      flex: 0.09,
+      headerClassName: "verify-user-table-head",
+      headerAlign: "center",
+      cellAlign: "center",
+      renderCell: (params) => (
+        <div className="verify-user-table-cell">{params.value}</div>
+      ),
+    },
+    {
+      field: "user",
+      headerName: "User",
+      flex: 0.15,
+      headerClassName: "verify-user-table-head",
+      headerAlign: "center",
+      renderCell: renderUserCell,
+    },
+    {
+      field: "check",
+      headerName: "Check Document",
+      headerClassName: "verify-user-table-head",
+      flex: 0.2,
+      renderCell: (params) => (
+        <div className="verify-user-table-cell verify-user-check-cell">
+          <Button variant="outlined">Check Document</Button>
+        </div>
+      ),
+    },
+  ];
 
   return (
-    <TableContainer className="verify-user-table-container">
-      <Table className="verify-user-table">
-        <TableHead className="verify-user-table-head">
-          <TableRow>
-            <TableCell
-              className="verify-user-table-cell verify-user-banner-cell"
-              sx={headerStyle}
-            >
-              Banner
-            </TableCell>
-            <TableCell className="verify-user-table-cell" sx={headerStyle}>
-              Title
-            </TableCell>
-            <TableCell className="verify-user-table-cell" sx={headerStyle}>
-              Uploaded Document At
-            </TableCell>
-            <TableCell className="verify-user-table-cell" sx={headerStyle}>
-              Mobile
-            </TableCell>
-            <TableCell
-              className="verify-user-table-cell verify-user-user-cell"
-              sx={{ textAlign: "center", ...headerStyle }}
-            >
-              User
-            </TableCell>
-            <TableCell
-              className="verify-user-table-cell verify-user-check-cell"
-              sx={headerStyle}
-            >
-              Check Document
-            </TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.length === 0 ? (
-            <TableRow>
-              <TableCell
-                colSpan={6}
-                align="center"
-                className="no-data-dc-verify-user-header"
-                sx={{
-                  fontSize: "20px",
-                  color: "darkblue",
-                }}
-              >
-                No data available
-              </TableCell>
-            </TableRow>
-          ) : (
-            data.map((item) => (
-              <TableRow key={item.id} className="verify-user-table-row">
-                <TableCell className="verify-user-table-cell verify-user-banner-cell">
-                  <Avatar
-                    className="verify-user-banner-avatar"
-                    src={item.banner}
-                    alt="Banner"
-                    sx={{
-                      width: "100%",
-                      height: "50px",
-                      borderRadius: "5px",
-                    }}
-                  />
-                </TableCell>
-                <TableCell className="verify-user-table-cell">
-                  {item.title}
-                </TableCell>
-                <TableCell className="verify-user-table-cell">
-                  {item.createdAt}
-                </TableCell>
-                <TableCell className="verify-user-table-cell">
-                  {item.mobile}
-                </TableCell>
-                <TableCell
-                  className="verify-user-table-cell verify-user-user-cell"
-                  sx={{
-                    textAlign: "center",
-                    verticalAlign: "middle",
-                  }}
-                >
-                  <Avatar
-                    className="verify-user-user-avatar"
-                    src={item.userProfileImage}
-                    alt="User Avatar"
-                  />
-                  <span className="verify-user-user-name">
-                    {item.userFullName}
-                  </span>
-                </TableCell>
-                <TableCell className="verify-user-table-cell verify-user-check-cell">
-                  <Button variant="outlined">Check Document</Button>
-                </TableCell>
-              </TableRow>
-            ))
-          )}
-        </TableBody>
-      </Table>
-      <TablePagination
-        component="div"
-        className="verify-user-table-bottom"
-        rowsPerPageOptions={[2, 5, 10, 25]}
-        onRowsPerPageChange={(e) => setRowPerPage(e.target.value)}
-        count={totalItems}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
+    <div style={{ width: "100%" }}>
+      <DataGrid
+        rows={data}
+        columns={columns}
+        paginationModel={{ pageSize: rowsPerPage, page: page }}
+        paginationMode="server"
+        pageSizeOptions={[2, 5, 10, 25]}
+        rowCount={totalItems}
+        checkboxSelection={false}
+        disableRowSelectionOnClick
+        rowSelection={false}
+        onPaginationModelChange={(x) => {
+          setPage(x.page);
+          setRowPerPage(x.pageSize);
+        }}
+        rowHeight={90}
       />
-    </TableContainer>
+    </div>
   );
 };
 

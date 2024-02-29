@@ -5,6 +5,7 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     /* margin-bottom: 16px; */
+    font-family: monospace;
   }
 
   body.dark .verify-user-table-container{
@@ -17,28 +18,67 @@
   
   .verify-user-table-head {
     background-color: #4070f4;
+    color: white;
+    font-size: 18px;
+    font-family: inherit !important;
+  }
+
+  .verify-user-table-head svg{
+    color: darkblue;
+  }
+
+  body.dark .verify-user-table-head svg{
+    color: yellow;
   }
 
   body.dark .verify-user-table-head {
     background-color: black;
+    color: yellow;
   }
   
   .verify-user-table-cell {
-    font-weight: normal;
-    text-align: center;
+    font-weight: 500;
     padding: 12px 0;
+    color: rgb(0, 0, 82);
+    font-family: monospace;
+    font-size: 18px;
   }
 
   body.dark .verify-user-table-cell{
+    color: white;
+  }
+
+  .verify-user-table-cell-timestamp {
+    font-weight: 500;
+    color: rgb(0, 0, 82);
+    font-family: monospace;
+    font-size: 14px;
+  }
+
+  body.dark .verify-user-table-cell-timestamp{
     color: white;
   }
   
   .verify-user-table-row:hover {
     background-color: rgba(64, 112, 244, 0.1);
   }
+
+  .MuiToolbar-root, .MuiToolbar-root p{
+    color: darkblue;
+    font-size: 15px;
+    font-weight: bold;
+  }
+
+  body.dark .MuiToolbar-root, body.dark .MuiToolbar-root p, body.dark .MuiToolbar-root button,body.dark .MuiToolbar-root svg{
+    color: yellow;
+  }
+
+  body.dark .MuiToolbar-root button:disabled svg{
+    color: gainsboro;
+  }
   
   .verify-user-banner-cell {
-    width: 120px;
+    width: 100%;
     padding-left: 16px;
 }
 
@@ -50,6 +90,7 @@
   
   .verify-user-user-cell {
     text-align: center;
+    width: 100%;
     vertical-align: middle;
   }
   
