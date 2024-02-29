@@ -209,3 +209,13 @@
   body.dark .search-with-button-dc-verify-users .search-button{
     background-color: darkblue;
   }
+
+  .image-placeholder-updatetable {
+    position: absolute;
+    width: 150px;
+    height: 75px;
+    background: linear-gradient(135deg, #ffffff, #a1a0a0);
+    animation: gradientAnimation 2s ease infinite alternate;
+    padding: 35px;
+    border-radius: 10px;
+  }

@@ -51,6 +51,7 @@ const MyUploadedDocsDataTable = ({ documents }) => {
       headerName: "Banner",
       flex: 0.27,
       align: "center",
+      minWidth: 200,
       headerAlign: "center",
       headerClassName: "custom-header-datatable",
       renderCell: renderCell,
@@ -60,6 +61,7 @@ const MyUploadedDocsDataTable = ({ documents }) => {
       headerName: "Title",
       flex: 0.4,
       align: "left",
+      minWidth: 240,
       headerAlign: "left",
       headerClassName: "custom-header-datatable",
     },
@@ -67,6 +69,7 @@ const MyUploadedDocsDataTable = ({ documents }) => {
       field: "ministry",
       headerName: "Ministry",
       flex: 0.3,
+      minWidth: 200,
       align: "left",
       headerAlign: "left",
       headerClassName: "custom-header-datatable",
@@ -75,6 +78,7 @@ const MyUploadedDocsDataTable = ({ documents }) => {
       field: "id",
       headerName: "Action",
       flex: 0.4,
+      minWidth: 200,
       align: "center",
       headerAlign: "center",
       headerClassName: "custom-header-datatable",
@@ -109,11 +113,6 @@ const MyUploadedDocsDataTable = ({ documents }) => {
           initialState={{
             pagination: {
               paginationModel: { pageSize: pageSize, page: 0 },
-            },
-            columns: {
-              columnVisibilityModel: {
-                ministry: false,
-              },
             },
           }}
           pageSizeOptions={[5, 10, 25]}

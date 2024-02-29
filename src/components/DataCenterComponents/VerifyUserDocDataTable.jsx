@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Avatar, Button } from "@mui/material";
 import "../../css/verify-user-doc-datatable.css";
@@ -29,20 +29,26 @@ const VerifyUserDocDataTable = ({
       flex: 0.2,
       headerClassName: "verify-user-table-head",
       minWidth: 200,
-      renderCell: (params) => (
-        <div className="verify-user-table-cell verify-user-banner-cell">
-          <Avatar
-            className="verify-user-banner-avatar"
-            src={params.value}
-            alt="Banner"
-            sx={{
-              width: "100%",
-              height: "75px",
-              borderRadius: "5px",
-            }}
-          />
-        </div>
-      ),
+      renderCell: (params) => {
+        const [imageLoaded, setImageLoaded] = useState(false);
+        return (
+          <div className="verify-user-table-cell verify-user-banner-cell">
+            {!imageLoaded && <div className="image-placeholder-updatetable" />}
+            <Avatar
+              className="verify-user-banner-avatar"
+              src={params.value}
+              alt="Banner"
+              onLoad={() => setImageLoaded(true)}
+              sx={{
+                width: "100%",
+                height: "75px",
+                borderRadius: "5px",
+                opacity: imageLoaded ? "1" : "0",
+              }}
+            />
+          </div>
+        );
+      },
     },
     {
       field: "title",
