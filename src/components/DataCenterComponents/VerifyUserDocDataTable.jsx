@@ -28,6 +28,7 @@ const VerifyUserDocDataTable = ({
       headerName: "Banner",
       flex: 0.2,
       headerClassName: "verify-user-table-head",
+      minWidth: 200,
       renderCell: (params) => (
         <div className="verify-user-table-cell verify-user-banner-cell">
           <Avatar
@@ -48,6 +49,7 @@ const VerifyUserDocDataTable = ({
       headerName: "Title",
       flex: 0.2,
       headerClassName: "verify-user-table-head",
+      minWidth: 350,
       renderCell: (params) => (
         <div className="verify-user-table-cell">{params.value}</div>
       ),
@@ -55,6 +57,7 @@ const VerifyUserDocDataTable = ({
     {
       field: "createdAt",
       headerName: "Uploaded Document At",
+      minWidth: 300,
       flex: 0.25,
       headerClassName: "verify-user-table-head",
       renderCell: (params) => (
@@ -66,6 +69,7 @@ const VerifyUserDocDataTable = ({
     {
       field: "mobile",
       headerName: "Mobile",
+      minWidth: 100,
       flex: 0.09,
       headerClassName: "verify-user-table-head",
       headerAlign: "center",
@@ -77,6 +81,7 @@ const VerifyUserDocDataTable = ({
     {
       field: "user",
       headerName: "User",
+      minWidth: 200,
       flex: 0.15,
       headerClassName: "verify-user-table-head",
       headerAlign: "center",
@@ -85,6 +90,7 @@ const VerifyUserDocDataTable = ({
     {
       field: "check",
       headerName: "Check Document",
+      minWidth: 200,
       headerClassName: "verify-user-table-head",
       flex: 0.2,
       renderCell: (params) => (
@@ -103,6 +109,7 @@ const VerifyUserDocDataTable = ({
         paginationModel={{ pageSize: rowsPerPage, page: page }}
         paginationMode="server"
         pageSizeOptions={[2, 5, 10, 25]}
+        colu
         rowCount={totalItems}
         checkboxSelection={false}
         disableRowSelectionOnClick
