@@ -27,53 +27,59 @@ const uploadedByUsersDocumentService = {
   ) => {
     try {
       const collectionRef = docCollectionRef;
-      const queryRef = query(
+      let queryRef = query(
         collectionRef,
-        orderBy("userMobile", "desc"),
-        orderBy("createdAt", "desc"),
         where("userMobile", ">=", searchQuery.toUpperCase()),
         where("userMobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
         where("status", "==", 1),
         where("approveStatus", "==", "Pending"),
         where("randomDataCenterId", "in", [dataCenterId, 0]),
-        limit(itemsPerPage)
+        orderBy("userMobile", "desc"),
+        orderBy("createdAt", "desc")
       );
 
-      let startAfterDoc = null;
       if (page > 1) {
-        const snapshot = await getDocs(queryRef);
-        const lastVisible = snapshot.docs[snapshot.docs.length - 1];
-        startAfterDoc = lastVisible.data().createdAt;
+        const snapshot = await getDocs(
+          query(queryRef, limit(itemsPerPage * (page - 1)))
+        );
+
+        const lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        const lastUserMobile = lastDoc.data().userMobile;
+        const lastCreatedAt = lastDoc.data().createdAt;
+
+        queryRef = query(
+          queryRef,
+          startAfter(lastUserMobile, lastCreatedAt),
+          limit(itemsPerPage)
+        );
+      } else {
+        queryRef = query(queryRef, limit(itemsPerPage));
       }
 
-      const querySnapshot = await getDocs(
-        startAfterDoc ? query(queryRef, startAfter(startAfterDoc)) : queryRef
-      );
-
+      const querySnapshot = await getDocs(queryRef);
       const documents = querySnapshot.docs.map((doc) => ({
         id: doc.id,
         data: doc.data(),
       }));
 
-      const queryRefCount = query(
-        collectionRef,
-        orderBy("userMobile", "desc"),
-        orderBy("createdAt", "desc"),
-        where("userMobile", ">=", searchQuery.toUpperCase()),
-        where("userMobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
-        where("status", "==", 1),
-        where("approveStatus", "==", "Pending"),
-        where("randomDataCenterId", "in", [dataCenterId, 0])
+      const totalDocsQuerySnapshot = await getDocs(
+        query(
+          collectionRef,
+          where("userMobile", ">=", searchQuery.toUpperCase()),
+          where("userMobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
+          where("status", "==", 1),
+          where("approveStatus", "==", "Pending"),
+          where("randomDataCenterId", "in", [dataCenterId, 0])
+        )
       );
-      const totalDocsQuerySnapshot = await getDocs(queryRefCount);
       const totalDocsCount = totalDocsQuerySnapshot.size;
-      // const totalPages = Math.ceil(totalDocsCount / itemsPerPage);
 
       return { documents, totalItems: totalDocsCount };
     } catch (error) {
       throw error;
     }
   },
+
   getDocumentFromId: async (id) => {
     const docRef = doc(db, "UploadedDocsByUsers", id);
     try {
