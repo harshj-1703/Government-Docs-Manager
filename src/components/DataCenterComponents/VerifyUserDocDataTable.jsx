@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Avatar, Button } from "@mui/material";
 import "../../css/verify-user-doc-datatable.css";
+import { useNavigate } from "react-router-dom";
 
 const VerifyUserDocDataTable = ({
   data,
@@ -21,6 +22,8 @@ const VerifyUserDocDataTable = ({
       <span className="verify-user-user-name">{params.row.userFullName}</span>
     </div>
   );
+
+  const navigate = useNavigate();
 
   const columns = [
     {
@@ -76,7 +79,7 @@ const VerifyUserDocDataTable = ({
       field: "mobile",
       headerName: "Mobile",
       minWidth: 100,
-      flex: 0.09,
+      flex: 0.1,
       headerClassName: "verify-user-table-head",
       headerAlign: "center",
       cellAlign: "center",
@@ -94,14 +97,23 @@ const VerifyUserDocDataTable = ({
       renderCell: renderUserCell,
     },
     {
-      field: "check",
+      field: "id",
       headerName: "Check Document",
       minWidth: 200,
       headerClassName: "verify-user-table-head",
       flex: 0.2,
       renderCell: (params) => (
         <div className="verify-user-table-cell verify-user-check-cell">
-          <Button variant="outlined">Check Document</Button>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              navigate("../verify-user-uploaded-docs-detail", {
+                state: params.value,
+              });
+            }}
+          >
+            Check Document
+          </Button>
         </div>
       ),
     },

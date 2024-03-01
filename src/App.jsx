@@ -62,6 +62,9 @@ const UserDocumentsStatus = lazy(() =>
 const DataCenterDetails = lazy(() =>
   import("./components/DataCenterComponents/DataCenterDetails.jsx")
 );
+const VerifyUserDocumentsDetails = lazy(() =>
+  import("./components/DataCenterComponents/VerifyUserDocumentsDetails.jsx")
+);
 
 //---------------------------------- Main Function APP ----------------------------------
 function App() {
@@ -202,6 +205,10 @@ function App() {
         {
           path: "verify-user-uploaded-docs",
           element: <VerifyUserDocuments />,
+        },
+        {
+          path: "verify-user-uploaded-docs-detail",
+          element: <VerifyUserDocumentsDetails />,
         },
         {
           path: "check-user-documents-status",

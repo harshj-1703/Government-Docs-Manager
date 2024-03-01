@@ -1,0 +1,184 @@
+.vudd-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ensures user info is centered vertically */
+    padding: 20px;
+    background-color: #c8e3fb; /* Very light sky color */
+    color: darkblue;
+  }
+
+  body.dark .vudd-container{
+    background-color: rgb(0, 0, 57);
+  }
+  
+  .vudd-details {
+    background-color: #a6beff63;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    text-align: center;
+  }
+
+  .vudd-details h1{
+    letter-spacing: 2.5px;
+    margin-bottom: 10px;
+  }
+
+  body.dark .vudd-details{
+    background-color: rgba(0, 15, 97, 0.79);
+    color: white;
+  }
+
+  .vudd-details p{
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: 800;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .vudd-banner {
+    width: 100%;
+    max-width: 60%; /* Smaller banner */
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .vudd-user-info {
+    display: flex;
+    justify-content: center; /* Centers user info horizontally */
+    align-items: center;
+    flex-direction: column; /* Aligns user info vertically */
+    margin-bottom: 20px;
+    flex-direction: row;
+  }
+  
+  .vudd-profile-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin: 18px;
+  }
+  
+  .vudd-fields {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  
+  .vudd-field {
+    background-color: #eef1ff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  body.dark .vudd-field{
+    background-color:#001b86;
+  }
+  
+  .vudd-field h2 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    letter-spacing: 2.5px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .vudd-field a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  .vudd-progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .vudd-progress-fill {
+    height: 100%;
+    background-color: #04ff00;
+  }
+  
+  .vudd-progress-text {
+    text-align: center;
+    font-size: 14px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+  
+  .vudd-updatedat{
+    margin-top: 25px;
+  }
+  
+  .data-center-remark-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid cyan;
+    font-family: monospace;
+    border-radius: 8px;
+    resize: vertical;
+    font-size: 16px;
+  }
+
+  body.dark .data-center-remark-input {
+    background-color: #031768;
+    color: white;
+  }
+  
+  .data-center-remark-input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .remarks-label {
+    margin-bottom: 5px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+    
+  .vudd-hr{
+    height: 2px;
+    margin: 20px;
+    background-color: skyblue;
+  }
+
+  .vudd-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .vudd-buttons button {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+    transition: background-color 0.3s ease;
+    margin: 0 20px;
+    font-family: monospace;
+    letter-spacing: 5px;
+    font-weight: bolder;
+  }
+  
+  .vudd-buttons button:nth-child(1) {
+    background-color: #28a745;
+    color: #ffffff;
+  }
+  
+  .vudd-buttons button:nth-child(2) {
+    background-color: #dc3545;
+    color: #ffffff;
+  }
+  
+  .vudd-buttons button:hover {
+    filter: contrast(2.1);
+  }
+  
