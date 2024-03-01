@@ -7,6 +7,7 @@ function AboutContent() {
   return (
     <>
       <div id="main-about">
+        Lets Make Government System Curreptionless and easy to use
         <div id="box-photo-content">
           <div>
             <LazyLoadImage

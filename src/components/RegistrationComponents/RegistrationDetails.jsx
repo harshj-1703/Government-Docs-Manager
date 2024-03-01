@@ -86,6 +86,18 @@ function RegistrationDetails({
     } else if (value.length > 35) {
       setPasswordError("Password Length Must Less Then 35 letters");
       return false;
+    } else if (!/[A-Z]/.test(value)) {
+      setPasswordError("Password must contain at least one uppercase letter.");
+      return false;
+    } else if (!/[a-z]/.test(value)) {
+      setPasswordError("Password must contain at least one lowercase letter.");
+      return false;
+    } else if (!/\d/.test(value)) {
+      setPasswordError("Password must contain at least one digit.");
+      return false;
+    } else if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value)) {
+      setPasswordError("Password must contain at least one special character.");
+      return false;
     } else {
       setPasswordError("");
       return true;

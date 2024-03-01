@@ -117,6 +117,7 @@ function DocumentFields({
         const mobile = localStorage.getItem("mobile");
         formData["userMobile"] = mobile;
         formData["verifyRatio"] = 0;
+        formData["numbersDataCenterChecked"] = 0;
         formData["status"] = 1;
         if (verificationType === "random") {
           formData["randomDataCenterId"] =

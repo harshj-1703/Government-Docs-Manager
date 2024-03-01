@@ -28,7 +28,7 @@ function Home() {
       </section>
 
       <section id="about" className="section">
-        <div id="about-heading">About Us</div>
+        {/* <div id="about-heading">About Us</div> */}
         <AboutContent />
       </section>
 
