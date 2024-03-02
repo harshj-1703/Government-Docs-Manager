@@ -1,22 +1,13 @@
-import React, { useState } from "react";
-import { LazyLoadImage } from "react-lazy-load-image-component";
+import React from "react";
 
 function AboutContent() {
-  const [imageLoaded, setImageLoaded] = useState(false);
-
   return (
     <>
       <div id="main-about">
-        Lets Make Government System Curreptionless and easy to use
-        <div id="box-photo-content">
-          <div>
-            <LazyLoadImage
-              id="hj-image"
-              src="/images/bhai.jpeg"
-              style={{ opacity: imageLoaded ? 1 : 0 }}
-              onLoad={() => setImageLoaded(true)}
-            />
-          </div>
+        <div className="about-shape-and-text">
+          <h1 className="about-shape-text">
+            Let's Make Government System Corruption Less and Easy to Use
+          </h1>
         </div>
         <div id="about-main-text">
           <h2 data-text="Developed By">Developed By</h2>
