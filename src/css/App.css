@@ -84,7 +84,7 @@ body{
     transition: 0.5s;
     top: -50%;
 }
-.indicator::before{
+/* .indicator::before{
     content: '';
     position: absolute;
     top: 50%;
@@ -105,7 +105,7 @@ body{
     background: transparent;
     border-top-left-radius: 20px;
     box-shadow: -1px -10px 0 0 var(--clr);
-}
+} */
 .navigation ul li:nth-child(1).active ~ .indicator{
     transform: translateX(calc(70px * 0));
 }
