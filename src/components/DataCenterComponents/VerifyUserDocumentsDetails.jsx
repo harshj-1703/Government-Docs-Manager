@@ -12,7 +12,7 @@ function VerifyUserDocumentsDetails() {
     const uploadedDocumentData =
       await uploadedByUsersDocumentService.getDocumentFromId(uploadedDocId);
     setDocumentData(uploadedDocumentData);
-    console.log(uploadedDocumentData);
+    // console.log(uploadedDocumentData);
   };
 
   useEffect(() => {

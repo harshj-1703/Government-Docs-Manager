@@ -59,6 +59,7 @@ function UserDocumentStatus({ isMenuShow }) {
       field: "banner",
       headerName: "Banner",
       flex: 0.2,
+      minWidth: 200,
       align: "center",
       headerAlign: "center",
       headerClassName: "custom-header-datatable",
@@ -68,6 +69,7 @@ function UserDocumentStatus({ isMenuShow }) {
       field: "title",
       headerName: "Title",
       flex: 0.3,
+      minWidth: 300,
       align: "left",
       headerAlign: "left",
       headerClassName: "custom-header-datatable",
@@ -76,6 +78,7 @@ function UserDocumentStatus({ isMenuShow }) {
       field: "ministry",
       headerName: "Ministry",
       flex: 0.4,
+      minWidth: 200,
       align: "left",
       headerAlign: "left",
       headerClassName: "custom-header-datatable",
@@ -84,6 +87,7 @@ function UserDocumentStatus({ isMenuShow }) {
       field: "updatedAt",
       headerName: "Uploaded Time",
       flex: 0.4,
+      minWidth: 300,
       align: "left",
       headerAlign: "left",
       headerClassName: "custom-header-datatable",
@@ -92,6 +96,7 @@ function UserDocumentStatus({ isMenuShow }) {
       field: "approveStatus",
       headerName: "Approve",
       flex: 0.25,
+      minWidth: 150,
       align: "center",
       headerAlign: "center",
       headerClassName: "custom-header-datatable",
@@ -125,6 +130,7 @@ function UserDocumentStatus({ isMenuShow }) {
       field: "verifyRatio",
       headerName: "Verify(%)",
       flex: 0.2,
+      minWidth: 200,
       align: "center",
       headerAlign: "center",
       headerClassName: "custom-header-datatable",
@@ -170,7 +176,10 @@ function UserDocumentStatus({ isMenuShow }) {
           isMenuShow ? "user-document-status-blur" : "user-document-status"
         }
       >
-        <div className="myuploaded-docs-datatable-table">
+        <div
+          className="myuploaded-docs-datatable-table"
+          style={{ margin: "25px 0" }}
+        >
           {isLoading && <CircularLoading />}
           {!isLoading &&
             (documents.length !== 0 ? (
@@ -196,7 +205,7 @@ function UserDocumentStatus({ isMenuShow }) {
                   checkboxSelection={false}
                   rowSelection={false}
                   getRowHeight={getRowHeight}
-                  style={{ border: "none", width: "100%", height: "100%" }}
+                  style={{ border: "none" }}
                 />
               </>
             ) : (
