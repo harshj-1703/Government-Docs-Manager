@@ -13,16 +13,12 @@ import {
   query,
 } from "firebase/firestore";
 
-const datacenterCollectionRef = collection(db, "Datacenters");
+const remarksCollectionRef = collection(db, "DocumentRemarks");
 
-const dataCenterServices = {
-  // getAllUsers: () => {
-  //     const queryRef = query(datacenterCollectionRef, orderBy("status", "desc"));
-  //     return getDocs(queryRef);
-  //   },
-  getDataCenterFromMobile: async (mobile) => {
+const remarksDocumentsServices = {
+  getremarksFromMobile: async (mobile) => {
     try {
-      const q = query(datacenterCollectionRef, where("mobile", "==", mobile));
+      const q = query(remarksCollectionRef, where("mobile", "==", mobile));
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.docs.length > 0) {
@@ -38,9 +34,9 @@ const dataCenterServices = {
       throw error;
     }
   },
-  getRandomDataCenterId: async () => {
+  getRandomremarksId: async () => {
     try {
-      const querySnapshot = await getDocs(datacenterCollectionRef);
+      const querySnapshot = await getDocs(remarksCollectionRef);
       const documentIds = querySnapshot.docs.map((doc) => doc.id);
       const randomIndex = Math.floor(Math.random() * documentIds.length);
       const randomDocumentId = documentIds[randomIndex];
@@ -50,25 +46,16 @@ const dataCenterServices = {
       throw error;
     }
   },
-  getTotalDataCenters: async () => {
-    try {
-      const querySnapshot = await getDocs(datacenterCollectionRef);
-      return querySnapshot.size;
-    } catch (error) {
-      console.error("Error", error);
-      throw error;
-    }
-  },
-  addDataCenter: (newDs) => {
-    return addDoc(datacenterCollectionRef, newDs);
+  addremarksDocuments: (newDs) => {
+    return addDoc(remarksCollectionRef, newDs);
   },
   //   deleteUser: (id) => {
   //     return deleteDoc(doc(bookCollectionRef, id));
   //   },
-  updateDataCenter: (id, newDs) => {
-    const userDocRef = doc(datacenterCollectionRef, id);
+  updateremarks: (id, newDs) => {
+    const userDocRef = doc(remarksCollectionRef, id);
     return updateDoc(userDocRef, newDs);
   },
 };
 
-export default dataCenterServices;
+export default remarksDocumentsServices;
