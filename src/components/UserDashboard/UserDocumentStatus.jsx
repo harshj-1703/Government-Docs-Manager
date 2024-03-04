@@ -135,7 +135,7 @@ function UserDocumentStatus({ isMenuShow }) {
       headerAlign: "center",
       headerClassName: "custom-header-datatable",
       renderCell: (params) => {
-        const ratio = parseFloat(params.value);
+        const ratio = parseFloat(params.value).toFixed(2);
         let bgColor, borderColor;
 
         if (ratio < 25) {
@@ -160,7 +160,7 @@ function UserDocumentStatus({ isMenuShow }) {
           color: "darkblue",
         };
 
-        return <div style={cellStyle}>{params.value} %</div>;
+        return <div style={cellStyle}>{ratio} %</div>;
       },
     },
   ];
