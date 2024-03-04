@@ -16,6 +16,16 @@ import {
 const approvedDocumentsCollectionRef = collection(db, "ApprovedDocuments");
 
 const approvedDocumentsServices = {
+  getApprovedDocumentFromId: async (id) => {
+    const docRef = doc(db, "ApprovedDocuments", id);
+    try {
+      const doc = await getDoc(docRef);
+      // console.log(doc.data());
+      return doc.data();
+    } catch (error) {
+      throw error;
+    }
+  },
   getapprovedDocumentsFromMobile: async (mobile) => {
     try {
       const q = query(
@@ -37,18 +47,6 @@ const approvedDocumentsServices = {
       throw error;
     }
   },
-  getRandomapprovedDocumentsId: async () => {
-    try {
-      const querySnapshot = await getDocs(approvedDocumentsCollectionRef);
-      const documentIds = querySnapshot.docs.map((doc) => doc.id);
-      const randomIndex = Math.floor(Math.random() * documentIds.length);
-      const randomDocumentId = documentIds[randomIndex];
-      return randomDocumentId;
-    } catch (error) {
-      console.error("Error getting random document ID:", error);
-      throw error;
-    }
-  },
   addapprovedDocuments: (newDs) => {
     return addDoc(approvedDocumentsCollectionRef, newDs);
   },
@@ -56,6 +54,9 @@ const approvedDocumentsServices = {
     const userDocRef = doc(approvedDocumentsCollectionRef, id);
     return updateDoc(userDocRef, newDs);
   },
+  //   deleteUser: (id) => {
+  //     return deleteDoc(doc(bookCollectionRef, id));
+  //   },
 };
 
 export default approvedDocumentsServices;

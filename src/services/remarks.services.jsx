@@ -16,33 +16,21 @@ import {
 const remarksCollectionRef = collection(db, "DocumentRemarks");
 
 const remarksDocumentsServices = {
-  getremarksFromMobile: async (mobile) => {
+  getremarksFromDocumentId: async (docId) => {
     try {
-      const q = query(remarksCollectionRef, where("mobile", "==", mobile));
+      const q = query(remarksCollectionRef, where("documentId", "==", docId));
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.docs.length > 0) {
-        const userDoc = querySnapshot.docs[0];
+        const docsDoc = querySnapshot.docs[0];
         return {
-          id: userDoc.id,
-          user: userDoc.data(),
+          id: docsDoc.id,
+          remarks: docsDoc.data(),
         };
       } else {
         return null;
       }
     } catch (error) {
-      throw error;
-    }
-  },
-  getRandomremarksId: async () => {
-    try {
-      const querySnapshot = await getDocs(remarksCollectionRef);
-      const documentIds = querySnapshot.docs.map((doc) => doc.id);
-      const randomIndex = Math.floor(Math.random() * documentIds.length);
-      const randomDocumentId = documentIds[randomIndex];
-      return randomDocumentId;
-    } catch (error) {
-      console.error("Error getting random document ID:", error);
       throw error;
     }
   },

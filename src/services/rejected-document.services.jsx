@@ -16,36 +16,13 @@ import {
 const rejectedDocumentsCollectionRef = collection(db, "RejectedDocuments");
 
 const rejectedDocumentsServices = {
-  getrejectedDocumentsFromMobile: async (mobile) => {
+  getRejectedDocumentFromId: async (id) => {
+    const docRef = doc(db, "RejectedDocuments", id);
     try {
-      const q = query(
-        rejectedDocumentsCollectionRef,
-        where("mobile", "==", mobile)
-      );
-      const querySnapshot = await getDocs(q);
-
-      if (querySnapshot.docs.length > 0) {
-        const userDoc = querySnapshot.docs[0];
-        return {
-          id: userDoc.id,
-          user: userDoc.data(),
-        };
-      } else {
-        return null;
-      }
+      const doc = await getDoc(docRef);
+      // console.log(doc.data());
+      return doc.data();
     } catch (error) {
-      throw error;
-    }
-  },
-  getRandomrejectedDocumentsId: async () => {
-    try {
-      const querySnapshot = await getDocs(rejectedDocumentsCollectionRef);
-      const documentIds = querySnapshot.docs.map((doc) => doc.id);
-      const randomIndex = Math.floor(Math.random() * documentIds.length);
-      const randomDocumentId = documentIds[randomIndex];
-      return randomDocumentId;
-    } catch (error) {
-      console.error("Error getting random document ID:", error);
       throw error;
     }
   },
@@ -56,6 +33,9 @@ const rejectedDocumentsServices = {
     const userDocRef = doc(rejectedDocumentsCollectionRef, id);
     return updateDoc(userDocRef, newDs);
   },
+  //   deleteUser: (id) => {
+  //     return deleteDoc(doc(bookCollectionRef, id));
+  //   },
 };
 
 export default rejectedDocumentsServices;
