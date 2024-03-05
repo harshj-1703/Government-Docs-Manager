@@ -58,27 +58,25 @@ function VerifyUserDocuments() {
         <div className="head-div-dc-verify-users">
           <h1 style={{ textAlign: "center" }}>Verify User Documents</h1>
           <div className="hr-div"></div>
-          {data.length !== 0 && (
-            <div className="search-with-button-dc-verify-users">
-              <input
-                placeholder="Search With Mobile Number"
-                className="data-center-search-input"
-                id="data-center-search-input"
-                type="number"
-              />
-              <button
-                className="search-button"
-                onClick={() => {
-                  const search = document.getElementById(
-                    "data-center-search-input"
-                  ).value;
-                  setSearch(search);
-                }}
-              >
-                Search
-              </button>
-            </div>
-          )}
+          <div className="search-with-button-dc-verify-users">
+            <input
+              placeholder="Search With Mobile Number"
+              className="data-center-search-input"
+              id="data-center-search-input"
+              type="number"
+            />
+            <button
+              className="search-button"
+              onClick={() => {
+                const search = document.getElementById(
+                  "data-center-search-input"
+                ).value;
+                setSearch(search);
+              }}
+            >
+              Search
+            </button>
+          </div>
         </div>
         {isLoading ? (
           <CircularLoading />
