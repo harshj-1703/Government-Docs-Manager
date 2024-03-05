@@ -16,6 +16,7 @@ function VerifyUserDocumentsDetails() {
   const [remarks, setRemarks] = useState("");
   const [remarksError, setRemarksError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [change, setChange] = useState(false);
 
   const timestampOptions = {
     month: "long",
@@ -54,6 +55,7 @@ function VerifyUserDocumentsDetails() {
     if (validateRemarks(remarks)) {
       const confirm = window.confirm("Are you sure want to approve document?");
       if (confirm) {
+        setChange(true);
         if (documentData.randomDataCenterId !== 0) {
           setLoading(true);
           try {
@@ -61,6 +63,10 @@ function VerifyUserDocumentsDetails() {
               verifyRatio: 100,
               numbersDataCenterChecked: 1,
               approveStatus: "Approved",
+              checkedByDCMNumber: [
+                ...documentData.checkedByDCMNumber,
+                localStorage.getItem("mobile"),
+              ],
             };
             await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
               uploadedDocId,
@@ -114,6 +120,10 @@ function VerifyUserDocumentsDetails() {
                 verifyRatio: 100,
                 numbersDataCenterChecked: totalDataCenters,
                 approveStatus: "Approved",
+                checkedByDCMNumber: [
+                  ...documentData.checkedByDCMNumber,
+                  localStorage.getItem("mobile"),
+                ],
               };
               approvedDocumentObject.verifyRatio = 100;
               approvedDocumentObject.approveStatus = "Approved";
@@ -139,6 +149,10 @@ function VerifyUserDocumentsDetails() {
                 verifyRatio: 0,
                 numbersDataCenterChecked: totalDataCenters,
                 approveStatus: "Rejected",
+                checkedByDCMNumber: [
+                  ...documentData.checkedByDCMNumber,
+                  localStorage.getItem("mobile"),
+                ],
               };
               rejectedDocumentObject.verifyRatio = 0;
               rejectedDocumentObject.approveStatus = "Rejected";
@@ -182,6 +196,10 @@ function VerifyUserDocumentsDetails() {
                 documentData.verifyRatio + (1 / totalDataCenters) * 100,
               numbersDataCenterChecked:
                 documentData.numbersDataCenterChecked + 1,
+              checkedByDCMNumber: [
+                ...documentData.checkedByDCMNumber,
+                localStorage.getItem("mobile"),
+              ],
             };
             await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
               uploadedDocId,
@@ -210,6 +228,7 @@ function VerifyUserDocumentsDetails() {
   const rejectDocument = async () => {
     const confirm = window.confirm("Are you sure want to reject document?");
     if (confirm) {
+      setChange(true);
       if (documentData.randomDataCenterId !== 0) {
         setLoading(true);
         try {
@@ -217,6 +236,10 @@ function VerifyUserDocumentsDetails() {
             verifyRatio: 0,
             numbersDataCenterChecked: 1,
             approveStatus: "Rejected",
+            checkedByDCMNumber: [
+              ...documentData.checkedByDCMNumber,
+              localStorage.getItem("mobile"),
+            ],
           };
 
           await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
@@ -272,6 +295,10 @@ function VerifyUserDocumentsDetails() {
               verifyRatio: 100,
               numbersDataCenterChecked: totalDataCenters,
               approveStatus: "Approved",
+              checkedByDCMNumber: [
+                ...documentData.checkedByDCMNumber,
+                localStorage.getItem("mobile"),
+              ],
             };
             approvedDocumentObject.verifyRatio = 100;
             approvedDocumentObject.approveStatus = "Approved";
@@ -296,6 +323,10 @@ function VerifyUserDocumentsDetails() {
               verifyRatio: 0,
               numbersDataCenterChecked: totalDataCenters,
               approveStatus: "Rejected",
+              checkedByDCMNumber: [
+                ...documentData.checkedByDCMNumber,
+                localStorage.getItem("mobile"),
+              ],
             };
             rejectedDocumentObject.verifyRatio = 0;
             rejectedDocumentObject.approveStatus = "Rejected";
@@ -337,6 +368,10 @@ function VerifyUserDocumentsDetails() {
             verifyRatio:
               documentData.verifyRatio - (1 / totalDataCenters) * 100,
             numbersDataCenterChecked: documentData.numbersDataCenterChecked + 1,
+            checkedByDCMNumber: [
+              ...documentData.checkedByDCMNumber,
+              localStorage.getItem("mobile"),
+            ],
           };
           await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
             uploadedDocId,
@@ -363,7 +398,7 @@ function VerifyUserDocumentsDetails() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [change]);
 
   return (
     <div className="vudd-container">
@@ -421,7 +456,8 @@ function VerifyUserDocumentsDetails() {
               {documentData.updatedAt}
             </p>
             <p className="vudd-progress-text">
-              Verification Progress: {documentData.verifyRatio}%
+              Verification Progress:{" "}
+              {parseFloat(documentData.verifyRatio).toFixed(2)}%
             </p>
             {parseInt(documentData.verifyRatio) >= 0 && (
               <div className="vudd-progress-bar">
@@ -432,27 +468,11 @@ function VerifyUserDocumentsDetails() {
               </div>
             )}
             <div className="vudd-hr"></div>
-            {documentData.approveStatus === "Approved" && (
-              <p
-                style={{
-                  color: "green",
-                  fontSize: "20px",
-                  fontFamily: "monospace",
-                }}
-              >
-                Document Approved
-              </p>
-            )}
             {documentData.approveStatus === "Rejected" && (
-              <p
-                style={{
-                  color: "red",
-                  fontSize: "20px",
-                  fontFamily: "monospace",
-                }}
-              >
-                Document Rejected
-              </p>
+              <p style={{ color: "red" }}>Document Rejected</p>
+            )}
+            {documentData.approveStatus === "Approved" && (
+              <p style={{ color: "green" }}>Document Approved</p>
             )}
             {documentData.approveStatus === "Pending" && (
               <>

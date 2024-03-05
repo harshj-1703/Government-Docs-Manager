@@ -78,7 +78,7 @@ const VerifyUserDocDataTable = ({
     {
       field: "mobile",
       headerName: "Mobile",
-      minWidth: 100,
+      minWidth: 120,
       flex: 0.1,
       headerClassName: "verify-user-table-head",
       headerAlign: "center",

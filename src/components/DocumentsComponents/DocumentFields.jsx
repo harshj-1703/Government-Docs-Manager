@@ -119,6 +119,7 @@ function DocumentFields({
         formData["verifyRatio"] = 0;
         formData["numbersDataCenterChecked"] = 0;
         formData["status"] = 1;
+        formData["checkedByDCMNumber"] = [];
         if (verificationType === "random") {
           formData["randomDataCenterId"] =
             await dataCenterServices.getRandomDataCenterId();
