@@ -88,6 +88,10 @@ function VerifyUserDocumentsDetails() {
             approvedDocumentObject.verifyRatio = 100;
             approvedDocumentObject.approveStatus = "Approved";
             approvedDocumentObject.uploadedDocId = uploadedDocId;
+            approvedDocumentObject.checkedByDCMNumber = [
+              ...documentData.checkedByDCMNumber,
+              localStorage.getItem("mobile"),
+            ];
 
             await approvedDocumentsServices.addapprovedDocuments(
               approvedDocumentObject
@@ -132,6 +136,10 @@ function VerifyUserDocumentsDetails() {
               approvedDocumentObject.verifyRatio = 100;
               approvedDocumentObject.approveStatus = "Approved";
               approvedDocumentObject.uploadedDocId = uploadedDocId;
+              approvedDocumentObject.checkedByDCMNumber = [
+                ...documentData.checkedByDCMNumber,
+                localStorage.getItem("mobile"),
+              ];
               approvedDocumentObject.createdAt = new Date().toLocaleString(
                 "en-US",
                 timestampOptions
@@ -140,8 +148,6 @@ function VerifyUserDocumentsDetails() {
                 "en-US",
                 timestampOptions
               );
-              approvedDocumentObject.verifyRatio = 100;
-              approvedDocumentObject.approveStatus = "Approved";
               approvedDocumentObject.numbersDataCenterChecked =
                 totalDataCenters;
 
@@ -169,10 +175,12 @@ function VerifyUserDocumentsDetails() {
                 "en-US",
                 timestampOptions
               );
-              rejectedDocumentObject.verifyRatio = 0;
-              rejectedDocumentObject.approveStatus = "Rejected";
               rejectedDocumentObject.numbersDataCenterChecked =
                 totalDataCenters;
+              rejectedDocumentObject.checkedByDCMNumber = [
+                ...documentData.checkedByDCMNumber,
+                localStorage.getItem("mobile"),
+              ];
 
               await rejectedDocumentsServices.addrejectedDocuments(
                 rejectedDocumentObject
@@ -265,6 +273,10 @@ function VerifyUserDocumentsDetails() {
             );
             rejectedDocumentObject.verifyRatio = 0;
             rejectedDocumentObject.approveStatus = "Rejected";
+            rejectedDocumentObject.checkedByDCMNumber = [
+              ...documentData.checkedByDCMNumber,
+              localStorage.getItem("mobile"),
+            ];
 
             await rejectedDocumentsServices.addrejectedDocuments(
               rejectedDocumentObject
@@ -306,9 +318,6 @@ function VerifyUserDocumentsDetails() {
                   localStorage.getItem("mobile"),
                 ],
               };
-              approvedDocumentObject.verifyRatio = 100;
-              approvedDocumentObject.approveStatus = "Approved";
-              approvedDocumentObject.uploadedDocId = uploadedDocId;
               approvedDocumentObject.createdAt = new Date().toLocaleString(
                 "en-US",
                 timestampOptions
@@ -319,8 +328,13 @@ function VerifyUserDocumentsDetails() {
               );
               approvedDocumentObject.verifyRatio = 100;
               approvedDocumentObject.approveStatus = "Approved";
+              approvedDocumentObject.uploadedDocId = uploadedDocId;
               approvedDocumentObject.numbersDataCenterChecked =
                 totalDataCenters;
+              approvedDocumentObject.checkedByDCMNumber = [
+                ...documentData.checkedByDCMNumber,
+                localStorage.getItem("mobile"),
+              ];
 
               await approvedDocumentsServices.addapprovedDocuments(
                 approvedDocumentObject
@@ -346,10 +360,12 @@ function VerifyUserDocumentsDetails() {
                 "en-US",
                 timestampOptions
               );
-              rejectedDocumentObject.verifyRatio = 0;
-              rejectedDocumentObject.approveStatus = "Rejected";
               rejectedDocumentObject.numbersDataCenterChecked =
                 totalDataCenters;
+              rejectedDocumentObject.checkedByDCMNumber = [
+                ...documentData.checkedByDCMNumber,
+                localStorage.getItem("mobile"),
+              ];
 
               await rejectedDocumentsServices.addrejectedDocuments(
                 rejectedDocumentObject

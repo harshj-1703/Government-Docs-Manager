@@ -61,9 +61,9 @@ const uploadedByUsersDocumentService = {
         data: doc.data(),
       }));
 
-      const filteredDocuments = documents.filter(
-        (doc) => !doc.data.checkedByDCMNumber.includes(mobile)
-      );
+      // const filteredDocuments = documents.filter(
+      //   (doc) => !doc.data.checkedByDCMNumber.includes(mobile)
+      // );
 
       const totalDocsQuerySnapshot = await getDocs(
         query(
@@ -75,14 +75,14 @@ const uploadedByUsersDocumentService = {
           where("randomDataCenterId", "in", [dataCenterId, 0])
         )
       );
-      // const totalDocsCount = totalDocsQuerySnapshot.size;
-      const filteredCounts = totalDocsQuerySnapshot.docs.filter(
-        (doc) => !doc.data().checkedByDCMNumber.includes(mobile)
-      );
+      const totalDocsCount = totalDocsQuerySnapshot.size;
+      // const filteredCounts = totalDocsQuerySnapshot.docs.filter(
+      //   (doc) => !doc.data().checkedByDCMNumber.includes(mobile)
+      // );
 
       return {
-        documents: filteredDocuments,
-        totalItems: filteredCounts.length,
+        documents: documents,
+        totalItems: totalDocsCount,
       };
     } catch (error) {
       throw error;
