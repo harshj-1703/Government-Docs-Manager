@@ -33,6 +33,7 @@ function VerifyUserDocuments() {
         banner: data.data.banner,
         title: data.data.title,
         ministry: data.data.ministry,
+        checkedByDCMNumber: data.data.checkedByDCMNumber,
         userFullName: data.data.userFullName,
         mobile: data.data.userMobile,
         userProfileImage: data.data.userProfileImage,

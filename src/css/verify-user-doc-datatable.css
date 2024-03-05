@@ -126,6 +126,16 @@
     color: white;
   }
 
+  .checked-text{
+    color: darkblue;
+    width: 100%;
+    text-align: center;
+  }
+
+  body.dark .checked-text{
+    color: white;
+  }
+
   .data-center-search-input {
     border-radius: 10px 0 0 10px;
     outline: 2px solid #00a6fb;

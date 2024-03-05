@@ -102,20 +102,28 @@ const VerifyUserDocDataTable = ({
       minWidth: 200,
       headerClassName: "verify-user-table-head",
       flex: 0.2,
-      renderCell: (params) => (
-        <div className="verify-user-table-cell verify-user-check-cell">
-          <Button
-            variant="outlined"
-            onClick={() => {
-              navigate("../verify-user-uploaded-docs-detail", {
-                state: params.value,
-              });
-            }}
+      renderCell: (params) =>
+        params.row.checkedByDCMNumber.includes(
+          localStorage.getItem("mobile")
+        ) ? (
+          <div className="checked-text">Checked</div>
+        ) : (
+          <div
+            className="verify-user-table-cell verify-user-check-cell"
+            style={{ width: "100%", textAlign: "center" }}
           >
-            Check Document
-          </Button>
-        </div>
-      ),
+            <Button
+              variant="outlined"
+              onClick={() => {
+                navigate("../verify-user-uploaded-docs-detail", {
+                  state: params.value,
+                });
+              }}
+            >
+              Check Document
+            </Button>
+          </div>
+        ),
     },
   ];
 
@@ -148,6 +156,7 @@ const VerifyUserDocDataTable = ({
             fontSize: "30px",
             color: "red",
             marginTop: "35px",
+            minHeight: "50px",
           }}
         >
           No Data Available
