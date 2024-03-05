@@ -87,6 +87,7 @@ function VerifyUserDocumentsDetails() {
             );
             approvedDocumentObject.verifyRatio = 100;
             approvedDocumentObject.approveStatus = "Approved";
+            approvedDocumentObject.uploadedDocId = uploadedDocId;
 
             await approvedDocumentsServices.addapprovedDocuments(
               approvedDocumentObject
@@ -130,6 +131,7 @@ function VerifyUserDocumentsDetails() {
               };
               approvedDocumentObject.verifyRatio = 100;
               approvedDocumentObject.approveStatus = "Approved";
+              approvedDocumentObject.uploadedDocId = uploadedDocId;
               approvedDocumentObject.createdAt = new Date().toLocaleString(
                 "en-US",
                 timestampOptions
@@ -306,6 +308,7 @@ function VerifyUserDocumentsDetails() {
               };
               approvedDocumentObject.verifyRatio = 100;
               approvedDocumentObject.approveStatus = "Approved";
+              approvedDocumentObject.uploadedDocId = uploadedDocId;
               approvedDocumentObject.createdAt = new Date().toLocaleString(
                 "en-US",
                 timestampOptions
