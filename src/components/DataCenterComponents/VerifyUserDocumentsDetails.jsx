@@ -17,6 +17,7 @@ function VerifyUserDocumentsDetails() {
   const [remarksError, setRemarksError] = useState("");
   const [loading, setLoading] = useState(false);
   const [change, setChange] = useState(false);
+  const [showButtons, setShowButtons] = useState(true);
 
   const timestampOptions = {
     month: "long",
@@ -33,7 +34,10 @@ function VerifyUserDocumentsDetails() {
     const uploadedDocumentData =
       await uploadedByUsersDocumentService.getDocumentFromId(uploadedDocId);
     setDocumentData(uploadedDocumentData);
-    // console.log(uploadedDocumentData);
+    const showButtonsOrNot = uploadedDocumentData.checkedByDCMNumber.includes(
+      localStorage.getItem("mobile")
+    );
+    setShowButtons(!showButtonsOrNot);
   };
 
   const validateRemarks = (remark) => {
@@ -55,7 +59,6 @@ function VerifyUserDocumentsDetails() {
     if (validateRemarks(remarks)) {
       const confirm = window.confirm("Are you sure want to approve document?");
       if (confirm) {
-        setChange(true);
         if (documentData.randomDataCenterId !== 0) {
           setLoading(true);
           try {
@@ -221,115 +224,35 @@ function VerifyUserDocumentsDetails() {
           }
           setLoading(false);
         }
+        setChange(() => !change);
       }
     }
   };
 
   const rejectDocument = async () => {
-    const confirm = window.confirm("Are you sure want to reject document?");
-    if (confirm) {
-      setChange(true);
-      if (documentData.randomDataCenterId !== 0) {
-        setLoading(true);
-        try {
-          const newDocumentUpdateObject = {
-            verifyRatio: 0,
-            numbersDataCenterChecked: 1,
-            approveStatus: "Rejected",
-            checkedByDCMNumber: [
-              ...documentData.checkedByDCMNumber,
-              localStorage.getItem("mobile"),
-            ],
-          };
-
-          await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
-            uploadedDocId,
-            newDocumentUpdateObject
-          );
-
-          const rejectedDocumentObject = documentData;
-
-          rejectedDocumentObject.createdAt = new Date().toLocaleString(
-            "en-US",
-            timestampOptions
-          );
-          rejectedDocumentObject.updatedAt = new Date().toLocaleString(
-            "en-US",
-            timestampOptions
-          );
-          rejectedDocumentObject.verifyRatio = 0;
-          rejectedDocumentObject.approveStatus = "Rejected";
-
-          await rejectedDocumentsServices.addrejectedDocuments(
-            rejectedDocumentObject
-          );
-
-          await remarksDocumentsServices.addremarksDocuments({
-            remarks,
-            status: "Rejected",
-            documentId: uploadedDocId,
-            createdAt: new Date().toLocaleString("en-US", timestampOptions),
-            updatedAt: new Date().toLocaleString("en-US", timestampOptions),
-          });
-
-          ToastMessage({
-            message: "Document Rejected Successfully!",
-            type: "warning",
-          });
-        } catch (e) {
-          console.error(e);
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        setLoading(true);
-        const totalDataCenters = await getTotalDataCenters();
-        const ratio =
-          ((documentData.numbersDataCenterChecked + 1) / totalDataCenters) *
-          100;
-        if (ratio > 90) {
-          let newDocumentUpdateObject = {};
-          if (documentData.verifyRatio > 0) {
-            const approvedDocumentObject = documentData;
-            newDocumentUpdateObject = {
-              verifyRatio: 100,
-              numbersDataCenterChecked: totalDataCenters,
-              approveStatus: "Approved",
-              checkedByDCMNumber: [
-                ...documentData.checkedByDCMNumber,
-                localStorage.getItem("mobile"),
-              ],
-            };
-            approvedDocumentObject.verifyRatio = 100;
-            approvedDocumentObject.approveStatus = "Approved";
-            approvedDocumentObject.createdAt = new Date().toLocaleString(
-              "en-US",
-              timestampOptions
-            );
-            approvedDocumentObject.updatedAt = new Date().toLocaleString(
-              "en-US",
-              timestampOptions
-            );
-            approvedDocumentObject.verifyRatio = 100;
-            approvedDocumentObject.approveStatus = "Approved";
-            approvedDocumentObject.numbersDataCenterChecked = totalDataCenters;
-
-            await approvedDocumentsServices.addapprovedDocuments(
-              approvedDocumentObject
-            );
-          } else {
-            const rejectedDocumentObject = documentData;
-            newDocumentUpdateObject = {
+    if (validateRemarks(remarks)) {
+      const confirm = window.confirm("Are you sure want to reject document?");
+      if (confirm) {
+        if (documentData.randomDataCenterId !== 0) {
+          setLoading(true);
+          try {
+            const newDocumentUpdateObject = {
               verifyRatio: 0,
-              numbersDataCenterChecked: totalDataCenters,
+              numbersDataCenterChecked: 1,
               approveStatus: "Rejected",
               checkedByDCMNumber: [
                 ...documentData.checkedByDCMNumber,
                 localStorage.getItem("mobile"),
               ],
             };
-            rejectedDocumentObject.verifyRatio = 0;
-            rejectedDocumentObject.approveStatus = "Rejected";
+
+            await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
+              uploadedDocId,
+              newDocumentUpdateObject
+            );
+
+            const rejectedDocumentObject = documentData;
+
             rejectedDocumentObject.createdAt = new Date().toLocaleString(
               "en-US",
               timestampOptions
@@ -340,58 +263,144 @@ function VerifyUserDocumentsDetails() {
             );
             rejectedDocumentObject.verifyRatio = 0;
             rejectedDocumentObject.approveStatus = "Rejected";
-            rejectedDocumentObject.numbersDataCenterChecked = totalDataCenters;
 
             await rejectedDocumentsServices.addrejectedDocuments(
               rejectedDocumentObject
             );
+
+            await remarksDocumentsServices.addremarksDocuments({
+              remarks,
+              status: "Rejected",
+              documentId: uploadedDocId,
+              createdAt: new Date().toLocaleString("en-US", timestampOptions),
+              updatedAt: new Date().toLocaleString("en-US", timestampOptions),
+            });
+
+            ToastMessage({
+              message: "Document Rejected Successfully!",
+              type: "warning",
+            });
+          } catch (e) {
+            console.error(e);
+          } finally {
+            setLoading(false);
           }
-          await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
-            uploadedDocId,
-            newDocumentUpdateObject
-          );
-
-          await remarksDocumentsServices.addremarksDocuments({
-            remarks,
-            status: "Rejected",
-            documentId: uploadedDocId,
-            createdAt: new Date().toLocaleString("en-US", timestampOptions),
-            updatedAt: new Date().toLocaleString("en-US", timestampOptions),
-          });
-
-          ToastMessage({
-            message: "Document Rejected Successfully!",
-            type: "success",
-          });
         } else {
-          const newDocumentUpdateObject = {
-            verifyRatio:
-              documentData.verifyRatio - (1 / totalDataCenters) * 100,
-            numbersDataCenterChecked: documentData.numbersDataCenterChecked + 1,
-            checkedByDCMNumber: [
-              ...documentData.checkedByDCMNumber,
-              localStorage.getItem("mobile"),
-            ],
-          };
-          await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
-            uploadedDocId,
-            newDocumentUpdateObject
-          );
+          setLoading(true);
+          const totalDataCenters = await getTotalDataCenters();
+          const ratio =
+            ((documentData.numbersDataCenterChecked + 1) / totalDataCenters) *
+            100;
+          if (ratio > 90) {
+            let newDocumentUpdateObject = {};
+            if (documentData.verifyRatio > 0) {
+              const approvedDocumentObject = documentData;
+              newDocumentUpdateObject = {
+                verifyRatio: 100,
+                numbersDataCenterChecked: totalDataCenters,
+                approveStatus: "Approved",
+                checkedByDCMNumber: [
+                  ...documentData.checkedByDCMNumber,
+                  localStorage.getItem("mobile"),
+                ],
+              };
+              approvedDocumentObject.verifyRatio = 100;
+              approvedDocumentObject.approveStatus = "Approved";
+              approvedDocumentObject.createdAt = new Date().toLocaleString(
+                "en-US",
+                timestampOptions
+              );
+              approvedDocumentObject.updatedAt = new Date().toLocaleString(
+                "en-US",
+                timestampOptions
+              );
+              approvedDocumentObject.verifyRatio = 100;
+              approvedDocumentObject.approveStatus = "Approved";
+              approvedDocumentObject.numbersDataCenterChecked =
+                totalDataCenters;
 
-          await remarksDocumentsServices.addremarksDocuments({
-            remarks,
-            status: "Rejected",
-            documentId: uploadedDocId,
-            createdAt: new Date().toLocaleString("en-US", timestampOptions),
-            updatedAt: new Date().toLocaleString("en-US", timestampOptions),
-          });
+              await approvedDocumentsServices.addapprovedDocuments(
+                approvedDocumentObject
+              );
+            } else {
+              const rejectedDocumentObject = documentData;
+              newDocumentUpdateObject = {
+                verifyRatio: 0,
+                numbersDataCenterChecked: totalDataCenters,
+                approveStatus: "Rejected",
+                checkedByDCMNumber: [
+                  ...documentData.checkedByDCMNumber,
+                  localStorage.getItem("mobile"),
+                ],
+              };
+              rejectedDocumentObject.verifyRatio = 0;
+              rejectedDocumentObject.approveStatus = "Rejected";
+              rejectedDocumentObject.createdAt = new Date().toLocaleString(
+                "en-US",
+                timestampOptions
+              );
+              rejectedDocumentObject.updatedAt = new Date().toLocaleString(
+                "en-US",
+                timestampOptions
+              );
+              rejectedDocumentObject.verifyRatio = 0;
+              rejectedDocumentObject.approveStatus = "Rejected";
+              rejectedDocumentObject.numbersDataCenterChecked =
+                totalDataCenters;
 
-          ToastMessage({
-            message: "Document Rejected Successfully!",
-            type: "success",
-          });
+              await rejectedDocumentsServices.addrejectedDocuments(
+                rejectedDocumentObject
+              );
+            }
+            await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
+              uploadedDocId,
+              newDocumentUpdateObject
+            );
+
+            await remarksDocumentsServices.addremarksDocuments({
+              remarks,
+              status: "Rejected",
+              documentId: uploadedDocId,
+              createdAt: new Date().toLocaleString("en-US", timestampOptions),
+              updatedAt: new Date().toLocaleString("en-US", timestampOptions),
+            });
+
+            ToastMessage({
+              message: "Document Rejected Successfully!",
+              type: "success",
+            });
+          } else {
+            const newDocumentUpdateObject = {
+              verifyRatio:
+                documentData.verifyRatio - (1 / totalDataCenters) * 100,
+              numbersDataCenterChecked:
+                documentData.numbersDataCenterChecked + 1,
+              checkedByDCMNumber: [
+                ...documentData.checkedByDCMNumber,
+                localStorage.getItem("mobile"),
+              ],
+            };
+            await uploadedByUsersDocumentService.updateUploadedByUsersDocument(
+              uploadedDocId,
+              newDocumentUpdateObject
+            );
+
+            await remarksDocumentsServices.addremarksDocuments({
+              remarks,
+              status: "Rejected",
+              documentId: uploadedDocId,
+              createdAt: new Date().toLocaleString("en-US", timestampOptions),
+              updatedAt: new Date().toLocaleString("en-US", timestampOptions),
+            });
+
+            ToastMessage({
+              message: "Document Rejected Successfully!",
+              type: "success",
+            });
+          }
+          setLoading(false);
         }
-        setLoading(false);
+        setChange(() => !change);
       }
     }
   };
@@ -474,7 +483,7 @@ function VerifyUserDocumentsDetails() {
             {documentData.approveStatus === "Approved" && (
               <p style={{ color: "green" }}>Document Approved</p>
             )}
-            {documentData.approveStatus === "Pending" && (
+            {documentData.approveStatus === "Pending" && showButtons && (
               <>
                 <div className="vudd-dc-verify-remarks">
                   <textarea
