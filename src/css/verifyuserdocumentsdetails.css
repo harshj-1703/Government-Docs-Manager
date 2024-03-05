@@ -1,10 +1,10 @@
 .vudd-container {
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh; /* Ensures user info is centered vertically */
+    align-items: center; */
+    min-height: 100vh;
     padding: 20px;
-    background-color: #c8e3fb; /* Very light sky color */
+    background-color: #c8e3fb;
     color: darkblue;
   }
 
@@ -14,6 +14,7 @@
   
   .vudd-details {
     background-color: #a6beff63;
+    margin: auto;
     border-radius: 10px;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -42,7 +43,7 @@
   
   .vudd-banner {
     width: 100%;
-    max-width: 60%; /* Smaller banner */
+    max-width: 60%;
     border-radius: 10px;
     margin-top: 20px;
   }
@@ -149,8 +150,8 @@
   }
 
   .vudd-buttons {
-    display: flex;
-    justify-content: space-between;
+    /* display: flex; */
+    /* justify-content: space-between; */
     margin-top: 20px;
   }
   
@@ -171,11 +172,15 @@
   .vudd-buttons button:nth-child(1) {
     background-color: #28a745;
     color: #ffffff;
+    margin: 5px;
+    min-width: 200px;
   }
   
   .vudd-buttons button:nth-child(2) {
     background-color: #dc3545;
     color: #ffffff;
+    margin: 5px;
+    min-width: 200px;
   }
   
   .vudd-buttons button:hover {

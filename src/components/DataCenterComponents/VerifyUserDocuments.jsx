@@ -55,7 +55,7 @@ function VerifyUserDocuments() {
     <>
       <div style={{ padding: "20px 40px 40px 40px" }}>
         <div className="head-div-dc-verify-users">
-          <h1>Verify User Documents</h1>
+          <h1 style={{ textAlign: "center" }}>Verify User Documents</h1>
           <div className="hr-div"></div>
           <div className="search-with-button-dc-verify-users">
             <input

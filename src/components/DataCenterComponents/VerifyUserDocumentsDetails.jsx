@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
 import CircularLoading from "../CircularLoading";
 import "../../css/verifyuserdocumentsdetails.css";
@@ -432,21 +432,60 @@ function VerifyUserDocumentsDetails() {
               </div>
             )}
             <div className="vudd-hr"></div>
-            <div className="vudd-dc-verify-remarks">
-              <textarea
-                placeholder="Add remarks here"
-                className="data-center-remark-input"
-                type="text"
-                rows={3}
-                maxLength={300}
-                value={remarks}
-                onChange={(e) => setRemarks(e.target.value)}
-              ></textarea>
-              {remarksError && <p style={{ color: "red" }}>{remarksError}</p>}
-            </div>
-            <div className="vudd-buttons">
-              <button onClick={approveDocument}>Approve</button>
-              <button onClick={rejectDocument}>Reject</button>
+            {documentData.approveStatus === "Approved" && (
+              <p
+                style={{
+                  color: "green",
+                  fontSize: "20px",
+                  fontFamily: "monospace",
+                }}
+              >
+                Document Approved
+              </p>
+            )}
+            {documentData.approveStatus === "Rejected" && (
+              <p
+                style={{
+                  color: "red",
+                  fontSize: "20px",
+                  fontFamily: "monospace",
+                }}
+              >
+                Document Rejected
+              </p>
+            )}
+            {documentData.approveStatus === "Pending" && (
+              <>
+                <div className="vudd-dc-verify-remarks">
+                  <textarea
+                    placeholder="Add remarks here"
+                    className="data-center-remark-input"
+                    type="text"
+                    rows={3}
+                    maxLength={300}
+                    value={remarks}
+                    onChange={(e) => setRemarks(e.target.value)}
+                  ></textarea>
+                  {remarksError && (
+                    <p style={{ color: "red" }}>{remarksError}</p>
+                  )}
+                </div>
+                <div className="vudd-buttons">
+                  <button onClick={approveDocument}>Approve</button>
+                  <button onClick={rejectDocument}>Reject</button>
+                </div>
+              </>
+            )}
+            <div style={{ textAlign: "right", marginTop: "15px" }}>
+              <Link
+                to={"../verify-user-uploaded-docs"}
+                style={{
+                  textDecoration: "none",
+                  color: "orange",
+                }}
+              >
+                Back
+              </Link>
             </div>
           </div>
         ) : (
