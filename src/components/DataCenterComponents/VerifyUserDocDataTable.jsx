@@ -12,6 +12,15 @@ const VerifyUserDocDataTable = ({
   setRowPerPage,
   setPage,
 }) => {
+  const [showChecked, setShowChecked] = useState(false);
+
+  const filteredData = showChecked
+    ? data.filter(
+        (item) =>
+          !item.checkedByDCMNumber.includes(localStorage.getItem("mobile"))
+      )
+    : data;
+
   const renderUserCell = (params) => (
     <div className="verify-user-table-cell verify-user-user-cell">
       <Avatar
@@ -129,9 +138,16 @@ const VerifyUserDocDataTable = ({
 
   return (
     <div style={{ width: "100%" }}>
+      <Button
+        variant="outlined"
+        onClick={() => setShowChecked(!showChecked)}
+        style={{ marginBottom: "10px" }}
+      >
+        {showChecked ? "Show All" : "Show UnChecked Only"}
+      </Button>
       {data.length !== 0 ? (
         <DataGrid
-          rows={data}
+          rows={filteredData}
           columns={columns}
           paginationModel={{ pageSize: rowsPerPage, page: page }}
           paginationMode="server"
