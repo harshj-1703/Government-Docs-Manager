@@ -21,6 +21,7 @@ const uploadedByUsersDocumentService = {
     dataCenterId,
     page = 1,
     itemsPerPage = 2,
+    mobile,
     searchQuery = ""
   ) => {
     try {
@@ -60,6 +61,10 @@ const uploadedByUsersDocumentService = {
         data: doc.data(),
       }));
 
+      const filteredDocuments = documents.filter(
+        (doc) => !doc.data.checkedByDCMNumber.includes(mobile)
+      );
+
       const totalDocsQuerySnapshot = await getDocs(
         query(
           collectionRef,
@@ -70,9 +75,15 @@ const uploadedByUsersDocumentService = {
           where("randomDataCenterId", "in", [dataCenterId, 0])
         )
       );
-      const totalDocsCount = totalDocsQuerySnapshot.size;
+      // const totalDocsCount = totalDocsQuerySnapshot.size;
+      const filteredCounts = totalDocsQuerySnapshot.docs.filter(
+        (doc) => !doc.data().checkedByDCMNumber.includes(mobile)
+      );
 
-      return { documents, totalItems: totalDocsCount };
+      return {
+        documents: filteredDocuments,
+        totalItems: filteredCounts.length,
+      };
     } catch (error) {
       throw error;
     }

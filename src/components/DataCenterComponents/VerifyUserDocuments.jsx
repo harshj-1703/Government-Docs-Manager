@@ -24,6 +24,7 @@ function VerifyUserDocuments() {
           dataCenterId.id,
           page + 1,
           rowsPerPage,
+          mobile,
           search
         );
 
