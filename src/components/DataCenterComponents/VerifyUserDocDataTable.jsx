@@ -67,7 +67,7 @@ const VerifyUserDocDataTable = ({
       field: "createdAt",
       headerName: "Uploaded Document At",
       minWidth: 300,
-      flex: 0.25,
+      flex: 0.24,
       headerClassName: "verify-user-table-head",
       renderCell: (params) => (
         <div className="verify-user-table-cell-timestamp">
@@ -121,23 +121,38 @@ const VerifyUserDocDataTable = ({
 
   return (
     <div style={{ width: "100%" }}>
-      <DataGrid
-        rows={data}
-        columns={columns}
-        paginationModel={{ pageSize: rowsPerPage, page: page }}
-        paginationMode="server"
-        pageSizeOptions={[2, 5, 10, 25]}
-        colu
-        rowCount={totalItems}
-        checkboxSelection={false}
-        disableRowSelectionOnClick
-        rowSelection={false}
-        onPaginationModelChange={(x) => {
-          setPage(x.page);
-          setRowPerPage(x.pageSize);
-        }}
-        rowHeight={90}
-      />
+      {data.length !== 0 ? (
+        <DataGrid
+          rows={data}
+          columns={columns}
+          paginationModel={{ pageSize: rowsPerPage, page: page }}
+          paginationMode="server"
+          pageSizeOptions={[2, 5, 10, 25]}
+          colu
+          rowCount={totalItems}
+          checkboxSelection={false}
+          disableRowSelectionOnClick
+          rowSelection={false}
+          onPaginationModelChange={(x) => {
+            setPage(x.page);
+            setRowPerPage(x.pageSize);
+          }}
+          rowHeight={90}
+        />
+      ) : (
+        <div
+          style={{
+            fontFamily: "monospace",
+            width: "100%",
+            textAlign: "center",
+            fontSize: "30px",
+            color: "red",
+            marginTop: "35px",
+          }}
+        >
+          No Data Available
+        </div>
+      )}
     </div>
   );
 };
