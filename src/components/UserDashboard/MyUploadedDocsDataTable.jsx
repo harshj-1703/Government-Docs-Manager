@@ -4,7 +4,7 @@ import CircularLoading from "../CircularLoading";
 import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
 import { Link } from "react-router-dom";
 
-const MyUploadedDocsDataTable = ({ documents }) => {
+const MyUploadedDocsDataTable = ({ documents, updatePage, setUpdatePage }) => {
   const [pageSize, setPageSize] = useState(5);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -12,6 +12,7 @@ const MyUploadedDocsDataTable = ({ documents }) => {
     const confirmation = window.confirm(
       "Are you sure you want to delete request?"
     );
+    setUpdatePage(!updatePage);
     if (confirmation) {
       setIsLoading(true);
       const docDelete = { status: 0 };

@@ -9,6 +9,7 @@ import "../../css/documentpage.css";
 function MyUploadedDocs({ isMenuShow }) {
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [updatePage, setUpdatePage] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -25,6 +26,7 @@ function MyUploadedDocs({ isMenuShow }) {
           ministry: doc.data.ministry,
         };
       });
+      console.log("first");
       // const documents = [
       //   {
       //     banner:
@@ -79,7 +81,7 @@ function MyUploadedDocs({ isMenuShow }) {
 
   useEffect(() => {
     fetchData();
-  }, [data]);
+  }, [updatePage]);
 
   return (
     <div className="document-detail-main-div">
@@ -94,7 +96,11 @@ function MyUploadedDocs({ isMenuShow }) {
             {data.length !== 0 ? (
               <LazyLoadComponent>
                 <h1>My Uploaded Documents</h1>
-                <MyUploadedDocsDataTable documents={data} />
+                <MyUploadedDocsDataTable
+                  documents={data}
+                  updatePage={updatePage}
+                  setUpdatePage={setUpdatePage}
+                />
               </LazyLoadComponent>
             ) : (
               <h1>No Uploaded Documents</h1>
