@@ -1,0 +1,75 @@
+.pdf-modal-main-div{
+    color: darkblue;
+    background-color: white;
+    min-height: 100vh;
+}
+
+.pdf-modal-main-div h4{
+    font-family: monospace;
+    font-size: 35px;
+    text-align: center;
+    padding: 10px;
+    text-decoration: underline;
+}
+
+.qr-code-div{
+    padding: 40px 40px 20px 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userprofile-image-pdf{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.banner-image-pdf{
+    height: 100px;
+    width: 180px;
+    border-radius: 25px;
+}
+
+.main-certificate-text{
+    text-indent: 50px;
+    margin: 10px 70px;
+    font-family: monospace;
+    font-size: 25px;
+}
+
+.main-certificate-text b {
+    font-family: monospace;
+}
+
+.needed-fields-pdf{
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: smaller;
+}
+
+.signature-of-verified{
+    width: 100%;
+    text-align: end;
+}
+
+.signature-of-verified .signature-sign{
+    font-family: monospace;
+    padding-bottom: 20px;
+    margin-right: 150px;
+}
+
+.fieldname-main-pdf{
+    font-size: 20px;
+    font-family: monospace;
+    text-align: center;
+}
+
+.field-name-file{
+    margin-top: 35px;
+}
+
+.attached-files-pdf{
+    padding: 20px 70px;
+}

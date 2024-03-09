@@ -47,6 +47,7 @@ import "./css/App.css";
 import "./css/login.css";
 import "./css/registration.css";
 import "./css/userdashboard.css";
+import Temp from "./components/DataCenterComponents/Temp.jsx";
 const DocumentStatus = lazy(() =>
   import("./components/UserDashboard/UserDocumentStatus.jsx")
 );
@@ -227,6 +228,10 @@ function App() {
           element: <DataCenterDetails />,
         },
       ],
+    },
+    {
+      path: "temp",
+      element: <Temp />,
     },
     //error 404
     {
