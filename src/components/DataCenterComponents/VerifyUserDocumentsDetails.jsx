@@ -8,6 +8,7 @@ import approvedDocumentsServices from "../../services/approved-document.services
 import rejectedDocumentsServices from "../../services/rejected-document.services";
 import remarksDocumentsServices from "../../services/remarks.services";
 import ToastMessage from "../ToastMessage";
+import { generatePDF } from "./GeneratePDFWithApprovedDocument";
 
 function VerifyUserDocumentsDetails() {
   const location = useLocation();
@@ -500,7 +501,18 @@ function VerifyUserDocumentsDetails() {
               <p style={{ color: "red" }}>Document Rejected</p>
             )}
             {documentData.approveStatus === "Approved" && (
-              <p style={{ color: "green" }}>Document Approved</p>
+              <div>
+                <p style={{ color: "green" }}>Document Approved</p>
+                <div className="vudd-buttons">
+                  <button
+                    onClick={() => {
+                      generatePDF(documentData.userMobile, documentData.docId);
+                    }}
+                  >
+                    Generate PDF
+                  </button>
+                </div>
+              </div>
             )}
             {documentData.approveStatus === "Pending" && showButtons && (
               <>

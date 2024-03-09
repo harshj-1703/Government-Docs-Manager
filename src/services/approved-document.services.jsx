@@ -47,6 +47,28 @@ const approvedDocumentsServices = {
       throw error;
     }
   },
+  getapprovedDocumentsFromDocIdAndUserMobile: async (docId, userMobile) => {
+    try {
+      const q = query(
+        approvedDocumentsCollectionRef,
+        where("docId", "==", docId),
+        where("userMobile", "==", userMobile)
+      );
+      const querySnapshot = await getDocs(q);
+
+      if (querySnapshot.docs.length > 0) {
+        const userDoc = querySnapshot.docs[0];
+        return {
+          id: userDoc.id,
+          doc: userDoc.data(),
+        };
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
   addapprovedDocuments: (newDs) => {
     return addDoc(approvedDocumentsCollectionRef, newDs);
   },
