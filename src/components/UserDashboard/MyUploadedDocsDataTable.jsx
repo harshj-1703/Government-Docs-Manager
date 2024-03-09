@@ -85,16 +85,22 @@ const MyUploadedDocsDataTable = ({ documents, updatePage, setUpdatePage }) => {
       headerClassName: "custom-header-datatable",
       renderCell: (params) => (
         <div>
-          <button
-            className="delete-button"
-            value={params.value}
-            onClick={deleteUploadedByUserDoc}
-          >
-            Delete
-          </button>
-          <Link to={"uploadedByUserDocUpdate"} state={params.value}>
-            <button className="update-button">Update</button>
-          </Link>
+          {!params.row.checkedByDCMNumber ? (
+            <>
+              <button
+                className="delete-button"
+                value={params.value}
+                onClick={deleteUploadedByUserDoc}
+              >
+                Delete
+              </button>
+              <Link to={"uploadedByUserDocUpdate"} state={params.value}>
+                <button className="update-button">Update</button>
+              </Link>
+            </>
+          ) : (
+            <p>In Progress of Checking</p>
+          )}
         </div>
       ),
     },

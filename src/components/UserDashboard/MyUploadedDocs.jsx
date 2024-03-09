@@ -24,9 +24,10 @@ function MyUploadedDocs({ isMenuShow }) {
           banner: doc.data.banner,
           title: doc.data.title,
           ministry: doc.data.ministry,
+          checkedByDCMNumber:
+            doc.data.checkedByDCMNumber.length > 0 ? true : false,
         };
       });
-      console.log("first");
       // const documents = [
       //   {
       //     banner:
