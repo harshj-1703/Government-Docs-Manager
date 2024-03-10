@@ -121,8 +121,8 @@ function Temp({ mobile = "9727023832", docId = "gqmh8nLPH7YBWNz4Pzy9" }) {
               <b>{documentData.doc.createdAt.slice(0, -9)}</b>.
             </div>
             <div className="main-certificate-text">
-              The document required the following documents for verification,
-              and they are attached in this PDF:
+              The {documentData.doc.title} required the following documents for
+              verification, and they are attached in this PDF:
               {Object.entries(documentData.doc.fields).map(
                 ([fieldName, fileType]) => (
                   <p key={fieldName} className="needed-fields-pdf">
