@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
 import CircularLoading from "../CircularLoading";
 import "../../css/verifyuserdocumentsdetails.css";
@@ -8,8 +8,6 @@ import approvedDocumentsServices from "../../services/approved-document.services
 import rejectedDocumentsServices from "../../services/rejected-document.services";
 import remarksDocumentsServices from "../../services/remarks.services";
 import ToastMessage from "../ToastMessage";
-import GeneratePDFWithApprovedDocument from "./GeneratePDFWithApprovedDocument";
-import generatePDF, { Resolution, Margin } from "react-to-pdf";
 
 function VerifyUserDocumentsDetails() {
   const location = useLocation();
@@ -20,28 +18,7 @@ function VerifyUserDocumentsDetails() {
   const [loading, setLoading] = useState(false);
   const [change, setChange] = useState(false);
   const [showButtons, setShowButtons] = useState(true);
-  const targetRef = useRef();
-  const [isGenerating, setIsGenerating] = useState(false);
-
-  const options = {
-    method: "open",
-    resolution: Resolution.HIGH,
-    page: {
-      margin: Margin.SMALL,
-    },
-    canvas: {
-      mimeType: "image/png",
-      qualityRatio: 1,
-    },
-    overrides: {
-      pdf: {
-        compress: true,
-      },
-      canvas: {
-        useCORS: true,
-      },
-    },
-  };
+  const navigate = useNavigate();
 
   const timestampOptions = {
     month: "long",
@@ -526,45 +503,16 @@ function VerifyUserDocumentsDetails() {
             {documentData.approveStatus === "Approved" && (
               <div>
                 <p style={{ color: "green" }}>Document Approved</p>
-                {!isGenerating ? (
-                  <>
-                    <div className="vudd-buttons">
-                      <button
-                        onClick={async () => {
-                          setIsGenerating(true);
-                          try {
-                            await generatePDF(targetRef, options);
-                            setIsGenerating(false);
-                          } catch (e) {
-                            ToastMessage({
-                              message: "Error Generating PDF",
-                              type: "error",
-                            });
-                          } finally {
-                            setIsGenerating(false);
-                          }
-                        }}
-                      >
-                        Generate PDF
-                      </button>
-                    </div>
-                    <div
-                      style={{
-                        position: "absolute",
-                        left: "-1000px",
-                        top: 0,
-                      }}
+                <>
+                  <div className="vudd-buttons">
+                    <Link
+                      target="_blank"
+                      to={`/generatepdf-approved-document/${documentData.userMobile}/${documentData.docId}`}
                     >
-                      <GeneratePDFWithApprovedDocument
-                        targetRef={targetRef}
-                        mobile={documentData.userMobile}
-                        docId={documentData.docId}
-                      />
-                    </div>
-                  </>
-                ) : (
-                  <CircularLoading />
-                )}
+                      <button>Generate PDF</button>
+                    </Link>
+                  </div>
+                </>
               </div>
             )}
             {documentData.approveStatus === "Pending" && showButtons && (

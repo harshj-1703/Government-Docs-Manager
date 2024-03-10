@@ -75,4 +75,12 @@
     padding: 10px 20px;
     margin: 20px 0;
     border-radius: 15px;
+    text-align: center;
+}
+
+.field-name-file img{
+    max-width: 500px;
+    height: auto;
+    width: auto;
+    max-height: 500px;
 }

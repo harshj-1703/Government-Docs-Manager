@@ -47,7 +47,7 @@ import "./css/App.css";
 import "./css/login.css";
 import "./css/registration.css";
 import "./css/userdashboard.css";
-import Temp from "./components/DataCenterComponents/Temp.jsx";
+
 const DocumentStatus = lazy(() =>
   import("./components/UserDashboard/UserDocumentStatus.jsx")
 );
@@ -65,6 +65,11 @@ const DataCenterDetails = lazy(() =>
 );
 const VerifyUserDocumentsDetails = lazy(() =>
   import("./components/DataCenterComponents/VerifyUserDocumentsDetails.jsx")
+);
+const GeneratePDFWithApprovedDocument = lazy(() =>
+  import(
+    "./components/DataCenterComponents/GeneratePDFWithApprovedDocument.jsx"
+  )
 );
 
 //---------------------------------- Main Function APP ----------------------------------
@@ -116,6 +121,15 @@ function App() {
             <RegisterUser />
           </Suspense>
         </>
+      ),
+    },
+    {
+      path: "generatepdf-approved-document/:mobile/:docId",
+      element: (
+        <Suspense fallback={<CircularLoading />}>
+          <ToastContainer />
+          <GeneratePDFWithApprovedDocument />
+        </Suspense>
       ),
     },
     //user-dashboard
@@ -227,11 +241,11 @@ function App() {
           path: "datacenter-details",
           element: <DataCenterDetails />,
         },
+        {
+          path: "datacenter-details",
+          element: <DataCenterDetails />,
+        },
       ],
-    },
-    {
-      path: "temp",
-      element: <Temp />,
     },
     //error 404
     {
