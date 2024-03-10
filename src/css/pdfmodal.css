@@ -8,7 +8,7 @@
     font-family: monospace;
     font-size: 35px;
     text-align: center;
-    padding: 10px;
+    padding: 20px;
     text-decoration: underline;
 }
 
@@ -64,12 +64,16 @@
     font-size: 20px;
     font-family: monospace;
     text-align: center;
-}
-
-.field-name-file{
-    margin-top: 35px;
+    padding: 15px;
 }
 
 .attached-files-pdf{
-    padding: 20px 70px;
+    padding: 20px 40px;
+}
+
+.field-name-file{
+    border: 2px solid darkblue;
+    padding: 10px 20px;
+    margin: 20px 0;
+    border-radius: 15px;
 }
