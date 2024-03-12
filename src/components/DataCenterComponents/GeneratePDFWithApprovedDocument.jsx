@@ -18,7 +18,7 @@ function GeneratePDFWithApprovedDocument() {
           docId,
           mobile
         );
-      console.log(documentData);
+      // console.log(documentData);
       setDocumentData(documentData);
       setLoading(false);
     } catch (e) {
@@ -33,12 +33,19 @@ function GeneratePDFWithApprovedDocument() {
     fetchData();
   }, []);
 
+  const downloadPDF = async () => {};
+
   return (
     <>
       {loading ? (
         <CircularLoading />
       ) : (
         <div className="pdf-modal-main-div">
+          <div className="pdf-modal-download-button">
+            <button className="download-btn" onClick={downloadPDF}>
+              <i className="material-icons">get_app</i> Download as PDF
+            </button>
+          </div>
           <h4>Document Certificate</h4>
           <div className="qr-code-div">
             <div>

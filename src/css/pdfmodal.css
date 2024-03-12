@@ -68,6 +68,7 @@
 
 .attached-files-pdf{
     padding: 20px 40px;
+    page-break-inside: avoid;
 }
 
 .field-name-file{
@@ -76,6 +77,7 @@
     margin: 20px 0;
     border-radius: 15px;
     text-align: center;
+    page-break-inside: avoid;
 }
 
 .field-name-file img{
@@ -84,3 +86,44 @@
     width: auto;
     max-height: 500px;
 }
+
+.pdf-modal-download-button{
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: end;
+}
+
+.download-btn {
+    background-color: darkblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .download-btn:hover {
+    background-color: rgb(56, 56, 206);
+  }
+  
+/* @media print
+{    
+    .pdf-modal-download-button, .pdf-modal-download-button *
+    {
+        display: none !important;
+    }
+    @page {
+        margin-top: 0;
+    }
+    @page {
+        margin-bottom: 0;
+    }
+} */
