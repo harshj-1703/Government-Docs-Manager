@@ -72,7 +72,7 @@ function GeneratePDFWithApprovedDocument() {
               <i className="material-icons">
                 {generatingPDF ? "refresh" : "get_app"}
               </i>
-              {generatingPDF ? "Generating..." : "Download as PDF"}
+              {generatingPDF ? "Generating..." : "Print as PDF"}
             </button>
           </div>
           <h4>Document Certificate</h4>
@@ -135,7 +135,7 @@ function GeneratePDFWithApprovedDocument() {
           <div className="signature-of-verified">
             <img src="../../images/Signature.png" alt="Harsh Jolapara" />
           </div>
-          <hr />
+          {/* <hr /> */}
           <div className="attached-files-pdf">
             <h4>Attached Files</h4>
             {Object.entries(documentData.doc.fields).map(
