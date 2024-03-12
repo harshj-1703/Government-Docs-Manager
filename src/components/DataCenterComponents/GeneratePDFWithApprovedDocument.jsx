@@ -10,6 +10,7 @@ function GeneratePDFWithApprovedDocument() {
   const [documentData, setDocumentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const { mobile, docId } = useParams();
+  const [generatingPDF, setGeneratingPDF] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -33,10 +34,6 @@ function GeneratePDFWithApprovedDocument() {
     fetchData();
   }, []);
 
-  const downloadPDF = () => {
-    window.print();
-  };
-
   return (
     <>
       {loading ? (
@@ -44,8 +41,38 @@ function GeneratePDFWithApprovedDocument() {
       ) : (
         <div className="pdf-modal-main-div">
           <div className="pdf-modal-download-button">
-            <button className="download-btn" onClick={downloadPDF}>
-              <i className="material-icons">get_app</i> Download as PDF
+            <button
+              className={"download-btn"}
+              disabled={generatingPDF ? true : false}
+              onClick={() => {
+                if (!loading && !generatingPDF && documentData) {
+                  setGeneratingPDF(true);
+                  setTimeout(() => {
+                    const iframe = document.createElement("iframe");
+                    iframe.style.display = "none";
+                    document.body.appendChild(iframe);
+                    const htmlContent = document.documentElement.outerHTML;
+                    const iframeDoc = iframe.contentWindow.document;
+                    iframeDoc.write(htmlContent);
+                    iframeDoc.close();
+                    iframe.onload = () => {
+                      setGeneratingPDF(false);
+                      iframe.contentWindow.print();
+                    };
+                  }, 1500);
+                } else {
+                  ToastMessage({
+                    message: "Data is not available to print.",
+                    type: "warning",
+                  });
+                }
+              }}
+              style={{ backgroundColor: generatingPDF ? "green" : "darkblue" }}
+            >
+              <i className="material-icons">
+                {generatingPDF ? "refresh" : "get_app"}
+              </i>
+              {generatingPDF ? "Generating..." : "Download as PDF"}
             </button>
           </div>
           <h4>Document Certificate</h4>
