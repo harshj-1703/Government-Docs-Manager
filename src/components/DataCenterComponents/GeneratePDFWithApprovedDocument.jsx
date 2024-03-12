@@ -33,7 +33,9 @@ function GeneratePDFWithApprovedDocument() {
     fetchData();
   }, []);
 
-  const downloadPDF = async () => {};
+  const downloadPDF = () => {
+    window.print();
+  };
 
   return (
     <>

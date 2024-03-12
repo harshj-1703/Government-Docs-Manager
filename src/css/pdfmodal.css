@@ -114,7 +114,7 @@
     background-color: rgb(56, 56, 206);
   }
   
-/* @media print
+@media print
 {    
     .pdf-modal-download-button, .pdf-modal-download-button *
     {
@@ -126,4 +126,4 @@
     @page {
         margin-bottom: 0;
     }
-} */
+}
