@@ -131,7 +131,7 @@ function GeneratePDFWithApprovedDocument() {
                 <QRCode
                   className="qr-code"
                   style={{ height: "150px", width: "150px" }}
-                  value={documentData.id}
+                  value={`${process.env.HOST_LINK}/generatepdf-approved-document/${mobile}/${docId}`}
                 />
                 <p style={{ fontFamily: "monospace", textAlign: "center" }}>
                   Scan QR & verify
