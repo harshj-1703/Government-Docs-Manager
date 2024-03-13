@@ -6,6 +6,7 @@ import CircularLoading from "../CircularLoading";
 import QRCode from "react-qr-code";
 import { useParams } from "react-router-dom";
 import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 function GeneratePDFWithApprovedDocument() {
   const [documentData, setDocumentData] = useState(null);
@@ -52,6 +53,28 @@ function GeneratePDFWithApprovedDocument() {
     setIsImageDownloading(false);
   };
 
+  const handleDownloadPDF = async () => {
+    setIsImageDownloading(true);
+    const element = document.getElementById("download-photo"),
+      scale = 3;
+    const canvas = await html2canvas(element, { scale });
+    const imageData = canvas.toDataURL("image/jpeg");
+    const aspectRatio = canvas.height / canvas.width;
+
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "mm",
+      format: [210, 297],
+    });
+
+    pdf.addImage(imageData, "JPEG", 0, 0, 210, 210 * aspectRatio);
+    pdf.save(
+      `${documentData.doc.userFullName}-${documentData.doc.title}-approved-certificate.pdf`
+    );
+
+    setIsImageDownloading(false);
+  };
+
   return (
     <>
       {loading ? (
@@ -61,7 +84,16 @@ function GeneratePDFWithApprovedDocument() {
           <div className="pdf-modal-download-button">
             <button
               className={"download-btn"}
-              onClick={handleDownloadImage}
+              onClick={() => {
+                const pdf = window.confirm(
+                  "Press Ok for PDF or Cancle for Image Download"
+                );
+                if (pdf) {
+                  handleDownloadPDF();
+                } else {
+                  handleDownloadImage();
+                }
+              }}
               disabled={isImageDownloading}
               style={{
                 backgroundColor: isImageDownloading ? "green" : "darkblue",
@@ -78,7 +110,7 @@ function GeneratePDFWithApprovedDocument() {
           <div id="download-photo">
             <h4>Document Approved Certificate</h4>
             <div className="qr-code-div">
-              <div>
+              <div className="user-photo-print">
                 <img
                   src={documentData.doc.userProfileImage}
                   alt="user-photo"
@@ -88,7 +120,7 @@ function GeneratePDFWithApprovedDocument() {
                   User Photo
                 </p> */}
               </div>
-              <div>
+              <div className="user-photo-print">
                 <img
                   src={documentData.doc.banner}
                   alt="banner-photo"
@@ -123,14 +155,15 @@ function GeneratePDFWithApprovedDocument() {
               </div>
               <div className="main-certificate-text">
                 The {documentData.doc.title} required the following documents
-                for verification, and they are attached in this PDF:
+                for verification, and they are given as :&nbsp;
                 {Object.entries(documentData.doc.fields).map(
-                  ([fieldName, fileType]) => (
-                    <p key={fieldName} className="needed-fields-pdf">
-                      <b>{fieldName}:</b> {fileType}
-                    </p>
+                  ([fieldName, fileType], index, array) => (
+                    <span key={fieldName}>
+                      <b>{fieldName}</b>
+                      {index !== array.length - 1 ? ", " : ""}
+                    </span>
                   )
-                )}{" "}
+                )}
               </div>
             </div>
             <div className="signature-of-verified">
