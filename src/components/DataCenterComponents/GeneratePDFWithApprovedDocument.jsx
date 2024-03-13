@@ -5,12 +5,13 @@ import ToastMessage from "../ToastMessage";
 import CircularLoading from "../CircularLoading";
 import QRCode from "react-qr-code";
 import { useParams } from "react-router-dom";
+import html2canvas from "html2canvas";
 
 function GeneratePDFWithApprovedDocument() {
   const [documentData, setDocumentData] = useState(null);
   const [loading, setLoading] = useState(true);
   const { mobile, docId } = useParams();
-  const [generatingPDF, setGeneratingPDF] = useState(false);
+  const [isImageDownloading, setIsImageDownloading] = useState(false);
 
   const fetchData = async () => {
     try {
@@ -34,6 +35,23 @@ function GeneratePDFWithApprovedDocument() {
     fetchData();
   }, []);
 
+  const handleDownloadImage = async () => {
+    setIsImageDownloading(true);
+    const element = document.getElementById("download-photo"),
+      scale = 5,
+      canvas = await html2canvas(element, { scale }),
+      data = canvas.toDataURL("image/jpg"),
+      link = document.createElement("a");
+
+    link.href = data;
+    link.download = `${documentData.doc.userFullName}-${documentData.doc.title}-approved-certificate.jpg`;
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    setIsImageDownloading(false);
+  };
+
   return (
     <>
       {loading ? (
@@ -43,97 +61,81 @@ function GeneratePDFWithApprovedDocument() {
           <div className="pdf-modal-download-button">
             <button
               className={"download-btn"}
-              disabled={generatingPDF ? true : false}
-              onClick={() => {
-                if (!loading && !generatingPDF && documentData) {
-                  setGeneratingPDF(true);
-                  setTimeout(() => {
-                    const iframe = document.createElement("iframe");
-                    iframe.style.display = "none";
-                    document.body.appendChild(iframe);
-                    const htmlContent = document.documentElement.outerHTML;
-                    const iframeDoc = iframe.contentWindow.document;
-                    iframeDoc.write(htmlContent);
-                    iframeDoc.close();
-                    iframe.onload = () => {
-                      setGeneratingPDF(false);
-                      iframe.contentWindow.print();
-                    };
-                  }, 1500);
-                } else {
-                  ToastMessage({
-                    message: "Data is not available to print.",
-                    type: "warning",
-                  });
-                }
+              onClick={handleDownloadImage}
+              disabled={isImageDownloading}
+              style={{
+                backgroundColor: isImageDownloading ? "green" : "darkblue",
               }}
-              style={{ backgroundColor: generatingPDF ? "green" : "darkblue" }}
             >
-              <i className="material-icons">
-                {generatingPDF ? "refresh" : "get_app"}
+              <i
+                className={`material-icons ${isImageDownloading ? "spin" : ""}`}
+              >
+                {isImageDownloading ? "refresh" : "get_app"}
               </i>
-              {generatingPDF ? "Generating..." : "Print as PDF"}
+              Download Certificate
             </button>
           </div>
-          <h4>Document Certificate</h4>
-          <div className="qr-code-div">
-            <div>
-              <img
-                src={documentData.doc.userProfileImage}
-                alt="user-photo"
-                className="userprofile-image-pdf"
-              />
-              <p style={{ fontFamily: "monospace", textAlign: "center" }}>
-                User Photo
-              </p>
+          <div id="download-photo">
+            <h4>Document Approved Certificate</h4>
+            <div className="qr-code-div">
+              <div>
+                <img
+                  src={documentData.doc.userProfileImage}
+                  alt="user-photo"
+                  className="userprofile-image-pdf"
+                />
+                {/* <p style={{ fontFamily: "monospace", textAlign: "center" }}>
+                  User Photo
+                </p> */}
+              </div>
+              <div>
+                <img
+                  src={documentData.doc.banner}
+                  alt="banner-photo"
+                  className="banner-image-pdf"
+                />
+              </div>
+              <div>
+                <QRCode
+                  className="qr-code"
+                  style={{ height: "150px", width: "150px" }}
+                  value={documentData.id}
+                />
+                <p style={{ fontFamily: "monospace", textAlign: "center" }}>
+                  Scan QR & verify
+                </p>
+              </div>
             </div>
             <div>
-              <img
-                src={documentData.doc.banner}
-                alt="banner-photo"
-                className="banner-image-pdf"
-              />
+              <div className="main-certificate-text">
+                This certificate certifies that{" "}
+                <b>
+                  Mr./Mrs./Ms. {documentData.doc.userFullName} (Mobile No.:{" "}
+                  {documentData.doc.userMobile})
+                </b>{" "}
+                has affirmed that their documents for{" "}
+                <b>{documentData.doc.title}</b> from the{" "}
+                <b>{documentData.doc.ministry}</b> ministry have been approved.
+              </div>
+              <div className="main-certificate-text">
+                The request for the document was created on{" "}
+                <b>{documentData.doc.createdAt.slice(0, -9)}</b>.
+              </div>
+              <div className="main-certificate-text">
+                The {documentData.doc.title} required the following documents
+                for verification, and they are attached in this PDF:
+                {Object.entries(documentData.doc.fields).map(
+                  ([fieldName, fileType]) => (
+                    <p key={fieldName} className="needed-fields-pdf">
+                      <b>{fieldName}:</b> {fileType}
+                    </p>
+                  )
+                )}{" "}
+              </div>
             </div>
-            <div>
-              <QRCode
-                className="qr-code"
-                style={{ height: "150px", width: "150px" }}
-                value={documentData.id}
-              />
-              <p style={{ fontFamily: "monospace", textAlign: "center" }}>
-                Scan QR & verify
-              </p>
+            <div className="signature-of-verified">
+              <img src="../../images/Signature.png" alt="Harsh Jolapara" />
             </div>
-          </div>
-          <div>
-            <div className="main-certificate-text">
-              This certificate certifies that{" "}
-              <b>
-                Mr./Mrs./Ms. {documentData.doc.userFullName} (Mobile No.:{" "}
-                {documentData.doc.userMobile})
-              </b>{" "}
-              has affirmed that their documents for{" "}
-              <b>{documentData.doc.title}</b> from the{" "}
-              <b>{documentData.doc.ministry}</b> ministry have been approved.
-            </div>
-            <div className="main-certificate-text">
-              The request for the document was created on{" "}
-              <b>{documentData.doc.createdAt.slice(0, -9)}</b>.
-            </div>
-            <div className="main-certificate-text">
-              The {documentData.doc.title} required the following documents for
-              verification, and they are attached in this PDF:
-              {Object.entries(documentData.doc.fields).map(
-                ([fieldName, fileType]) => (
-                  <p key={fieldName} className="needed-fields-pdf">
-                    <b>{fieldName}:</b> {fileType}
-                  </p>
-                )
-              )}{" "}
-            </div>
-          </div>
-          <div className="signature-of-verified">
-            <img src="../../images/Signature.png" alt="Harsh Jolapara" />
           </div>
           {/* <hr /> */}
           <div className="attached-files-pdf">
