@@ -42,20 +42,16 @@ const VerifyUserDocDataTable = ({
       headerClassName: "verify-user-table-head",
       minWidth: 200,
       renderCell: (params) => {
-        const [imageLoaded, setImageLoaded] = useState(false);
         return (
           <div className="verify-user-table-cell verify-user-banner-cell">
-            {!imageLoaded && <div className="image-placeholder-updatetable" />}
             <Avatar
               className="verify-user-banner-avatar"
               src={params.value}
               alt="Banner"
-              onLoad={() => setImageLoaded(true)}
               sx={{
                 width: "100%",
                 height: "75px",
                 borderRadius: "5px",
-                opacity: imageLoaded ? "1" : "0",
               }}
             />
           </div>
