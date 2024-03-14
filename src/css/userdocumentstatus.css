@@ -89,3 +89,15 @@
     padding: 5px;
     border-radius: 12px;
   }
+
+  .main-document-remarks-data{
+    display: flex;
+    margin: 20px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .main-document-remarks-data div{
+    margin-left: 15px;
+  }

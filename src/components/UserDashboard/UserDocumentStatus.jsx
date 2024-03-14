@@ -61,7 +61,7 @@ function UserDocumentStatus({ isMenuShow }) {
     {
       field: "banner",
       headerName: "Banner",
-      flex: 0.2,
+      flex: 0.15,
       minWidth: 200,
       align: "center",
       headerAlign: "center",
@@ -71,8 +71,8 @@ function UserDocumentStatus({ isMenuShow }) {
     {
       field: "title",
       headerName: "Title",
-      flex: 0.3,
-      minWidth: 300,
+      flex: 0.25,
+      minWidth: 250,
       align: "left",
       headerAlign: "left",
       headerClassName: "custom-header-datatable",
@@ -96,9 +96,54 @@ function UserDocumentStatus({ isMenuShow }) {
       headerClassName: "custom-header-datatable",
     },
     {
+      field: "remarks",
+      headerName: "Remarks",
+      flex: 0.1,
+      minWidth: 190,
+      align: "center",
+      headerAlign: "center",
+      headerClassName: "custom-header-datatable",
+      renderCell: (params) => {
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+            key={params.row.id}
+          >
+            <Link
+              to={`../mydocument-remarks/${params.row.id}`}
+              style={{ textDecoration: "none" }}
+            >
+              <button
+                style={{
+                  marginTop: "8px",
+                  fontFamily: "monospace",
+                  padding: "7px",
+                  border: `1px solid white`,
+                  backgroundColor: `orange`,
+                  color: "darkblue",
+                  borderRadius: "5px",
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <i className="material-icons">note</i>
+                Remarks
+              </button>
+            </Link>
+          </div>
+        );
+      },
+    },
+    {
       field: "approveStatus",
       headerName: "Approve",
-      flex: 0.25,
+      flex: 0.15,
       minWidth: 190,
       align: "center",
       headerAlign: "center",
@@ -168,8 +213,8 @@ function UserDocumentStatus({ isMenuShow }) {
     {
       field: "verifyRatio",
       headerName: "Verify(%)",
-      flex: 0.2,
-      minWidth: 200,
+      flex: 0.1,
+      minWidth: 100,
       align: "center",
       headerAlign: "center",
       headerClassName: "custom-header-datatable",

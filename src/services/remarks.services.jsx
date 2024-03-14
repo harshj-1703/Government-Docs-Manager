@@ -22,11 +22,11 @@ const remarksDocumentsServices = {
       const querySnapshot = await getDocs(q);
 
       if (querySnapshot.docs.length > 0) {
-        const docsDoc = querySnapshot.docs[0];
-        return {
-          id: docsDoc.id,
-          remarks: docsDoc.data(),
-        };
+        const documents = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          data: doc.data(),
+        }));
+        return documents;
       } else {
         return null;
       }
