@@ -189,7 +189,7 @@ function App() {
         },
         {
           path: "myapproveddocs",
-          element: <UserApprovedDocuments />,
+          element: <UserApprovedDocuments isMenuShow={isMenuShow} />,
         },
       ],
     },
