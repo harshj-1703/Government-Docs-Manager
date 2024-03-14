@@ -79,7 +79,7 @@ function GeneratePDFWithApprovedDocument() {
     <>
       {loading ? (
         <CircularLoading />
-      ) : (
+      ) : documentData ? (
         <div className="pdf-modal-main-div">
           <div className="pdf-modal-download-button">
             <button
@@ -198,6 +198,14 @@ function GeneratePDFWithApprovedDocument() {
             )}
           </div>
         </div>
+      ) : (
+        <>
+          <div id="error-page-div" style={{ backgroundColor: "darkblue" }}>
+            <h1 style={{ color: "white", letterSpacing: "4px" }}>
+              Not Verified
+            </h1>
+          </div>
+        </>
       )}
     </>
   );
