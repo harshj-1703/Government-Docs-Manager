@@ -83,16 +83,23 @@ function UserNavbarMenu({ setIsMenuShow }) {
                 </span>
               </Link>
             </li>
-            {/* <li className="orbital-menu__item">
-              <a href="" className="orbital-menu__link">
+            <li className="orbital-menu__item">
+              <Link
+                className="orbital-menu__link"
+                to="myapproveddocs"
+                onClick={() => {
+                  setIsMenuShow((prev) => !prev);
+                }}
+              >
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="activity" className="material-icons"></i>
+                  <i data-feather="activity" className="material-icons">
+                    done
+                  </i>
                 </span>
-                <span className="orbital-menu__link-text">
-                  Analytics & Reporting
-                </span>
-              </a>
+                <span className="orbital-menu__link-text">Approved Docs</span>
+              </Link>
             </li>
+            {/* 
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">

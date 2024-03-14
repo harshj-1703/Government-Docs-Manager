@@ -41,6 +41,9 @@ const UsersApprovedDocuments = lazy(() =>
 const UsersRejectedDocuments = lazy(() =>
   import("./components/DataCenterComponents/UsersRejectedDocuments.jsx")
 );
+const UserApprovedDocuments = lazy(() =>
+  import("./components/UserDashboard/UserApprovedDocuments.jsx")
+);
 
 //Css files load
 import "./css/App.css";
@@ -184,6 +187,10 @@ function App() {
             },
           ],
         },
+        {
+          path: "myapproveddocs",
+          element: <UserApprovedDocuments />,
+        },
       ],
     },
     //data-center-login
@@ -236,10 +243,6 @@ function App() {
         {
           path: "datacenter-user-rejected-documents",
           element: <UsersRejectedDocuments />,
-        },
-        {
-          path: "datacenter-details",
-          element: <DataCenterDetails />,
         },
         {
           path: "datacenter-details",
