@@ -200,7 +200,10 @@ function GeneratePDFWithApprovedDocument() {
         </div>
       ) : (
         <>
-          <div id="error-page-div" style={{ backgroundColor: "darkblue" }}>
+          <div
+            id="error-page-div"
+            style={{ backgroundColor: "darkblue", textAlign: "center" }}
+          >
             <h1 style={{ color: "white", letterSpacing: "4px" }}>
               Not Verified
             </h1>

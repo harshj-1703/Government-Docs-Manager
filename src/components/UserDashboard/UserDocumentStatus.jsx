@@ -3,6 +3,7 @@ import "../../css/userdocumentstatus.css";
 import uploadedByUsersDocumentService from "../../services/uploadedDocByUser.services";
 import CircularLoading from "../CircularLoading";
 import { DataGrid } from "@mui/x-data-grid";
+import { Link } from "react-router-dom";
 
 function UserDocumentStatus({ isMenuShow }) {
   const [documents, setDocuments] = useState([]);
@@ -25,6 +26,8 @@ function UserDocumentStatus({ isMenuShow }) {
         updatedAt: data.updatedAt,
         approveStatus: data.approveStatus,
         verifyRatio: data.verifyRatio,
+        docId: data.docId,
+        userMobile: data.userMobile,
       };
     });
     setDocuments(() => [...filteredData]);
@@ -96,7 +99,7 @@ function UserDocumentStatus({ isMenuShow }) {
       field: "approveStatus",
       headerName: "Approve",
       flex: 0.25,
-      minWidth: 150,
+      minWidth: 190,
       align: "center",
       headerAlign: "center",
       headerClassName: "custom-header-datatable",
@@ -123,7 +126,43 @@ function UserDocumentStatus({ isMenuShow }) {
           borderRadius: "5px",
         };
 
-        return <div style={cellStyle}>{params.value}</div>;
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <div style={cellStyle}>{params.value}</div>
+            {params.value === "Approved" && (
+              <Link
+                to={`/generatepdf-approved-document/${params.row.userMobile}/${params.row.docId}`}
+                style={{ textDecoration: "none" }}
+                target="_blank"
+              >
+                <button
+                  style={{
+                    marginTop: "8px",
+                    fontFamily: "monospace",
+                    padding: "7px",
+                    border: `1px solid white`,
+                    backgroundColor: `darkblue`,
+                    color: "white",
+                    borderRadius: "5px",
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <i className="material-icons">get_app</i>
+                  Approve Certificate
+                </button>
+              </Link>
+            )}
+          </div>
+        );
       },
     },
     {
@@ -184,7 +223,9 @@ function UserDocumentStatus({ isMenuShow }) {
           {!isLoading &&
             (documents.length !== 0 ? (
               <>
-                <h1 style={{ marginBottom: "5px" }}>My Documents Status</h1>
+                <h1 style={{ marginBottom: "5px", fontWeight: "100" }}>
+                  My Documents Status
+                </h1>
                 <hr />
                 <DataGrid
                   rows={documents}
