@@ -99,17 +99,23 @@ function UserNavbarMenu({ setIsMenuShow }) {
                 <span className="orbital-menu__link-text">Approved Docs</span>
               </Link>
             </li>
-            {/* 
             <li className="orbital-menu__item">
-              <a href="" className="orbital-menu__link">
+              <Link
+                className="orbital-menu__link"
+                to="user-queries"
+                onClick={() => {
+                  setIsMenuShow((prev) => !prev);
+                }}
+              >
                 <span className="orbital-menu__link-icon">
-                  <i data-feather="calendar" className="material-icons"></i>
+                  <i data-feather="calendar" className="material-icons">
+                    contact_support
+                  </i>
                 </span>
-                <span className="orbital-menu__link-text">
-                  Time & Attendance
-                </span>
-              </a>
+                <span className="orbital-menu__link-text">User Queries</span>
+              </Link>
             </li>
+            {/* 
             <li className="orbital-menu__item">
               <a href="" className="orbital-menu__link">
                 <span className="orbital-menu__link-icon">

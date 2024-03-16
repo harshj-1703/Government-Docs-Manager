@@ -47,6 +47,9 @@ const UserApprovedDocuments = lazy(() =>
 const MyDocumentRemarks = lazy(() =>
   import("./components/UserDashboard/MyDocumentRemarks.jsx")
 );
+const UserQueries = lazy(() =>
+  import("./components/UserDashboard/UserQueries.jsx")
+);
 
 //Css files load
 import "./css/App.css";
@@ -193,6 +196,10 @@ function App() {
         {
           path: "myapproveddocs",
           element: <UserApprovedDocuments isMenuShow={isMenuShow} />,
+        },
+        {
+          path: "user-queries",
+          element: <UserQueries isMenuShow={isMenuShow} />,
         },
         {
           path: "mydocument-remarks/:id",
