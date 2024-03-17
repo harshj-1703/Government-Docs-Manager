@@ -69,8 +69,8 @@ const VerifyUserDocuments = lazy(() =>
 const UserDocumentsStatus = lazy(() =>
   import("./components/DataCenterComponents/UserDocumentsStatus.jsx")
 );
-const DataCenterDetails = lazy(() =>
-  import("./components/DataCenterComponents/DataCenterDetails.jsx")
+const UserQueriesByDc = lazy(() =>
+  import("./components/DataCenterComponents/UserQueriesByDc.jsx")
 );
 const VerifyUserDocumentsDetails = lazy(() =>
   import("./components/DataCenterComponents/VerifyUserDocumentsDetails.jsx")
@@ -259,8 +259,8 @@ function App() {
           element: <UsersRejectedDocuments />,
         },
         {
-          path: "datacenter-details",
-          element: <DataCenterDetails />,
+          path: "user-queries-bydc",
+          element: <UserQueriesByDc />,
         },
       ],
     },

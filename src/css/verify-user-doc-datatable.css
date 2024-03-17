@@ -229,3 +229,18 @@
     padding: 35px;
     border-radius: 10px;
   }
+
+  .delete-button,
+  .update-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+
+  .delete-button {
+    color: white;
+    background-color: red;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }

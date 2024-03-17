@@ -28,9 +28,9 @@ function DataCenterDashboardGrid() {
       link: "datacenter-user-rejected-documents",
     },
     {
-      heading: "DataCenter Details",
-      content: "Datacenter's all details",
-      link: "datacenter-details",
+      heading: "User Queries",
+      content: "Users queries",
+      link: "user-queries-bydc",
     },
   ];
 
