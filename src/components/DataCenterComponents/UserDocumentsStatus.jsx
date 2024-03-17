@@ -30,6 +30,8 @@ function UserDocumentsStatus() {
         userFullName: data.data.userFullName,
         mobile: data.data.userMobile,
         userProfileImage: data.data.userProfileImage,
+        approveStatus: data.data.approveStatus,
+        numbersDataCenterChecked: data.data.numbersDataCenterChecked,
         verifyRatio: data.data.verifyRatio,
         createdAt: data.data.createdAt,
       }));

@@ -114,6 +114,88 @@ const UserUploadedDocsDataTable = ({
       renderCell: renderUserCell,
     },
     {
+      field: "approveStatus",
+      headerName: "Status",
+      flex: 0.15,
+      minWidth: 140,
+      align: "center",
+      headerAlign: "center",
+      headerClassName: "verify-user-table-head",
+      renderCell: (params) => {
+        let statusColor;
+        switch (params.value) {
+          case "Pending":
+            statusColor = "orange";
+            break;
+          case "Approved":
+            statusColor = "green";
+            break;
+          case "Rejected":
+            statusColor = "red";
+            break;
+          default:
+            statusColor = "black";
+        }
+
+        const cellStyle = {
+          border: `2px solid ${statusColor}`,
+          padding: "5px",
+          backgroundColor: `${statusColor}`,
+          borderRadius: "5px",
+        };
+
+        return (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <div style={cellStyle}>{params.value}</div>
+          </div>
+        );
+      },
+    },
+    {
+      field: "verifyRatio",
+      headerName: "Verify(%)",
+      flex: 0.1,
+      minWidth: 180,
+      align: "center",
+      headerAlign: "center",
+      headerClassName: "verify-user-table-head",
+      renderCell: (params) => {
+        const ratio = parseFloat(params.value).toFixed(2);
+        let bgColor, borderColor;
+
+        if (ratio < 25) {
+          bgColor = "lightcoral";
+          borderColor = "red";
+        } else if (ratio >= 25 && ratio < 50) {
+          bgColor = "lightsalmon";
+          borderColor = "orange";
+        } else if (ratio >= 50 && ratio < 90) {
+          bgColor = "lightblue";
+          borderColor = "blue";
+        } else {
+          bgColor = "lightgreen";
+          borderColor = "green";
+        }
+
+        const cellStyle = {
+          border: `2px solid ${borderColor}`,
+          backgroundColor: bgColor,
+          padding: "5px",
+          borderRadius: "5px",
+          color: "darkblue",
+        };
+
+        return <div style={cellStyle}>{ratio} %</div>;
+      },
+    },
+    {
       field: "id",
       headerName: "Delete",
       minWidth: 90,
@@ -125,7 +207,17 @@ const UserUploadedDocsDataTable = ({
         <button
           className="delete-button"
           value={params.value}
+          style={
+            !params.row.numbersDataCenterChecked <= 0
+              ? {
+                  backgroundColor: "gray",
+                }
+              : {
+                  backgroundColor: "red",
+                }
+          }
           onClick={deleteUploadedByUserDoc}
+          disabled={!params.row.numbersDataCenterChecked <= 0}
         >
           Delete
         </button>
