@@ -16,7 +16,6 @@ function UserQueryDetail() {
         id
       );
       setData(queryData);
-      console.log(queryData);
     } catch (error) {
       console.log(error);
     } finally {
