@@ -11,6 +11,7 @@ import {
   where,
   limit,
   doc,
+  startAfter,
   query,
 } from "firebase/firestore";
 
@@ -35,7 +36,7 @@ const userQueriesDocumentsServices = {
         );
 
         const lastDoc = snapshot.docs[snapshot.docs.length - 1];
-        const lastUserMobile = lastDoc.data().userMobile;
+        const lastUserMobile = lastDoc.data().mobile;
         const lastCreatedAt = lastDoc.data().createdAt;
 
         queryRef = query(

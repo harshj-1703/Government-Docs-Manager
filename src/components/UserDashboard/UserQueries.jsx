@@ -17,7 +17,7 @@ function UserQueries({ isMenuShow }) {
     if (value.trim() === "") {
       setQueryError("Query is required.");
       return false;
-    } else if (value.length > 700) {
+    } else if (value.length > 1200) {
       setQueryError("Query Length Must Less Then 500 letters");
       return false;
     } else {
