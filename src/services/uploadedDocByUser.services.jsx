@@ -155,6 +155,74 @@ const uploadedByUsersDocumentService = {
     }
   },
 
+  getAllApprovedUserDocumentsWithPagination: async (
+    page = 1,
+    itemsPerPage = 2,
+    searchQuery = ""
+  ) => {
+    try {
+      const collectionRef = docCollectionRef;
+      let queryRef = query(
+        collectionRef,
+        where("userMobile", ">=", searchQuery.toUpperCase()),
+        where("userMobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
+        where("status", "==", 1),
+        where("approveStatus", "==", "Approved"),
+        orderBy("userMobile", "desc"),
+        orderBy("createdAt", "desc")
+      );
+
+      if (page > 1) {
+        const snapshot = await getDocs(
+          query(queryRef, limit(itemsPerPage * (page - 1)))
+        );
+
+        const lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        const lastUserMobile = lastDoc.data().userMobile;
+        const lastCreatedAt = lastDoc.data().createdAt;
+
+        queryRef = query(
+          queryRef,
+          startAfter(lastUserMobile, lastCreatedAt),
+          limit(itemsPerPage)
+        );
+      } else {
+        queryRef = query(queryRef, limit(itemsPerPage));
+      }
+
+      const querySnapshot = await getDocs(queryRef);
+      const documents = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+
+      // const filteredDocuments = documents.filter(
+      //   (doc) => !doc.data.checkedByDCMNumber.includes(mobile)
+      // );
+
+      const totalDocsQuerySnapshot = await getDocs(
+        query(
+          collectionRef,
+          where("userMobile", ">=", searchQuery.toUpperCase()),
+          where("userMobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
+          where("approveStatus", "==", "Approved"),
+          where("status", "==", 1)
+        )
+      );
+      const totalDocsCount = totalDocsQuerySnapshot.size;
+      // const filteredCounts = totalDocsQuerySnapshot.docs.filter(
+      //   (doc) => !doc.data().checkedByDCMNumber.includes(mobile)
+      // );
+
+      return {
+        documents: documents,
+        totalItems: totalDocsCount,
+      };
+    } catch (error) {
+      throw error;
+    }
+  },
+
   getDocumentFromId: async (id) => {
     const docRef = doc(db, "UploadedDocsByUsers", id);
     try {
