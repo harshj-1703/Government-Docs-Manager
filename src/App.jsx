@@ -80,6 +80,9 @@ const GeneratePDFWithApprovedDocument = lazy(() =>
     "./components/DataCenterComponents/GeneratePDFWithApprovedDocument.jsx"
   )
 );
+const UserQueryDetail = lazy(() =>
+  import("./components/DataCenterComponents/UserQueryDetail.jsx")
+);
 
 //---------------------------------- Main Function APP ----------------------------------
 function App() {
@@ -260,7 +263,17 @@ function App() {
         },
         {
           path: "user-queries-bydc",
-          element: <UserQueriesByDc />,
+          element: <Outlet />,
+          children: [
+            {
+              index: true,
+              element: <UserQueriesByDc />,
+            },
+            {
+              path: "user-query-details/:id",
+              element: <UserQueryDetail />,
+            },
+          ],
         },
       ],
     },

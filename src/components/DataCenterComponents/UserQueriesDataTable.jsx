@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Avatar } from "@mui/material";
 import "../../css/verify-user-doc-datatable.css";
+import { Link } from "react-router-dom";
 
 const UserQueriesDataTable = ({
   data,
@@ -71,6 +72,44 @@ const UserQueriesDataTable = ({
       headerClassName: "verify-user-table-head",
       headerAlign: "center",
       renderCell: renderUserCell,
+    },
+    {
+      field: "id",
+      headerName: "Details",
+      flex: 0.07,
+      minWidth: 170,
+      align: "center",
+      headerAlign: "center",
+      headerClassName: "verify-user-table-head",
+      renderCell: (params) => {
+        return (
+          <Link
+            to={`./user-query-details/${params.row.id}`}
+            style={{ textDecoration: "none" }}
+            target="_blank"
+          >
+            <button
+              style={{
+                marginTop: "8px",
+                fontFamily: "monospace",
+                padding: "7px",
+                border: `1px solid white`,
+                backgroundColor: `darkblue`,
+                color: "white",
+                borderRadius: "5px",
+                display: "flex",
+                alignItems: "center",
+                cursor: "pointer",
+              }}
+            >
+              <i className="material-icons" style={{ marginRight: "2px" }}>
+                info
+              </i>
+              Query Details
+            </button>
+          </Link>
+        );
+      },
     },
   ];
 
