@@ -9,6 +9,7 @@ import {
   updateDoc,
   orderBy,
   where,
+  limit,
   doc,
   query,
 } from "firebase/firestore";
@@ -16,6 +17,67 @@ import {
 const userQueriesCollectionRef = collection(db, "UserQueries");
 
 const userQueriesDocumentsServices = {
+  getAllQueries: async (page = 1, itemsPerPage = 2, searchQuery = "") => {
+    try {
+      const collectionRef = userQueriesCollectionRef;
+      let queryRef = query(
+        collectionRef,
+        where("mobile", ">=", searchQuery.toUpperCase()),
+        where("mobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
+        where("status", "==", 1),
+        orderBy("mobile", "desc"),
+        orderBy("createdAt", "desc")
+      );
+
+      if (page > 1) {
+        const snapshot = await getDocs(
+          query(queryRef, limit(itemsPerPage * (page - 1)))
+        );
+
+        const lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        const lastUserMobile = lastDoc.data().userMobile;
+        const lastCreatedAt = lastDoc.data().createdAt;
+
+        queryRef = query(
+          queryRef,
+          startAfter(lastUserMobile, lastCreatedAt),
+          limit(itemsPerPage)
+        );
+      } else {
+        queryRef = query(queryRef, limit(itemsPerPage));
+      }
+
+      const querySnapshot = await getDocs(queryRef);
+      const documents = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+
+      // const filteredDocuments = documents.filter(
+      //   (doc) => !doc.data.checkedByDCMNumber.includes(mobile)
+      // );
+
+      const totalDocsQuerySnapshot = await getDocs(
+        query(
+          collectionRef,
+          where("mobile", ">=", searchQuery.toUpperCase()),
+          where("mobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
+          where("status", "==", 1)
+        )
+      );
+      const totalDocsCount = totalDocsQuerySnapshot.size;
+      // const filteredCounts = totalDocsQuerySnapshot.docs.filter(
+      //   (doc) => !doc.data().checkedByDCMNumber.includes(mobile)
+      // );
+
+      return {
+        documents: documents,
+        totalItems: totalDocsCount,
+      };
+    } catch (error) {
+      throw error;
+    }
+  },
   getUserQueryFromId: async (id) => {
     const docRef = doc(db, "UserQueries", id);
     try {

@@ -47,6 +47,7 @@ function UserQueries({ isMenuShow }) {
           fullName: localStorage.getItem("fullName"),
           profileImage: localStorage.getItem("profileImage"),
           createdAt: new Date().toLocaleString("en-US", timestampOptions),
+          status: 1,
         });
         ToastMessage({
           message: "Query Submitted Successfully!",
