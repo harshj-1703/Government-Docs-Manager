@@ -51,7 +51,7 @@ function DataCenterDashboard() {
 
     try {
       const res = await fetch(
-        `http://api.weatherapi.com/v1/current.json?key=${process.env.TEMPRATURE_API_KEY}&q=${city}&aqi=yes`
+        `https://api.weatherapi.com/v1/current.json?key=${process.env.TEMPRATURE_API_KEY}&q=${city}&aqi=yes`
       );
       const data = await res.json();
       // console.log(data);

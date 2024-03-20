@@ -8,7 +8,6 @@ import ProtectedDataCenter from "./components/ProtectedDataCenter.jsx";
 import CircularLoading from "./components/CircularLoading.jsx";
 import Home from "./pages/Home";
 import ProtectedAdmin from "./components/ProtectedAdmin.jsx";
-import AdminNavbar from "./components/AdminComponents/AdminNavbar.jsx";
 
 //Lazy loading files
 const UserLogin = lazy(() => import("./pages/UserLogin"));
@@ -86,6 +85,10 @@ const GeneratePDFWithApprovedDocument = lazy(() =>
 );
 const UserQueryDetail = lazy(() =>
   import("./components/DataCenterComponents/UserQueryDetail.jsx")
+);
+
+const AdminNavbar = lazy(() =>
+  import("./components/AdminComponents/AdminNavbar.jsx")
 );
 
 //---------------------------------- Main Function APP ----------------------------------

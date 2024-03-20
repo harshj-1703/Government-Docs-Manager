@@ -42,10 +42,12 @@ function VerifyOTPAdmin({ mobile, otp, setOtp, verificationCode, setStep }) {
             localStorage.setItem("isLoggedIn", 1);
             localStorage.setItem("mobile", mobile);
             localStorage.setItem("imageUrl", result.user.imageUrl);
+            localStorage.setItem("city", result.user.city);
+            localStorage.setItem("state", result.user.state);
             ToastMessage({
               message: "Login Successfull!",
               type: "success",
-              closeTime: 4000,
+              closeTime: 2500,
             });
             navigate("/admin-dashboard");
           })

@@ -109,7 +109,7 @@ function AdminNavbar() {
                 {!imageLoaded && <Skeleton />}
                 <img
                   className="profile-image-photo"
-                  src={localStorage.getItem("imageurl")}
+                  src={localStorage.getItem("imageUrl")}
                   style={{ opacity: imageLoaded ? 1 : 0 }}
                   onLoad={() => setImageLoaded(true)}
                   alt=""
