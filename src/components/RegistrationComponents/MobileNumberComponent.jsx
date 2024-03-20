@@ -6,6 +6,7 @@ import { auth } from "../../firebase";
 import CircularLoading from "../CircularLoading";
 import userService from "../../services/user.services";
 import dataCenterServices from "../../services/data-center.services";
+import adminServices from "../../services/admin.services";
 
 function MobileNumberComponent({
   mobile,
@@ -32,7 +33,8 @@ function MobileNumberComponent({
       const available2 = await dataCenterServices.getDataCenterFromMobile(
         mobile
       );
-      if (available2) {
+      const available3 = await adminServices.getadminFromMobile(mobile);
+      if (available2 || available3) {
         return true;
       } else {
         return false;

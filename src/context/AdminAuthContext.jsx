@@ -1,16 +1,16 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
-import dataCenterServices from "../services/data-center.services";
+import adminServices from "../services/admin.services";
 
-const dataCenterAuthContext = createContext();
+const adminAuthContext = createContext();
 
-export function DataCenterAuthContextProvider({ children }) {
+export function AdminAuthContextProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const mobileAvailableOrNot = async (mobile) => {
-    const available = await dataCenterServices.getDataCenterFromMobile(mobile);
+  const mobileAdminAvailableOrNot = async (mobile) => {
+    const available = await adminServices.getadminFromMobile(mobile);
     if (available) {
       return true;
     } else {
@@ -22,7 +22,9 @@ export function DataCenterAuthContextProvider({ children }) {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         if (currentUser.phoneNumber) {
-          if (await mobileAvailableOrNot(currentUser.phoneNumber.slice(3))) {
+          if (
+            await mobileAdminAvailableOrNot(currentUser.phoneNumber.slice(3))
+          ) {
             setUser(currentUser);
           }
         }
@@ -35,12 +37,12 @@ export function DataCenterAuthContextProvider({ children }) {
   }, []);
 
   return (
-    <dataCenterAuthContext.Provider value={{ user, isLoading }}>
+    <adminAuthContext.Provider value={{ user, isLoading }}>
       {children}
-    </dataCenterAuthContext.Provider>
+    </adminAuthContext.Provider>
   );
 }
 
-export function useDataCenterAuth() {
-  return useContext(dataCenterAuthContext);
+export function useAdminAuth() {
+  return useContext(adminAuthContext);
 }

@@ -11,9 +11,11 @@ import Home from "./pages/Home";
 //Lazy loading files
 const UserLogin = lazy(() => import("./pages/UserLogin"));
 const DatacenterLogin = lazy(() => import("./pages/DataCenterLogin"));
+const AdminLogin = lazy(() => import("./pages/AdminLogin.jsx"));
 const DataCenterDashboard = lazy(() =>
   import("./pages/DataCenterDashboard.jsx")
 );
+const AdminDashboard = lazy(() => import("./pages/AdminDashboard.jsx"));
 const RegisterUser = lazy(() => import("./pages/RegisterUser"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard.jsx"));
@@ -56,6 +58,7 @@ import "./css/App.css";
 import "./css/login.css";
 import "./css/registration.css";
 import "./css/userdashboard.css";
+import ProtectedAdmin from "./components/ProtectedAdmin.jsx";
 
 const DocumentStatus = lazy(() =>
   import("./components/UserDashboard/UserDocumentStatus.jsx")
@@ -274,6 +277,39 @@ function App() {
               element: <UserQueryDetail />,
             },
           ],
+        },
+      ],
+    },
+    //admin-login
+    {
+      path: "/admin-login",
+      element: (
+        <>
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <AdminLogin />
+          </Suspense>
+        </>
+      ),
+    },
+    //admin-dashboard
+    {
+      path: "admin-dashboard",
+      element: (
+        <>
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <ProtectedAdmin>
+              <DataCenterNavbar />
+              <Outlet />
+            </ProtectedAdmin>
+          </Suspense>
+        </>
+      ),
+      children: [
+        {
+          index: true,
+          element: <AdminDashboard />,
         },
       ],
     },

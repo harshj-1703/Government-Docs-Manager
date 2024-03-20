@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { auth } from "../firebase";
 import { onAuthStateChanged } from "firebase/auth";
 import dataCenterServices from "../services/data-center.services";
+import adminServices from "../services/admin.services";
 
 const userAuthContext = createContext();
 
@@ -18,14 +19,29 @@ export function UserAuthContextProvider({ children }) {
     }
   };
 
+  const mobileAvailableOrNotAdmin = async (mobile) => {
+    const available = await adminServices.getadminFromMobile(mobile);
+    if (available) {
+      return true;
+    } else {
+      return false;
+    }
+  };
+
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       if (currentUser) {
         if (currentUser.phoneNumber) {
           if (
-            mobileAvailableOrNotDataCenter(currentUser.phoneNumber.slice(3))
+            await mobileAvailableOrNotDataCenter(
+              currentUser.phoneNumber.slice(3)
+            )
           ) {
             currentUser.role = "datacenter";
+          } else if (
+            await mobileAvailableOrNotAdmin(currentUser.phoneNumber.slice(3))
+          ) {
+            currentUser.role = "admin";
           }
         }
       }

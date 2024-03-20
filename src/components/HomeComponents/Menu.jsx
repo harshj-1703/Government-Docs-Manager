@@ -43,7 +43,7 @@ function Menu() {
           </Link>
         </li>
         <li style={{ "--i": 2, "--clr1": "#0a66c2" }}>
-          <Link>
+          <Link to={"/admin-login"}>
             <span>
               <i className="material-icons">perm_identity</i>
             </span>
