@@ -75,6 +75,7 @@ function AdminLogin() {
             ToastMessage({
               message: "Verification code sent successfully!",
               type: "success",
+              closeTime: 2000,
             });
           })
           .catch((err) => {

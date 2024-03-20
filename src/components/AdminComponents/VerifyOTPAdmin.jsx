@@ -36,16 +36,17 @@ function VerifyOTPAdmin({ mobile, otp, setOtp, verificationCode, setStep }) {
     verificationCode
       .confirm(otp)
       .then((result) => {
-        ToastMessage({
-          message: "Verification successful!",
-          type: "success",
-        });
         adminServices
           .getadminFromMobile(mobile)
           .then((result) => {
             localStorage.setItem("isLoggedIn", 1);
             localStorage.setItem("mobile", mobile);
             localStorage.setItem("imageUrl", result.user.imageUrl);
+            ToastMessage({
+              message: "Login Successfull!",
+              type: "success",
+              closeTime: 4000,
+            });
             navigate("/admin-dashboard");
           })
           .catch((e) => {
