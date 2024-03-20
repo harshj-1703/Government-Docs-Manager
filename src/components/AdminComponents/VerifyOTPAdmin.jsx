@@ -4,6 +4,7 @@ import { LazyLoadComponent } from "react-lazy-load-image-component";
 import ToastMessage from "../ToastMessage";
 import CircularLoading from "../CircularLoading";
 import { useNavigate } from "react-router-dom";
+import adminServices from "../../services/admin.services";
 
 function VerifyOTPAdmin({ mobile, otp, setOtp, verificationCode, setStep }) {
   const [seconds, setSeconds] = useState(150);
@@ -39,9 +40,17 @@ function VerifyOTPAdmin({ mobile, otp, setOtp, verificationCode, setStep }) {
           message: "Verification successful!",
           type: "success",
         });
-        localStorage.setItem("isLoggedIn", 1);
-        localStorage.setItem("mobile", mobile);
-        navigate("/admin-dashboard");
+        adminServices
+          .getadminFromMobile(mobile)
+          .then((result) => {
+            localStorage.setItem("isLoggedIn", 1);
+            localStorage.setItem("mobile", mobile);
+            localStorage.setItem("imageUrl", result.user.imageUrl);
+            navigate("/admin-dashboard");
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       })
       .catch((error) => {
         ToastMessage({

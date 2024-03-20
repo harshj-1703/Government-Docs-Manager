@@ -7,6 +7,8 @@ import ProtectedUser from "./components/ProtectedUser.jsx";
 import ProtectedDataCenter from "./components/ProtectedDataCenter.jsx";
 import CircularLoading from "./components/CircularLoading.jsx";
 import Home from "./pages/Home";
+import ProtectedAdmin from "./components/ProtectedAdmin.jsx";
+import AdminNavbar from "./components/AdminComponents/AdminNavbar.jsx";
 
 //Lazy loading files
 const UserLogin = lazy(() => import("./pages/UserLogin"));
@@ -58,7 +60,6 @@ import "./css/App.css";
 import "./css/login.css";
 import "./css/registration.css";
 import "./css/userdashboard.css";
-import ProtectedAdmin from "./components/ProtectedAdmin.jsx";
 
 const DocumentStatus = lazy(() =>
   import("./components/UserDashboard/UserDocumentStatus.jsx")
@@ -300,7 +301,7 @@ function App() {
           <Suspense fallback={<CircularLoading />}>
             <ToastContainer />
             <ProtectedAdmin>
-              <DataCenterNavbar />
+              <AdminNavbar />
               <Outlet />
             </ProtectedAdmin>
           </Suspense>
