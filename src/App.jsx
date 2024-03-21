@@ -8,16 +8,16 @@ import ProtectedDataCenter from "./components/ProtectedDataCenter.jsx";
 import CircularLoading from "./components/CircularLoading.jsx";
 import Home from "./pages/Home";
 import ProtectedAdmin from "./components/ProtectedAdmin.jsx";
+import UserLogin from "./pages/UserLogin";
+import DatacenterLogin from "./pages/DataCenterLogin";
+import AdminLogin from "./pages/AdminLogin.jsx";
+import RegisterUser from "./pages/RegisterUser";
 
 //Lazy loading files
-const UserLogin = lazy(() => import("./pages/UserLogin"));
-const DatacenterLogin = lazy(() => import("./pages/DataCenterLogin"));
-const AdminLogin = lazy(() => import("./pages/AdminLogin.jsx"));
 const DataCenterDashboard = lazy(() =>
   import("./pages/DataCenterDashboard.jsx")
 );
 const AdminDashboard = lazy(() => import("./pages/AdminDashboard.jsx"));
-const RegisterUser = lazy(() => import("./pages/RegisterUser"));
 const ForgotPassword = lazy(() => import("./pages/ForgotPassword.jsx"));
 const UserDashboard = lazy(() => import("./pages/UserDashboard.jsx"));
 const DocumentPage = lazy(() =>
@@ -111,10 +111,10 @@ function App() {
       path: "user-login",
       element: (
         <>
-          <Suspense fallback={<CircularLoading />}>
-            <ToastContainer />
-            <UserLogin />
-          </Suspense>
+          {/* <Suspense fallback={<CircularLoading />}> */}
+          <ToastContainer />
+          <UserLogin />
+          {/* </Suspense> */}
         </>
       ),
     },
@@ -135,10 +135,10 @@ function App() {
       path: "register-user",
       element: (
         <>
-          <Suspense fallback={<CircularLoading />}>
-            <ToastContainer />
-            <RegisterUser />
-          </Suspense>
+          {/* <Suspense fallback={<CircularLoading />}> */}
+          <ToastContainer />
+          <RegisterUser />
+          {/* </Suspense> */}
         </>
       ),
     },
@@ -222,10 +222,10 @@ function App() {
       path: "datacenter-login",
       element: (
         <>
-          <Suspense fallback={<CircularLoading />}>
-            <ToastContainer />
-            <DatacenterLogin />
-          </Suspense>
+          {/* <Suspense fallback={<CircularLoading />}> */}
+          <ToastContainer />
+          <DatacenterLogin />
+          {/* </Suspense> */}
         </>
       ),
     },
@@ -289,10 +289,10 @@ function App() {
       path: "/admin-login",
       element: (
         <>
-          <Suspense fallback={<CircularLoading />}>
-            <ToastContainer />
-            <AdminLogin />
-          </Suspense>
+          {/* <Suspense fallback={<CircularLoading />}> */}
+          <ToastContainer />
+          <AdminLogin />
+          {/* </Suspense> */}
         </>
       ),
     },
