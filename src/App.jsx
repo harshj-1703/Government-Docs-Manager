@@ -111,10 +111,10 @@ function App() {
       path: "user-login",
       element: (
         <>
-          {/* <Suspense fallback={<CircularLoading />}> */}
-          <ToastContainer />
-          <UserLogin />
-          {/* </Suspense> */}
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <UserLogin />
+          </Suspense>
         </>
       ),
     },
@@ -135,10 +135,10 @@ function App() {
       path: "register-user",
       element: (
         <>
-          {/* <Suspense fallback={<CircularLoading />}> */}
-          <ToastContainer />
-          <RegisterUser />
-          {/* </Suspense> */}
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <RegisterUser />
+          </Suspense>
         </>
       ),
     },
@@ -222,10 +222,10 @@ function App() {
       path: "datacenter-login",
       element: (
         <>
-          {/* <Suspense fallback={<CircularLoading />}> */}
-          <ToastContainer />
-          <DatacenterLogin />
-          {/* </Suspense> */}
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <DatacenterLogin />
+          </Suspense>
         </>
       ),
     },
@@ -289,10 +289,10 @@ function App() {
       path: "/admin-login",
       element: (
         <>
-          {/* <Suspense fallback={<CircularLoading />}> */}
-          <ToastContainer />
-          <AdminLogin />
-          {/* </Suspense> */}
+          <Suspense fallback={<CircularLoading />}>
+            <ToastContainer />
+            <AdminLogin />
+          </Suspense>
         </>
       ),
     },
