@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../css/datacenter-dashboard.css";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import AdminDashboardData from "../components/AdminComponents/AdminDashboardData";
 
 const Skeleton = () => <div className="skeleton"></div>;
 
@@ -162,6 +163,7 @@ function AdminDashboard() {
           </div>
         </div>
       </div>
+      <AdminDashboardData />
     </div>
   );
 }

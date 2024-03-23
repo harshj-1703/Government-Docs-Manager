@@ -64,7 +64,7 @@ function AdminNavbar() {
   return (
     <>
       <nav>
-        <div className="nav-bar">
+        <div className="nav-bar-admin">
           <i className="material-icons sidebarOpen">menu</i>
           <span className="logo navLogo">
             <Link to="/">
@@ -72,14 +72,14 @@ function AdminNavbar() {
               &nbsp;Gov Docs
             </Link>
           </span>
-          <div className="menu">
+          <div className="menu-admin">
             <div className="logo-toggle">
               <span className="logo">
                 <Link to="/">Gov Docs</Link>
               </span>
               <i className="material-icons siderbarClose">cancel</i>
             </div>
-            <ul className="nav-links">
+            <ul className="nav-links-admin">
               <li>
                 <NavLink to="/admin-dashboard" end>
                   Home

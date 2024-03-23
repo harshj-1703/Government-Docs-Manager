@@ -26,7 +26,7 @@ nav{
     background-color: var(--nav-color);
     z-index: 1000;
 }
-nav .nav-bar{
+nav .nav-bar-admin{
     position: relative;
     height: 100%;
     /* max-width: 1000px; */
@@ -38,18 +38,19 @@ nav .nav-bar{
     align-items: center;
     justify-content: space-between;
 }
-nav .nav-bar .sidebarOpen{
+nav .nav-bar-admin .sidebarOpen{
     color: var(--text-color);
     font-size: 25px;
     padding: 5px;
     cursor: pointer;
     display: block;
 }
-nav .nav-bar .logo a{
+nav .nav-bar-admin .logo a{
     font-size: 25px;
     font-weight: 500;
     display: flex;
     align-items: center;
+    margin-left: 50px;
     justify-content: center;
     color: var(--text-color);
     text-decoration: none;
@@ -57,15 +58,15 @@ nav .nav-bar .logo a{
 .logo-toggle{
     display: none;
 }
-.nav-bar .nav-links{
+.nav-bar-admin .nav-links-admin{
     display: flex;
     align-items: center;
 }
-.nav-bar .nav-links li{
+.nav-bar-admin .nav-links-admin li{
     margin: 0 5px;
     list-style: none;
 }
-.nav-links li a{
+.nav-links-admin li a{
     position: relative;
     font-size: 17px;
     font-weight: 400;
@@ -73,7 +74,7 @@ nav .nav-bar .logo a{
     text-decoration: none;
     padding: 10px;
 }
-.nav-links li a::before{
+.nav-links-admin li a::before{
     content: '';
     position: absolute;
     left: 50%;
@@ -86,13 +87,13 @@ nav .nav-bar .logo a{
     opacity: 0;
     transition: all 0.3s ease;
 }
-.nav-links li:hover a::before{
+.nav-links-admin li:hover a::before{
     opacity: 1;
 }
-.nav-links li a.active{
+.nav-links-admin li a.active{
     color: yellow;
 }
-.nav-bar .darkLight-searchBox{
+.nav-bar-admin .darkLight-searchBox{
     display: flex;
     align-items: center;
 }
@@ -146,7 +147,7 @@ body.dark .search-field i{
 }
 
 /* @media (max-width: 790px) { */
-    .menu{
+    .menu-admin{
         display: block;
         position: fixed;
         height: 100%;
@@ -158,10 +159,10 @@ body.dark .search-field i{
         z-index: 100;
         transition: all 0.4s ease;
     }
-    nav.active .menu{
+    nav.active .menu-admin{
         left: -0%;
     }
-    .menu .logo-toggle{
+    .menu-admin .logo-toggle{
         display: block;
         width: 100%;
         display: flex;
@@ -173,11 +174,11 @@ body.dark .search-field i{
         font-size: 24px;
         cursor: pointer;
     }
-    .nav-bar .nav-links{
+    .nav-bar-admin .nav-links-admin{
         flex-direction: column;
         padding-top: 30px;
     }
-    .nav-links li a{
+    .nav-links-admin li a{
         display: block;
         margin-top: 20px;
     }

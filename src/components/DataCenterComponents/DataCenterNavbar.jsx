@@ -72,7 +72,7 @@ function DataCenterNavbar() {
               &nbsp;Gov Docs
             </Link>
           </span>
-          <div className="menu">
+          <div className="menu" style={{ display: "block" }}>
             <div className="logo-toggle">
               <span className="logo">
                 <Link to="/">Gov Docs</Link>

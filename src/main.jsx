@@ -6,13 +6,13 @@ import { DataCenterAuthContextProvider } from "./context/DataCenterAuthContext.j
 import { AdminAuthContextProvider } from "./context/AdminAuthContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <UserAuthContextProvider>
-      <DataCenterAuthContextProvider>
-        <AdminAuthContextProvider>
-          <App />
-        </AdminAuthContextProvider>
-      </DataCenterAuthContextProvider>
-    </UserAuthContextProvider>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <UserAuthContextProvider>
+    <DataCenterAuthContextProvider>
+      <AdminAuthContextProvider>
+        <App />
+      </AdminAuthContextProvider>
+    </DataCenterAuthContextProvider>
+  </UserAuthContextProvider>
+  // </React.StrictMode>
 );

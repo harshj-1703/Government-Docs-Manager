@@ -1,0 +1,63 @@
+.admin-dashboard-data-main {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .analytics-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa; /* Light gray background */
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    flex: 1 1 230px;
+  }
+
+  body.dark .analytics-card{
+    background-color: #03004c;
+  }
+  
+  .analytics-icon {
+    background-color: #3f51b5; /* Deep blue */
+    color: #fff;
+    border-radius: 50%;
+    padding: 20px; /* Increased padding */
+    font-size: 36px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .analytics-content {
+    text-align: center;
+  }
+  
+  .analytics-value {
+    font-size: 32px; /* Larger font size */
+    font-weight: bold;
+    color: #3f51b5; /* Deep blue */
+    margin-bottom: 5px;
+    font-family:'Courier New', Courier, monospace;
+  }
+  
+  .analytics-label {
+    font-size: 18px; /* Larger font size */
+    color: #333; /* Dark gray */
+    font-family: "Arial", sans-serif;
+  }
+
+  body.dark .analytics-label{
+    color: white;
+  }
+  
+  .material-icons {
+    font-size: 36px;
+  }
+  

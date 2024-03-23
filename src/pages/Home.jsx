@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Slideshow from "../components/HomeComponents/Slideshow";
 import Wave from "../components/HomeComponents/Wave";
 import Menu from "../components/HomeComponents/Menu";
@@ -6,8 +6,28 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import ServiceContent from "../components/HomeComponents/ServiceContent";
 import AboutContent from "../components/HomeComponents/AboutContent";
 import ContactUsContent from "../components/HomeComponents/ContactUsContent";
+import { db } from "../firebase";
+import { addDoc, collection } from "firebase/firestore";
 
 function Home() {
+  useEffect(() => {
+    const addWebsiteLoadData = async () => {
+      try {
+        const websiteLoadDataRef = collection(db, "WebsiteLoadData");
+        await addDoc(websiteLoadDataRef, {
+          createdAt: new Date(),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    addWebsiteLoadData();
+
+    if (!localStorage.getItem("mode")) {
+      localStorage.setItem("mode", "dark-mode");
+    }
+  }, []);
+
   return (
     <>
       <section id="home" className="section">

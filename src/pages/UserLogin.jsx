@@ -48,6 +48,11 @@ function UserLogin() {
           message: "User Not Registered",
           type: "error",
         });
+      } else if (available.user.status === 0) {
+        ToastMessage({
+          message: "You were removed by admin",
+          type: "error",
+        });
       } else {
         await signInWithEmailAndPassword(auth, mobile + "@hj.com", password)
           .then((userCredential) => {
