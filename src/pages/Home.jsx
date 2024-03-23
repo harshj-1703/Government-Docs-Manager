@@ -11,17 +11,20 @@ import { addDoc, collection } from "firebase/firestore";
 
 function Home() {
   useEffect(() => {
-    const addWebsiteLoadData = async () => {
-      try {
-        const websiteLoadDataRef = collection(db, "WebsiteLoadData");
-        await addDoc(websiteLoadDataRef, {
-          createdAt: new Date(),
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    addWebsiteLoadData();
+    if (localStorage.getItem("visited") !== "1") {
+      const addWebsiteLoadData = async () => {
+        try {
+          const websiteLoadDataRef = collection(db, "WebsiteLoadData");
+          await addDoc(websiteLoadDataRef, {
+            createdAt: new Date(),
+          });
+          localStorage.setItem("visited", 1);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      addWebsiteLoadData();
+    }
 
     if (!localStorage.getItem("mode")) {
       localStorage.setItem("mode", "dark-mode");

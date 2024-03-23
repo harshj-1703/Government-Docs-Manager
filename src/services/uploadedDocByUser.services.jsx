@@ -291,6 +291,12 @@ const uploadedByUsersDocumentService = {
     }
   },
 
+  getTotalUploadedDocuments: async () => {
+    const querySnapshot = await getDocs(docCollectionRef);
+    const totalCounts = querySnapshot.size;
+    return totalCounts;
+  },
+
   getDocumentFromId: async (id) => {
     const docRef = doc(db, "UploadedDocsByUsers", id);
     try {

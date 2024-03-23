@@ -26,6 +26,11 @@ const rejectedDocumentsServices = {
       throw error;
     }
   },
+  getTotalRejectedDocuments: async () => {
+    const querySnapshot = await getDocs(rejectedDocumentsCollectionRef);
+    const totalCounts = querySnapshot.size;
+    return totalCounts;
+  },
   addrejectedDocuments: (newDs) => {
     return addDoc(rejectedDocumentsCollectionRef, newDs);
   },

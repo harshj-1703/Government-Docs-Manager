@@ -61,3 +61,22 @@
     font-size: 36px;
   }
   
+  .loading-spinner-an {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #3f51b5;
+    border-radius: 50%;
+    width: 30px;
+    margin: 5px auto;
+    height: 30px;
+    animation: spin-an 1s linear infinite;
+  }
+  
+  @keyframes spin-an {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  

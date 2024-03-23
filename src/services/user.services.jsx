@@ -39,15 +39,34 @@ const userService = {
       throw error;
     }
   },
-  addUser: (newUser) => {
-    return addDoc(userCollectionRef, newUser);
+  addUser: async (newUser) => {
+    return await addDoc(userCollectionRef, newUser);
   },
   //   deleteUser: (id) => {
   //     return deleteDoc(doc(bookCollectionRef, id));
   //   },
-  updateUser: (id, newUser) => {
+  getAllNumberOfUsers: async () => {
+    const querySnapshot = await getDocs(userCollectionRef);
+    const totalDocumentsCount = querySnapshot.size;
+    return totalDocumentsCount;
+  },
+  getAllNumberOfActiveUsers: async () => {
+    const querySnapshot = await getDocs(
+      query(userCollectionRef, where("status", "==", 1))
+    );
+    const totalDocumentsCount = querySnapshot.size;
+    return totalDocumentsCount;
+  },
+  getAllNumberOfInActiveUsers: async () => {
+    const querySnapshot = await getDocs(
+      query(userCollectionRef, where("status", "==", 0))
+    );
+    const totalDocumentsCount = querySnapshot.size;
+    return totalDocumentsCount;
+  },
+  updateUser: async (id, newUser) => {
     const userDocRef = doc(userCollectionRef, id);
-    return updateDoc(userDocRef, newUser);
+    return await updateDoc(userDocRef, newUser);
   },
 };
 

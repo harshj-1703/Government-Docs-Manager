@@ -92,6 +92,18 @@ const userQueriesDocumentsServices = {
   adduserQueriesDocuments: (newDs) => {
     return addDoc(userQueriesCollectionRef, newDs);
   },
+  getTotalUserQueries: async () => {
+    const querySnapshot = await getDocs(userQueriesCollectionRef);
+    const totalCounts = querySnapshot.size;
+    return totalCounts;
+  },
+  getTotalSolvedUserQueries: async () => {
+    const querySnapshot = await getDocs(
+      query(userQueriesCollectionRef, where("status", "==", 0))
+    );
+    const totalCounts = querySnapshot.size;
+    return totalCounts;
+  },
   //   deleteUser: (id) => {
   //     return deleteDoc(doc(bookCollectionRef, id));
   //   },

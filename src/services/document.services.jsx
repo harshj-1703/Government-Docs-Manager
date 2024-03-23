@@ -58,6 +58,11 @@ const documentService = {
       throw error;
     }
   },
+  getTotalDocuments: async () => {
+    const querySnapshot = await getDocs(docCollectionRef);
+    const totalCounts = querySnapshot.size;
+    return totalCounts;
+  },
   addDocument: (newDoc) => {
     return addDoc(docCollectionRef, newDoc);
   },

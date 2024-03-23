@@ -69,6 +69,11 @@ const approvedDocumentsServices = {
       throw error;
     }
   },
+  getTotalApprovedDocuments: async () => {
+    const querySnapshot = await getDocs(approvedDocumentsCollectionRef);
+    const totalCounts = querySnapshot.size;
+    return totalCounts;
+  },
   addapprovedDocuments: (newDs) => {
     return addDoc(approvedDocumentsCollectionRef, newDs);
   },
