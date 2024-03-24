@@ -11,8 +11,6 @@ import {
 } from "firebase/firestore";
 
 function WebsiteVisitsChart() {
-  const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,7 +44,7 @@ function WebsiteVisitsChart() {
         const xValues = labels;
         const yValues = values;
 
-        await new Chart("myChart", {
+        await new Chart("websiteVisitsChart", {
           type: "line",
           data: {
             labels: xValues,
@@ -98,10 +96,8 @@ function WebsiteVisitsChart() {
             },
           },
         });
-        setIsLoading(false);
       } catch (error) {
         console.error("Error fetching website visits data:", error);
-        setIsLoading(false);
       }
     };
 
@@ -111,7 +107,7 @@ function WebsiteVisitsChart() {
   return (
     <div className="website-visits-chart">
       <canvas
-        id="myChart"
+        id="websiteVisitsChart"
         className="analytics-card"
         style={{ width: "100%", maxWidth: "550px" }}
       ></canvas>

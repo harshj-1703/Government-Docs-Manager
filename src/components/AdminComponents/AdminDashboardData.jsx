@@ -2,6 +2,7 @@ import React from "react";
 import "../../css/admin-dashboard.css";
 import AdminAnalytics from "./AdminAnalytics";
 import WebsiteVisitsChart from "./Charts/WebsiteVisitsChart";
+import ApprovedAndRejectedDocsPieChart from "./Charts/ApprovedAndRejectedDocsPieChart";
 
 function AdminDashboardData() {
   return (
@@ -11,6 +12,7 @@ function AdminDashboardData() {
       </div>
       <div className="charts-grid">
         <WebsiteVisitsChart />
+        <ApprovedAndRejectedDocsPieChart />
       </div>
     </div>
   );
