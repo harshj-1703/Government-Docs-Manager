@@ -60,10 +60,11 @@ nav .nav-bar-admin .logo a{
 }
 .nav-bar-admin .nav-links-admin{
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 .nav-bar-admin .nav-links-admin li{
-    margin: 0 5px;
+    /* margin: 0 5px; */
     list-style: none;
 }
 .nav-links-admin li a{
@@ -72,8 +73,14 @@ nav .nav-bar-admin .logo a{
     font-weight: 400;
     color: var(--text-color);
     text-decoration: none;
-    padding: 10px;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
 }
+
+.nav-links-admin li a i{
+    font-size: 25px;
+}
+
 .nav-links-admin li a::before{
     content: '';
     position: absolute;
@@ -158,6 +165,7 @@ body.dark .search-field i{
         background-color: var(--side-nav);
         z-index: 100;
         transition: all 0.4s ease;
+        overflow-y: scroll;
     }
     nav.active .menu-admin{
         left: -0%;
@@ -175,12 +183,16 @@ body.dark .search-field i{
         cursor: pointer;
     }
     .nav-bar-admin .nav-links-admin{
+        justify-content: center;
+        align-items: center;
         flex-direction: column;
-        padding-top: 30px;
+        padding-top: 10px;
     }
     .nav-links-admin li a{
-        display: block;
-        margin-top: 20px;
+        display: flex;
+        margin-top: 27px;
+        justify-content: center;
+        align-items: center;
     }
 /* } */
 

@@ -69,7 +69,7 @@ function AdminNavbar() {
           <span className="logo navLogo">
             <Link to="/">
               <img src="/images/logo.png" height={30} width={30} />
-              &nbsp;Gov Docs
+              &nbsp;&nbsp;Gov Docs
             </Link>
           </span>
           <div className="menu-admin">
@@ -82,7 +82,66 @@ function AdminNavbar() {
             <ul className="nav-links-admin">
               <li>
                 <NavLink to="/admin-dashboard" end>
-                  Dashboard
+                  <i className="material-icons">dashboard</i>
+                  &nbsp;&nbsp;Dashboard
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-add-document" end>
+                  <i className="material-icons">description</i>&nbsp;&nbsp;Add
+                  Document
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-add-datacenter" end>
+                  <i className="material-icons">storage</i>&nbsp;&nbsp;Add
+                  DataCenter
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-add-datacenter" end>
+                  <i className="material-icons">image</i>&nbsp;&nbsp;Add Posters
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-all-users" end>
+                  <i className="material-icons">people</i>&nbsp;&nbsp;All Users
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-all-document" end>
+                  <i className="material-icons">library_books</i>&nbsp;&nbsp;All
+                  Documents
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-all-datacenters" end>
+                  <i className="material-icons">dns</i>&nbsp;&nbsp;All
+                  DataCenters
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-all-uploadedDocuments" end>
+                  <i className="material-icons">cloud_upload</i>&nbsp;&nbsp;All
+                  Uploaded Docs
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-all-approvedDocuments" end>
+                  <i className="material-icons">check_circle</i>
+                  &nbsp;&nbsp;Approved Documents
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-all-rejectedDocuments" end>
+                  <i className="material-icons">cancel</i>&nbsp;&nbsp;Rejected
+                  Documents
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin-user-queries" end>
+                  <i className="material-icons">question_answer</i>
+                  &nbsp;&nbsp;User Queries
                 </NavLink>
               </li>
               <li>
@@ -94,11 +153,12 @@ function AdminNavbar() {
                   }}
                   style={{ color: "red" }}
                 >
-                  LogOut
+                  <i className="material-icons">logout</i>&nbsp;&nbsp;LogOut
                 </Link>
               </li>
             </ul>
           </div>
+
           <div className="darkLight-searchBox">
             <div className="dark-light">
               <i className="material-icons moon">dark_mode</i>

@@ -464,10 +464,18 @@ body.dark .datacenter-profile-card{
 
   .datacenter-data-persons div{
     font-family: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     font-size: 35px;
     font-weight: bold;
     text-transform: uppercase;
+  }
+
+  .datacenter-data-persons i{
+    margin-right: 8px;
+    font-size: 30px;
   }
 
   .datacenter-data-combine-column{

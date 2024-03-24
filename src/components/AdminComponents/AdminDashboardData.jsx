@@ -9,15 +9,13 @@ function AdminDashboardData() {
   return (
     <div className="admin-dashboard-data">
       <div className="admin-dashboard-data-main">
-        <AdminAnalytics />
+        {/* <AdminAnalytics /> */}
       </div>
       <div className="charts-grid">
-        <WebsiteVisitsChart />
-        <ApprovedAndRejectedDocsPieChart />
+        {/* <WebsiteVisitsChart />
+        <ApprovedAndRejectedDocsPieChart /> */}
       </div>
-      <div className="charts-grid">
-        <UserDeviceInfoChart />
-      </div>
+      <div className="charts-grid">{/* <UserDeviceInfoChart /> */}</div>
     </div>
   );
 }
