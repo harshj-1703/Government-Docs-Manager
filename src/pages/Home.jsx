@@ -10,13 +10,32 @@ import { db } from "../firebase";
 import { addDoc, collection } from "firebase/firestore";
 
 function Home() {
+  const getDeviceInfo = () => {
+    const userAgent = navigator.userAgent;
+    let os = "Others";
+
+    if (userAgent.indexOf("Windows") !== -1) {
+      os = "Windows";
+    } else if (userAgent.indexOf("Mac OS") !== -1) {
+      os = "Mac OS";
+    } else if (/(iPhone|iPod|iPad)/.test(userAgent)) {
+      os = "iOS";
+    } else if (/Android/.test(userAgent)) {
+      os = "Android";
+    }
+
+    return { os };
+  };
+
   useEffect(() => {
     if (localStorage.getItem("visited") !== "1") {
       const addWebsiteLoadData = async () => {
         try {
+          const { os } = getDeviceInfo();
           const websiteLoadDataRef = collection(db, "WebsiteLoadData");
           await addDoc(websiteLoadDataRef, {
             createdAt: new Date(),
+            os,
           });
           localStorage.setItem("visited", 1);
         } catch (error) {

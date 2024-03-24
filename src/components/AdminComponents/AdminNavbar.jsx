@@ -82,7 +82,7 @@ function AdminNavbar() {
             <ul className="nav-links-admin">
               <li>
                 <NavLink to="/admin-dashboard" end>
-                  Home
+                  Dashboard
                 </NavLink>
               </li>
               <li>

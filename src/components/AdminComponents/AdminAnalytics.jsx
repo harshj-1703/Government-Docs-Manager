@@ -149,17 +149,17 @@ function AdminAnalytics() {
   };
 
   useEffect(() => {
-    // fetchTotalUsers();
-    // fetchTotalActiveUsers();
-    // fetchTotalInActiveUsers();
-    // fetchTotalDataCenters();
-    // fetchTotalDocuments();
-    // fetchTotalUploadedDocuments();
-    // fetchTotalApprovedDocuments();
-    // fetchTotalRejectedDocuments();
-    // fetchTotalUserQueries();
-    // fetchTotalUserSolvedQueries();
-    // fetchTotalWebsiteVisites();
+    fetchTotalUsers();
+    fetchTotalActiveUsers();
+    fetchTotalInActiveUsers();
+    fetchTotalDataCenters();
+    fetchTotalDocuments();
+    fetchTotalUploadedDocuments();
+    fetchTotalApprovedDocuments();
+    fetchTotalRejectedDocuments();
+    fetchTotalUserQueries();
+    fetchTotalUserSolvedQueries();
+    fetchTotalWebsiteVisites();
   }, []);
 
   return (

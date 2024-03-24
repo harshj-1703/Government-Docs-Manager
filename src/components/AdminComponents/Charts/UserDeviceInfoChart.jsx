@@ -1,60 +1,55 @@
 import React, { useEffect } from "react";
 import "../../../assets/Chart";
 import { db } from "../../../firebase";
-import {
-  collection,
-  getDocs,
-  query,
-  where,
-  orderBy,
-  limit,
-} from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
-function WebsiteVisitsChart() {
+function UserDeviceInfoChart() {
   useEffect(() => {
     const fetchData = async () => {
       try {
         const websiteLoadDataRef = collection(db, "WebsiteLoadData");
 
-        const last7DaysQuery = query(
-          websiteLoadDataRef,
-          where(
-            "createdAt",
-            ">",
-            new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-          ),
-          orderBy("createdAt", "asc")
+        const windowsUserQuery = await getDocs(
+          query(websiteLoadDataRef, where("os", "==", "Windows"))
         );
 
-        const querySnapshot = await getDocs(last7DaysQuery);
-        const data = querySnapshot.docs.map((doc) => ({
-          date: doc.data().createdAt.toDate().toLocaleDateString(),
-        }));
-        const visitsCountByDate = data.reduce((acc, obj) => {
-          const date = obj.date;
-          acc[date] = (acc[date] || 0) + 1;
-          return acc;
-        }, {});
-        const sortedVisitsCountByDate = Object.entries(visitsCountByDate)
-          .sort(([dateA], [dateB]) => new Date(dateA) - new Date(dateB))
-          .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+        const macOsUserQuery = await getDocs(
+          query(websiteLoadDataRef, where("os", "==", "Mac OS"))
+        );
 
-        const labels = Object.keys(sortedVisitsCountByDate);
-        const values = Object.values(sortedVisitsCountByDate);
-        const xValues = labels;
-        const yValues = values;
+        const iOSUserQuery = await getDocs(
+          query(websiteLoadDataRef, where("os", "==", "iOS"))
+        );
 
-        await new Chart("websiteVisitsChart", {
-          type: "line",
+        const androidUserQuery = await getDocs(
+          query(websiteLoadDataRef, where("os", "==", "Android"))
+        );
+
+        const othersUserQuery = await getDocs(
+          query(websiteLoadDataRef, where("os", "==", "Others"))
+        );
+
+        const xValues = ["Windows", "Mac OS", "iOS", "Android", "Others"];
+        const barColors = ["skyblue", "blue", "darkblue", "orange", "tomato"];
+        const yValues = [
+          windowsUserQuery.size,
+          macOsUserQuery.size,
+          iOSUserQuery.size,
+          androidUserQuery.size,
+          othersUserQuery.size,
+        ];
+
+        await new Chart("devicesInfoChart", {
+          type: "bar",
           data: {
             labels: xValues,
             datasets: [
               {
                 fill: false,
                 lineTension: 0,
-                backgroundColor: "white",
-                borderColor: "red",
-                borderWidth: 3,
+                backgroundColor: barColors,
+                borderColor: "darkblue",
+                borderWidth: 1,
                 data: yValues,
               },
             ],
@@ -63,7 +58,7 @@ function WebsiteVisitsChart() {
             responsive: true,
             title: {
               display: true,
-              text: "Total Websites visits per day Users(Last 7 Days)",
+              text: "Total Number Of Devices Used Website",
               fontSize: "20",
               fontColor: "grey",
             },
@@ -107,7 +102,7 @@ function WebsiteVisitsChart() {
   return (
     <div className="website-visits-chart">
       <canvas
-        id="websiteVisitsChart"
+        id="devicesInfoChart"
         className="analytics-card"
         style={{ width: "100%", maxWidth: "550px" }}
       ></canvas>
@@ -115,4 +110,4 @@ function WebsiteVisitsChart() {
   );
 }
 
-export default WebsiteVisitsChart;
+export default UserDeviceInfoChart;
