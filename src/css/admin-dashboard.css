@@ -80,3 +80,23 @@
     }
   }
   
+  .website-visits-chart{
+    margin-top: 25px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .charts-grid{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @media screen and (max-width: 1200px) {
+    .charts-grid{
+      flex-direction: column;
+    }
+}
