@@ -28,10 +28,9 @@ const documentService = {
       const queryRef = query(
         collectionRef,
         orderBy("title", "asc"),
-        orderBy("updatedAt", "desc"),
+        orderBy("createdAt", "desc"),
         where("title", ">=", searchQuery.toUpperCase()),
         where("title", "<=", searchQuery.toUpperCase() + "\uf8ff"),
-        where("uploadedBy", "==", "Users"),
         where("status", "==", 1),
         startAfter(page * itemsPerPage)
       );

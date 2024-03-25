@@ -59,3 +59,173 @@ body.dark .user-query-main-content h2{
         overflow-x: auto;
     }
 }
+
+.user-query-main-content input{
+    min-width: 300px;
+    max-width: 500px;
+    padding: 11px;
+    letter-spacing: 2.5px;
+    font-size: 17px;
+    font-family: 'Trebuchet MS', sans-serif;
+    box-sizing: border-box;
+    border: 2px solid rgba(242, 224, 224, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.76);
+    color: darkblue;
+}
+
+body.dark .user-query-main-content input{
+    border: 2px solid rgba(242, 224, 224, 0.3);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: cyan;
+}
+
+.user-query-main-content .form-group{
+    color: darkblue;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif !important;
+    margin-bottom: 20px;
+}
+
+.user-query-main-content .form-group div{
+    color: darkblue;
+    display: flex;
+    flex-direction: column;
+}
+
+.user-query-main-content label{
+    color: darkblue;
+    font-family: Arial, Helvetica, sans-serif;
+    letter-spacing: 2px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+body.dark .user-query-main-content label{
+    color: white;
+}
+
+body.dark .user-query-main-content .form-group{
+    color: white;
+}
+
+.user-query-main-content .banner-container{
+    height: 120px;
+    width: 240px;
+    margin-top: 10px;
+    border: 2px solid darkblue;
+    border-radius: 7px;
+}
+
+.user-query-main-content select{
+    background-color: white;
+    width: 300px;
+    color: darkblue;
+}
+
+body.dark .user-query-main-content select{
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white !important;
+}
+
+.user-query-main-content .banner-container img{
+    border-radius: 12px;
+    object-fit: fill;
+}
+
+.required-docs-div{
+    display: flex;
+    padding: 7px;
+    border: 2px solid darkblue;
+    margin-top: 5px;
+    border-radius: 10px;
+}
+
+.file-types-select-menu-div{
+    display: flex;
+    align-items: center !important;
+}
+
+.file-types-select-menu-div select{
+    margin-left: 5px;
+}
+
+.form-group-doc{
+    margin-bottom: 10px;
+}
+
+.required-docs-div input{
+    width: 500px;
+}
+
+@media screen and (min-width: 800px) {
+    .title-and-ministry-form{
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 12px;
+    }
+    
+    .title-and-ministry-form .form-group{
+        margin: 5px;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .required-docs-div{
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .required-docs-div input{
+        width: 300px;
+    }
+
+    .required-docs-div .file-types-select-menu-div{
+        margin: 0;
+        margin-top: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+}
+
+.documents-required-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add-icon {
+    cursor: pointer;
+    background-color: #0b19d5;
+    border-radius: 50%;
+    padding: 5px;
+    margin-left: 5px;
+    margin: 5px;
+    color: white;
+  }
+  
+  .add-icon:hover {
+    background-color: #2b66fd;
+  }
+
+  .remove-icon {
+    cursor: pointer;
+    background-color: red;
+    border-radius: 50%;
+    padding: 5px;
+    margin-left: 5px;
+    margin: 5px;
+    color: white;
+  }
+  
+  .remove-icon:hover {
+    background-color: orange;
+  }
+  
+  .joi-editor-Description{
+    color: darkblue;
+  }
