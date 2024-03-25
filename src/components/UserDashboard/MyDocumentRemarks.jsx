@@ -14,20 +14,30 @@ function MyDocumentRemarks({ isMenuShow }) {
   const { id } = useParams();
 
   const fetchData = async () => {
-    const data = await remarksDocumentsServices.getremarksFromDocumentId(id);
-    const doc1 = await uploadedByUsersDocumentService.getDocumentFromId(id);
-    let filteredData = data.map((x) => {
-      let data = x.data;
-      return {
-        id: x.id,
-        remarks: data.remarks,
-        status: data.status,
-        updatedAt: data.updatedAt,
-      };
-    });
-    setDoc(doc1);
-    setDocuments(() => [...filteredData]);
-    setIsLoading(false);
+    setIsLoading(true);
+    try {
+      const data = await remarksDocumentsServices.getremarksFromDocumentId(id);
+      const doc1 = await uploadedByUsersDocumentService.getDocumentFromId(id);
+
+      if (data && Array.isArray(data)) {
+        let filteredData = data.map((x) => ({
+          id: x.id,
+          remarks: x.data.remarks,
+          status: x.data.status,
+          updatedAt: x.data.updatedAt,
+        }));
+
+        setDoc(doc1);
+        setDocuments(filteredData);
+      } else {
+        setDocuments([]);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setDocuments([]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -118,7 +128,6 @@ function MyDocumentRemarks({ isMenuShow }) {
         >
           {isLoading && <CircularLoading />}
           {!isLoading &&
-            doc &&
             (documents.length !== 0 ? (
               <>
                 <h1 style={{ marginBottom: "5px", fontWeight: "100" }}>
@@ -158,7 +167,7 @@ function MyDocumentRemarks({ isMenuShow }) {
                 />
               </>
             ) : (
-              <h1>No Uploaded Documents</h1>
+              <h1>No Documents Remarks</h1>
             ))}
         </div>
       </div>
