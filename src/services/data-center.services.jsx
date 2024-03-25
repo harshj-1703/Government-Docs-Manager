@@ -10,16 +10,65 @@ import {
   orderBy,
   where,
   doc,
+  limit,
   query,
 } from "firebase/firestore";
 
 const datacenterCollectionRef = collection(db, "Datacenters");
 
 const dataCenterServices = {
-  // getAllUsers: () => {
-  //     const queryRef = query(datacenterCollectionRef, orderBy("status", "desc"));
-  //     return getDocs(queryRef);
-  //   },
+  getAllDataCenters: async (page = 1, itemsPerPage = 2, searchQuery = "") => {
+    try {
+      const collectionRef = datacenterCollectionRef;
+      let queryRef = query(
+        collectionRef,
+        where("mobile", ">=", searchQuery.toUpperCase()),
+        where("mobile", "<=", searchQuery.toUpperCase() + "\uf8ff"),
+        orderBy("mobile", "desc"),
+        orderBy("createdAt", "desc")
+      );
+
+      if (page > 1) {
+        const snapshot = await getDocs(
+          query(queryRef, limit(itemsPerPage * (page - 1)))
+        );
+
+        const lastDoc = snapshot.docs[snapshot.docs.length - 1];
+        const lastUserMobile = lastDoc.data().userMobile;
+        const lastCreatedAt = lastDoc.data().createdAt;
+
+        queryRef = query(
+          queryRef,
+          startAfter(lastUserMobile, lastCreatedAt),
+          limit(itemsPerPage)
+        );
+      } else {
+        queryRef = query(queryRef, limit(itemsPerPage));
+      }
+
+      const querySnapshot = await getDocs(queryRef);
+      const documents = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        data: doc.data(),
+      }));
+
+      const totalDocsQuerySnapshot = await getDocs(
+        query(
+          collectionRef,
+          where("mobile", ">=", searchQuery.toUpperCase()),
+          where("mobile", "<=", searchQuery.toUpperCase() + "\uf8ff")
+        )
+      );
+      const totalDocsCount = totalDocsQuerySnapshot.size;
+
+      return {
+        documents: documents,
+        totalItems: totalDocsCount,
+      };
+    } catch (error) {
+      throw error;
+    }
+  },
   getDataCenterFromMobile: async (mobile) => {
     try {
       const q = query(datacenterCollectionRef, where("mobile", "==", mobile));

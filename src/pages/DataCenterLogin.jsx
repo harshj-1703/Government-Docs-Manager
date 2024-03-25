@@ -25,6 +25,9 @@ function DatacenterLogin() {
   const mobileAvailableOrNot = async (mobile) => {
     const available = await dataCenterServices.getDataCenterFromMobile(mobile);
     if (available) {
+      if (available.user.status === 0) {
+        return false;
+      }
       return true;
     } else {
       return false;

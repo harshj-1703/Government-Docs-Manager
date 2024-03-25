@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Avatar } from "@mui/material";
 import "../../css/verify-user-doc-datatable.css";
-import documentService from "../../services/document.services";
+import dataCenterServices from "../../services/data-center.services";
 
-const AllDocumentsDataTable = ({
+const AllDataCentersDataTable = ({
   data,
   totalItems,
   page,
@@ -19,13 +19,13 @@ const AllDocumentsDataTable = ({
     const confirmation = window.confirm(
       `Are you sure you want to ${
         currentStatus === 0 ? "enable" : "disable"
-      } this document?`
+      } this datacenter?`
     );
     if (confirmation) {
       try {
         setIsLoading(true);
         const newStatus = currentStatus === 0 ? 1 : 0;
-        await documentService.updateDocument(docId, { status: newStatus });
+        await dataCenterServices.updateDataCenter(docId, { status: newStatus });
         setIsDelete(!isDelete);
       } catch (error) {
         console.log(error);
@@ -35,24 +35,44 @@ const AllDocumentsDataTable = ({
     }
   };
 
+  const renderPerson1Cell = (params) => (
+    <div className="verify-user-table-cell verify-user-user-cell">
+      <Avatar
+        src={params.row.p1Photo}
+        alt="User Avatar"
+        className="verify-user-user-avatar"
+      />
+      <span className="verify-user-user-name">{params.row.p1}</span>
+    </div>
+  );
+
+  const renderPerson2Cell = (params) => (
+    <div className="verify-user-table-cell verify-user-user-cell">
+      <Avatar
+        src={params.row.p2Photo}
+        alt="User Avatar"
+        className="verify-user-user-avatar"
+      />
+      <span className="verify-user-user-name">{params.row.p2}</span>
+    </div>
+  );
+
   const columns = [
     {
-      field: "banner",
-      headerName: "Banner",
-      flex: 0.15,
+      field: "imageurl",
+      headerName: "Profile",
+      flex: 0.05,
       headerClassName: "verify-user-table-head",
-      minWidth: 200,
+      minWidth: 95,
       renderCell: (params) => {
         return (
           <div className="verify-user-table-cell verify-user-banner-cell">
             <Avatar
               className="verify-user-banner-avatar"
               src={params.value}
-              alt="Banner"
+              alt="Profile"
               sx={{
-                width: "100%",
-                height: "75px",
-                borderRadius: "5px",
+                borderRadius: "50%",
               }}
             />
           </div>
@@ -60,102 +80,50 @@ const AllDocumentsDataTable = ({
       },
     },
     {
-      field: "title",
-      headerName: "Title",
-      flex: 0.2,
-      headerClassName: "verify-user-table-head",
-      minWidth: 350,
-      renderCell: (params) => (
-        <div
-          className="verify-user-table-cell"
-          style={{
-            whiteSpace: "break-spaces",
-          }}
-        >
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: "ministry",
-      headerName: "Ministry",
-      flex: 0.2,
-      headerClassName: "verify-user-table-head",
-      minWidth: 400,
-      renderCell: (params) => (
-        <div
-          className="verify-user-table-cell"
-          style={{
-            whiteSpace: "break-spaces",
-          }}
-        >
-          {params.value}
-        </div>
-      ),
-    },
-    {
-      field: "verification",
-      headerName: "Verification Type",
-      flex: 0.2,
-      headerClassName: "verify-user-table-head",
+      field: "Person 1",
+      headerName: "Person 1",
       minWidth: 200,
-      renderCell: (params) => (
-        <div
-          className="verify-user-table-cell"
-          style={{
-            whiteSpace: "break-spaces",
-          }}
-        >
-          {params.value.toUpperCase()} Based
-        </div>
-      ),
-    },
-    {
-      field: "fields",
-      headerName: "Required Docs",
-      flex: 0.2,
-      headerClassName: "verify-user-table-head",
-      minWidth: 450,
-      renderCell: (params) => (
-        <div
-          className="verify-user-table-cell"
-          style={{
-            fontSize: "12px",
-            whiteSpace: "break-spaces",
-          }}
-        >
-          {Object.keys(params.value).join(", ")}
-        </div>
-      ),
-    },
-    {
-      field: "photoExample",
-      headerName: "Doc Example",
       flex: 0.15,
       headerClassName: "verify-user-table-head",
+      headerAlign: "center",
+      renderCell: renderPerson1Cell,
+    },
+    {
+      field: "Person 2",
+      headerName: "Person 2",
       minWidth: 200,
-      renderCell: (params) => {
-        return (
-          <div className="verify-user-table-cell verify-user-banner-cell">
-            <Avatar
-              className="verify-user-banner-avatar"
-              src={params.value}
-              alt="Example"
-              sx={{
-                width: "100%",
-                height: "75px",
-                borderRadius: "5px",
-              }}
-            />
-          </div>
-        );
-      },
+      flex: 0.15,
+      headerClassName: "verify-user-table-head",
+      headerAlign: "center",
+      renderCell: renderPerson2Cell,
+    },
+    {
+      field: "mobile",
+      headerName: "Mobile",
+      minWidth: 140,
+      flex: 0.05,
+      headerClassName: "verify-user-table-head",
+      renderCell: (params) => (
+        <div className="verify-user-table-cell">{params.value}</div>
+      ),
+    },
+    {
+      field: "City & State",
+      headerName: "City & State",
+      minWidth: 250,
+      flex: 0.1,
+      headerClassName: "verify-user-table-head",
+      renderCell: (params) => (
+        <div className="verify-user-table-cell">
+          {params.row.city}, {params.row.state}
+        </div>
+      ),
     },
     {
       field: "createdAt",
       headerName: "Uploaded Document At",
       minWidth: 300,
-      flex: 0.24,
+      flex: 0.2,
       headerClassName: "verify-user-table-head",
       renderCell: (params) => (
         <div className="verify-user-table-cell-timestamp">
@@ -233,4 +201,4 @@ const AllDocumentsDataTable = ({
   );
 };
 
-export default AllDocumentsDataTable;
+export default AllDataCentersDataTable;
