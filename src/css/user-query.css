@@ -120,6 +120,14 @@ body.dark .user-query-main-content .form-group{
     border-radius: 7px;
 }
 
+.user-query-main-content .p-banner-container img{
+    height: 100px;
+    width: 100px;
+    margin-top: 10px;
+    border: 2px solid darkblue;
+    border-radius: 50%;
+}
+
 .user-query-main-content select{
     background-color: white;
     width: 300px;
