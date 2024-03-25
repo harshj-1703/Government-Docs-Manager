@@ -87,59 +87,59 @@ function AdminNavbar() {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-add-document" end>
+                <NavLink to="admin-add-document" end>
                   <i className="material-icons">description</i>&nbsp;&nbsp;Add
                   Document
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-add-datacenter" end>
+                <NavLink to="admin-add-datacenter" end>
                   <i className="material-icons">storage</i>&nbsp;&nbsp;Add
                   DataCenter
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-add-datacenter" end>
+                <NavLink to="admin-add-posters" end>
                   <i className="material-icons">image</i>&nbsp;&nbsp;Add Posters
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-all-users" end>
+                <NavLink to="admin-all-users" end>
                   <i className="material-icons">people</i>&nbsp;&nbsp;All Users
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-all-document" end>
+                <NavLink to="admin-all-document" end>
                   <i className="material-icons">library_books</i>&nbsp;&nbsp;All
                   Documents
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-all-datacenters" end>
+                <NavLink to="admin-all-datacenters" end>
                   <i className="material-icons">dns</i>&nbsp;&nbsp;All
                   DataCenters
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-all-uploadedDocuments" end>
+                <NavLink to="admin-all-uploadedDocuments" end>
                   <i className="material-icons">cloud_upload</i>&nbsp;&nbsp;All
                   Uploaded Docs
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-all-approvedDocuments" end>
+                <NavLink to="admin-all-approvedDocuments" end>
                   <i className="material-icons">check_circle</i>
                   &nbsp;&nbsp;Approved Documents
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-all-rejectedDocuments" end>
+                <NavLink to="admin-all-rejectedDocuments" end>
                   <i className="material-icons">cancel</i>&nbsp;&nbsp;Rejected
                   Documents
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin-user-queries" end>
+                <NavLink to="admin-user-queries" end>
                   <i className="material-icons">question_answer</i>
                   &nbsp;&nbsp;User Queries
                 </NavLink>

@@ -59,6 +59,12 @@ import "./css/App.css";
 import "./css/login.css";
 import "./css/registration.css";
 import "./css/userdashboard.css";
+import AddDocumentByAdmin from "./components/AdminComponents/AddDocumentByAdmin.jsx";
+import AddDataCenterByAdmin from "./components/AdminComponents/AddDataCenterByAdmin.jsx";
+import AddPostersByAdmin from "./components/AdminComponents/AddPostersByAdmin.jsx";
+import AllUsersByAdmin from "./components/AdminComponents/AllUsersByAdmin.jsx";
+import AllDocumentsByAdmin from "./components/AdminComponents/AllDocumentsByAdmin.jsx";
+import AllDataCentersByAdmin from "./components/AdminComponents/AllDataCentersByAdmin.jsx";
 
 const DocumentStatus = lazy(() =>
   import("./components/UserDashboard/UserDocumentStatus.jsx")
@@ -314,6 +320,56 @@ function App() {
         {
           index: true,
           element: <AdminDashboard />,
+        },
+        {
+          path: "admin-add-document",
+          element: <AddDocumentByAdmin />,
+        },
+        {
+          path: "admin-add-datacenter",
+          element: <AddDataCenterByAdmin />,
+        },
+        {
+          path: "admin-add-posters",
+          element: <AddPostersByAdmin />,
+        },
+        {
+          path: "admin-all-users",
+          element: <AllUsersByAdmin />,
+        },
+        {
+          path: "admin-all-document",
+          element: <AllDocumentsByAdmin />,
+        },
+        {
+          path: "admin-all-datacenters",
+          element: <AllDataCentersByAdmin />,
+        },
+        {
+          path: "admin-all-uploadedDocuments",
+          element: <UserDocumentsStatus />,
+        },
+        {
+          path: "admin-all-approvedDocuments",
+          element: <UsersApprovedDocuments />,
+        },
+        {
+          path: "admin-all-rejectedDocuments",
+          element: <UsersRejectedDocuments />,
+        },
+        {
+          path: "admin-user-queries",
+          element: <Outlet />,
+          children: [
+            {
+              index: true,
+              element: <UserQueriesByDc />,
+            },
+            {
+              path: "user-query-details/:id",
+              element: <UserQueryDetail />,
+            },
+          ],
         },
       ],
     },
