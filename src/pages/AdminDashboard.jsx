@@ -34,7 +34,7 @@ function AdminDashboard() {
         day: "numeric",
       })
     );
-    // getTempratureData();
+    getTempratureData();
   }, []);
 
   const getTempratureData = async () => {
