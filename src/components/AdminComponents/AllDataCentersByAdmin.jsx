@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import CircularLoading from "../CircularLoading";
-import AllDocumentsDataTable from "./AllDocumentsDataTable";
 import dataCenterServices from "../../services/data-center.services";
 import AllDataCentersDataTable from "./AllDataCentersDataTable";
 
