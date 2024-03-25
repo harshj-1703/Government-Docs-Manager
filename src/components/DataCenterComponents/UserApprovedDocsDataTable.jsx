@@ -145,7 +145,7 @@ const UserApprovedDocsDataTable = ({
           columns={columns}
           paginationModel={{ pageSize: rowsPerPage, page: page }}
           paginationMode="server"
-          pageSizeOptions={[2, 5, 10, 25]}
+          pageSizeOptions={[5, 10, 25, 50]}
           colu
           rowCount={totalItems}
           checkboxSelection={false}

@@ -59,12 +59,6 @@ import "./css/App.css";
 import "./css/login.css";
 import "./css/registration.css";
 import "./css/userdashboard.css";
-import AddDocumentByAdmin from "./components/AdminComponents/AddDocumentByAdmin.jsx";
-import AddDataCenterByAdmin from "./components/AdminComponents/AddDataCenterByAdmin.jsx";
-import AddPostersByAdmin from "./components/AdminComponents/AddPostersByAdmin.jsx";
-import AllUsersByAdmin from "./components/AdminComponents/AllUsersByAdmin.jsx";
-import AllDocumentsByAdmin from "./components/AdminComponents/AllDocumentsByAdmin.jsx";
-import AllDataCentersByAdmin from "./components/AdminComponents/AllDataCentersByAdmin.jsx";
 
 const DocumentStatus = lazy(() =>
   import("./components/UserDashboard/UserDocumentStatus.jsx")
@@ -93,8 +87,27 @@ const UserQueryDetail = lazy(() =>
   import("./components/DataCenterComponents/UserQueryDetail.jsx")
 );
 
+//admin routes lazy load
 const AdminNavbar = lazy(() =>
   import("./components/AdminComponents/AdminNavbar.jsx")
+);
+const AddDocumentByAdmin = lazy(() =>
+  import("./components/AdminComponents/AddDocumentByAdmin.jsx")
+);
+const AddDataCenterByAdmin = lazy(() =>
+  import("./components/AdminComponents/AddDataCenterByAdmin.jsx")
+);
+const AddPostersByAdmin = lazy(() =>
+  import("./components/AdminComponents/AddPostersByAdmin.jsx")
+);
+const AllUsersByAdmin = lazy(() =>
+  import("./components/AdminComponents/AllUsersByAdmin.jsx")
+);
+const AllDocumentsByAdmin = lazy(() =>
+  import("./components/AdminComponents/AllDocumentsByAdmin.jsx")
+);
+const AllDataCentersByAdmin = lazy(() =>
+  import("./components/AdminComponents/AllDataCentersByAdmin.jsx")
 );
 
 //---------------------------------- Main Function APP ----------------------------------
