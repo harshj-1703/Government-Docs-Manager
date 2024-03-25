@@ -171,9 +171,12 @@ function UserDashboard({ isMenuShow }) {
                       />
                       <div className="card__content">
                         <p className="card__title">{item.data.title}</p>
-                        <p className="card__description">
-                          {item.data.description}
-                        </p>
+                        <p
+                          className="card__description"
+                          dangerouslySetInnerHTML={{
+                            __html: item.data.description,
+                          }}
+                        ></p>
                       </div>
                     </Link>
                   </div>

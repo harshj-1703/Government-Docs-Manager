@@ -65,7 +65,12 @@ function DocumentPage({ isMenuShow }) {
             <div className="document-page-title">{data.title}</div>
             <div className="document-page-ministry">{data.ministry}</div>
             <hr className="line" />
-            <div className="document-page-description">{data.description}</div>
+            <div
+              className="document-page-description"
+              dangerouslySetInnerHTML={{
+                __html: data.description,
+              }}
+            ></div>
             <div className="document-page-state">
               <div id="orange">Applicable&nbsp;</div>
               <div id="white">in&nbsp;</div>
