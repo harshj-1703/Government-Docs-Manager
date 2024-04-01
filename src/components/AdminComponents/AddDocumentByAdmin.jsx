@@ -222,19 +222,51 @@ function AddDocumentByAdmin() {
           return acc;
         }, {});
 
-        await documentService.addDocument({
-          title,
-          description: content,
-          fields: requiredDocsObject,
-          ministry,
-          banner: urlBanner,
-          photoExample: urlPhotoExample,
-          state: "india",
-          status: 1,
-          uploadedBy: "Users",
-          verification: checkingProcess,
-          createdAt: new Date().toLocaleString("en-US", timestampOptions),
+        // await documentService.addDocument({
+        //   title,
+        //   description: content,
+        //   fields: requiredDocsObject,
+        //   ministry,
+        //   banner: urlBanner,
+        //   photoExample: urlPhotoExample,
+        //   state: "india",
+        //   status: 1,
+        //   uploadedBy: "Users",
+        //   verification: checkingProcess,
+        //   createdAt: new Date().toLocaleString("en-US", timestampOptions),
+        // });
+
+        const message = `
+          <b>New Document Added to Government Document Management</b>
+          A new document has been added to the Government Document Management system:
+          
+          <b>Title:</b> ${title}
+          <b>Ministry:</b> ${ministry}
+          <b>Fields:</b>
+          ${Object.keys(requiredDocsObject)
+            .map(
+              (field) => `${field}: <code>${requiredDocsObject[field]}</code>`
+            )
+            .join("\n")}
+          
+          <i>If you want more details or need this document, please visit our website</i>: <a href="${
+            process.env.HOST_LINK
+          }">${process.env.HOST_LINK}</a>
+      `;
+
+        await fetch(`${process.env.TELEGRAM_BROADCAST_API}/send-message`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message: message }),
+        }).catch((error) => {
+          console.error(
+            "There was a problem with your fetch operation:",
+            error
+          );
         });
+
         ToastMessage({
           message: "Document Added Successfully!",
           type: "success",

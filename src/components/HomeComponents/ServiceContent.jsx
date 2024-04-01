@@ -3,7 +3,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import ImageIcon from "@mui/icons-material/Image";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import VerifiedUserIcon from "@mui/icons-material/VerifiedUser";
 import PublicIcon from "@mui/icons-material/Public";
@@ -12,6 +11,7 @@ import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 import LockIcon from "@mui/icons-material/Lock";
 import MobileFriendlyIcon from "@mui/icons-material/MobileFriendly";
 import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
+import { NotificationAddRounded } from "@mui/icons-material";
 
 const services = [
   {
@@ -32,10 +32,9 @@ const services = [
     icon: <PublicIcon />,
   },
   {
-    title: "Large Amount of Documents",
-    description:
-      "Efficiently handling and managing a large volume of documents.",
-    icon: <ImageIcon />,
+    title: "Telegram Notification",
+    description: "Telegram Based Notification System.",
+    icon: <NotificationAddRounded />,
   },
   {
     title: "Data Center Login",
