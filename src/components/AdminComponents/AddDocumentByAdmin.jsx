@@ -222,19 +222,19 @@ function AddDocumentByAdmin() {
           return acc;
         }, {});
 
-        // await documentService.addDocument({
-        //   title,
-        //   description: content,
-        //   fields: requiredDocsObject,
-        //   ministry,
-        //   banner: urlBanner,
-        //   photoExample: urlPhotoExample,
-        //   state: "india",
-        //   status: 1,
-        //   uploadedBy: "Users",
-        //   verification: checkingProcess,
-        //   createdAt: new Date().toLocaleString("en-US", timestampOptions),
-        // });
+        await documentService.addDocument({
+          title,
+          description: content,
+          fields: requiredDocsObject,
+          ministry,
+          banner: urlBanner,
+          photoExample: urlPhotoExample,
+          state: "india",
+          status: 1,
+          uploadedBy: "Users",
+          verification: checkingProcess,
+          createdAt: new Date().toLocaleString("en-US", timestampOptions),
+        });
 
         const message = `
           <b>New Document Added to Government Document Management</b>
