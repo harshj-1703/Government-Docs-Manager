@@ -59,6 +59,7 @@ import "./css/App.css";
 import "./css/login.css";
 import "./css/registration.css";
 import "./css/userdashboard.css";
+import ChatBot from "./pages/ChatBot.jsx";
 
 const DocumentStatus = lazy(() =>
   import("./components/UserDashboard/UserDocumentStatus.jsx")
@@ -395,6 +396,7 @@ function App() {
 
   return (
     <>
+      <ChatBot />
       <RouterProvider router={router} />
     </>
   );
